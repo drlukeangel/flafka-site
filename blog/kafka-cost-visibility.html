@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Your Kafka Team Needs Cost Visibility (And How to Get It) | Flafka Blog</title>
+  <meta name="description" content="Confluent Cloud cost management made simple. Learn how Flafka's Spend Dashboard, CFU Monitor, and Cost Alerts give your Kafka team real-time cost visibility.">
+  <meta name="keywords" content="Confluent Cloud cost management, Kafka FinOps, CFU monitoring tool, Confluent Cloud spend, Kafka cost visibility, Flink SQL cost estimation">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Why Your Kafka Team Needs Cost Visibility (And How to Get It)">
+  <meta property="og:description" content="Confluent Cloud costs are opaque. Learn how Flafka gives your Kafka team real-time spend visibility, CFU monitoring, and budget alerts.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/blog/kafka-cost-visibility.html">
+  <meta property="og:image" content="https://flafka.dev/assets/screenshots/ws3-spend-dashboard-dark.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why Your Kafka Team Needs Cost Visibility">
+  <meta name="twitter:description" content="Confluent Cloud costs are opaque. Flafka gives your team real-time spend visibility, CFU monitoring, and budget alerts.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/screenshots/ws3-spend-dashboard-dark.png">
+
+  <link rel="canonical" href="https://flafka.dev/blog/kafka-cost-visibility.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why Your Kafka Team Needs Cost Visibility (And How to Get It)",
+    "description": "Confluent Cloud cost management made simple. Learn how Flafka's Spend Dashboard, CFU Monitor, and Cost Alerts give your Kafka team real-time cost visibility.",
+    "datePublished": "2026-03-22",
+    "dateModified": "2026-03-22",
+    "author": {
+      "@type": "Organization",
+      "name": "Flafka Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    },
+    "image": "https://flafka.dev/assets/screenshots/ws3-spend-dashboard-dark.png",
+    "mainEntityOfPage": "https://flafka.dev/blog/kafka-cost-visibility.html",
+    "wordCount": "1800",
+    "timeRequired": "PT7M"
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="../features.html">Features</a></li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../demo.html">Demos</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html" class="active">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../demo.html">Demos</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">FinOps</div>
+    <h1 class="animate-in" style="max-width: 700px; margin: 0 auto;">Why Your Kafka Team Needs <span class="text-gradient">Cost Visibility</span></h1>
+    <p class="animate-in" data-delay="1" style="margin-top: var(--space-md);">(And How to Get It)</p>
+  </div>
+</section>
+
+<!-- Article -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main">
+        <div class="article__meta">
+          <span class="article__author">Flafka Team</span>
+          <time datetime="2026-03-22">March 22, 2026</time>
+          <span>7 min read</span>
+        </div>
+
+        <div class="article__body">
+          <p>
+            If your team runs workloads on Confluent Cloud, you know the feeling: the monthly invoice arrives, the number is higher than expected, and nobody can explain exactly why. There is no per-statement cost breakdown. No daily trend chart. No alert before the budget overruns. Just a flat invoice after the money is spent.
+          </p>
+          <p>
+            This is the cost visibility gap in the Kafka ecosystem. And it is a gap that no other Kafka management tool &mdash; Conduktor, AKHQ, Kafka UI, Lenses, or the Confluent Console itself &mdash; has attempted to close. Until now.
+          </p>
+
+          <h2 id="the-problem">The Problem: Confluent Cloud Costs Are Opaque</h2>
+          <p>
+            Confluent Cloud pricing is based on <strong>Confluent Flink Units (CFUs)</strong> for Flink workloads, plus per-partition and per-throughput charges for Kafka topics, connectors, and Schema Registry. The pricing model is flexible &mdash; but the visibility into actual spending is not.
+          </p>
+          <p>
+            Most teams discover their cost problems reactively:
+          </p>
+          <ul>
+            <li>A Flink SQL statement runs for 3 weeks at 8 CFUs/hour before anyone notices</li>
+            <li>A connector scales up and doubles throughput charges overnight</li>
+            <li>A test topic accumulates storage costs because nobody cleaned it up</li>
+            <li>The monthly bill is 40% higher than budget, with no clear attribution</li>
+          </ul>
+          <p>
+            The Confluent Console shows current resource usage, but it does not offer trend charts, projections, budget tracking, or cost alerts. If you want cost visibility, you are on your own &mdash; usually with spreadsheets and manual Billing API exports.
+          </p>
+
+          <h2 id="cfu-pricing">CFU Pricing Explained</h2>
+          <p>
+            Confluent Flink Units (CFUs) are the compute currency for Flink SQL on Confluent Cloud. Every running Flink statement consumes CFUs based on its complexity, input topic throughput, and windowing operations.
+          </p>
+          <p>
+            The challenge is that CFU consumption is not obvious from the SQL alone. A simple <code>SELECT * FROM orders</code> might consume 0.5 CFUs/hour, while a windowed aggregation with a 3-way join could consume 12 CFUs/hour. At Confluent's pricing, the difference between those two statements is the difference between $12/month and $288/month.
+          </p>
+          <p>
+            Without pre-submission cost estimation, teams submit statements blindly and discover the cost impact weeks later. This is especially dangerous for data teams experimenting with new queries &mdash; a quick prototype can become an expensive production workload before anyone notices.
+          </p>
+
+          <h2 id="flafka-cost-stack">Flafka's Cost Visibility Stack</h2>
+          <p>
+            Flafka is the only Kafka management tool that treats cost visibility as a first-class feature. Here is what we have built:
+          </p>
+
+          <h3>Spend Dashboard (S72)</h3>
+          <p>
+            The Spend Dashboard provides real-time cost visibility with KPI cards for month-to-date spend, daily average, projected end-of-month total, and budget utilization. A daily trend chart shows spending patterns over the current billing period. Product-level breakdown reveals which services &mdash; Kafka, Flink, Connect, Schema Registry &mdash; are driving costs.
+          </p>
+          <figure>
+            <img src="../assets/screenshots/ws3-spend-dashboard-dark.png" alt="Flafka Spend Dashboard showing month-to-date costs, daily trend chart, and product-level breakdown" loading="lazy">
+            <figcaption>Spend Dashboard: real-time cost tracking with product-level breakdown and trend charts</figcaption>
+          </figure>
+
+          <h3>Cost Drill-Down (S73)</h3>
+          <p>
+            The drill-down view lets you inspect costs at the individual resource level. Which Flink statement is consuming the most CFUs? Which connector is driving throughput charges? Which topics are accumulating the most storage? The drill-down answers these questions without leaving the UI.
+          </p>
+
+          <h3>CFU Monitor (S73)</h3>
+          <p>
+            The CFU Monitor shows real-time CFU consumption per Flink statement. A bar chart ranks statements by CFU/hour, making it immediately obvious which statements are the most expensive. Combined with the Flink SQL IDE's pre-submission cost estimation (S68), you can see costs before and after deployment.
+          </p>
+
+          <h3>Budget Estimation (S68)</h3>
+          <p>
+            Before submitting a Flink SQL statement, Flafka estimates the CFU/hour cost based on query complexity. If the estimate exceeds your configured budget threshold, a warning appears with the projected monthly cost. This prevents billing surprises at the point of creation, not weeks later.
+          </p>
+
+          <h3>Cost Examples (S74)</h3>
+          <p>
+            A library of real-world cost examples helps teams understand what typical workloads cost. "A windowed aggregation over 3 topics at 10K msgs/sec costs approximately 4.2 CFUs/hour ($100/month)." These reference points make cost planning concrete instead of abstract.
+          </p>
+
+          <h2 id="cost-alerts">Cost Alerts: Proactive Notifications (S78)</h2>
+          <p>
+            Shipped in Sprint 78, cost alerts add proactive notifications to the cost visibility stack. Configure budget thresholds and receive alerts before overruns happen:
+          </p>
+          <ul>
+            <li><strong>Budget warning</strong> &mdash; alert when projected spend reaches 80% of monthly budget</li>
+            <li><strong>Budget critical</strong> &mdash; alert when projected spend reaches 100% of budget</li>
+            <li><strong>Cost spike</strong> &mdash; alert when daily spend exceeds 2x the 7-day average</li>
+          </ul>
+          <p>
+            Alerts integrate with the same webhook system used for SLO notifications &mdash; route them to Slack, PagerDuty, or any HTTP endpoint. The goal is simple: you should never be surprised by your Confluent Cloud bill again.
+          </p>
+
+          <h2 id="roi">The ROI: How Teams Could Save 40% on CFU Costs</h2>
+          <p>
+            Here is a realistic scenario based on common Confluent Cloud usage patterns:
+          </p>
+          <blockquote>
+            <p>
+              A platform team running 12 Flink SQL statements on Confluent Cloud discovers through Flafka's CFU Monitor that 3 statements are consuming 65% of total CFU budget. One statement, a prototype windowed join left running after a hackathon, costs $180/month by itself. Another uses a tumbling window that could be replaced with a more efficient hopping window, reducing consumption by 60%.
+            </p>
+          </blockquote>
+          <p>
+            By identifying inefficient and forgotten statements, a typical team could reduce CFU costs by 30-40%. The Spend Dashboard makes these opportunities visible within the first week of use. Without it, these costs would have continued silently for months.
+          </p>
+          <p>
+            The math is straightforward: if your Confluent Cloud bill is $2,000/month and Flafka helps you eliminate 35% of wasted CFU spend, that is $700/month in savings &mdash; $8,400/year. Flafka's Team tier at $19/seat/month pays for itself many times over.
+          </p>
+
+          <h2 id="no-competitor">Why No Competitor Offers This</h2>
+          <p>
+            Cost visibility requires deep integration with Confluent Cloud's billing and metrics APIs. Most Kafka GUIs focus on topic management and consumer groups &mdash; they connect via the Kafka protocol and never touch the Confluent Cloud management plane. Flafka integrates with both: the Kafka protocol for data operations, and the Confluent Cloud APIs for cost, metrics, Flink, and connector management.
+          </p>
+          <p>
+            This dual integration is what makes Flafka's cost visibility possible &mdash; and why no competitor has replicated it. It is not a feature you can bolt on; it requires architectural decisions made from day one.
+          </p>
+
+          <h2 id="get-started">Start Tracking Your Confluent Cloud Costs Today</h2>
+          <p>
+            The Spend Dashboard, CFU Monitor, and Cost Alerts are available on the Flafka Team tier. Set up takes less than 5 minutes &mdash; connect your Confluent Cloud credentials and cost data starts flowing immediately. No spreadsheets. No manual exports. No monthly surprises.
+          </p>
+
+          <div style="text-align: center; margin-top: var(--space-2xl);">
+            <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+            <a href="../pricing.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-md);">See Pricing</a>
+            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-muted);">
+              <a href="../features.html">Explore all features</a> &bull; <a href="kafka-slo-monitoring.html">SLO Monitoring Guide</a> &bull; <a href="../compare.html">Full competitor comparison</a>
+            </p>
+          </div>
+        </div>
+
+        <p style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-3xl); border-top: 1px solid var(--border-subtle); padding-top: var(--space-lg);">
+          Published: March 22, 2026 &bull; Last updated: March 22, 2026
+        </p>
+      </article>
+
+      <!-- Sidebar TOC -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#the-problem">The Problem</a></li>
+            <li><a href="#cfu-pricing">CFU Pricing Explained</a></li>
+            <li><a href="#flafka-cost-stack">Cost Visibility Stack</a></li>
+            <li><a href="#cost-alerts">Cost Alerts (S78)</a></li>
+            <li><a href="#roi">The ROI</a></li>
+            <li><a href="#no-competitor">Why No Competitor Offers This</a></li>
+            <li><a href="#get-started">Get Started</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Stop guessing your<br><span class="text-gradient">Confluent Cloud costs</span></h2>
+    <p>Real-time spend visibility. No credit card required for the free tier.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="../demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__mascot-wrap">
+          <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="footer__mascot">
+        </div>
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">
+          The Kafka management platform that sees everything. Built with Rust for performance, React for experience.
+        </p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../demo.html">Demos</a></li>
+          <li><a href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../about.html#contact">Contact</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="../security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>

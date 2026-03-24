@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing | Flafka — Kafka Management Platform</title>
+  <meta name="description" content="Kafka GUI pricing: Free Starter (3 users), $19/seat/mo Team with spend dashboards and RBAC, custom Enterprise. Conduktor alternative pricing starting free. 14-day trial, no credit card.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pricing | Flafka — Kafka Management Platform">
+  <meta property="og:description" content="Start free with 3 users. Team tier at $19/seat/mo with spend dashboards, RBAC, and connector monitoring. 14-day free trial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flafka.dev/pricing.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pricing | Flafka — Kafka Management Platform">
+  <meta name="twitter:description" content="Start free. $19/seat/mo for the full platform. Conduktor alternatives at a lower price.">
+
+  <link rel="canonical" href="https://flafka.dev/pricing.html">
+  <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-icon">F</span>
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="security.html">Security</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="compare.html">Compare</a>
+  <a href="security.html">Security</a>
+  <a href="docs.html">Docs</a>
+  <a href="community.html">Community</a>
+  <a href="demo.html">Sprint Demos</a>
+  <a href="video-library.html">Feature Videos</a>
+  <a href="roi-calculator.html">ROI Calculator</a>
+  <a href="about.html">About</a>
+  <a href="blog.html">Blog</a>
+
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <h1 class="animate-in">Simple, <span class="text-gradient">transparent</span> pricing</h1>
+    <p class="animate-in" data-delay="1">Start free. No credit card required. Annual billing saves 20%.</p>
+  </div>
+</section>
+
+<!-- Pricing Cards -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+
+    <!-- Billing Toggle -->
+    <div class="pricing-toggle animate-in" role="radiogroup" aria-label="Billing period">
+      <label class="pricing-toggle__label active" id="toggle-monthly">
+        <input type="radio" name="billing" value="monthly" checked class="sr-only"> Monthly
+      </label>
+      <button class="pricing-toggle__switch" role="switch" aria-checked="false" aria-label="Toggle annual billing" id="billing-toggle"></button>
+      <label class="pricing-toggle__label" id="toggle-annual">
+        <input type="radio" name="billing" value="annual" class="sr-only"> Annual
+      </label>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Starter -->
+      <div class="pricing-card animate-in" data-delay="1">
+        <div class="pricing-card__name">Starter</div>
+        <div class="pricing-card__price">Free</div>
+        <div class="pricing-card__period">Up to 3 users, 1 cluster &mdash; forever</div>
+        <p style="font-size: var(--text-xs); color: var(--color-primary-light); margin-top: var(--space-xs); font-weight: 600;">Works with any Kafka cluster</p>
+        <ul class="pricing-card__features">
+          <li>Topic management (CRUD)</li>
+          <li>Schema Registry (Avro, JSON, Protobuf)</li>
+          <li>Message browser with search</li>
+          <li>Flink SQL IDE</li>
+          <li>Schema Impact Analysis</li>
+          <li>Consumer group monitoring</li>
+          <li>Real-time WebSocket streaming</li>
+          <li>Dark mode</li>
+          <li>Desktop app (Tauri)</li>
+          <li>Docker deployment</li>
+          <li>Community support</li>
+        </ul>
+        <div class="pricing-card__cta">
+          <a href="#" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="pricing-card pricing-card--featured animate-in" data-delay="2">
+        <div class="pricing-card__popular">Most Popular</div>
+        <div class="pricing-card__name">Team</div>
+        <div class="pricing-card__price">
+          <span class="pricing-card__price-value" id="team-price">$19</span><span style="font-size: var(--text-lg); font-weight: 500; color: var(--text-muted);">/seat/mo</span>
+          <span class="pricing-card__save-badge" id="save-badge">Save 20%</span>
+        </div>
+        <div class="pricing-card__period">Unlimited users &amp; clusters &bull; 14-day free trial</div>
+        <ul class="pricing-card__features">
+          <li>Everything in Starter, plus:</li>
+          <li>Spend Dashboard (FinOps)</li>
+          <li>Resource-level RBAC with glob patterns</li>
+          <li>Connector monitoring (throughput + logs)</li>
+          <li>SLO tracking with error budgets</li>
+          <li>ACL management + template presets</li>
+          <li>Shareable analytics reports</li>
+          <li>Shareable dashboard snapshots</li>
+          <li>Analytics export (JSON/CSV)</li>
+          <li>Data quality rules engine</li>
+          <li>Connection profiles (multi-cluster)</li>
+          <li>Team spaces</li>
+          <li>Budget alerts &amp; notifications</li>
+          <li>Email support</li>
+          <li style="margin-top: var(--space-sm);"><a href="demo.html#cost-demo" style="color: var(--color-primary-light); text-decoration: underline; font-weight: 600;">Watch the cost management demo &rarr;</a></li>
+          <li><a href="roi-calculator.html" style="color: var(--color-primary-light); text-decoration: underline; font-weight: 600;">Calculate your savings &rarr;</a></li>
+        </ul>
+        <div class="pricing-card__cta">
+          <button class="btn btn--primary" id="start-trial-btn" data-signup-trigger>Start 14-Day Free Trial</button>
+        </div>
+
+        <!-- Trial Form (inline) -->
+        <div class="trial-form" id="trial-form">
+          <h4 style="margin-bottom: var(--space-md);">Start your free trial</h4>
+          <form id="trial-form-el" novalidate>
+            <div class="trial-form__fields">
+              <div class="form-field">
+                <label for="trial-email">Work Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="trial-email" name="email" placeholder="you@company.com" required>
+                <span class="form-field__error" aria-live="polite"></span>
+              </div>
+              <div class="form-field">
+                <label for="trial-company">Company Name</label>
+                <input type="text" id="trial-company" name="company" placeholder="Your company">
+                <span class="form-field__error" aria-live="polite"></span>
+              </div>
+              <div class="form-field">
+                <label for="trial-size">Team Size</label>
+                <select id="trial-size" name="team_size">
+                  <option value="">Select team size</option>
+                  <option value="1-5">1-5 people</option>
+                  <option value="6-20">6-20 people</option>
+                  <option value="21-50">21-50 people</option>
+                  <option value="50+">50+ people</option>
+                </select>
+              </div>
+              <!-- Honeypot -->
+              <div class="form-field form-field--hp" aria-hidden="true" tabindex="-1">
+                <label for="trial-website">Website</label>
+                <input type="text" id="trial-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+            </div>
+            <div class="trial-form__submit">
+              <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;">Start Free Trial</button>
+            </div>
+            <p class="trial-form__note">No credit card required. Full Team features for 14 days.</p>
+          </form>
+        </div>
+
+        <!-- Trial Success (inline setup) -->
+        <div class="trial-form__success" id="trial-success">
+          <h4 style="color: var(--color-success); margin-bottom: var(--space-sm);">Trial activated!</h4>
+          <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-bottom: var(--space-md);">Here's how to get started:</p>
+          <div class="trial-setup">
+            <div class="trial-setup__tabs">
+              <button class="trial-setup__tab active" data-setup="docker">Docker</button>
+              <button class="trial-setup__tab" data-setup="tauri">Desktop (Tauri)</button>
+            </div>
+            <div class="trial-setup__content" id="setup-docker">docker pull flafka/flafka:latest
+docker run -p 8080:8080 flafka/flafka:latest</div>
+            <div class="trial-setup__content" id="setup-tauri" style="display: none;">Download the installer for your OS:
+&bull; Windows: flafka-setup.exe
+&bull; macOS: Flafka.dmg
+&bull; Linux: flafka.AppImage
+
+Visit flafka.dev/download</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card animate-in" data-delay="3">
+        <div class="pricing-card__name">Enterprise</div>
+        <div class="pricing-card__price">Custom</div>
+        <div class="pricing-card__period">Volume pricing for 50+ seats</div>
+        <ul class="pricing-card__features">
+          <li>Everything in Team, plus:</li>
+          <li>SSO / OIDC integration</li>
+          <li>SAML support (coming soon)</li>
+          <li>SOC 2 compliance (coming soon)</li>
+          <li>PCI-DSS compliance documentation</li>
+          <li>Audit compliance reporting</li>
+          <li>Bootstrap admin &amp; lockout prevention</li>
+          <li>Permission-denied guidance UI</li>
+          <li>SLA guarantee</li>
+          <li>Dedicated support engineer</li>
+          <li>Custom integrations</li>
+          <li>Priority feature requests</li>
+        </ul>
+        <div class="pricing-card__cta">
+          <a href="about.html#contact" class="btn btn--secondary">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature Comparison Matrix -->
+<section class="section" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <h2 class="section-header__title">Feature comparison</h2>
+      <p class="section-header__desc">Every feature, every tier. No surprises.</p>
+    </div>
+
+    <div class="pricing-matrix animate-in">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th style="color: var(--color-primary-light);">Team</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Users</td><td>Up to 3</td><td>Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>Clusters</td><td>1</td><td>Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>Topic Management</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Schema Registry CRUD</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Message Browser + Search</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Flink SQL IDE</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Schema Impact Analysis</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Consumer Group Monitoring</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Dark Mode</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Desktop App (Tauri)</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Docker Deployment</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr>
+            <td colspan="4" style="background: var(--bg-elevated); font-weight: 700; color: var(--color-primary-light);">
+              Team &amp; Enterprise
+            </td>
+          </tr>
+          <tr><td>Spend Dashboard</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Resource RBAC (glob patterns)</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Connector Monitoring</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>SLO Tracking</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>ACL Management + Templates</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Shareable Analytics</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Analytics Export</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Data Quality Rules</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Connection Profiles</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Budget Alerts</td><td class="cross">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr>
+            <td colspan="4" style="background: var(--bg-elevated); font-weight: 700; color: var(--color-primary-light);">
+              Enterprise Only
+            </td>
+          </tr>
+          <tr><td>SSO / OIDC</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="check">&#10003;</td></tr>
+          <tr><td>SAML</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="partial">Coming soon</td></tr>
+          <tr><td>PCI-DSS Documentation</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Audit Compliance</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="check">&#10003;</td></tr>
+          <tr><td>SLA Guarantee</td><td>Community</td><td>Email</td><td>Dedicated</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <h2 class="section-header__title">Frequently asked questions</h2>
+    </div>
+
+    <div style="max-width: 720px; margin: 0 auto;">
+      <div class="faq-item open">
+        <button class="faq-question">Do I need a Confluent Cloud account?</button>
+        <div class="faq-answer">
+          Yes. Flafka is a management interface for Confluent Cloud. You connect it to your existing Confluent Cloud clusters using your API keys. Flafka does not host or manage Kafka infrastructure directly.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I self-host Flafka?</button>
+        <div class="faq-answer">
+          Yes. Flafka runs as a single Docker container or as a native desktop application via Tauri (Windows, macOS, Linux). There is no cloud dependency &mdash; the application runs entirely in your environment.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What about data privacy?</button>
+        <div class="faq-answer">
+          Flafka connects directly to your Confluent Cloud clusters. No data passes through our servers. Your messages, schemas, and configuration stay within your network. The only external call is license validation (for paid tiers).
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I switch from Conduktor?</button>
+        <div class="faq-answer">
+          Yes. Setup takes about 5 minutes. Enter your Confluent Cloud API credentials and you're ready to go. You'll immediately gain access to Schema Impact Analysis, Spend Dashboard, RBAC Patterns, and Connector Monitoring &mdash; four features Conduktor doesn't offer.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is there a free trial for the Team tier?</button>
+        <div class="faq-answer">
+          Yes. The Team tier includes a 14-day free trial with full access to all features. No credit card required to start. After the trial, you can continue on the free Starter tier or upgrade.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Does Flafka support MSK or self-managed Kafka?</button>
+        <div class="faq-answer">
+          Yes. Flafka works with any Kafka cluster via SASL/PLAIN + TLS, including Confluent Cloud, AWS MSK, Apache Kafka, Redpanda, and Aiven. Core features (topic management, message browser, consumer groups, monitoring, dark mode, desktop app) work on all platforms. Confluent Cloud-specific features like Flink SQL IDE and CFU cost management require a Confluent Cloud cluster.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How does the annual discount work?</button>
+        <div class="faq-answer">
+          Annual billing saves 20%. The Team tier drops from $19/seat/month to $15/seat/month when billed annually. Enterprise customers receive custom volume pricing. Contact sales for details.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How does the free trial work?</button>
+        <div class="faq-answer">
+          The Team tier includes a 14-day free trial with full access to every Team feature &mdash; Spend Dashboard, RBAC, Connector Monitoring, SLO Tracking, and more. No credit card required. After 14 days, you can continue on the free Starter tier or upgrade to keep Team features.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I upgrade from Starter to Team?</button>
+        <div class="faq-answer">
+          Yes. You can upgrade from Starter to Team at any time. All your data, configurations, and settings are preserved. The upgrade takes effect immediately &mdash; no downtime, no data migration needed.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Start building with <span class="text-gradient">Flafka</span> today</h2>
+    <p>Free tier available. No credit card. Deploy in under 5 minutes.</p>
+    <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Get Started Free</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <span class="nav__logo-icon" style="width:28px;height:28px;font-size:15px;">F</span>
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="demo.html">Demos</a></li>
+          <li><a href="video-library.html">Feature Videos</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="compare.html">Compare</a></li>
+          <li><a href="security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/signup.js"></script>
+</body>
+</html>

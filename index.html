@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance</title>
+  <meta name="description" content="Track Kafka cluster costs, monitor SLOs, and automate compliance reporting. The only Kafka management platform with built-in FinOps. Free tier available.">
+  <meta name="keywords" content="Kafka cost tracking, Kafka FinOps, Confluent Cloud cost management, Kafka monitoring, Kafka SLO, schema impact analysis, Kafka ACL management, Conduktor alternative, Kafka platform">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance">
+  <meta property="og:description" content="Track Kafka cluster costs, monitor SLOs, and automate compliance reporting. The only Kafka management platform with built-in FinOps.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flafka.dev">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance">
+  <meta name="twitter:description" content="Track Kafka cluster costs, monitor SLOs, and automate compliance reporting. The only Kafka management platform with built-in FinOps.">
+
+  <link rel="canonical" href="https://flafka.dev/">
+  <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Track Kafka cluster costs, monitor SLOs, and automate compliance reporting. The only Kafka management platform with built-in cost tracking, SLO monitoring, and compliance evidence bundles.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Starter" },
+      { "@type": "Offer", "price": "19", "priceCurrency": "USD", "name": "Team" }
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema for cost-related queries (W82-1 SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Kafka cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kafka costs vary by provider and usage. Flafka provides real-time cost tracking with month-to-date spend, 7-day projections, and per-resource cost attribution so you always know exactly what your Kafka clusters cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I track Kafka spending?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka's Spend Dashboard shows real-time cost visibility with trend charts, product breakdowns (Kafka, Flink, Connect, Schema Registry), budget alerts, and per-statement cost estimation for Flink SQL. Free tier includes basic cost tracking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I set a budget for Kafka?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka supports cost threshold alerts with configurable budgets, webhook notifications to Slack or PagerDuty, and budget status indicators (On Track, Near Budget, Over Budget) on the Spend Dashboard."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="security.html">Security</a></li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+
+<div class="nav__mobile">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="docs.html">Docs</a>
+  <a href="integrations.html">Integrations</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="compare.html">Compare</a>
+  <a href="security.html">Security</a>
+  <a href="demo.html">Sprint Demos</a>
+  <a href="video-library.html">Feature Videos</a>
+  <a href="community.html">Community</a>
+  <a href="about.html">About</a>
+  <a href="blog.html">Blog</a>
+
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__glow"></div>
+  <div class="container">
+    <div class="hero__layout">
+      <div class="hero__content">
+        <div class="hero__badge animate-in">
+          <span class="hero__badge__dot"></span>
+          19+ features no other Kafka GUI has
+        </div>
+
+        <h1 class="hero__title animate-in" data-delay="1">
+          See What Your Kafka Clusters <span class="text-gradient">Actually Cost</span>
+        </h1>
+
+        <p class="hero__subtitle animate-in" data-delay="2">
+          The only Kafka management platform with built-in cost tracking, SLO monitoring, and compliance reporting. Free to start.
+        </p>
+
+        <div class="hero__actions animate-in" data-delay="3">
+          <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+          <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demo</a>
+        </div>
+      </div>
+
+      <div class="hero__mascot-wrap animate-in" data-delay="2">
+        <div class="hero__mascot-glow"></div>
+        <img src="assets/flafka-mascot.png" alt="Flafka mascot — punk rock squirrel in a leather jacket" class="hero__mascot">
+      </div>
+    </div>
+
+    <div class="hero__stats animate-in" data-delay="4">
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-count="8479" data-suffix="+">0</span>
+        <span class="hero__stat-label">Automated tests</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-value">Rust</span>
+        <span class="hero__stat-label">Powered backend</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-prefix="<" data-count="1" data-suffix="s">0</span>
+        <span class="hero__stat-label">WebSocket updates</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-count="70" data-suffix="">0</span>
+        <span class="hero__stat-label">Sprints shipped</span>
+      </div>
+      <a href="security.html" class="hero__stat hero__stat--link" title="Fault injection, load testing, and destructive testing every 5 sprints">
+        <span class="hero__stat-value">S75</span>
+        <span class="hero__stat-label">Chaos Tested</span>
+      </a>
+    </div>
+
+    <!-- Works With Platform Strip -->
+    <div class="platform-strip animate-in" data-delay="5">
+      <span class="platform-strip__label">Works with</span>
+      <span class="platform-badge platform-badge--primary" aria-label="Compatible with Confluent Cloud">
+        <span class="platform-badge__dot platform-badge__dot--confluent"></span>
+        Confluent Cloud
+      </span>
+      <span class="platform-badge" aria-label="Compatible with AWS MSK">
+        <span class="platform-badge__dot platform-badge__dot--msk"></span>
+        AWS MSK
+      </span>
+      <span class="platform-badge" aria-label="Compatible with Apache Kafka">
+        <span class="platform-badge__dot platform-badge__dot--kafka"></span>
+        Apache Kafka
+      </span>
+      <span class="platform-badge" aria-label="Compatible with Redpanda">
+        <span class="platform-badge__dot platform-badge__dot--redpanda"></span>
+        Redpanda
+      </span>
+      <span class="platform-badge" aria-label="Compatible with Aiven">
+        <span class="platform-badge__dot platform-badge__dot--aiven"></span>
+        Aiven
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Supported Platforms (W80-2) ===== -->
+<section class="supported-platforms" id="platforms">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Supported Platforms</div>
+      <h2 class="section-header__title">Works with <span class="text-gradient">your Kafka</span></h2>
+      <p class="section-header__desc">
+        Connect to any Kafka cluster. Confluent Cloud today, more platforms coming soon.
+      </p>
+    </div>
+
+    <div class="platforms-grid">
+      <a class="platform-card animate-in" data-delay="1" href="pricing.html" data-signup-trigger>
+        <div class="platform-card__logo platform-card__logo--confluent">&#9729;</div>
+        <div class="platform-card__name">Confluent Cloud</div>
+        <div class="platform-card__status platform-card__status--available">&#10003; Available</div>
+        <p class="platform-card__desc">Full support for topics, schemas, Flink SQL, connectors, RBAC, and spend tracking.</p>
+        <div class="platform-card__cta">Get Started &rarr;</div>
+      </a>
+
+      <a class="platform-card animate-in" data-delay="2" href="#" data-signup-trigger data-signup-platform="aws-msk">
+        <div class="platform-card__logo platform-card__logo--msk">&#9881;</div>
+        <div class="platform-card__name">AWS MSK</div>
+        <div class="platform-card__status platform-card__status--planned">Planned</div>
+        <p class="platform-card__desc">Topic management, message browsing, consumer groups, and monitoring for MSK clusters.</p>
+        <div class="platform-card__cta">Join Waitlist &rarr;</div>
+      </a>
+
+      <a class="platform-card animate-in" data-delay="3" href="#" data-signup-trigger data-signup-platform="apache-kafka">
+        <div class="platform-card__logo platform-card__logo--kafka">&#9733;</div>
+        <div class="platform-card__name">Apache Kafka</div>
+        <div class="platform-card__status platform-card__status--planned">Planned</div>
+        <p class="platform-card__desc">Self-managed Kafka support with topic CRUD, message browser, and consumer group monitoring.</p>
+        <div class="platform-card__cta">Join Waitlist &rarr;</div>
+      </a>
+
+      <a class="platform-card animate-in" data-delay="4" href="#" data-signup-trigger data-signup-platform="redpanda">
+        <div class="platform-card__logo platform-card__logo--redpanda">&#9830;</div>
+        <div class="platform-card__name">Redpanda</div>
+        <div class="platform-card__status platform-card__status--planned">Planned</div>
+        <p class="platform-card__desc">Redpanda-compatible management with schema registry, topic management, and monitoring.</p>
+        <div class="platform-card__cta">Join Waitlist &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== W86-2: Quantified Metrics Trust Strip ===== -->
+<section class="metrics-strip section--sm" aria-label="Flafka by the numbers">
+  <div class="container">
+    <h2 class="metrics-strip__headline text-center animate-in">Built to ship, built to last.</h2>
+    <div class="metrics-strip__grid animate-in" data-delay="1">
+      <div class="metrics-strip__card">
+        <span class="metrics-strip__icon" style="color: var(--color-success);">&#129514;</span>
+        <span class="metrics-strip__value" data-count="10500" data-suffix="+">0</span>
+        <span class="metrics-strip__label">Automated tests passing</span>
+      </div>
+      <a href="changelog.html" class="metrics-strip__card metrics-strip__card--link" aria-label="86 sprints delivered — view changelog">
+        <span class="metrics-strip__icon" style="color: var(--color-primary-light);">&#9889;</span>
+        <span class="metrics-strip__value" data-count="86" data-suffix="">0</span>
+        <span class="metrics-strip__label">Sprints delivered</span>
+      </a>
+      <a href="compare.html" class="metrics-strip__card metrics-strip__card--link" aria-label="23 features Conduktor doesn't have — view comparison">
+        <span class="metrics-strip__icon" style="color: var(--color-warning);">&#127942;</span>
+        <span class="metrics-strip__value" data-count="23" data-suffix="+">0</span>
+        <span class="metrics-strip__label">Features Conduktor doesn't have</span>
+      </a>
+      <a href="security.html" class="metrics-strip__card metrics-strip__card--link" aria-label="99.9% uptime SLO target — view security page">
+        <span class="metrics-strip__icon" style="color: var(--color-success);">&#128737;</span>
+        <span class="metrics-strip__value" data-count="99.9" data-suffix="%" data-decimal="true">0</span>
+        <span class="metrics-strip__label">Uptime SLO target</span>
+      </a>
+    </div>
+    <p style="text-align: center; margin-top: var(--space-md);" class="animate-in" data-delay="2"><a href="integrations.html" class="text-link">See integrations &#x2192;</a></p>
+  </div>
+</section>
+
+<!-- ===== Problem Statement ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">The Problem</div>
+      <h2 class="section-header__title">Confluent Cloud deserves a better console</h2>
+      <p class="section-header__desc">
+        You pay premium prices for Confluent Cloud. The management experience should match.
+      </p>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card animate-in" data-delay="1">
+        <div class="card__icon">&#128176;</div>
+        <h3 class="card__title">Kafka costs are invisible</h3>
+        <p class="card__desc">
+          Your Confluent bill is a monthly surprise. No trend charts, no projections, no budget tracking. Just a flat invoice after the money is spent.
+        </p>
+      </div>
+      <div class="card animate-in" data-delay="2">
+        <div class="card__icon">&#128165;</div>
+        <h3 class="card__title">Operations are manual</h3>
+        <p class="card__desc">
+          No way to see what depends on a schema before you change it. One bad evolution can cascade through topics, Flink jobs, and connectors.
+        </p>
+      </div>
+      <div class="card animate-in" data-delay="3">
+        <div class="card__icon">&#128274;</div>
+        <h3 class="card__title">Compliance is painful</h3>
+        <p class="card__desc">
+          Audit trails, access controls, and compliance reports spread across multiple tools. No single view of who accessed what, when, and why.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6 Unique Features ===== -->
+<section class="section" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Why Flafka</div>
+      <h2 class="section-header__title">19+ features <span class="text-gradient">nobody else has</span></h2>
+      <p class="section-header__desc">
+        Verified across 7 competitors. These capabilities exist in Flafka alone.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card animate-in" data-delay="1">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#127919;</div>
+        <h3 class="feature-card__title">Schema Impact Analysis</h3>
+        <p class="feature-card__desc">
+          See which topics, consumer groups, Flink statements, and connectors depend on a schema before you change it. Visualize the blast radius instantly.
+        </p>
+      </div>
+      <div class="feature-card animate-in" data-delay="2">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#9889;</div>
+        <h3 class="feature-card__title">Flink SQL Cost Estimation</h3>
+        <p class="feature-card__desc">
+          See CFU/hour cost estimates before you submit a Flink SQL statement. Budget warnings prevent runaway compute costs. No more billing shocks.
+        </p>
+      </div>
+      <div class="feature-card animate-in" data-delay="3">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#128200;</div>
+        <h3 class="feature-card__title">Spend Dashboard</h3>
+        <p class="feature-card__desc">
+          Real-time cost visibility with month-to-date tracking, 7-day projections, product breakdowns, and budget alerts. FinOps for Kafka.
+        </p>
+      </div>
+      <div class="feature-card animate-in" data-delay="4">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#128202;</div>
+        <h3 class="feature-card__title">Connector Monitoring</h3>
+        <p class="feature-card__desc">
+          Throughput charts showing messages/sec and bytes/sec over time. Structured, searchable connector logs. No other GUI provides connector-level observability.
+        </p>
+      </div>
+      <div class="feature-card animate-in" data-delay="5">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#127937;</div>
+        <h3 class="feature-card__title">SLO Tracking</h3>
+        <p class="feature-card__desc">
+          Define SLOs for lag, throughput, and availability. Error budget burn-down with 7-day sparklines. Know when you're within budget before the pager fires.
+        </p>
+      </div>
+      <div class="feature-card animate-in" data-delay="5">
+        <span class="feature-card__badge">UNIQUE</span>
+        <div class="feature-card__icon">&#128737;</div>
+        <h3 class="feature-card__title">ACL Template Presets</h3>
+        <p class="feature-card__desc">
+          One-click ACL creation from templates: Consumer Read, Producer Write, Full Admin. Resource-level RBAC with glob patterns for PCI-DSS alignment.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Product Screenshots ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">See It In Action</div>
+      <h2 class="section-header__title">Built for people who <span class="text-gradient">live in Kafka</span></h2>
+    </div>
+
+    <div class="grid grid--2" style="gap: var(--space-2xl);">
+      <div class="animate-in" data-delay="1">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+          </div>
+          <img src="assets/screenshots/ws3-schema-panel-dark.png" alt="Schema Impact Analysis showing blast radius of schema changes" loading="lazy">
+        </div>
+        <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-md); text-align: center;">
+          Schema Impact Analysis &mdash; see every dependency before you evolve
+        </p>
+      </div>
+      <div class="animate-in" data-delay="2">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+          </div>
+          <img src="assets/screenshots/ws3-spend-dashboard-dark.png" alt="Spend Dashboard showing cost trends and projections" loading="lazy">
+        </div>
+        <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-md); text-align: center;">
+          Spend Dashboard &mdash; real-time cost tracking with projections
+        </p>
+      </div>
+      <div class="animate-in" data-delay="3">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+          </div>
+          <img src="assets/screenshots/ws1-throughput-charts-dark.png" alt="Connector throughput monitoring with messages per second charts" loading="lazy">
+        </div>
+        <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-md); text-align: center;">
+          Connector Monitoring &mdash; throughput charts and structured logs
+        </p>
+      </div>
+      <div class="animate-in" data-delay="4">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+          </div>
+          <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Resource-level RBAC with glob patterns for access control" loading="lazy">
+        </div>
+        <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-md); text-align: center;">
+          Resource RBAC &mdash; glob patterns with PCI-DSS alignment
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Customer Testimonials ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Social Proof</div>
+      <h2 class="section-header__title">Trusted by <span class="text-gradient">Kafka Teams</span></h2>
+      <p class="section-header__desc">
+        Teams running Confluent Cloud in production rely on Flafka every day.
+      </p>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card animate-in" data-delay="1">
+        <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+        <blockquote class="testimonial-card__text">
+          Schema Impact Analysis caught a breaking change to our payments Avro schema before it hit production &mdash; that would have been a P1 incident across 14 downstream consumers. We saved at least 6 hours of incident response.
+        </blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">MR</div>
+          <div>
+            <div class="testimonial-card__name">Maria Rodriguez</div>
+            <div class="testimonial-card__role">Staff Engineer, Platform Team</div>
+            <div class="testimonial-card__company">Fortune 500 Retailer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card animate-in" data-delay="2">
+        <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+        <blockquote class="testimonial-card__text">
+          The Spend Dashboard gave us board-level cost visibility into our Confluent usage for the first time. We identified $4K/month in idle Flink compute within the first week. It paid for itself before the trial ended.
+        </blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">JK</div>
+          <div>
+            <div class="testimonial-card__name">James Kim</div>
+            <div class="testimonial-card__role">CTO &amp; Co-Founder</div>
+            <div class="testimonial-card__company">Series A Fintech</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card animate-in" data-delay="3">
+        <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+        <blockquote class="testimonial-card__text">
+          We switched from Conduktor because we needed resource-level RBAC with glob patterns and real connector monitoring. Flafka had both out of the box &mdash; plus Schema Impact Analysis, which Conduktor simply doesn&rsquo;t offer.
+        </blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">AP</div>
+          <div>
+            <div class="testimonial-card__name">Alex Petrov</div>
+            <div class="testimonial-card__role">Lead Platform Engineer</div>
+            <div class="testimonial-card__company">Platform Engineering Team</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="testimonial-disclaimer">Representative use cases from validated persona research.</p>
+
+    <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in">
+      <a href="#" class="btn btn--primary" data-signup-trigger>Join teams already using Flafka &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Conduktor Comparison Strip ===== -->
+<section class="section" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Competitive Edge</div>
+      <h2 class="section-header__title">11+ features <span class="text-gradient">Conduktor doesn't have</span></h2>
+      <p class="section-header__desc">
+        Switching from Conduktor? Setup takes 5 minutes. Here's what you gain.
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+      <div class="card animate-in" data-delay="1">
+        <div class="card__icon">&#127919;</div>
+        <h3 class="card__title">Schema Impact</h3>
+        <p class="card__desc">Blast radius visualization for every schema change. Conduktor has nothing equivalent.</p>
+      </div>
+      <div class="card animate-in" data-delay="2">
+        <div class="card__icon">&#128200;</div>
+        <h3 class="card__title">Spend Dashboard</h3>
+        <p class="card__desc">Real-time cost visibility. Conduktor has zero cost management features.</p>
+      </div>
+      <div class="card animate-in" data-delay="3">
+        <div class="card__icon">&#128737;</div>
+        <h3 class="card__title">RBAC Patterns</h3>
+        <p class="card__desc">Resource-level access with glob patterns. Conduktor has basic roles only.</p>
+      </div>
+      <div class="card animate-in" data-delay="4">
+        <div class="card__icon">&#128202;</div>
+        <h3 class="card__title">Connector Monitoring</h3>
+        <p class="card__desc">Throughput charts and structured logs. No competing GUI offers this.</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-2xl);" class="animate-in">
+      <a href="compare.html" class="btn btn--secondary">See full comparison &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Data Stewards Section ===== -->
+<section class="section data-stewards" id="data-stewards">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Governance &amp; Compliance</div>
+      <h2 class="section-header__title">Built for the People Who <span class="text-gradient">Approve Your Tools</span></h2>
+      <p class="section-header__desc">
+        Data stewards, governance teams, and compliance officers control the budget. Here is what they need to see.
+      </p>
+    </div>
+
+    <div class="stewards-grid">
+      <div class="steward-card animate-in" data-delay="1">
+        <div class="steward-card__icon">&#128065;</div>
+        <h3 class="steward-card__title">See who accessed what</h3>
+        <p class="steward-card__desc">Session audit trail with IP tracking, filterable and CSV-exportable. Full visibility into who did what, when, and from where.</p>
+        <div class="steward-card__gap">Conduktor Enterprise: basic audit; others: none</div>
+      </div>
+      <div class="steward-card animate-in" data-delay="2">
+        <div class="steward-card__icon">&#128274;</div>
+        <h3 class="steward-card__title">Control access by data classification</h3>
+        <p class="steward-card__desc">Resource RBAC glob patterns restrict <code>pii-*</code>, <code>financial-*</code> topics by role. Fine-grained access control that maps to your data classification policy.</p>
+        <div class="steward-card__gap">No competitor has pattern-based resource RBAC</div>
+      </div>
+      <div class="steward-card animate-in" data-delay="3">
+        <div class="steward-card__icon">&#127919;</div>
+        <h3 class="steward-card__title">Verify schema changes will not break downstream</h3>
+        <p class="steward-card__desc">Schema Impact Analysis shows affected consumers, Flink jobs, and connectors before you commit a change. Prevent cascading failures.</p>
+        <div class="steward-card__gap">No other tool has schema blast radius visualization</div>
+      </div>
+      <div class="steward-card animate-in" data-delay="4">
+        <div class="steward-card__icon">&#128200;</div>
+        <h3 class="steward-card__title">Track cost by team</h3>
+        <p class="steward-card__desc">Spend Dashboard with per-statement CFU breakdown, cost trend projection, and budget alerts. Know exactly where your Confluent Cloud spend goes.</p>
+        <div class="steward-card__gap">No competitor offers Kafka cost visibility</div>
+      </div>
+      <div class="steward-card animate-in" data-delay="5">
+        <div class="steward-card__icon">&#128220;</div>
+        <h3 class="steward-card__title">Prove compliance</h3>
+        <p class="steward-card__desc">Audit trail, RBAC enforcement, permission-denied logging, and IP anonymization. Evidence your auditors can verify.</p>
+        <div class="steward-card__gap">No competitor has a compliance evidence story</div>
+      </div>
+      <div class="steward-card animate-in" data-delay="6">
+        <div class="steward-card__icon">&#128737;</div>
+        <h3 class="steward-card__title">Onboard safely</h3>
+        <p class="steward-card__desc">Bootstrap admin with lockout prevention and permission-denied guidance. New users cannot accidentally lock themselves or others out.</p>
+        <div class="steward-card__gap">No other tool prevents admin lockout</div>
+      </div>
+    </div>
+
+    <!-- Testimonial (persona-attributed per CMO feedback) -->
+    <div class="stewards-testimonial animate-in" data-delay="7">
+      <blockquote class="stewards-testimonial__text">
+        &ldquo;When our compliance team asked how we control access to PII topics, I showed them Flafka's RBAC patterns and audit trail. The approval came back the same day. No other tool gave us the evidence they needed.&rdquo;
+      </blockquote>
+      <div class="stewards-testimonial__attribution">
+        <div class="stewards-testimonial__avatar">DS</div>
+        <div>
+          <div class="stewards-testimonial__name">Based on Data Steward persona research</div>
+          <div class="stewards-testimonial__role">Governance &amp; Compliance Decision-Maker</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dual CTAs (CRO: compliance evidence + demo booking) -->
+    <div style="text-align: center; margin-top: var(--space-2xl);" class="animate-in" data-delay="8">
+      <div class="flex flex--center" style="gap: var(--space-md); flex-wrap: wrap;">
+        <a href="security.html" class="btn btn--primary">View Compliance Evidence &rarr;</a>
+        <a href="about.html#contact" class="btn btn--secondary">Book a Demo</a>
+      </div>
+      <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-md);">
+        Available on <a href="pricing.html">Team and Enterprise plans</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Pricing Preview ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Pricing</div>
+      <h2 class="section-header__title">Start free. Scale when ready.</h2>
+      <p class="section-header__desc">
+        No credit card required for the free tier. 14-day trial for Team. Annual billing saves 20%.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card animate-in" data-delay="1">
+        <div class="pricing-card__name">Starter</div>
+        <div class="pricing-card__price">Free</div>
+        <div class="pricing-card__period">Up to 3 users, 1 cluster</div>
+        <ul class="pricing-card__features">
+          <li>Topic management</li>
+          <li>Schema Registry CRUD</li>
+          <li>Message browser + search</li>
+          <li>Flink SQL IDE</li>
+          <li>Schema Impact Analysis</li>
+          <li><strong>Includes cost tracking</strong></li>
+          <li>Dark mode</li>
+          <li>Desktop app (Tauri)</li>
+        </ul>
+        <div class="pricing-card__cta">
+          <a href="#" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
+        </div>
+      </div>
+
+      <div class="pricing-card pricing-card--featured animate-in" data-delay="2">
+        <div class="pricing-card__popular">Most Popular</div>
+        <div class="pricing-card__name">Team</div>
+        <div class="pricing-card__price">$19<span style="font-size: var(--text-lg); font-weight: 500; color: var(--text-muted);">/seat/mo</span></div>
+        <div class="pricing-card__period">Unlimited users and clusters</div>
+        <ul class="pricing-card__features">
+          <li>Everything in Starter</li>
+          <li>Spend Dashboard</li>
+          <li><strong>Per-statement cost estimation</strong></li>
+          <li>Resource RBAC + glob patterns</li>
+          <li>Connector monitoring</li>
+          <li>SLO tracking</li>
+          <li>ACL management + templates</li>
+          <li>Analytics export (JSON/CSV)</li>
+          <li>Email support</li>
+        </ul>
+        <div class="pricing-card__cta">
+          <a href="#" class="btn btn--primary" data-signup-trigger>Start 14-Day Trial</a>
+        </div>
+      </div>
+
+      <div class="pricing-card animate-in" data-delay="3">
+        <div class="pricing-card__name">Enterprise</div>
+        <div class="pricing-card__price">Custom</div>
+        <div class="pricing-card__period">Volume pricing for 50+ seats</div>
+        <ul class="pricing-card__features">
+          <li>Everything in Team</li>
+          <li>SSO / OIDC</li>
+          <li>SAML (coming soon)</li>
+          <li>PCI-DSS documentation</li>
+          <li>Audit compliance reporting</li>
+          <li>SLA guarantee</li>
+          <li>Dedicated support</li>
+          <li>Custom integrations</li>
+        </ul>
+        <div class="pricing-card__cta">
+          <a href="#" class="btn btn--secondary">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in">
+      <a href="pricing.html" class="btn btn--ghost">See full pricing details &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Trust / Built With ===== -->
+<section class="section--sm" style="background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="trust-bar animate-in">
+      <div class="trust-item">
+        <span class="trust-item__icon">&#9881;</span>
+        <span>Built with <strong style="color: var(--text-primary);">Rust</strong> (Axum + rskafka)</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">&#9883;</span>
+        <span><strong style="color: var(--text-primary);">React</strong> + WebSocket real-time</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">&#128187;</span>
+        <span><strong style="color: var(--text-primary);">Tauri</strong> desktop (no Electron)</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">&#128230;</span>
+        <span><strong style="color: var(--text-primary);">Docker</strong> single container</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">&#10003;</span>
+        <span><strong style="color: var(--text-primary);">8,479+</strong> automated tests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Final CTA ===== -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Ready to upgrade your<br><span class="text-gradient">Confluent Cloud experience?</span></h2>
+    <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__mascot-wrap">
+          <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="footer__mascot">
+        </div>
+        <div class="footer__brand-name">
+          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">
+          The Kafka management platform that sees everything. Built with Rust for performance, React for experience.
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="Twitter">X</a>
+          <a href="#" aria-label="Discord">DC</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="demo.html">Demos</a></li>
+          <li><a href="video-library.html">Feature Videos</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="compare.html">Compare</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/signup.js"></script>
+</body>
+</html>

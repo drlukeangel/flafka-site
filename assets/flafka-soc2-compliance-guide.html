@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flafka SOC 2 Compliance Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm 2.5cm;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #1a1a2e;
+      background: #fff;
+    }
+
+    /* Cover Page */
+    .cover {
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      text-align: center;
+    }
+    .cover__logo {
+      width: 80px;
+      height: 80px;
+      background: #7c3aed;
+      color: #fff;
+      font-size: 42px;
+      font-weight: 700;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .cover__title {
+      font-size: 28pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .cover__subtitle {
+      font-size: 14pt;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    .cover__meta {
+      font-size: 10pt;
+      color: #9ca3af;
+    }
+    .cover__bar {
+      width: 60px;
+      height: 4px;
+      background: #7c3aed;
+      border-radius: 2px;
+      margin: 2rem auto;
+    }
+
+    /* Headings */
+    h1 { font-size: 20pt; color: #1a1a2e; margin-bottom: 1rem; page-break-after: avoid; }
+    h2 { font-size: 14pt; color: #7c3aed; margin: 1.5rem 0 0.75rem; page-break-after: avoid; }
+    h3 { font-size: 12pt; color: #374151; margin: 1rem 0 0.5rem; page-break-after: avoid; }
+
+    p { margin-bottom: 0.75rem; }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 10pt;
+      page-break-inside: avoid;
+    }
+    th, td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border: 1px solid #e5e7eb;
+    }
+    th {
+      background: #f3f0ff;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    td { color: #374151; }
+    tr:nth-child(even) td { background: #fafafa; }
+
+    .check { color: #059669; font-weight: 700; }
+    .section { margin-bottom: 1.5rem; }
+    .page-break { page-break-before: always; }
+
+    /* Lists */
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.3rem; }
+
+    /* Footer */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 9pt;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* Building block cards */
+    .bb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .bb-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 9.5pt;
+    }
+    .bb-card__name {
+      font-weight: 700;
+      color: #7c3aed;
+      margin-bottom: 0.25rem;
+    }
+    .bb-card__sprint {
+      font-size: 8pt;
+      color: #9ca3af;
+    }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page 1: Cover -->
+<div class="cover">
+  <div class="cover__logo">F</div>
+  <div class="cover__title">SOC 2 Compliance Guide</div>
+  <div class="cover__subtitle">Mapping Flafka's Compliance Building Blocks<br>to SOC 2 Trust Services Criteria</div>
+  <div class="cover__bar"></div>
+  <div class="cover__meta">
+    Flafka &mdash; Enterprise Kafka Management Platform<br>
+    Version 1.0 &bull; March 2026<br>
+    flafka.dev/security
+  </div>
+</div>
+
+<!-- Page 2: Executive Summary -->
+<h1>1. Executive Summary</h1>
+
+<div class="section">
+  <p>
+    Apache Kafka powers the real-time data infrastructure for thousands of enterprises. As Kafka deployments grow,
+    so do compliance requirements: who accessed which topic, when were ACLs changed, what SLOs are being met,
+    and can we prove it to auditors?
+  </p>
+  <p>
+    Flafka is the only Kafka management platform with a dedicated compliance story. While competitors like Conduktor,
+    AKHQ, Kafka UI, and Redpanda Console focus on operational features, Flafka ships 9 compliance building blocks
+    that map directly to SOC 2 Trust Services Criteria.
+  </p>
+  <p>
+    This guide maps Flafka's shipped features to the five most relevant SOC 2 criteria, provides evidence types
+    for each, and shows how to generate compliance artifacts your auditors need.
+  </p>
+
+  <h2>Why Kafka Management Needs Compliance Controls</h2>
+  <p>
+    Kafka topics often contain PII, financial transactions, and healthcare data. Without a management layer
+    that enforces access controls, logs all actions, and monitors for anomalies, organizations face:
+  </p>
+  <ul>
+    <li>Unauthorized access to sensitive topics (PCI-DSS Req 7 violation)</li>
+    <li>No audit trail for configuration changes (SOX non-compliance)</li>
+    <li>No evidence of monitoring for SOC 2 auditors (CC7.2 gap)</li>
+    <li>Manual, error-prone compliance reporting</li>
+  </ul>
+  <p>
+    Flafka addresses all four gaps with features that are shipped, tested, and generating evidence today.
+  </p>
+</div>
+
+<!-- Page 3: SOC 2 Trust Services Criteria Mapping -->
+<div class="page-break"></div>
+<h1>2. SOC 2 Trust Services Criteria Mapping</h1>
+
+<div class="section">
+  <p>
+    The following table maps the five most relevant SOC 2 Common Criteria to specific Flafka features,
+    the sprint in which each feature shipped, and the type of evidence available for auditors.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Criteria ID</th>
+        <th>Criteria Name</th>
+        <th>Flafka Feature</th>
+        <th>Sprint</th>
+        <th>Evidence Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CC6.1</strong></td>
+        <td>Logical Access Controls</td>
+        <td>RBAC with glob patterns, Bootstrap Admin, ACL templates</td>
+        <td>S72, S71</td>
+        <td class="check">RBAC Export</td>
+      </tr>
+      <tr>
+        <td><strong>CC6.3</strong></td>
+        <td>Role-Based Access</td>
+        <td>Resource-level RBAC, permission-denied guidance, ACL CRUD</td>
+        <td>S72, S71</td>
+        <td class="check">Screenshot + Audit Log</td>
+      </tr>
+      <tr>
+        <td><strong>CC7.2</strong></td>
+        <td>System Monitoring</td>
+        <td>SLO tracking, Prometheus export, connector monitoring, SLO compliance reports</td>
+        <td>S67, S69, S79</td>
+        <td class="check">SLO Report Export</td>
+      </tr>
+      <tr>
+        <td><strong>CC7.3</strong></td>
+        <td>Anomaly Detection &amp; Response</td>
+        <td>SLO webhook alerts, statement failure alerts, connector error alerts</td>
+        <td>S74, S79</td>
+        <td class="check">Webhook Logs</td>
+      </tr>
+      <tr>
+        <td><strong>CC8.1</strong></td>
+        <td>Change Management</td>
+        <td>Connector config audit trail, session audit trail, RBAC audit export</td>
+        <td>S77, S73, S80</td>
+        <td class="check">JSONL Audit Log</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>CC6.1 &mdash; Logical Access Controls</h2>
+  <p>
+    Flafka's RBAC system uses glob patterns (e.g., <code>pii-*</code>, <code>prod-payments-*</code>) to restrict
+    access at the resource level. Users are assigned roles with specific read/write permissions on topic patterns,
+    schema subjects, and connector names. The Bootstrap Admin feature prevents lockout during initial setup.
+  </p>
+  <p><strong>Evidence:</strong> Export the full RBAC configuration via Settings &gt; Security &gt; Export RBAC. The export includes all users, roles, resource patterns, and permission grants.</p>
+
+  <h2>CC6.3 &mdash; Role-Based Access</h2>
+  <p>
+    ACL templates provide pre-configured role definitions (e.g., "Read-Only Analyst", "Stream Engineer",
+    "Admin") that can be applied to new users. Permission-denied events are logged with actionable guidance,
+    helping users request appropriate access rather than escalating to admin.
+  </p>
+  <p><strong>Evidence:</strong> Permission-denied log entries with user, resource, action, and timestamp. ACL change history in the audit trail.</p>
+
+  <h2>CC7.2 &mdash; System Monitoring</h2>
+  <p>
+    SLO tracking monitors consumer lag, partition balance, and throughput against configurable thresholds.
+    SLO compliance reports (shipped Sprint 79) provide exportable summaries showing compliance percentages
+    over time. Prometheus export enables integration with existing monitoring infrastructure.
+  </p>
+  <p><strong>Evidence:</strong> SLO compliance report exports (JSON/CSV), Prometheus metrics endpoint, connector throughput charts.</p>
+
+  <h2>CC7.3 &mdash; Anomaly Detection &amp; Response</h2>
+  <p>
+    When SLOs are violated, Flafka sends webhook alerts to Slack, PagerDuty, or any HTTP endpoint.
+    Statement failure alerts notify teams of Flink SQL errors. Connector error alerts detect task failures
+    and unhealthy connectors.
+  </p>
+  <p><strong>Evidence:</strong> Webhook delivery logs, alert configuration exports, SLO violation history.</p>
+
+  <h2>CC8.1 &mdash; Change Management</h2>
+  <p>
+    Every configuration change is recorded in a JSONL audit trail with daily rotation and 30-day retention.
+    This covers: connector config changes, session events (login/logout/refresh), ACL modifications,
+    role assignments, and resource pattern updates.
+  </p>
+  <p><strong>Evidence:</strong> JSONL audit log files with timestamps, actor IDs, before/after snapshots, and action types.</p>
+</div>
+
+<!-- Page 4: 9 Compliance Building Blocks -->
+<div class="page-break"></div>
+<h1>3. Nine Compliance Building Blocks</h1>
+
+<div class="section">
+  <p>
+    Flafka's compliance story is built on nine discrete features, each independently testable and auditable.
+  </p>
+
+  <div class="bb-grid">
+    <div class="bb-card">
+      <div class="bb-card__name">1. Resource RBAC</div>
+      Glob pattern access control for topics, schemas, connectors
+      <div class="bb-card__sprint">S72</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">2. ACL Templates</div>
+      Pre-configured role definitions for common access patterns
+      <div class="bb-card__sprint">S71</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">3. Session Audit</div>
+      Login, logout, token refresh events with IP anonymization
+      <div class="bb-card__sprint">S73</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">4. ACL Audit Trail</div>
+      Before/after snapshots for every ACL change
+      <div class="bb-card__sprint">S73</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">5. SLO Tracking</div>
+      Error budgets, compliance percentages, trend monitoring
+      <div class="bb-card__sprint">S67/S69</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">6. SLO Webhooks</div>
+      Slack, PagerDuty, HTTP alerts on SLO violations
+      <div class="bb-card__sprint">S74</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">7. Connector Audit</div>
+      Config change tracking with actor attribution
+      <div class="bb-card__sprint">S77</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">8. RBAC Audit Export</div>
+      Full RBAC configuration export for auditors
+      <div class="bb-card__sprint">S80</div>
+    </div>
+    <div class="bb-card">
+      <div class="bb-card__name">9. Display Masking</div>
+      RBAC-integrated field masking for PII protection
+      <div class="bb-card__sprint">S78</div>
+    </div>
+  </div>
+</div>
+
+<!-- Page 5: Generating Compliance Evidence -->
+<div class="page-break"></div>
+<h1>4. How to Generate Compliance Evidence</h1>
+
+<div class="section">
+  <p>
+    When your auditor requests compliance evidence, Flafka provides four export mechanisms:
+  </p>
+
+  <h2>4.1 RBAC Configuration Export</h2>
+  <p>Navigate to <strong>Settings &gt; Security &gt; Export RBAC</strong>. This generates a JSON file containing all users, roles, resource patterns, and permission grants. Useful for CC6.1 and CC6.3 evidence.</p>
+
+  <h2>4.2 SLO Compliance Reports</h2>
+  <p>Navigate to <strong>SLO Dashboard &gt; Compliance Reports</strong>. Export reports as JSON or CSV showing SLO compliance percentages, violation counts, and error budget consumption over configurable time ranges. Useful for CC7.2 evidence.</p>
+
+  <h2>4.3 Data Quality Violation Export</h2>
+  <p>Navigate to <strong>Data Quality &gt; Violations &gt; Export</strong>. Download violation history with rule definitions, affected topics, and severity levels. Useful for PI1.3 (data integrity) evidence.</p>
+
+  <h2>4.4 Audit Log Files</h2>
+  <p>Audit logs are stored as JSONL files with daily rotation in the configured audit directory. Each entry includes timestamp, actor ID, action type, resource, and before/after state for mutations. 30-day retention by default. Useful for CC8.1 evidence.</p>
+
+  <h3>Example Audit Log Entry</h3>
+  <pre style="background:#f8f8f8;padding:1rem;border-radius:6px;font-size:9pt;overflow-x:auto;border:1px solid #e5e7eb;">
+{
+  "timestamp": "2026-03-22T14:32:01Z",
+  "actor": "admin@company.com",
+  "action": "acl.update",
+  "resource": "topic:payments-*",
+  "before": { "permission": "read" },
+  "after": { "permission": "read,write" },
+  "ip": "192.168.1.xxx"
+}</pre>
+</div>
+
+<!-- Page 6: Getting Started -->
+<div class="page-break"></div>
+<h1>5. Getting Started</h1>
+
+<div class="section">
+  <h2>5.1 Deploy in One Command</h2>
+  <pre style="background:#f8f8f8;padding:1rem;border-radius:6px;font-size:10pt;border:1px solid #e5e7eb;">docker run -d -p 8080:8080 \
+  -e FLAFKA_CONFLUENT_CLOUD_API_KEY=your-key \
+  -e FLAFKA_CONFLUENT_CLOUD_API_SECRET=your-secret \
+  -e FLAFKA_CONFLUENT_CLUSTER_ID=your-cluster-id \
+  flafka/flafka:latest</pre>
+
+  <h2>5.2 First SLO in 5 Minutes</h2>
+  <ol>
+    <li>Open Flafka at <code>http://localhost:8080</code></li>
+    <li>Navigate to <strong>SLO Dashboard</strong></li>
+    <li>Click <strong>Create SLO</strong></li>
+    <li>Select a topic, set a lag threshold (e.g., 1000 messages), and target (e.g., 99.5%)</li>
+    <li>Enable webhook alerts to your Slack channel</li>
+    <li>Flafka begins tracking immediately &mdash; no restart required</li>
+  </ol>
+
+  <h2>5.3 Enable RBAC</h2>
+  <ol>
+    <li>Navigate to <strong>Settings &gt; Security</strong></li>
+    <li>Enable <strong>RBAC enforcement</strong></li>
+    <li>Create roles using glob patterns (e.g., <code>prod-*</code> for production topics)</li>
+    <li>Assign roles to users</li>
+    <li>Export the RBAC configuration for your audit file</li>
+  </ol>
+
+  <h2>5.4 Forward to Your ARB</h2>
+  <p>
+    Share this guide with your Architecture Review Board alongside:
+  </p>
+  <ul>
+    <li>RBAC configuration export (JSON)</li>
+    <li>SLO compliance report (CSV)</li>
+    <li>Sample audit log entries (JSONL)</li>
+    <li>The Flafka security page: <strong>flafka.dev/security</strong></li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>&copy; 2026 Flafka. All rights reserved.</p>
+  <p>This document maps Flafka features to SOC 2 requirements. It is not a certification or legal guarantee of compliance. Consult your compliance team for formal assessment.</p>
+  <p>flafka.dev &bull; enterprise@flafka.dev</p>
+</div>
+
+</body>
+</html>

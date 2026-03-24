@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switching from Conduktor to Flafka: Complete Migration Guide</title>
+  <meta name="description" content="Step-by-step guide to migrating from Conduktor to Flafka. Feature mapping, configuration migration, user onboarding checklist, and FAQ for teams switching Kafka management tools.">
+  <meta name="keywords" content="Conduktor alternative, switch from Conduktor, Conduktor vs Flafka migration, Kafka GUI migration, Conduktor replacement">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Switching from Conduktor to Flafka: Complete Migration Guide">
+  <meta property="og:description" content="Everything you need to migrate from Conduktor to Flafka. Feature mapping, configuration steps, and onboarding checklist.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/guides/conduktor-migration.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Switching from Conduktor to Flafka: Complete Migration Guide">
+  <meta name="twitter:description" content="Step-by-step migration from Conduktor to Flafka. Feature mapping, configuration, and onboarding for Kafka teams.">
+
+  <link rel="canonical" href="https://flafka.dev/guides/conduktor-migration.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Migrate from Conduktor to Flafka",
+    "description": "A complete guide for teams switching from Conduktor to Flafka for Kafka management.",
+    "totalTime": "PT30M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Install Flafka",
+        "text": "Download and install Flafka as a desktop app (Windows, macOS, Linux) or deploy as a Docker container.",
+        "position": 1
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Configure your Confluent Cloud connection",
+        "text": "Enter your Confluent Cloud bootstrap server, API key, and API secret in the Flafka connection profile settings.",
+        "position": 2
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Verify topics are visible",
+        "text": "Navigate to the Topics panel and confirm all your Kafka topics appear with correct partition counts and configurations.",
+        "position": 3
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Set up RBAC patterns",
+        "text": "Configure resource-level RBAC with glob patterns to match your access control requirements. Use ACL template presets for common patterns.",
+        "position": 4
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Configure SLOs",
+        "text": "Define SLOs for consumer lag, throughput, and availability. Set error budget thresholds and webhook notifications.",
+        "position": 5
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Onboard your team",
+        "text": "Create user accounts, assign roles, and share the setup wizard documentation with your team members.",
+        "position": 6
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="../features.html">Features</a></li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../demo.html">Demos</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../demo.html">Demos</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">Migration Guide</div>
+    <h1 class="animate-in" style="max-width: 800px; margin: 0 auto;">Switching from Conduktor to <span class="text-gradient">Flafka</span></h1>
+    <p class="animate-in" data-delay="1" style="max-width: 600px; margin: var(--space-lg) auto 0;">Everything your team needs to evaluate and migrate. Feature mapping, configuration steps, and a complete onboarding checklist.</p>
+  </div>
+</section>
+
+<!-- Migration Guide Content -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main">
+
+        <!-- Section 1: Feature Mapping Table -->
+        <h2 id="feature-mapping" class="animate-in">Feature Mapping: Conduktor vs Flafka</h2>
+        <p>An honest, side-by-side comparison. We highlight where Flafka excels, where Conduktor has the edge, and where both tools deliver.</p>
+
+        <div class="migration-table-wrapper animate-in" data-delay="1">
+          <table class="migration-table">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>Conduktor</th>
+                <th>Flafka</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Topic Management</strong></td>
+                <td class="check">&#10003; Full CRUD</td>
+                <td class="check">&#10003; Full CRUD</td>
+                <td>Equivalent functionality</td>
+              </tr>
+              <tr>
+                <td><strong>Schema Registry</strong></td>
+                <td class="check">&#10003; Full CRUD</td>
+                <td class="check">&#10003; Full CRUD</td>
+                <td>Both support Avro, JSON Schema, Protobuf</td>
+              </tr>
+              <tr>
+                <td><strong>Consumer Groups</strong></td>
+                <td class="check">&#10003; View + reset</td>
+                <td class="check">&#10003; View + reset</td>
+                <td>Equivalent functionality</td>
+              </tr>
+              <tr>
+                <td><strong>Message Browser</strong></td>
+                <td class="check" style="color: var(--color-success); font-weight: 700;">Superior</td>
+                <td>Good</td>
+                <td>Conduktor's message browser is acknowledged as the best in market</td>
+              </tr>
+              <tr>
+                <td><strong>ACL Management</strong></td>
+                <td class="check">&#10003; Basic roles</td>
+                <td class="check">&#10003; Basic + templates</td>
+                <td>Flafka adds one-click ACL template presets</td>
+              </tr>
+              <tr>
+                <td><strong>Connectors</strong></td>
+                <td class="check">&#10003; CRUD</td>
+                <td class="check">&#10003; CRUD + monitoring</td>
+                <td>Flafka adds throughput charts and structured logs</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-Cluster</strong></td>
+                <td class="check">&#10003; Multi-cluster</td>
+                <td>Profiles</td>
+                <td>Conduktor has deeper multi-cluster support</td>
+              </tr>
+              <tr>
+                <td><strong>Dark Mode</strong></td>
+                <td class="check">&#10003; Yes</td>
+                <td class="check">&#10003; Yes</td>
+                <td>Both offer dark mode</td>
+              </tr>
+              <tr>
+                <td><strong>SSO / LDAP</strong></td>
+                <td class="check">&#10003; OIDC + LDAP</td>
+                <td>OIDC</td>
+                <td>Conduktor has broader SSO options</td>
+              </tr>
+              <tr>
+                <td><strong>Free Tier</strong></td>
+                <td class="check" style="color: var(--color-success); font-weight: 700;">50 users</td>
+                <td>3 users</td>
+                <td>Conduktor's free tier is more generous</td>
+              </tr>
+              <tr>
+                <td><strong>Data Masking</strong></td>
+                <td class="check">&#10003; Yes</td>
+                <td class="cross">Coming soon</td>
+                <td>Conduktor offers PII field masking today</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>Schema Impact Analysis</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>See blast radius before schema changes</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>Spend Dashboard</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>Real-time cost visibility with projections</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>SLO Tracking</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>Error budgets, sparklines, Prometheus export</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>Resource RBAC (glob patterns)</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>Pattern-based access control for PCI-DSS</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>Connector Config Intelligence</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>Throughput charts and structured connector logs</td>
+              </tr>
+              <tr class="migration-table__highlight">
+                <td><strong>Flink SQL IDE + Cost Estimation</strong></td>
+                <td class="cross">Not available</td>
+                <td class="check" style="font-weight: 700;">&#10003; Flafka only</td>
+                <td>Pre-submission CFU cost estimates</td>
+              </tr>
+              <tr>
+                <td><strong>Price</strong></td>
+                <td>~$25/seat/month</td>
+                <td style="color: var(--color-primary-light); font-weight: 700;">$19/seat/month</td>
+                <td>Flafka is ~24% less expensive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile cards (visible on small screens only) -->
+        <div class="migration-mobile-cards animate-in">
+          <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-md);">Scroll the table above or view the card summary below.</p>
+        </div>
+
+        <div style="text-align: center; margin: var(--space-2xl) 0;" class="animate-in">
+          <a href="../pricing.html" class="btn btn--primary">See Flafka Pricing &rarr;</a>
+          <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">$19/seat/month vs Conduktor's ~$25/seat/month</p>
+        </div>
+
+        <!-- Section 2: Configuration Migration -->
+        <h2 id="configuration" class="animate-in">Configuration Migration</h2>
+
+        <h3>Connection Profiles</h3>
+        <p>If you have Conduktor connection profiles configured, recreating them in Flafka takes about 2 minutes per cluster:</p>
+        <ol>
+          <li>In Conduktor, note your <strong>Bootstrap Server</strong>, <strong>API Key</strong>, and <strong>API Secret</strong> for each connection</li>
+          <li>In Flafka, open <strong>Settings &rarr; Connection Profiles</strong></li>
+          <li>Click <strong>"Add Profile"</strong> and enter the same credentials</li>
+          <li>Test the connection &mdash; Flafka will verify connectivity and list available topics</li>
+        </ol>
+        <p>Flafka connects via SASL/PLAIN + TLS, the same mechanism Conduktor uses for Confluent Cloud clusters.</p>
+
+        <h3>Access Control Mapping</h3>
+        <p>Conduktor uses role-based access with basic roles. Flafka extends this with resource-level RBAC using glob patterns:</p>
+        <ul>
+          <li><strong>Conduktor "Admin"</strong> &rarr; Flafka "Admin" role (full access)</li>
+          <li><strong>Conduktor "Editor"</strong> &rarr; Flafka custom role with <code>*</code> resource pattern</li>
+          <li><strong>Conduktor "Viewer"</strong> &rarr; Flafka "Viewer" role (read-only)</li>
+          <li><strong>Per-team access</strong> &rarr; Flafka glob patterns like <code>team-payments-*</code> restrict access to specific resources</li>
+        </ul>
+
+        <h3>Gateway Policies</h3>
+        <p>If you use Conduktor Gateway for proxy-level policies (virtual clusters, data masking at the wire level), note that <strong>Flafka complements Gateway</strong> &mdash; use Gateway for proxy-level policies and Flafka for management, monitoring, and compliance. The two tools can coexist in your stack.</p>
+
+        <!-- Section 3: User Onboarding Checklist -->
+        <h2 id="onboarding" class="animate-in">User Onboarding Checklist</h2>
+        <p>Follow these steps to get your team productive on Flafka:</p>
+
+        <div class="migration-checklist animate-in" data-delay="1">
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 1: Install Flafka</strong> &mdash; Download the desktop app (Windows, macOS, Linux) or deploy as a Docker container</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 2: Configure connection</strong> &mdash; Enter your Confluent Cloud bootstrap server, API key, and API secret</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 3: Verify topics</strong> &mdash; Confirm all topics appear in the Topics panel with correct partition counts</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 4: Set up RBAC</strong> &mdash; Configure resource-level access with glob patterns for your teams</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 5: Configure SLOs</strong> &mdash; Define lag, throughput, and availability targets for critical topics</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 6: Set up Spend Dashboard</strong> &mdash; Review cost visibility and configure budget alerts</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 7: Onboard team members</strong> &mdash; Create accounts, assign roles, and share the Learning Center</span>
+          </label>
+          <label class="migration-checklist__item">
+            <input type="checkbox">
+            <span><strong>Step 8: Run parallel evaluation</strong> &mdash; Keep Conduktor running alongside Flafka during your trial period</span>
+          </label>
+        </div>
+
+        <!-- Section 4: FAQ -->
+        <h2 id="faq" class="animate-in">Frequently Asked Questions</h2>
+
+        <div class="faq-list animate-in" data-delay="1">
+          <div class="faq-item">
+            <button class="faq-question">Can I run both Conduktor and Flafka during evaluation?</button>
+            <div class="faq-answer">
+              <p>Yes. Flafka and Conduktor connect to your Kafka cluster independently &mdash; they use different ports and do not interfere with each other. We recommend running both tools in parallel during your evaluation period so your team can compare the experience side-by-side before making a decision.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">What about Conduktor Gateway?</button>
+            <div class="faq-answer">
+              <p>Flafka does not replace Conduktor Gateway. Gateway operates at the wire level as a Kafka proxy, handling virtual clusters, data masking at the protocol level, and traffic policies. Flafka complements Gateway &mdash; use Gateway for proxy-level policies and Flafka for management, monitoring, cost visibility, and compliance. Many teams use a proxy alongside a management tool.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Is there a free tier?</button>
+            <div class="faq-answer">
+              <p>Yes. Flafka's Starter plan is free for up to 3 users and 1 cluster. It includes topic management, Schema Registry CRUD, message browser, Flink SQL IDE, Schema Impact Analysis, and the desktop app. The Team plan ($19/seat/month) adds Spend Dashboard, Resource RBAC, SLO tracking, connector monitoring, and more. <a href="../pricing.html">See full pricing details &rarr;</a></p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How long does migration take?</button>
+            <div class="faq-answer">
+              <p>For most teams, initial setup takes 5-10 minutes: install, configure your connection, and verify topics. Full onboarding (RBAC setup, SLO configuration, team accounts) typically takes 30-60 minutes. There is no data migration needed &mdash; Flafka connects directly to your existing Kafka cluster.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Can I get a migration credit for switching?</button>
+            <div class="faq-answer">
+              <p>Switching from Conduktor? Contact our team to discuss migration credits for the remainder of your Conduktor subscription. We want to make the transition as smooth as possible. <a href="../about.html#contact">Contact us &rarr;</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: 7 Capabilities Unique to Flafka -->
+        <h2 id="unique-capabilities" class="animate-in">7 Capabilities Unique to Flafka</h2>
+        <p>These features are available in Flafka and no other Kafka management tool &mdash; including Conduktor.</p>
+
+        <div class="migration-capabilities animate-in" data-delay="1">
+          <div class="migration-capability">
+            <div class="migration-capability__number">1</div>
+            <div class="migration-capability__content">
+              <h3>Schema Impact Analysis</h3>
+              <p>See which topics, consumer groups, Flink statements, and connectors depend on a schema before you change it. Visualize the blast radius of every schema evolution.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">2</div>
+            <div class="migration-capability__content">
+              <h3>Spend Dashboard</h3>
+              <p>Real-time Confluent Cloud cost visibility with month-to-date tracking, 7-day projections, product-level breakdowns, and budget alerts. FinOps for Kafka.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">3</div>
+            <div class="migration-capability__content">
+              <h3>SLO Tracking with Error Budgets</h3>
+              <p>Define SLOs for lag, throughput, and availability. Error budget burn-down, 7-day sparklines, webhook notifications, and Prometheus export.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">4</div>
+            <div class="migration-capability__content">
+              <h3>Resource RBAC with Glob Patterns</h3>
+              <p>Fine-grained access control using patterns like <code>pii-*</code> or <code>prod.orders.*</code>. PCI-DSS Requirement 7 aligned with full audit trail.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">5</div>
+            <div class="migration-capability__content">
+              <h3>Flink SQL IDE + Cost Estimation</h3>
+              <p>Monaco-powered SQL editor with pre-submission CFU/hour cost estimates. Budget warnings prevent runaway compute costs before you submit.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">6</div>
+            <div class="migration-capability__content">
+              <h3>Connector Throughput Monitoring</h3>
+              <p>Messages/sec and bytes/sec time-series charts for every connector. Structured, searchable logs with severity filtering. No other GUI provides this.</p>
+            </div>
+          </div>
+          <div class="migration-capability">
+            <div class="migration-capability__number">7</div>
+            <div class="migration-capability__content">
+              <h3>ACL Template Presets</h3>
+              <p>One-click ACL creation from templates: Consumer Read, Producer Write, Full Admin. Combined with glob patterns for enterprise-grade access control.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="migration-final-cta animate-in">
+          <h2>Ready to switch?</h2>
+          <p>Setup takes 5 minutes. Run Flafka alongside Conduktor during your evaluation &mdash; no commitment needed.</p>
+          <div class="flex flex--center" style="gap: var(--space-md); flex-wrap: wrap;">
+            <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+            <a href="../compare.html" class="btn btn--secondary btn--lg">See Full Comparison</a>
+          </div>
+          <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-md);">
+            <a href="../pricing.html">See pricing</a> &bull;
+            <a href="../blog/kafka-slo-monitoring.html">Read the SLO guide</a> &bull;
+            <a href="../security.html">View compliance evidence</a>
+          </p>
+        </div>
+
+      </article>
+
+      <!-- Sidebar TOC -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#feature-mapping">Feature Mapping</a></li>
+            <li><a href="#configuration">Configuration Migration</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#unique-capabilities">Unique Capabilities</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Ready to upgrade your <span class="text-gradient">Kafka management</span>?</h2>
+    <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="../demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../demo.html">Demos</a></li>
+          <li><a href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../about.html#contact">Contact</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="../security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>
