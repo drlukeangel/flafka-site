@@ -1,0 +1,56 @@
+name: Deploy to S3 + CloudFront
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: flafka-site
+  CLOUDFRONT_DISTRIBUTION_ID: E2HKCLKEOT0GMA
+
+jobs:
+  deploy:
+    name: Deploy marketing site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync . s3://${{ env.S3_BUCKET }}/ \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "node_modules/*" \
+            --exclude "*.md" \
+            --exclude ".DS_Store" \
+            --exclude "competitive-analysis.md" \
+            --cache-control "public, max-age=3600" \
+            --content-type-map '{"html":"text/html","css":"text/css","js":"application/javascript","png":"image/png","jpg":"image/jpeg","svg":"image/svg+xml","ico":"image/x-icon","json":"application/json","xml":"application/xml"}'
+
+      - name: Set HTML cache headers (shorter TTL)
+        run: |
+          for f in $(find . -name "*.html" -not -path "./.git/*" -not -path "./.github/*"); do
+            key="${f#./}"
+            aws s3 cp "s3://${{ env.S3_BUCKET }}/$key" "s3://${{ env.S3_BUCKET }}/$key" \
+              --metadata-directive REPLACE \
+              --cache-control "public, max-age=300" \
+              --content-type "text/html"
+          done
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
