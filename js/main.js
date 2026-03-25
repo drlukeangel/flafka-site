@@ -28,6 +28,15 @@
     var menu = document.querySelector('.nav__mobile');
     if (!btn || !menu) return;
 
+    // SITE-UX-10: Mark active page in mobile nav
+    var currentPage = location.pathname.split('/').pop() || 'index.html';
+    menu.querySelectorAll('a').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        link.classList.add('active');
+      }
+    });
+
     function closeMenu() {
       menu.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOC 2-Ready Kafka Management: How Flafka Maps to Trust Services Criteria | Flafka Blog</title>
+  <meta name="description" content="SOC 2-ready Kafka management with Flafka. Learn how 9 compliance building blocks map to Trust Services Criteria for Security (CC6), Availability (A1), and Confidentiality (C1). Automated evidence bundling, RBAC, and audit trails.">
+  <meta name="keywords" content="Kafka SOC 2, PCI-DSS Kafka, Kafka compliance management, SOC 2 Kafka tools, Kafka audit trail, Kafka RBAC, Kafka compliance automation, enterprise Kafka security">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SOC 2-Ready Kafka Management: How Flafka Maps to Trust Services Criteria">
+  <meta property="og:description" content="9 compliance building blocks that map Kafka operations to SOC 2 Trust Services Criteria. Automated evidence bundling, RBAC, audit trails, and posture dashboards.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/blog/soc2-kafka.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SOC 2-Ready Kafka Management: How Flafka Maps to Trust Services Criteria">
+  <meta name="twitter:description" content="9 compliance building blocks that map Kafka operations to SOC 2 Trust Services Criteria. Automated evidence bundling, RBAC, audit trails, and posture dashboards.">
+
+  <link rel="canonical" href="https://flafka.dev/blog/soc2-kafka.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "SOC 2-Ready Kafka Management: How Flafka Maps to Trust Services Criteria",
+    "description": "Learn how Flafka's 9 compliance building blocks map to SOC 2 Trust Services Criteria for Security, Availability, and Confidentiality. Automated evidence bundling, RBAC, audit trails, and posture dashboards.",
+    "datePublished": "2027-05-05",
+    "dateModified": "2027-05-05",
+    "author": {
+      "@type": "Organization",
+      "name": "Flafka Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    },
+    "image": "https://flafka.dev/assets/flafka-mascot.png",
+    "mainEntityOfPage": "https://flafka.dev/blog/soc2-kafka.html",
+    "wordCount": "950",
+    "timeRequired": "PT6M"
+  }
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can Flafka help my team pass a SOC 2 audit for Kafka infrastructure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka provides 9 compliance building blocks that map directly to SOC 2 Trust Services Criteria: resource-level RBAC (CC6.1), immutable audit trails (CC6.2), automated evidence bundling (CC6.3), compliance posture dashboards (CC7.2), and more. These features generate the artifacts auditors request, reducing manual evidence collection from weeks to minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka support PCI-DSS compliance for Kafka?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka's compliance features address PCI-DSS requirements including access control (Requirement 7), audit logging (Requirement 10), and data protection via AI PII detection (Requirement 3). Compliance bundles can be scheduled to export evidence packages aligned with PCI-DSS control categories."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Flafka's compliance automation compare to Conduktor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Conduktor does not offer compliance automation, evidence bundling, compliance posture dashboards, or audit trail export. Flafka is the only Kafka management tool with built-in SOC 2 and PCI-DSS compliance features, providing 13 compliance building blocks that no competitor matches."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="../features.html">Features</a></li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../demo.html">Demos</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html" class="active">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../demo.html">Demos</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">Enterprise Compliance</div>
+    <h1 class="animate-in" style="max-width: 700px; margin: 0 auto;">SOC 2-Ready Kafka Management: How Flafka Maps to <span class="text-gradient">Trust Services Criteria</span></h1>
+  </div>
+</section>
+
+<!-- Article -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main">
+        <div class="article__meta">
+          <span class="article__author">Flafka Engineering Team</span>
+          <time datetime="2027-05-05">May 2027</time>
+          <span>6 min read</span>
+        </div>
+
+        <div class="article__body">
+
+          <!-- Section 1: Introduction -->
+          <h2 id="why-soc2-matters">Why SOC 2 Matters for Kafka Teams</h2>
+          <p>
+            Every SOC 2 audit eventually reaches the streaming infrastructure. Auditors want to know who accessed what data, when access was granted, how changes are tracked, and whether controls are enforced continuously &mdash; not just at audit time.
+          </p>
+          <p>
+            For teams running Confluent Cloud, the challenge is not whether Kafka itself is secure. Confluent provides infrastructure-level encryption, network isolation, and IAM. The gap is at the management layer: who created that topic, who changed that schema, who has access to production consumer groups, and can you prove it?
+          </p>
+          <p>
+            Most Kafka management tools treat compliance as someone else's problem. Conduktor, AKHQ, Kafka UI, and Kafdrop provide no audit trails, no evidence export, and no compliance reporting. If your auditor asks for a list of all access changes to production topics over the last 90 days, you are writing scripts or scrolling through logs manually.
+          </p>
+          <p>
+            Flafka takes a different approach. Compliance is not a bolt-on &mdash; it is built into the platform with 9 building blocks that map directly to SOC 2 Trust Services Criteria.
+          </p>
+
+          <!-- Section 2: The 9 Compliance Building Blocks -->
+          <h2 id="building-blocks">The 9 Compliance Building Blocks</h2>
+          <p>
+            Flafka's compliance capabilities are not a single feature &mdash; they are a set of interlocking controls that together provide the evidence auditors require. Here are the 9 building blocks:
+          </p>
+          <ol>
+            <li><strong>Resource-Level RBAC.</strong> Access control at the topic, consumer group, connector, and schema level. Not just cluster-wide roles &mdash; granular permissions that map to the principle of least privilege.</li>
+            <li><strong>Immutable Audit Trail.</strong> Every action &mdash; topic creation, schema evolution, ACL change, connector deployment &mdash; is recorded with timestamp, actor, resource, and outcome. The trail is append-only and tamper-evident.</li>
+            <li><strong>Evidence Bundling.</strong> Export compliance evidence as structured packages: access logs, configuration snapshots, RBAC policies, and change history bundled into a single downloadable artifact.</li>
+            <li><strong>Scheduled Compliance Bundles.</strong> Automate evidence collection on a recurring schedule. Weekly, monthly, or quarterly bundles are generated and stored without manual intervention.</li>
+            <li><strong>Compliance Posture Dashboard.</strong> A real-time view of your compliance status: how many resources have RBAC applied, how many schemas have validation rules, how many topics lack access controls. Red/yellow/green posture scoring.</li>
+            <li><strong>AI PII Detection.</strong> Automated scanning of message payloads for 13 PII types. Detect sensitive data flowing through topics that should not contain it &mdash; a requirement for both SOC 2 Confidentiality and PCI-DSS Requirement 3.</li>
+            <li><strong>Data Quality Rules.</strong> Conditional DQ rules that validate message content against schema expectations. Failed validations are logged with evidence, supporting data integrity controls.</li>
+            <li><strong>Alert Routing Rules.</strong> Per-rule alert routing to specific channels: Slack, PagerDuty, email. Compliance violations trigger alerts to the security team, not the platform team.</li>
+            <li><strong>Configuration Drift Detection.</strong> Track when cluster configurations change and alert on unauthorized modifications. Drift detection supports the Change Management controls required by SOC 2 CC8.</li>
+          </ol>
+
+          <!-- Section 3: Mapping to TSC Categories -->
+          <h2 id="tsc-mapping">Mapping to Trust Services Criteria</h2>
+          <p>
+            SOC 2 organizes controls into five Trust Services Categories. Kafka management touches three of them directly:
+          </p>
+
+          <h3>Security (CC6) &mdash; Logical and Physical Access Controls</h3>
+          <p>
+            <strong>CC6.1 (Logical Access):</strong> Flafka's resource-level RBAC enforces least-privilege access at the topic, connector, and schema level. Access grants and revocations are logged in the audit trail.
+          </p>
+          <p>
+            <strong>CC6.2 (Access Revocation):</strong> When a team member leaves or changes roles, RBAC policy updates are tracked with before/after snapshots. Evidence bundles include the full access change history.
+          </p>
+          <p>
+            <strong>CC6.3 (Access Review):</strong> The compliance posture dashboard shows which resources have RBAC applied and which do not, enabling periodic access reviews without manual inventory.
+          </p>
+
+          <h3>Availability (A1) &mdash; System Availability and Recovery</h3>
+          <p>
+            <strong>A1.1 (Availability Monitoring):</strong> Flafka's <a href="../features.html">SLO engine</a> tracks consumer lag, throughput, and data freshness against defined targets. Breach detection with error budgets provides objective availability evidence.
+          </p>
+          <p>
+            <strong>A1.2 (Recovery Objectives):</strong> SLO compliance reports document uptime percentages, breach durations, and error budget consumption over auditable time periods.
+          </p>
+
+          <h3>Confidentiality (C1) &mdash; Protection of Confidential Information</h3>
+          <p>
+            <strong>C1.1 (Identification of Confidential Data):</strong> AI PII detection scans every message payload, identifying sensitive data that producers may not have explicitly tagged. Detection results feed into compliance reports.
+          </p>
+          <p>
+            <strong>C1.2 (Disposal of Confidential Data):</strong> Topic retention policies are tracked and reported. Evidence bundles document that data retention aligns with organizational policies.
+          </p>
+
+          <!-- Section 4: Compliance Automation -->
+          <h2 id="automation">Compliance Automation: From Weeks to Minutes</h2>
+          <p>
+            The difference between having compliance features and having compliance automation is the difference between a painful audit and a routine one. Manual evidence collection for a SOC 2 audit typically takes 2&ndash;4 weeks of engineering time. Teams export logs, screenshot configurations, compile access lists, and format everything into auditor-friendly documents.
+          </p>
+          <p>
+            Flafka's scheduled compliance bundles eliminate this work. Configure the bundle scope (which clusters, which time period, which control categories), set the schedule, and evidence packages are generated automatically. When the auditor asks for access logs for Q1, you download the bundle. When they want proof of continuous monitoring, you show the posture dashboard.
+          </p>
+          <p>
+            The compliance posture dashboard provides continuous visibility &mdash; not just at audit time. If a new topic is created without RBAC, the dashboard shows it immediately. If a schema validation rule is disabled, the posture score drops. Teams catch compliance gaps in real time instead of discovering them during audit prep.
+          </p>
+
+          <!-- Section 5: What Competitors Offer -->
+          <h2 id="competitors">What Competitors Offer: Nothing</h2>
+          <p>
+            No other Kafka management tool provides compliance automation. Here is the landscape:
+          </p>
+          <ul>
+            <li><strong>Conduktor:</strong> No audit trail export, no evidence bundling, no compliance dashboard, no scheduled reports.</li>
+            <li><strong>Confluent Console:</strong> Basic audit logs exist at the infrastructure level, but no compliance packaging, no posture scoring, no evidence automation.</li>
+            <li><strong>AKHQ / Kafka UI / Kafdrop:</strong> No compliance features of any kind.</li>
+            <li><strong>Lenses:</strong> Basic audit logging, but no evidence bundling, no compliance posture, no automated reporting.</li>
+          </ul>
+          <p>
+            If your organization requires SOC 2 compliance for Kafka operations, Flafka is currently the only tool that provides the evidence automation auditors expect. The alternative is building it yourself &mdash; custom scripts, manual exports, and spreadsheets that no one wants to maintain.
+          </p>
+
+          <!-- Section 6: FAQ -->
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>Can Flafka help my team pass a SOC 2 audit for Kafka infrastructure?</h3>
+          <p>
+            Flafka provides 9 compliance building blocks that map directly to SOC 2 Trust Services Criteria: resource-level RBAC (CC6.1), immutable audit trails (CC6.2), automated evidence bundling (CC6.3), compliance posture dashboards (CC7.2), and more. These features generate the artifacts auditors request, reducing manual evidence collection from weeks to minutes.
+          </p>
+
+          <h3>Does Flafka support PCI-DSS compliance for Kafka?</h3>
+          <p>
+            Flafka's compliance features address PCI-DSS requirements including access control (Requirement 7), audit logging (Requirement 10), and data protection via AI PII detection (Requirement 3). Compliance bundles can be scheduled to export evidence packages aligned with PCI-DSS control categories.
+          </p>
+
+          <h3>How does Flafka's compliance automation compare to Conduktor?</h3>
+          <p>
+            Conduktor does not offer compliance automation, evidence bundling, compliance posture dashboards, or audit trail export. Flafka is the only Kafka management tool with built-in SOC 2 and PCI-DSS compliance features.
+          </p>
+
+          <!-- CTA -->
+          <h2 id="get-started">Start Your Compliance Journey</h2>
+          <p>
+            Flafka's compliance features are available on the <a href="../pricing.html">Team plan</a> ($19/seat/month). The 14-day free trial includes full compliance automation so you can generate your first evidence bundle before committing.
+          </p>
+
+          <div style="text-align: center; margin-top: var(--space-2xl);">
+            <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+            <a href="../security.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-md);">View Security Details</a>
+            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-muted);">
+              <a href="../pricing.html">See pricing</a> &bull;
+              <a href="../features.html">Explore all features</a> &bull;
+              <a href="../compare.html">Compare with competitors</a> &bull;
+              <a href="../guides/conduktor-migration.html">Migration guide</a>
+            </p>
+          </div>
+        </div>
+
+        <p style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-3xl); border-top: 1px solid var(--border-subtle); padding-top: var(--space-lg);">
+          Published: May 2027 &bull; Last updated: May 2027
+        </p>
+      </article>
+
+      <!-- Sidebar TOC -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#why-soc2-matters">Why SOC 2 Matters</a></li>
+            <li><a href="#building-blocks">9 Building Blocks</a></li>
+            <li><a href="#tsc-mapping">TSC Mapping</a></li>
+            <li><a href="#automation">Compliance Automation</a></li>
+            <li><a href="#competitors">Competitor Comparison</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#get-started">Get Started</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Ready to see it <span class="text-gradient">in action</span>?</h2>
+    <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="../demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../demo.html">Demos</a></li>
+          <li><a href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../docs.html">Documentation</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../about.html#contact">Contact</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
+        <a href="../security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>

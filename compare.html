@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison</title>
-  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. Conduktor alternatives with Kafka ACL management tool features.">
+  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, and Compliance. Enterprise Kafka comparison.">
+  <meta name="keywords" content="enterprise Kafka comparison, Conduktor alternative, Kafka GUI comparison, Confluent Cloud management tool, Kafka admin tool comparison, enterprise Kafka management, Kafka compliance comparison">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison">
@@ -17,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Compare | Flafka vs Conduktor vs AKHQ vs Kafka UI">
   <meta name="twitter:description" content="Honest feature comparison against every major Kafka GUI. See what sets Flafka apart.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/compare.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
@@ -42,6 +44,7 @@
       <li><a href="roi-calculator.html">ROI Calculator</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
       <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
@@ -62,6 +65,7 @@
   <a href="roi-calculator.html">ROI Calculator</a>
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
 
   <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
@@ -361,6 +365,17 @@
             <td class="cross">No</td>
           </tr>
           <tr>
+            <td>Embedded CLI</td>
+            <td class="col-flafka check">&#10003; Built-in terminal, 6 resource types, tab completion</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
             <td style="font-weight:700; color: var(--color-primary-light);">Price</td>
             <td class="col-flafka" style="font-weight:700; color: var(--color-primary-light);">$19/seat</td>
             <td>Free w/ CC</td>
@@ -391,20 +406,75 @@
         <h3 class="h2h__name">Conduktor</h3>
         <span class="h2h__type">Commercial SaaS &bull; ~$25/seat/mo</span>
       </div>
-      <div class="h2h__columns">
-        <div class="h2h__col h2h__col--better">
-          <h4>&#10003; What Flafka does better</h4>
-          <ul>
-            <li><strong>Schema Impact Analysis</strong> &mdash; see blast radius before changes. Conduktor has nothing equivalent.</li>
-            <li><strong>Spend Dashboard</strong> &mdash; real-time cost visibility. Conduktor has zero cost management features.</li>
-            <li><strong>Resource RBAC with glob patterns</strong> &mdash; fine-grained access control. Conduktor has basic roles only.</li>
-            <li><strong>Connector monitoring</strong> &mdash; throughput charts and structured logs. No Conduktor equivalent.</li>
-            <li><strong>Flink SQL IDE</strong> with cost estimation &mdash; Conduktor has no Flink SQL support.</li>
-            <li><strong>SLO tracking</strong> with error budgets &mdash; unique to Flafka.</li>
-            <li><strong>Lower price</strong> &mdash; $19/seat vs Conduktor's ~$25/seat.</li>
-            <li><strong>Permission-enforced exports</strong> &mdash; Conduktor's analytics exports bypass access controls.</li>
-          </ul>
-        </div>
+
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-xl); font-size: var(--text-lg);">
+        Conduktor is the closest competitor. Here are the <strong style="color: var(--color-primary-light);">18+ features</strong> Flafka offers that Conduktor does not, organized by category.
+      </p>
+
+      <!-- FinOps (6 features) -->
+      <div class="h2h__category">
+        <h4 style="color: var(--color-primary-light); margin-bottom: var(--space-md); font-size: var(--text-lg);">FinOps &amp; Cost Management (6 features)</h4>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Conduktor has zero cost management capabilities. Flafka provides a complete FinOps stack:</p>
+        <ul class="h2h__feature-list">
+          <li><strong>Spend Dashboard with drill-down</strong> &mdash; month-to-date costs, daily trend charts, product-level breakdowns</li>
+          <li><strong>CFU Monitor (per-statement)</strong> &mdash; real-time Flink SQL cost tracking per statement</li>
+          <li><strong>Cost Threshold Alerts</strong> &mdash; automated notifications before budgets are exceeded</li>
+          <li><strong>Cost Anomaly Detection</strong> &mdash; ML-based detection of unusual spending patterns</li>
+          <li><strong>End-of-Month Cost Forecast</strong> &mdash; 7-day projections with confidence intervals</li>
+          <li><strong>Cost Allocation by Team</strong> &mdash; attribute spend to teams for chargeback reporting</li>
+        </ul>
+      </div>
+
+      <!-- Data Quality (5 features) -->
+      <div class="h2h__category" style="margin-top: var(--space-xl);">
+        <h4 style="color: var(--color-primary-light); margin-bottom: var(--space-md); font-size: var(--text-lg);">Data Quality (5 features)</h4>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Conduktor offers gateway-level schema validation only. Flafka provides a full no-code DQ rules engine:</p>
+        <ul class="h2h__feature-list">
+          <li><strong>No-Code Data Quality Rules</strong> &mdash; create rules via UI with field-level validation, regex, range checks</li>
+          <li><strong>Conditional DQ Rules</strong> &mdash; rules that apply only when conditions are met (e.g., validate only if region=EU)</li>
+          <li><strong>DQ Violation Persistence</strong> &mdash; violation history stored and queryable for audit</li>
+          <li><strong>DQ Coverage Dashboard</strong> &mdash; see which topics have rules and which are unprotected</li>
+          <li><strong>Schema Diff Explainer</strong> &mdash; plain-language explanation of schema changes with impact assessment</li>
+        </ul>
+      </div>
+
+      <!-- Compliance (4 features) -->
+      <div class="h2h__category" style="margin-top: var(--space-xl);">
+        <h4 style="color: var(--color-primary-light); margin-bottom: var(--space-md); font-size: var(--text-lg);">Compliance &amp; Security (4 features)</h4>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Conduktor has basic audit logs. Flafka provides enterprise compliance automation:</p>
+        <ul class="h2h__feature-list">
+          <li><strong>Compliance Bundle Scheduling</strong> &mdash; automated evidence collection on a schedule for SOC 2 / PCI-DSS audits</li>
+          <li><strong>Compliance Posture Dashboard</strong> &mdash; real-time view of your compliance status across all controls</li>
+          <li><strong>PCI-DSS Requirement 7 Alignment</strong> &mdash; resource-level RBAC with glob patterns designed for PCI compliance</li>
+          <li><strong>AI PII Detection (DLP)</strong> &mdash; hybrid regex+ML detection of 13 PII types, fully air-gapped</li>
+        </ul>
+      </div>
+
+      <!-- Alerting (3 features) -->
+      <div class="h2h__category" style="margin-top: var(--space-xl);">
+        <h4 style="color: var(--color-primary-light); margin-bottom: var(--space-md); font-size: var(--text-lg);">Alerting &amp; Observability (3+ features)</h4>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Conduktor has no SLO engine and no per-rule alert routing. Flafka provides:</p>
+        <ul class="h2h__feature-list">
+          <li><strong>SLO Tracking with Error Budgets</strong> &mdash; lag, throughput, and availability objectives with burn-down visualization</li>
+          <li><strong>Per-Rule Alert Routing</strong> &mdash; route different alert types to different channels (Slack, PagerDuty, email)</li>
+          <li><strong>SLO Compliance Reports</strong> &mdash; exportable compliance reports for stakeholders</li>
+        </ul>
+      </div>
+
+      <!-- Additional differentiators -->
+      <div class="h2h__category" style="margin-top: var(--space-xl);">
+        <h4 style="color: var(--color-primary-light); margin-bottom: var(--space-md); font-size: var(--text-lg);">Platform &amp; Developer Experience</h4>
+        <ul class="h2h__feature-list">
+          <li><strong>Flink SQL IDE with cost estimation</strong> &mdash; Conduktor has no Flink SQL support</li>
+          <li><strong>Schema Impact Analysis</strong> &mdash; blast radius visualization before changes; no Conduktor equivalent</li>
+          <li><strong>Connector monitoring</strong> &mdash; throughput charts and structured logs</li>
+          <li><strong>Embedded CLI</strong> &mdash; kubectl-style terminal with tab completion for 6 resource types</li>
+          <li><strong>Permission-enforced exports</strong> &mdash; Conduktor's analytics exports bypass access controls</li>
+          <li><strong>Lower price</strong> &mdash; $19/seat vs Conduktor's ~$25/seat (24% less)</li>
+        </ul>
+      </div>
+
+      <div class="h2h__columns" style="margin-top: var(--space-xl);">
         <div class="h2h__col h2h__col--honest">
           <h4>What Conduktor offers that we don't (yet)</h4>
           <ul>
@@ -419,7 +489,8 @@
         </div>
       </div>
       <div style="text-align: center; margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--border-subtle);">
-        <a href="guides/conduktor-migration.html" class="btn btn--primary btn--sm">Read the Complete Migration Guide &rarr;</a>
+        <a href="blog/flafka-vs-conduktor.html" class="btn btn--secondary btn--sm" style="margin-right: var(--space-md);">Read the Full Comparison Article &rarr;</a>
+        <a href="guides/conduktor-migration.html" class="btn btn--primary btn--sm">Migration Guide &rarr;</a>
       </div>
     </div>
 
@@ -468,7 +539,7 @@
         <div class="h2h__col h2h__col--better">
           <h4>&#10003; What Flafka does better</h4>
           <ul>
-            <li>All 6 unique features (Schema Impact, Cost Est., Spend, Connectors, SLO, ACL Templates)</li>
+            <li>All 18+ unique features (FinOps, Data Quality, Compliance, SLO, Schema Impact, and more)</li>
             <li>Polished, purpose-built dark mode UI</li>
             <li>Resource-level RBAC with PCI-DSS alignment</li>
             <li>Shareable analytics and dashboards</li>
@@ -501,7 +572,7 @@
             <li>Message browser with search and pagination vs. basic viewing</li>
             <li>Full CRUD for topics, schemas, ACLs, connectors</li>
             <li>Production-grade stability (Kafdrop has known crash issues)</li>
-            <li>All 6 unique features + enterprise capabilities</li>
+            <li>All 18+ unique features + enterprise capabilities</li>
           </ul>
         </div>
         <div class="h2h__col h2h__col--honest">
@@ -525,7 +596,7 @@
         <div class="h2h__col h2h__col--better">
           <h4>&#10003; What Flafka does better</h4>
           <ul>
-            <li>All 6 unique features</li>
+            <li>All 18+ unique features</li>
             <li>Purpose-built for Confluent Cloud (deeper integration)</li>
             <li>Resource-level RBAC with glob patterns</li>
             <li>Desktop app via Tauri</li>
@@ -553,7 +624,7 @@
         <div class="h2h__col h2h__col--better">
           <h4>&#10003; What Flafka does better</h4>
           <ul>
-            <li>All 6 unique features</li>
+            <li>All 18+ unique features</li>
             <li><strong>Flink SQL IDE</strong> &mdash; native Confluent Flink SQL support</li>
             <li><strong>Spend Dashboard</strong> for Confluent Cloud</li>
             <li><strong>Simpler deployment</strong> &mdash; single binary or Docker container</li>
@@ -584,7 +655,7 @@
         <div class="h2h__col h2h__col--better">
           <h4>&#10003; What Flafka does better</h4>
           <ul>
-            <li>All 6 unique features</li>
+            <li>All 18+ unique features</li>
             <li>Resource-level RBAC with PCI-DSS alignment</li>
             <li>Shareable analytics and dashboards</li>
             <li>Data quality rules engine</li>
@@ -649,7 +720,6 @@
         <ul>
           <li><a href="docs.html">Documentation</a></li>
           <li><a href="community.html">Community</a></li>
-          <li><a href="#">API Docs</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
@@ -664,10 +734,10 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
       <div class="footer__legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
         <a href="security.html">Security</a>
       </div>
     </div>

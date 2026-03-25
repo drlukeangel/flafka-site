@@ -26,6 +26,17 @@ body {
 a { color: var(--text-link); text-decoration: none; transition: color var(--transition-fast); }
 a:hover { color: var(--color-primary); }
 
+/* SITE-UX-12: Standalone text links need stronger visibility — underline + bolder color */
+.text-link {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+.text-link:hover { color: #c4b5fd; }
+[data-theme="light"] .text-link { color: var(--color-primary); }
+[data-theme="light"] .text-link:hover { color: #6d28d9; }
+
 img, video { max-width: 100%; display: block; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -272,6 +283,13 @@ code, .mono {
   border: 1px solid var(--border-subtle);
 }
 .nav__mobile a:hover { background: var(--bg-card); }
+/* SITE-UX-10: Active page indicator in mobile hamburger nav */
+.nav__mobile a.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary-light);
+  font-weight: 700;
+}
 
 /* --- Cards --- */
 .card {
@@ -832,12 +850,13 @@ code, .mono {
   gap: var(--space-sm);
 }
 
+/* SITE-UX-9: Bump feature list from text-secondary to text-primary for better contrast */
 .pricing-card__features li {
   display: flex;
   align-items: flex-start;
   gap: var(--space-sm);
   font-size: var(--text-sm);
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .pricing-card__features li::before {
@@ -1232,6 +1251,13 @@ code, .mono {
 .footer__legal a {
   color: var(--text-muted);
   font-size: var(--text-xs);
+}
+
+.footer__legal-placeholder {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  opacity: 0.5;
+  cursor: default;
 }
 
 /* --- Page Hero (for inner pages) --- */
@@ -4312,6 +4338,10 @@ code, .mono {
 @media (max-width: 640px) {
   .platforms-grid {
     grid-template-columns: 1fr;
+  }
+  /* SITE-UX-8: Reduce oversized vertical gap on mobile after platform cards */
+  .supported-platforms {
+    padding: var(--space-2xl) 0;
   }
 }
 

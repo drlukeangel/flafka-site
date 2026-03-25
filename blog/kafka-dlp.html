@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafka DLP — Why Your Kafka Data Needs AI PII Detection | Flafka Blog</title>
+  <meta name="description" content="Kafka DLP: AI-powered PII detection for streaming data. Learn why manual masking fails and how Flafka's hybrid regex+ML approach delivers sub-microsecond Kafka PII detection and stream data loss prevention.">
+  <meta name="keywords" content="Kafka DLP, Kafka PII detection, stream data loss prevention, Kafka data masking, Kafka GDPR, Kafka HIPAA, Kafka PCI-DSS, Kafka sensitive data, AI PII detection Kafka">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kafka DLP — Why Your Kafka Data Needs AI PII Detection">
+  <meta property="og:description" content="AI-powered PII detection for Kafka streams. Sub-microsecond latency, 13 PII types, air-gapped. No competitor offers this.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/blog/kafka-dlp.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kafka DLP — Why Your Kafka Data Needs AI PII Detection">
+  <meta name="twitter:description" content="AI-powered PII detection for Kafka streams. Sub-microsecond latency, 13 PII types, air-gapped. No competitor offers this.">
+
+  <link rel="canonical" href="https://flafka.dev/blog/kafka-dlp.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Kafka DLP — Why Your Kafka Data Needs AI PII Detection",
+    "description": "Learn why manual PII masking fails in Kafka and how Flafka's hybrid regex+ML approach delivers sub-microsecond detection across 13 PII types with zero data leaving your network.",
+    "datePublished": "2027-04-01",
+    "dateModified": "2027-04-01",
+    "author": {
+      "@type": "Organization",
+      "name": "Flafka Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    },
+    "image": "https://flafka.dev/assets/flafka-mascot.png",
+    "mainEntityOfPage": "https://flafka.dev/blog/kafka-dlp.html",
+    "wordCount": "1150",
+    "timeRequired": "PT8M"
+  }
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Kafka DLP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kafka DLP (Data Loss Prevention) is real-time scanning of Kafka message payloads for sensitive data patterns like PII. It detects credit card numbers, SSNs, email addresses, and other sensitive fields before data enters protected topics, enabling compliance with GDPR, HIPAA, and PCI-DSS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Flafka detect PII in Kafka streams?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka uses a hybrid regex+ML approach. Deterministic regex patterns catch known formats (credit cards, SSNs, phone numbers), while a trained ML model identifies contextual PII like names and addresses. Detection runs at sub-microsecond latency, entirely air-gapped with no data leaving your network."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Kafka DLP work without sending data to the cloud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka's PII detection is fully air-gapped. The ML model runs locally alongside your Kafka cluster. No message payloads, metadata, or detection results are transmitted externally. This is critical for organizations subject to data residency requirements."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="../features.html">Features</a></li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../demo.html">Demos</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html" class="active">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../demo.html">Demos</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">Data Loss Prevention</div>
+    <h1 class="animate-in" style="max-width: 700px; margin: 0 auto;">Kafka DLP &mdash; Why Your Kafka Data Needs <span class="text-gradient">AI PII Detection</span></h1>
+  </div>
+</section>
+
+<!-- Article -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main">
+        <div class="article__meta">
+          <span class="article__author">Flafka Engineering Team</span>
+          <time datetime="2027-04-01">April 2027</time>
+          <span>8 min read</span>
+        </div>
+
+        <div class="article__body">
+
+          <!-- Section 1: Introduction -->
+          <p>
+            Every Kafka cluster accumulates sensitive data. Credit card numbers flow through payment topics. Social Security numbers appear in user-profile events. Email addresses, phone numbers, and home addresses pass through dozens of topics produced by teams that may not even realize they are emitting personally identifiable information.
+          </p>
+          <p>
+            The problem is not that sensitive data exists &mdash; it is that most organizations have no way to know where it is. Kafka topics are high-throughput, schema-evolving, multi-producer streams. Manual auditing cannot keep pace. By the time a compliance team discovers PII in an unprotected topic, the data has already been consumed, replicated, and potentially exported to systems with weaker access controls.
+          </p>
+          <p>
+            Data Loss Prevention (DLP) for Kafka is not a luxury. For any organization subject to GDPR, HIPAA, or PCI-DSS, it is a requirement. The question is not whether you need it &mdash; it is whether your current tooling can deliver it.
+          </p>
+
+          <!-- Section 2: What Is Kafka DLP? -->
+          <h2 id="what-is-kafka-dlp">What Is Kafka DLP?</h2>
+          <p>
+            Kafka DLP is real-time scanning of message payloads for sensitive data patterns. Unlike traditional DLP systems designed for email or file storage, Kafka DLP operates on streaming data &mdash; messages that arrive continuously, at high volume, with microsecond delivery expectations.
+          </p>
+          <p>
+            Effective Kafka DLP means detection before data enters protected topics, not after. It means scanning every message in real time without adding meaningful latency to the produce path. It means identifying PII types that schema definitions do not explicitly tag &mdash; because producers change fields, rename columns, and add nested objects without updating documentation.
+          </p>
+          <p>
+            The goal is simple: know exactly what sensitive data flows through your Kafka cluster, in real time, with zero manual tagging. Conventional Kafka management tools do not offer this capability. Conduktor, Confluent Console, AKHQ, Lenses, Kafdrop, and Kafka UI all lack automated PII detection. If you want DLP for Kafka today, you either build it yourself or use Flafka.
+          </p>
+
+          <!-- Section 3: Why Manual Masking Isn't Enough -->
+          <h2 id="why-manual-masking-fails">Why Manual Masking Is Not Enough</h2>
+          <p>
+            Some teams rely on manual field tagging to identify sensitive data. A developer annotates schema fields as "PII" and downstream consumers apply masking rules. This approach has three critical weaknesses:
+          </p>
+          <ul>
+            <li><strong>Schema evolution introduces new fields.</strong> A producer adds a <code>billing_address</code> field to an existing schema. The field is not tagged as PII because the developer did not think of it as sensitive. The data flows unmasked for weeks before anyone notices.</li>
+            <li><strong>Producers change upstream without notification.</strong> A microservice team renames <code>ssn</code> to <code>tax_id</code> in a schema migration. The downstream masking rule, keyed on <code>ssn</code>, stops matching. The Social Security numbers now flow in the clear.</li>
+            <li><strong>Nested and dynamic structures evade static rules.</strong> JSON payloads with arbitrary nesting, arrays of objects, and dynamically-typed fields cannot be fully covered by static field-name-based masking. PII can hide in <code>metadata.custom_fields[3].value</code> where no static rule will find it.</li>
+          </ul>
+          <p>
+            Compliance auditors do not accept "we tagged what we knew about" as evidence of data protection. They want proof of detection &mdash; evidence that your system actively scans for sensitive data, not just masks fields that someone remembered to label.
+          </p>
+
+          <!-- Section 4: How Flafka's Approach Works -->
+          <h2 id="how-it-works">How Flafka's AI PII Detection Works</h2>
+          <p>
+            Flafka uses a hybrid detection architecture that combines deterministic regex patterns with a trained machine learning model. This two-layer approach catches both structured and contextual PII.
+          </p>
+          <p>
+            <strong>Layer 1: Regex patterns</strong> handle well-defined formats. Credit card numbers (Luhn-validated), Social Security numbers, phone numbers, email addresses, IP addresses, and other pattern-based PII types are matched deterministically with zero false negatives for known formats. Regex detection runs in nanoseconds per field.
+          </p>
+          <p>
+            <strong>Layer 2: ML classification</strong> handles contextual PII that cannot be captured by patterns alone. Names, physical addresses, dates of birth, medical record numbers, and free-text fields containing sensitive information are identified by a model trained on labeled PII datasets. The model runs locally &mdash; no API calls, no cloud inference, no data leaving your network.
+          </p>
+          <p>
+            Together, the two layers detect <strong>13 PII types</strong> at <strong>sub-microsecond latency</strong> per message. Detection is fully <strong>air-gapped</strong>: no message payloads, metadata, or detection results are transmitted externally. For organizations with data residency requirements, this is non-negotiable.
+          </p>
+          <p>
+            Flafka also implements a <strong>self-training feedback loop</strong>. When operators confirm or correct PII classifications through the UI, those corrections feed back into the model, improving accuracy over time without requiring manual retraining cycles. And for protected topics, Flafka supports <strong>producer blocking</strong> &mdash; messages containing detected PII are rejected at the produce path, preventing sensitive data from entering topics that should never contain it.
+          </p>
+
+          <!-- Section 5: 6 Capabilities No Competitor Offers -->
+          <h2 id="capabilities">6 Capabilities No Competitor Offers</h2>
+          <p>
+            Flafka's DLP implementation goes beyond basic detection. Here is how it compares to every major Kafka management tool:
+          </p>
+
+          <div class="compare-table-wrapper">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Capability</th>
+                  <th class="col-flafka">Flafka</th>
+                  <th>Conduktor</th>
+                  <th>Confluent</th>
+                  <th>Lenses</th>
+                  <th>AKHQ</th>
+                  <th>Kafka UI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AI-powered PII detection</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+                <tr>
+                  <td>Producer blocking on PII</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+                <tr>
+                  <td>PII exposure dashboards</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+                <tr>
+                  <td>Compliance reports (GDPR/HIPAA/PCI-DSS)</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+                <tr>
+                  <td>Self-training feedback loop</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+                <tr>
+                  <td>Sub-microsecond detection latency</td>
+                  <td class="col-flafka check">&#10003; Yes</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                  <td class="cross">No</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Conduktor offers basic data masking, but masking is not detection. Masking hides fields you already know about. Detection finds fields you do not. Confluent Cloud has no DLP capabilities in its console. Lenses, AKHQ, Kafdrop, and Kafka UI offer no PII-related features at all.
+          </p>
+
+          <!-- Section 6: CTA -->
+          <h2 id="get-started">See AI PII Detection in Action</h2>
+          <p>
+            Flafka's DLP capabilities are available on the <a href="../pricing.html">Team plan</a> ($19/seat/month). The 14-day free trial includes full AI PII detection so you can scan your own topics and see what your cluster contains before committing.
+          </p>
+
+          <div style="text-align: center; margin-top: var(--space-2xl);">
+            <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+            <a href="../compare.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-md);">Compare All Features</a>
+            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-muted);">
+              <a href="../pricing.html">See pricing</a> &bull;
+              <a href="../features.html">Explore all features</a> &bull;
+              <a href="../security.html">View compliance evidence</a> &bull;
+              <a href="../guides/conduktor-migration.html">Migration guide</a>
+            </p>
+          </div>
+        </div>
+
+        <p style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-3xl); border-top: 1px solid var(--border-subtle); padding-top: var(--space-lg);">
+          Published: April 2027 &bull; Last updated: April 2027
+        </p>
+      </article>
+
+      <!-- Sidebar TOC -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#what-is-kafka-dlp">What Is Kafka DLP?</a></li>
+            <li><a href="#why-manual-masking-fails">Why Manual Masking Fails</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#capabilities">6 Capabilities</a></li>
+            <li><a href="#get-started">Get Started</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Ready to see it <span class="text-gradient">in action</span>?</h2>
+    <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="../demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../demo.html">Demos</a></li>
+          <li><a href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../docs.html">Documentation</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../about.html#contact">Contact</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
+        <a href="../security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>

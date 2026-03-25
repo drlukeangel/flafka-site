@@ -3,43 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Integrations | Flafka — Kafka Management Platform</title>
-  <meta name="description" content="Flafka integrates natively with Confluent Cloud, Prometheus/Grafana, and PagerDuty alerting. AWS MSK and Apache Kafka OSS support coming soon.">
-  <meta name="keywords" content="Kafka integrations, Prometheus Kafka monitoring, PagerDuty Kafka alerts, MSK Kafka management, Confluent Cloud integrations">
+  <title>Integrations &amp; Platform Compatibility | Flafka — Kafka Management Platform</title>
+  <meta name="description" content="Flafka integrates with Confluent Cloud, Prometheus, Grafana, PagerDuty, Slack, Docker, and Helm. AWS MSK and Apache Kafka OSS support planned.">
+  <meta name="keywords" content="Kafka integrations, Prometheus Kafka monitoring, Grafana Kafka dashboard, PagerDuty Kafka alerts, MSK Kafka management, Confluent Cloud integrations, Kafka Docker, Kafka Helm chart">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Integrations | Flafka — Kafka Management Platform">
-  <meta property="og:description" content="Flafka integrates natively with Confluent Cloud, Prometheus/Grafana, and PagerDuty alerting. AWS MSK and Apache Kafka OSS support coming soon.">
+  <meta property="og:title" content="Integrations &amp; Platform Compatibility | Flafka">
+  <meta property="og:description" content="Flafka integrates with Confluent Cloud, Prometheus, Grafana, PagerDuty, Slack, Docker, and Helm. AWS MSK and Apache Kafka OSS support planned.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flafka.dev/integrations.html">
   <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Integrations | Flafka — Kafka Management Platform">
-  <meta name="twitter:description" content="Flafka integrates natively with Confluent Cloud, Prometheus/Grafana, and PagerDuty alerting. AWS MSK and Apache Kafka OSS support coming soon.">
+  <meta name="twitter:title" content="Integrations &amp; Platform Compatibility | Flafka">
+  <meta name="twitter:description" content="Flafka integrates with Confluent Cloud, Prometheus, Grafana, PagerDuty, Slack, Docker, and Helm. AWS MSK and Apache Kafka OSS support planned.">
 
   <link rel="canonical" href="https://flafka.dev/integrations.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- JSON-LD: ItemList -->
+  <!-- JSON-LD: SoftwareApplication with supported platforms -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Flafka Kafka Integrations",
-    "description": "Native integrations for Confluent Cloud, Prometheus, and PagerDuty. AWS MSK and Apache Kafka coming soon.",
-    "numberOfItems": 6,
-    "datePublished": "2026-03-22",
-    "dateModified": "2026-03-22",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Confluent Cloud", "url": "https://flafka.dev/integrations.html#confluent-cloud" },
-      { "@type": "ListItem", "position": 2, "name": "Prometheus + Grafana", "url": "https://flafka.dev/integrations.html#prometheus-grafana" },
-      { "@type": "ListItem", "position": 3, "name": "Alerting (PagerDuty, Slack)", "url": "https://flafka.dev/integrations.html#alerting" },
-      { "@type": "ListItem", "position": 4, "name": "AWS MSK (Coming Soon)", "url": "https://flafka.dev/integrations.html#aws-msk" },
-      { "@type": "ListItem", "position": 5, "name": "Apache Kafka OSS (Coming Soon)", "url": "https://flafka.dev/integrations.html#apache-kafka" },
-      { "@type": "ListItem", "position": 6, "name": "Terraform Provider (Coming Soon)", "url": "https://flafka.dev/integrations.html#terraform" }
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Kafka management platform with native Confluent Cloud support, Prometheus/Grafana monitoring, PagerDuty/Slack alerting, and multiple deployment options.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Starter" },
+      { "@type": "Offer", "price": "19", "priceCurrency": "USD", "name": "Team" }
+    ],
+    "softwareRequirements": "Confluent Cloud account (Apache Kafka and AWS MSK support planned)",
+    "featureList": [
+      "Confluent Cloud — full Kafka, Flink SQL, Schema Registry, Connectors, RBAC",
+      "Prometheus endpoint (/metrics) — SLO metrics, consumer lag, CFU usage",
+      "Grafana dashboards — pre-built dashboard JSON",
+      "PagerDuty — webhook alerting for SLOs, cost anomalies, connector errors",
+      "Slack — webhook delivery for all alert types",
+      "Docker single-container deployment",
+      "Docker Compose with volume mounts",
+      "Tauri Desktop App (macOS, Windows, Linux)",
+      "Standalone binary"
     ]
   }
   </script>
@@ -55,14 +62,16 @@
     </a>
     <ul class="nav__links">
       <li><a href="features.html">Features</a></li>
-      <li><a href="docs.html">Docs</a></li>
-      <li><a href="integrations.html" class="active">Integrations</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html">Security</a></li>
-      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="docs.html">Docs</a></li>
       <li><a href="community.html">Community</a></li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
       <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
@@ -73,16 +82,18 @@
 <div class="nav__mobile">
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
-  <a href="docs.html">Docs</a>
-  <a href="integrations.html">Integrations</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
   <a href="security.html">Security</a>
+  <a href="docs.html">Docs</a>
+  <a href="community.html">Community</a>
   <a href="demo.html">Sprint Demos</a>
   <a href="video-library.html">Feature Videos</a>
-  <a href="community.html">Community</a>
+  <a href="roi-calculator.html">ROI Calculator</a>
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
+
   <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
@@ -91,17 +102,18 @@
   <div class="page-hero__glow"></div>
   <div class="container">
     <h1 class="animate-in">Built for Your Entire <span class="text-gradient">Kafka Stack</span></h1>
-    <p class="hero__subtitle animate-in" data-delay="1">Flafka natively integrates with every tool in your Confluent Cloud ecosystem, with AWS MSK and Apache Kafka OSS support coming soon.</p>
+    <p class="hero__subtitle animate-in" data-delay="1">Flafka natively integrates with every tool in your Confluent Cloud ecosystem &mdash; monitoring, alerting, and deployment included.</p>
     <p class="animate-in" data-delay="2"><a href="compare.html" class="text-link">See how we compare to Conduktor &#x2192;</a></p>
   </div>
 </section>
 
-<!-- Native Integrations -->
-<section class="section" id="native-integrations" style="padding-top: 0;">
+<!-- ===== Supported Platforms ===== -->
+<section class="section" id="supported-platforms" style="padding-top: 0;">
   <div class="container">
     <div class="section-header section-header--center animate-in">
-      <div class="section-header__overline">Native Integrations</div>
-      <h2 class="section-header__title">Production-ready, <span class="text-gradient">today</span></h2>
+      <div class="section-header__overline">Supported Platforms</div>
+      <h2 class="section-header__title">Connect to <span class="text-gradient">your Kafka</span></h2>
+      <p class="section-header__desc">Confluent Cloud today, with Apache Kafka, AWS MSK, and Redpanda support on the roadmap.</p>
     </div>
 
     <div class="integrations-grid animate-in" data-delay="1">
@@ -111,68 +123,10 @@
         <div class="integration-card__body">
           <div class="integration-card__header">
             <h3 class="integration-card__name">Confluent Cloud</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--free">Free</span>
-            <span class="integration-card__status-badge integration-card__status-badge--supported">Supported</span>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
           </div>
-          <p class="integration-card__description">Full Kafka topic management, Flink SQL, Schema Registry, consumer groups, connectors, ACLs, and telemetry.</p>
+          <p class="integration-card__description">Full feature set: Kafka topics, Flink SQL IDE, Schema Registry, consumer groups, connectors, RBAC, spend tracking, SLO monitoring, and compliance evidence bundles.</p>
           <a href="index.html#signup" class="btn btn--primary btn--sm">Start Free &#x2192;</a>
-        </div>
-      </div>
-
-      <div class="integration-card" id="prometheus-grafana">
-        <div class="integration-card__icon" aria-hidden="true">&#x1F4CA;</div>
-        <div class="integration-card__body">
-          <div class="integration-card__header">
-            <h3 class="integration-card__name">Prometheus + Grafana</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--team">Team</span>
-            <span class="integration-card__status-badge integration-card__status-badge--supported">Supported</span>
-          </div>
-          <p class="integration-card__description">Export Kafka metrics to Prometheus. Pre-built Grafana dashboards for consumer lag, throughput, and partition health.</p>
-          <a href="index.html#signup" class="btn btn--primary btn--sm">Start Free &#x2192;</a>
-        </div>
-      </div>
-
-      <div class="integration-card" id="alerting">
-        <div class="integration-card__icon" aria-hidden="true">&#x1F514;</div>
-        <div class="integration-card__body">
-          <div class="integration-card__header">
-            <h3 class="integration-card__name">Alerting (PagerDuty, Slack, Webhook)</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--team">Team</span>
-            <span class="integration-card__status-badge integration-card__status-badge--supported">Supported</span>
-          </div>
-          <p class="integration-card__description">Get paged when SLOs breach, consumer groups fall behind, or spend exceeds budget. PagerDuty, Slack, and generic webhook support.</p>
-          <a href="index.html#signup" class="btn btn--primary btn--sm">Start Free &#x2192;</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in" data-delay="2">
-      <a href="index.html#signup" class="btn btn--primary">Get Started Free &#x2192;</a>
-    </div>
-  </div>
-</section>
-
-<!-- Coming Soon -->
-<section class="section" id="coming-soon" style="background: var(--bg-surface);">
-  <div class="container">
-    <div class="section-header section-header--center animate-in">
-      <div class="section-header__overline">Coming Soon</div>
-      <h2 class="section-header__title">On the <span class="text-gradient">roadmap</span></h2>
-    </div>
-
-    <div class="integrations-grid animate-in" data-delay="1">
-
-      <div class="integration-card" id="aws-msk">
-        <div class="integration-card__icon" aria-hidden="true">&#x2601;</div>
-        <div class="integration-card__body">
-          <div class="integration-card__header">
-            <h3 class="integration-card__name">AWS MSK</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--team">Team</span>
-            <span class="integration-card__status-badge integration-card__status-badge--coming-soon">Coming Soon</span>
-          </div>
-          <p class="integration-card__description">Full MSK cluster management with IAM authentication, topic CRUD, consumer groups, and CloudWatch metrics integration.</p>
-          <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
         </div>
       </div>
 
@@ -180,25 +134,170 @@
         <div class="integration-card__icon" aria-hidden="true">&#x1F418;</div>
         <div class="integration-card__body">
           <div class="integration-card__header">
-            <h3 class="integration-card__name">Apache Kafka OSS</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--free">Starter</span>
-            <span class="integration-card__status-badge integration-card__status-badge--coming-soon">Coming Soon</span>
+            <h3 class="integration-card__name">Apache Kafka</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Planned">Planned</span>
           </div>
-          <p class="integration-card__description">Connect to self-hosted Apache Kafka clusters with SASL/PLAIN, SASL/SCRAM, or mTLS authentication.</p>
+          <p class="integration-card__description">Self-hosted Kafka support: consumer groups, topics, message browser. SASL/PLAIN, SASL/SCRAM, and mTLS authentication.</p>
           <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
         </div>
       </div>
 
-      <div class="integration-card" id="terraform">
-        <div class="integration-card__icon" aria-hidden="true">&#x1F527;</div>
+      <div class="integration-card" id="aws-msk">
+        <div class="integration-card__icon" aria-hidden="true">&#x2601;</div>
         <div class="integration-card__body">
           <div class="integration-card__header">
-            <h3 class="integration-card__name">Terraform Provider</h3>
-            <span class="integration-card__tier-badge integration-card__tier-badge--enterprise">Enterprise</span>
-            <span class="integration-card__status-badge integration-card__status-badge--coming-soon">Coming Soon</span>
+            <h3 class="integration-card__name">AWS MSK</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Planned">Planned</span>
           </div>
-          <p class="integration-card__description">Infrastructure as code for Flafka configuration. Manage connection profiles, RBAC rules, and SLO definitions via Terraform.</p>
+          <p class="integration-card__description">IAM auth adapter, topic CRUD, consumer group monitoring, and CloudWatch metrics integration. Replaces manual MSK management workflows.</p>
           <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="redpanda">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F9CA;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Redpanda</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Planned">Planned</span>
+          </div>
+          <p class="integration-card__description">API-compatible Kafka management: topic CRUD, schema registry, consumer groups, and monitoring via Redpanda's Kafka-compatible protocol.</p>
+          <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Monitoring Integrations ===== -->
+<section class="section" id="monitoring" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Monitoring &amp; Alerting</div>
+      <h2 class="section-header__title">Observe everything, <span class="text-gradient">alert on anything</span></h2>
+      <p class="section-header__desc">Export metrics to your existing monitoring stack. Get paged when it matters.</p>
+    </div>
+
+    <div class="integrations-grid animate-in" data-delay="1">
+
+      <div class="integration-card" id="prometheus">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F4CA;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Prometheus</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Native <code>/metrics</code> endpoint exposing SLO metrics, consumer lag, CFU usage, and cost data in Prometheus format. Scrape-ready with no additional configuration.</p>
+          <a href="docs.html" class="btn btn--secondary btn--sm">View Docs &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="grafana">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F4C8;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Grafana</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Pre-built Grafana dashboard JSON for consumer lag, throughput, partition health, and cost trends. Import once, monitor everything.</p>
+          <a href="docs.html" class="btn btn--secondary btn--sm">View Docs &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="pagerduty">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F514;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">PagerDuty</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Webhook alerting for SLO breaches, cost anomalies, connector errors, and consumer lag spikes. Route alerts to the right on-call team automatically.</p>
+          <a href="docs.html" class="btn btn--secondary btn--sm">View Docs &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="slack">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F4AC;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Slack</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Webhook delivery for all alert types: SLO breaches, cost thresholds, connector failures, and consumer group lag. Rich message formatting with actionable links.</p>
+          <a href="docs.html" class="btn btn--secondary btn--sm">View Docs &#x2192;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Deployment Options ===== -->
+<section class="section" id="deployment">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Deployment</div>
+      <h2 class="section-header__title">Deploy <span class="text-gradient">your way</span></h2>
+      <p class="section-header__desc">Run Flafka wherever you run your infrastructure. One binary, multiple options.</p>
+    </div>
+
+    <div class="integrations-grid animate-in" data-delay="1">
+
+      <div class="integration-card" id="docker">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F433;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Docker</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Single-container deployment. One <code>docker run</code> command and you are up. Ideal for quick evaluation and small teams.</p>
+        </div>
+      </div>
+
+      <div class="integration-card" id="docker-compose">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F433;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Docker Compose</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Full stack with persistent volume mounts, environment variable configuration, and health checks. Production-ready for self-hosted teams.</p>
+        </div>
+      </div>
+
+      <div class="integration-card" id="helm">
+        <div class="integration-card__icon" aria-hidden="true">&#x2699;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Kubernetes Helm Chart</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Planned">Planned</span>
+          </div>
+          <p class="integration-card__description">Helm chart with configurable replicas, ingress, resource limits, and Prometheus ServiceMonitor. GitOps-friendly deployment for Kubernetes teams.</p>
+          <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="tauri-desktop">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F4BB;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Tauri Desktop App</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Native desktop application for macOS, Windows, and Linux. Built with Tauri &mdash; no Electron, no resource bloat. Launches in under 2 seconds.</p>
+          <a href="index.html#signup" class="btn btn--primary btn--sm">Download &#x2192;</a>
+        </div>
+      </div>
+
+      <div class="integration-card" id="standalone">
+        <div class="integration-card__icon" aria-hidden="true">&#x1F4E6;</div>
+        <div class="integration-card__body">
+          <div class="integration-card__header">
+            <h3 class="integration-card__name">Standalone Binary</h3>
+            <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
+          </div>
+          <p class="integration-card__description">Single Rust binary with zero runtime dependencies. Download, configure, run. Perfect for air-gapped environments and custom infrastructure.</p>
         </div>
       </div>
 
@@ -213,7 +312,8 @@
           <option value="">Which integration? (optional)</option>
           <option value="msk">AWS MSK</option>
           <option value="oss">Apache Kafka OSS</option>
-          <option value="terraform">Terraform Provider</option>
+          <option value="redpanda">Redpanda</option>
+          <option value="helm">Kubernetes Helm Chart</option>
         </select>
         <button type="submit" class="btn btn--primary">Join Waitlist</button>
       </form>
@@ -227,7 +327,10 @@
   <div class="container animate-in">
     <h2>Ready to try <span class="text-gradient">Flafka</span>?</h2>
     <p>Free tier available. No credit card. Deploy in under 5 minutes.</p>
-    <a href="index.html#signup" class="btn btn--primary btn--lg">Start Free Trial</a>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="index.html#signup" class="btn btn--primary btn--lg">Start Free Trial</a>
+      <a href="docs.html" class="btn btn--secondary btn--lg">Read the Docs</a>
+    </div>
   </div>
 </section>
 
@@ -273,10 +376,10 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
       <div class="footer__legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
         <a href="security.html">Security</a>
       </div>
     </div>

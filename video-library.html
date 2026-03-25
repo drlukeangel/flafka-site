@@ -157,16 +157,11 @@
       <li><a href="security.html">Security</a></li>
       <li><a href="docs.html">Docs</a></li>
       <li><a href="community.html">Community</a></li>
-      <li class="nav__dropdown">
-        <a href="demo.html" class="nav__dropdown-toggle active">Demos</a>
-        <div class="nav__dropdown-menu">
-          <a href="demo.html">Sprint Demos</a>
-          <a href="video-library.html">Feature Videos</a>
-        </div>
-      </li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle active">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
       <li><a href="roi-calculator.html">ROI Calculator</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
       <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
@@ -187,6 +182,7 @@
   <a href="roi-calculator.html">ROI Calculator</a>
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
   <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
@@ -210,6 +206,7 @@
       <button class="video-filter-btn" aria-pressed="false" data-filter="flink-sql">Flink SQL</button>
       <button class="video-filter-btn" aria-pressed="false" data-filter="kafka-operations">Kafka Operations</button>
       <button class="video-filter-btn" aria-pressed="false" data-filter="compliance">Compliance</button>
+      <button class="video-filter-btn" aria-pressed="false" data-filter="power-user">Power User</button>
     </div>
 
     <!-- ===== Most Popular (Featured Row) ===== -->
@@ -394,6 +391,27 @@
         </div>
       </div>
 
+      <!-- Embedded CLI (Power User) -->
+      <div class="card video-card" tabindex="0" role="button" aria-label="Play Flafka Embedded CLI Demo"
+           data-category="power-user" data-video="assets/videos/cli-demo.webm"
+           data-title="Embedded CLI — kubectl-style Terminal in the GUI"
+           data-desc="60-second walkthrough of Flafka's embedded CLI: opening the terminal panel, running help, topics, groups, and health commands with tab completion and table output.">
+        <div class="video-card__thumb-wrap">
+          <img src="assets/images/video-thumbs/cli-demo-thumb.webp"
+               alt="Flafka Embedded CLI Demo — kubectl-style terminal with topic listing and tab completion"
+               width="400" height="225" loading="lazy" class="video-card__thumb">
+          <div class="video-card__play"><svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg></div>
+        </div>
+        <div class="video-card__body">
+          <div class="video-card__meta">
+            <span class="video-card__duration">1:00</span>
+            <span class="video-card__category-tag">Power User</span>
+          </div>
+          <h3 class="video-card__title">Embedded CLI</h3>
+          <p class="video-card__desc">kubectl-style terminal in the GUI with 6 resource types, tab completion, and table + JSON output. <span class="badge-unique">UNIQUE</span></p>
+        </div>
+      </div>
+
       <!-- Data Quality (Coming Soon) -->
       <div class="card video-card video-card--coming-soon" tabindex="0" aria-label="Data Quality Rules demo — coming soon"
            data-category="data-quality">
@@ -499,7 +517,6 @@
         <ul>
           <li><a href="docs.html">Documentation</a></li>
           <li><a href="community.html">Community</a></li>
-          <li><a href="#">API Docs</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
@@ -514,10 +531,10 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
       <div class="footer__legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
         <a href="security.html">Security</a>
       </div>
     </div>

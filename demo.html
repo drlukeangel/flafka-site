@@ -44,6 +44,29 @@
     }
   }
   </script>
+
+  <!-- JSON-LD: VideoObject for CLI Demo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Flafka Embedded CLI Demo — kubectl-style Terminal in the GUI",
+    "description": "60-second walkthrough of Flafka's embedded CLI: opening the terminal panel, running help, topics, groups, and health commands with tab completion and table output.",
+    "thumbnailUrl": "https://flafka.dev/assets/images/cli-demo-thumb.png",
+    "uploadDate": "2027-04-21",
+    "duration": "PT1M",
+    "contentUrl": "https://flafka.dev/assets/videos/cli-demo.webm",
+    "embedUrl": "https://flafka.dev/demo.html#cli-demo",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -65,6 +88,7 @@
       <li><a href="roi-calculator.html">ROI Calculator</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
       <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
@@ -85,6 +109,7 @@
   <a href="roi-calculator.html">ROI Calculator</a>
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
 
   <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
@@ -108,7 +133,7 @@
     </div>
 
     <div class="video-card animate-in" style="max-width: 960px; margin: 0 auto;">
-      <video controls preload="metadata" poster="">
+      <video controls preload="metadata">
         <source src="assets/videos/Flafka-Feature-intro.webm" type="video/webm">
         Your browser does not support the video tag.
       </video>
@@ -133,7 +158,6 @@
       <div class="cost-demo__video">
         <video controls preload="metadata" poster="assets/images/cost-management-thumb.png" aria-label="Cost management demo video — 90-second walkthrough of the Spend Dashboard drill-down workflow">
           <source src="assets/videos/cost-management-demo.webm" type="video/webm">
-          <source src="assets/videos/cost-management-demo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -146,6 +170,37 @@
         <div style="margin-top: var(--space-xl);">
           <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Managing Kafka Costs</a>
           <a href="roi-calculator.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-sm);">Calculate Your ROI</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLI Demo (W91-2) -->
+<section class="section" id="cli-demo">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Power User</div>
+      <h2 class="section-header__title">Embedded CLI &mdash; <span class="text-gradient">Terminal Meets GUI</span></h2>
+      <p class="section-header__desc">The only Kafka admin tool with a kubectl-style terminal built into the GUI. No context switching, no separate tooling, no copy-pasting topic names between windows.</p>
+    </div>
+
+    <div class="cost-demo animate-in" style="max-width: 960px; margin: 0 auto;">
+      <div class="cost-demo__video">
+        <video controls preload="metadata" poster="assets/images/cli-demo-thumb.png" aria-label="Embedded CLI demo video — 60-second walkthrough of the kubectl-style terminal">
+          <source src="assets/videos/cli-demo.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="cost-demo__content">
+        <ul class="cost-demo__bullets">
+          <li><strong>6 resource types</strong> &mdash; topics, schemas, groups, consumers, health, and help &mdash; all from one terminal</li>
+          <li><strong>Tab completion</strong> for commands and topic names with persistent command history across sessions</li>
+          <li><strong>Table and JSON output</strong> modes for human reading or piping to scripts</li>
+        </ul>
+        <div style="margin-top: var(--space-xl);">
+          <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Try the CLI Free</a>
+          <a href="blog/embedded-cli.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-sm);">Read the Blog Post</a>
         </div>
       </div>
     </div>
@@ -411,7 +466,6 @@
         <ul>
           <li><a href="docs.html">Documentation</a></li>
           <li><a href="community.html">Community</a></li>
-          <li><a href="#">API Docs</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
@@ -426,10 +480,10 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
       <div class="footer__legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
         <a href="security.html">Security</a>
       </div>
     </div>

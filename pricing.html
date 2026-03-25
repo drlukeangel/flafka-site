@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pricing | Flafka — Kafka Management Platform">
   <meta name="twitter:description" content="Start free. $19/seat/mo for the full platform. Conduktor alternatives at a lower price.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/pricing.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
@@ -42,6 +43,7 @@
       <li><a href="roi-calculator.html">ROI Calculator</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
       <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
@@ -62,6 +64,7 @@
   <a href="roi-calculator.html">ROI Calculator</a>
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
 
   <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
@@ -127,18 +130,23 @@
         <div class="pricing-card__period">Unlimited users &amp; clusters &bull; 14-day free trial</div>
         <ul class="pricing-card__features">
           <li>Everything in Starter, plus:</li>
-          <li>Spend Dashboard (FinOps)</li>
+          <li style="padding-top: var(--space-xs); font-weight: 600; color: var(--color-primary-light);">Cost Management (FinOps):</li>
+          <li>Spend Dashboard with drill-down</li>
+          <li>CFU Monitor (per-statement)</li>
+          <li>Cost Threshold Alerts</li>
+          <li>Cost Anomaly Detection</li>
+          <li>End-of-Month Cost Forecast</li>
+          <li>Cost Allocation by Team</li>
+          <li style="padding-top: var(--space-xs); font-weight: 600; color: var(--color-primary-light);">Platform Features:</li>
           <li>Resource-level RBAC with glob patterns</li>
           <li>Connector monitoring (throughput + logs)</li>
           <li>SLO tracking with error budgets</li>
           <li>ACL management + template presets</li>
-          <li>Shareable analytics reports</li>
-          <li>Shareable dashboard snapshots</li>
-          <li>Analytics export (JSON/CSV)</li>
           <li>Data quality rules engine</li>
+          <li>Shareable analytics &amp; dashboard snapshots</li>
+          <li>Analytics export (JSON/CSV)</li>
           <li>Connection profiles (multi-cluster)</li>
           <li>Team spaces</li>
-          <li>Budget alerts &amp; notifications</li>
           <li>Email support</li>
           <li style="margin-top: var(--space-sm);"><a href="demo.html#cost-demo" style="color: var(--color-primary-light); text-decoration: underline; font-weight: 600;">Watch the cost management demo &rarr;</a></li>
           <li><a href="roi-calculator.html" style="color: var(--color-primary-light); text-decoration: underline; font-weight: 600;">Calculate your savings &rarr;</a></li>
@@ -303,55 +311,55 @@ Visit flafka.dev/download</div>
 
     <div style="max-width: 720px; margin: 0 auto;">
       <div class="faq-item open">
-        <button class="faq-question">Do I need a Confluent Cloud account?</button>
+        <button class="faq-question" aria-expanded="true">Do I need a Confluent Cloud account?</button>
         <div class="faq-answer">
           Yes. Flafka is a management interface for Confluent Cloud. You connect it to your existing Confluent Cloud clusters using your API keys. Flafka does not host or manage Kafka infrastructure directly.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Can I self-host Flafka?</button>
+        <button class="faq-question" aria-expanded="false">Can I self-host Flafka?</button>
         <div class="faq-answer">
           Yes. Flafka runs as a single Docker container or as a native desktop application via Tauri (Windows, macOS, Linux). There is no cloud dependency &mdash; the application runs entirely in your environment.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">What about data privacy?</button>
+        <button class="faq-question" aria-expanded="false">What about data privacy?</button>
         <div class="faq-answer">
           Flafka connects directly to your Confluent Cloud clusters. No data passes through our servers. Your messages, schemas, and configuration stay within your network. The only external call is license validation (for paid tiers).
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Can I switch from Conduktor?</button>
+        <button class="faq-question" aria-expanded="false">Can I switch from Conduktor?</button>
         <div class="faq-answer">
-          Yes. Setup takes about 5 minutes. Enter your Confluent Cloud API credentials and you're ready to go. You'll immediately gain access to Schema Impact Analysis, Spend Dashboard, RBAC Patterns, and Connector Monitoring &mdash; four features Conduktor doesn't offer.
+          Yes. Setup takes about 5 minutes. Enter your Confluent Cloud API credentials and you're ready to go. You'll immediately gain access to 18+ features Conduktor doesn't offer, including a complete FinOps stack, data quality rules, compliance automation, SLO monitoring, and schema impact analysis. <a href="blog/flafka-vs-conduktor.html">Read the full comparison</a>.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Is there a free trial for the Team tier?</button>
+        <button class="faq-question" aria-expanded="false">Is there a free trial for the Team tier?</button>
         <div class="faq-answer">
           Yes. The Team tier includes a 14-day free trial with full access to all features. No credit card required to start. After the trial, you can continue on the free Starter tier or upgrade.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Does Flafka support MSK or self-managed Kafka?</button>
+        <button class="faq-question" aria-expanded="false">Does Flafka support MSK or self-managed Kafka?</button>
         <div class="faq-answer">
           Yes. Flafka works with any Kafka cluster via SASL/PLAIN + TLS, including Confluent Cloud, AWS MSK, Apache Kafka, Redpanda, and Aiven. Core features (topic management, message browser, consumer groups, monitoring, dark mode, desktop app) work on all platforms. Confluent Cloud-specific features like Flink SQL IDE and CFU cost management require a Confluent Cloud cluster.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">How does the annual discount work?</button>
+        <button class="faq-question" aria-expanded="false">How does the annual discount work?</button>
         <div class="faq-answer">
           Annual billing saves 20%. The Team tier drops from $19/seat/month to $15/seat/month when billed annually. Enterprise customers receive custom volume pricing. Contact sales for details.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">How does the free trial work?</button>
+        <button class="faq-question" aria-expanded="false">How does the free trial work?</button>
         <div class="faq-answer">
           The Team tier includes a 14-day free trial with full access to every Team feature &mdash; Spend Dashboard, RBAC, Connector Monitoring, SLO Tracking, and more. No credit card required. After 14 days, you can continue on the free Starter tier or upgrade to keep Team features.
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Can I upgrade from Starter to Team?</button>
+        <button class="faq-question" aria-expanded="false">Can I upgrade from Starter to Team?</button>
         <div class="faq-answer">
           Yes. You can upgrade from Starter to Team at any time. All your data, configurations, and settings are preserved. The upgrade takes effect immediately &mdash; no downtime, no data migration needed.
         </div>
@@ -397,7 +405,6 @@ Visit flafka.dev/download</div>
         <ul>
           <li><a href="docs.html">Documentation</a></li>
           <li><a href="community.html">Community</a></li>
-          <li><a href="#">API Docs</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
@@ -412,10 +419,10 @@ Visit flafka.dev/download</div>
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__copy">&copy; 2026 Flafka. All rights reserved.</span>
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
       <div class="footer__legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
         <a href="security.html">Security</a>
       </div>
     </div>

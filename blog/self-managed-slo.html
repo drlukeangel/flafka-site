@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLO Monitoring for Self-Managed Kafka: Beyond CloudWatch and Grafana | Flafka Blog</title>
+  <meta name="description" content="SLO monitoring for self-managed Kafka and MSK. Move beyond CloudWatch alarms and Grafana dashboards with no-code SLO creation, breach detection, error budgets, Prometheus export, and compliance reports.">
+  <meta name="keywords" content="Kafka SLO monitoring, self-managed Kafka SLOs, Kafka consumer lag SLO, MSK monitoring tool, Kafka error budget, Kafka Prometheus metrics, Kafka reliability, Kafka observability">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SLO Monitoring for Self-Managed Kafka: Beyond CloudWatch and Grafana">
+  <meta property="og:description" content="No-code SLO creation for Kafka. Consumer lag, data freshness, and throughput SLOs with breach detection, error budgets, and Prometheus export.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/blog/self-managed-slo.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SLO Monitoring for Self-Managed Kafka: Beyond CloudWatch and Grafana">
+  <meta name="twitter:description" content="No-code SLO creation for Kafka. Consumer lag, data freshness, and throughput SLOs with breach detection, error budgets, and Prometheus export.">
+
+  <link rel="canonical" href="https://flafka.dev/blog/self-managed-slo.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "SLO Monitoring for Self-Managed Kafka: Beyond CloudWatch and Grafana",
+    "description": "Move beyond CloudWatch alarms and Grafana dashboards. Flafka's SLO engine provides no-code SLO creation, breach detection, error budgets, Prometheus export, and compliance reports for self-managed Kafka and MSK.",
+    "datePublished": "2027-05-05",
+    "dateModified": "2027-05-05",
+    "author": {
+      "@type": "Organization",
+      "name": "Flafka Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    },
+    "image": "https://flafka.dev/assets/flafka-mascot.png",
+    "mainEntityOfPage": "https://flafka.dev/blog/self-managed-slo.html",
+    "wordCount": "950",
+    "timeRequired": "PT6M"
+  }
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What Kafka metrics should I track with SLOs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The three most impactful Kafka SLOs are consumer lag (messages behind), data freshness (time since last consumed message), and throughput (messages per second). Consumer lag SLOs catch processing bottlenecks before they cascade. Data freshness SLOs detect stalled consumers. Throughput SLOs identify capacity issues before they cause message loss."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka work with self-managed Apache Kafka?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka currently supports Confluent Cloud with full feature coverage. Apache Kafka (self-managed) support is on the roadmap, targeting consumer groups, topics, and message browsing. MSK support with IAM auth adapter and CloudWatch metrics integration is also planned. Sign up for early access to be notified when self-managed support ships."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export Kafka SLO metrics to Prometheus and Grafana?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka exposes a /metrics Prometheus endpoint that includes SLO compliance percentages, error budget remaining, consumer lag by group, and breach counts. You can scrape this endpoint with any Prometheus-compatible system and visualize SLO data in your existing Grafana dashboards alongside other infrastructure metrics."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="../features.html">Features</a></li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../demo.html">Demos</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html" class="active">Blog</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../demo.html">Demos</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">SLO Monitoring</div>
+    <h1 class="animate-in" style="max-width: 700px; margin: 0 auto;">SLO Monitoring for Self-Managed Kafka: Beyond <span class="text-gradient">CloudWatch and Grafana</span></h1>
+  </div>
+</section>
+
+<!-- Article -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main">
+        <div class="article__meta">
+          <span class="article__author">Flafka Engineering Team</span>
+          <time datetime="2027-05-05">May 2027</time>
+          <span>6 min read</span>
+        </div>
+
+        <div class="article__body">
+
+          <!-- Section 1: Introduction -->
+          <h2 id="kafka-slos">SLOs for Kafka: Not Just Uptime</h2>
+          <p>
+            When platform teams think about Kafka reliability, they think about cluster uptime. Brokers are running, ZooKeeper quorum is healthy, the cluster accepts produce requests. But uptime is the floor, not the ceiling. A Kafka cluster can be "up" while consumer groups fall hours behind, data freshness degrades silently, and throughput drops below what downstream services require.
+          </p>
+          <p>
+            Service Level Objectives (SLOs) for Kafka go beyond uptime. They define what "healthy" actually means for your streaming infrastructure: consumer lag under 1,000 messages, data freshness within 30 seconds, throughput above 10,000 messages per second. When these thresholds are breached, the system is degraded &mdash; even if every broker reports healthy.
+          </p>
+          <p>
+            Most Kafka teams today rely on two tools for monitoring: CloudWatch (for MSK) and Grafana dashboards (for self-managed clusters). Both show metrics. Neither provides SLOs. The difference matters.
+          </p>
+
+          <!-- Section 2: Current Approach -->
+          <h2 id="current-approach">The CloudWatch + Grafana Approach (And Its Limits)</h2>
+          <p>
+            Self-managed Kafka teams typically piece together monitoring from multiple sources. JMX metrics are exported to Prometheus, visualized in Grafana, and alerted on via Alertmanager rules or PagerDuty integrations. MSK teams use CloudWatch metrics with static threshold alarms.
+          </p>
+          <p>
+            This approach works &mdash; until it does not. Here is where it breaks down:
+          </p>
+          <ul>
+            <li><strong>No error budgets.</strong> A CloudWatch alarm fires when consumer lag exceeds a threshold. It does not tell you how much of your reliability budget has been consumed this month. Without error budgets, every alert has the same urgency, and teams cannot make objective deployment decisions.</li>
+            <li><strong>No SLO compliance tracking.</strong> Grafana shows current lag. It does not show that your consumer group maintained 99.5% SLO compliance over the last 30 days. When a VP asks "how reliable is our Kafka infrastructure?", you open Grafana and try to eyeball a graph.</li>
+            <li><strong>Static thresholds miss context.</strong> Consumer lag of 5,000 messages might be fine for a batch analytics pipeline and catastrophic for a real-time payments system. CloudWatch alarms treat all consumer groups the same because they cannot express per-group SLO targets.</li>
+            <li><strong>No compliance reporting.</strong> SOC 2 and SLA audits require documented availability evidence over defined periods. Neither CloudWatch nor Grafana generates compliance-ready SLO reports. Teams export CSVs and build spreadsheets manually.</li>
+          </ul>
+
+          <!-- Section 3: Flafka's SLO Engine -->
+          <h2 id="slo-engine">What Flafka's SLO Engine Provides</h2>
+          <p>
+            Flafka's <a href="../features.html">SLO monitoring engine</a> was designed for exactly this problem. It provides four capabilities that CloudWatch and Grafana do not:
+          </p>
+
+          <h3>No-Code SLO Creation</h3>
+          <p>
+            Define SLOs through the UI without writing PromQL, Alertmanager rules, or CloudWatch alarm configurations. Select a metric (consumer lag, data freshness, throughput, error rate), set a target (99.9% of the time, consumer lag &lt; 1,000), choose a window (7-day rolling, 30-day calendar), and the SLO is active. Changes take effect immediately &mdash; no deploy cycle, no YAML editing.
+          </p>
+
+          <h3>Breach Detection with Error Budgets</h3>
+          <p>
+            When an SLO is breached, Flafka calculates the error budget impact. A 99.9% SLO over 30 days gives you 43.2 minutes of allowed downtime. If consumer lag exceeds the threshold for 10 minutes, Flafka shows that 23% of your monthly error budget has been consumed. This context transforms alerting from "something is wrong" to "you have used 23% of your reliability budget and it is day 5 of the month."
+          </p>
+
+          <h3>Prometheus Export</h3>
+          <p>
+            Flafka exposes a <code>/metrics</code> Prometheus endpoint that includes SLO compliance percentages, error budget remaining, consumer lag by group, and breach counts. Scrape it with your existing Prometheus setup and visualize SLO data in Grafana alongside other infrastructure metrics. Flafka does not replace your monitoring stack &mdash; it adds the SLO layer that is missing.
+          </p>
+
+          <h3>Compliance Reports</h3>
+          <p>
+            Generate SLO compliance reports for any time period: weekly, monthly, quarterly. Reports include SLO target, actual compliance percentage, breach count, total breach duration, and error budget consumption. These reports are formatted for auditors, not engineers &mdash; ready to include in SOC 2 evidence packages or attach to SLA reviews.
+          </p>
+
+          <!-- Section 4: Self-Managed Kafka -->
+          <h2 id="self-managed">How It Works with Self-Managed Kafka</h2>
+          <p>
+            Flafka currently provides full feature coverage for Confluent Cloud. Support for self-managed Apache Kafka is on the roadmap, targeting core management capabilities: consumer groups, topics, message browsing, and SLO monitoring.
+          </p>
+          <p>
+            For self-managed clusters, Flafka will connect directly to your bootstrap servers and JMX endpoints, collecting the same consumer lag, throughput, and partition metrics that your current monitoring stack collects &mdash; but with the SLO layer applied on top. No changes to your Kafka deployment are required.
+          </p>
+          <p>
+            The architecture is designed for air-gapped environments. Flafka runs alongside your cluster (Docker, Kubernetes, or standalone binary) with no external dependencies. Metrics collection, SLO evaluation, and alerting all happen locally.
+          </p>
+
+          <!-- Section 5: MSK Benefits -->
+          <h2 id="msk-benefits">MSK-Specific Benefits</h2>
+          <p>
+            AWS MSK teams face a particular challenge: CloudWatch metrics are available but limited. MSK exposes consumer lag, broker metrics, and partition metrics through CloudWatch, but the alarm system is primitive. Static thresholds, no error budgets, no SLO tracking, and CloudWatch Billing alarms that lag by 6&ndash;8 hours.
+          </p>
+          <p>
+            Flafka's planned MSK support includes an IAM auth adapter for seamless authentication and CloudWatch metrics integration. This means you can apply SLO monitoring on top of your existing MSK deployment without deploying additional JMX exporters or Prometheus infrastructure. The SLO engine consumes CloudWatch metrics directly and adds the error budget, compliance reporting, and alerting layer that CloudWatch lacks.
+          </p>
+          <p>
+            For MSK teams currently using CloudWatch Billing alarms for cost monitoring, Flafka's <a href="kafka-cost-visibility.html">cost management features</a> replace those 6&ndash;8 hour delayed alarms with real-time cost tracking, per-statement CFU monitoring, and end-of-month cost forecasts.
+          </p>
+
+          <!-- Section 6: FAQ -->
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>What Kafka metrics should I track with SLOs?</h3>
+          <p>
+            The three most impactful Kafka SLOs are consumer lag (messages behind), data freshness (time since last consumed message), and throughput (messages per second). Consumer lag SLOs catch processing bottlenecks before they cascade. Data freshness SLOs detect stalled consumers. Throughput SLOs identify capacity issues before they cause message loss.
+          </p>
+
+          <h3>Does Flafka work with self-managed Apache Kafka?</h3>
+          <p>
+            Flafka currently supports Confluent Cloud with full feature coverage. Apache Kafka (self-managed) support is on the roadmap, targeting consumer groups, topics, and message browsing. MSK support with IAM auth adapter and CloudWatch metrics integration is also planned. <a href="../about.html#contact">Sign up for early access</a> to be notified when self-managed support ships.
+          </p>
+
+          <h3>Can I export Kafka SLO metrics to Prometheus and Grafana?</h3>
+          <p>
+            Yes. Flafka exposes a <code>/metrics</code> Prometheus endpoint that includes SLO compliance percentages, error budget remaining, consumer lag by group, and breach counts. You can scrape this endpoint with any Prometheus-compatible system and visualize SLO data in your existing Grafana dashboards alongside other infrastructure metrics.
+          </p>
+
+          <!-- CTA -->
+          <h2 id="get-started">Try SLO Monitoring Today</h2>
+          <p>
+            Flafka's SLO monitoring is available on the <a href="../pricing.html">Team plan</a> ($19/seat/month). The 14-day free trial includes full SLO creation, breach detection, and Prometheus export so you can evaluate error budgets on your own Kafka workloads.
+          </p>
+
+          <div style="text-align: center; margin-top: var(--space-2xl);">
+            <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+            <a href="../compare.html" class="btn btn--secondary btn--lg" style="margin-left: var(--space-md);">Compare All Features</a>
+            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-muted);">
+              <a href="../pricing.html">See pricing</a> &bull;
+              <a href="../features.html">Explore all features</a> &bull;
+              <a href="../security.html">View security details</a> &bull;
+              <a href="kafka-slo-monitoring.html">Read SLO deep-dive</a>
+            </p>
+          </div>
+        </div>
+
+        <p style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-3xl); border-top: 1px solid var(--border-subtle); padding-top: var(--space-lg);">
+          Published: May 2027 &bull; Last updated: May 2027
+        </p>
+      </article>
+
+      <!-- Sidebar TOC -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#kafka-slos">SLOs for Kafka</a></li>
+            <li><a href="#current-approach">CloudWatch + Grafana Limits</a></li>
+            <li><a href="#slo-engine">Flafka's SLO Engine</a></li>
+            <li><a href="#self-managed">Self-Managed Kafka</a></li>
+            <li><a href="#msk-benefits">MSK Benefits</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#get-started">Get Started</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Ready to see it <span class="text-gradient">in action</span>?</h2>
+    <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="../demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../demo.html">Demos</a></li>
+          <li><a href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../docs.html">Documentation</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../about.html#contact">Contact</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
+        <a href="../security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>
