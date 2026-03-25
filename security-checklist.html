@@ -23,6 +23,60 @@
   <link rel="canonical" href="https://flafka.dev/security-checklist.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: HowTo for compliance checklist -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Flafka Compliance Checklist — SOC 2, PCI-DSS, GDPR, HIPAA",
+    "description": "Printable compliance checklist mapping SOC 2 Type II, PCI-DSS v4.0, GDPR, and HIPAA requirements to Flafka features. Share with your procurement and compliance team.",
+    "url": "https://flafka.dev/security-checklist.html",
+    "step": [
+      {
+        "@type": "HowToSection",
+        "name": "SOC 2 Type II — Trust Service Criteria",
+        "itemListElement": [
+          { "@type": "HowToStep", "name": "CC6.1 — Logical access security", "text": "RBAC with glob patterns restricts resource access. Bootstrap Admin prevents lockout." },
+          { "@type": "HowToStep", "name": "CC6.2 — Access provisioning", "text": "User Management panel for creating accounts. ACL Templates for role-based provisioning." },
+          { "@type": "HowToStep", "name": "CC6.3 — Access modification/removal", "text": "ACL CRUD operations with audit trail. Role Management with before/after snapshots." },
+          { "@type": "HowToStep", "name": "CC7.1 — System availability monitoring", "text": "SLO Tracking with error budgets and sparkline trends. SLO Webhook notifications." },
+          { "@type": "HowToStep", "name": "CC7.2 — Change management", "text": "Connector Audit Trail logs all connector lifecycle events. Session Audit tracks user actions." },
+          { "@type": "HowToStep", "name": "CC8.1 — Vulnerability management", "text": "Login Rate Limiting (5 attempts / 15 min). Configurable Password Policy." },
+          { "@type": "HowToStep", "name": "CC3.1 — Confidentiality", "text": "RBAC-integrated Display Masking. Viewer role sees masked values, operators see full data." },
+          { "@type": "HowToStep", "name": "PI1.3 — Data integrity monitoring", "text": "Data Quality Rules with violation detection. Schema Impact Analysis for safe evolution." }
+        ]
+      },
+      {
+        "@type": "HowToSection",
+        "name": "PCI-DSS v4.0 — Payment Card Industry",
+        "itemListElement": [
+          { "@type": "HowToStep", "name": "Req 3 — Protect stored account data", "text": "Display Masking with RBAC integration. Schema-tagged fields automatically masked for Viewer role." },
+          { "@type": "HowToStep", "name": "Req 7 — Restrict access by business need-to-know", "text": "Resource-level RBAC with glob patterns. ACL Templates for consistent provisioning." },
+          { "@type": "HowToStep", "name": "Req 10 — Log and monitor all access", "text": "Session Audit Trail with JSONL persistence and 30-day retention. Connector Audit for pipeline changes." }
+        ]
+      },
+      {
+        "@type": "HowToSection",
+        "name": "GDPR — General Data Protection Regulation",
+        "itemListElement": [
+          { "@type": "HowToStep", "name": "Art. 25 — Data protection by design", "text": "Display Masking built into RBAC. IP Anonymization in session audit." },
+          { "@type": "HowToStep", "name": "Art. 30 — Records of processing activities", "text": "Session Audit Trail captures all user actions. Connector Audit logs all pipeline changes." },
+          { "@type": "HowToStep", "name": "Art. 5 — Data minimization", "text": "Role-based field masking ensures users only see data relevant to their role." }
+        ]
+      },
+      {
+        "@type": "HowToSection",
+        "name": "HIPAA — Health Insurance Portability and Accountability Act",
+        "itemListElement": [
+          { "@type": "HowToStep", "name": "164.312(a) — Access control", "text": "Resource-level RBAC with glob patterns and Bootstrap Admin for lockout prevention." },
+          { "@type": "HowToStep", "name": "164.312(b) — Audit controls", "text": "Session Audit Trail with JSONL persistence. Connector Audit Trail for pipeline events." },
+          { "@type": "HowToStep", "name": "164.312(e) — Transmission security", "text": "WebSocket connections over TLS. All API communications encrypted in transit." }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -47,7 +101,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -66,7 +120,7 @@
   <a href="about.html">About</a>
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -221,7 +275,7 @@
           <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="footer__mascot">
         </div>
         <div class="footer__brand-name">
-          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">

@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison</title>
-  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, and Compliance. Enterprise Kafka comparison.">
+  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, Audit & Compliance, and MSK Support. Kafka compliance comparison and SOC 2 Kafka tool comparison.">
   <meta name="keywords" content="enterprise Kafka comparison, Conduktor alternative, Kafka GUI comparison, Confluent Cloud management tool, Kafka admin tool comparison, enterprise Kafka management, Kafka compliance comparison">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison">
-  <meta property="og:description" content="Transparent feature comparison against 7 Kafka GUI tools. See what Flafka does better and what others offer.">
+  <meta property="og:description" content="Transparent feature comparison against 7 Kafka GUI tools including Audit & Compliance, MSK Support, and FinOps. See what Flafka does better.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flafka.dev/compare.html">
   <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
@@ -17,12 +17,101 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Compare | Flafka vs Conduktor vs AKHQ vs Kafka UI">
-  <meta name="twitter:description" content="Honest feature comparison against every major Kafka GUI. See what sets Flafka apart.">
+  <meta name="twitter:description" content="Honest feature comparison against every major Kafka GUI — including Audit & Compliance, MSK Support, and pricing. See what sets Flafka apart.">
   <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/compare.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: SoftwareApplication with competitor comparison context -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, and Compliance.",
+    "url": "https://flafka.dev",
+    "featureList": [
+      "Schema Impact Analysis (unique — no competitor offers this)",
+      "Flink SQL IDE with real-time CFU cost estimation",
+      "Spend Dashboard with drill-down FinOps",
+      "Resource-Level RBAC with glob patterns",
+      "SLO Tracking with error budgets",
+      "Connector Monitoring with throughput and error tracking",
+      "Data Quality Rules engine",
+      "Compliance Reporting and audit trail",
+      "Cost Anomaly Detection and threshold alerts",
+      "ML-Assisted PII Detection and masking",
+      "Audit & Compliance: Audit Trail, Evidence Bundling, SOC 2 Controls Mapping, RBAC Audit Logging",
+      "MSK Support (Coming Soon — waitlist open)"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free Starter tier. Team tier at $19/seat/month. Enterprise custom pricing.",
+      "url": "https://flafka.dev/pricing.html"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: ItemList of compared Kafka management tools -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Kafka GUI Comparison",
+    "description": "Feature comparison of 8 Kafka management tools across FinOps, compliance, data quality, and platform capabilities.",
+    "numberOfItems": 8,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Flafka", "url": "https://flafka.dev" },
+      { "@type": "ListItem", "position": 2, "name": "Confluent Console" },
+      { "@type": "ListItem", "position": 3, "name": "Conduktor" },
+      { "@type": "ListItem", "position": 4, "name": "AKHQ" },
+      { "@type": "ListItem", "position": 5, "name": "Kafdrop" },
+      { "@type": "ListItem", "position": 6, "name": "Redpanda Console" },
+      { "@type": "ListItem", "position": 7, "name": "Lenses.io" },
+      { "@type": "ListItem", "position": 8, "name": "Kafka UI" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage for comparison questions (W94-2b) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Flafka support SOC 2 compliance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka provides 9 compliance building blocks that map directly to SOC 2 Trust Services Criteria, including immutable audit trails, automated evidence bundling, compliance posture dashboards, and RBAC audit logging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka work with Amazon MSK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MSK support is coming soon. You can join the MSK waitlist to get early access. Flafka currently supports Confluent Cloud, with self-managed Apache Kafka and Amazon MSK as the next integration targets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Flafka cost vs Conduktor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka's Team tier is $19/seat/mo vs Conduktor's ~$25/seat/mo — a 24% savings. Flafka also offers 18+ unique features that Conduktor does not have, including FinOps, compliance automation, and SLO tracking."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -30,7 +119,7 @@
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a href="index.html" class="nav__logo">
-      <span class="nav__logo-icon">F</span>
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
       Flafka
     </a>
     <ul class="nav__links">
@@ -47,7 +136,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -67,7 +156,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -75,7 +164,7 @@
   <div class="page-hero__glow"></div>
   <div class="container">
     <h1 class="animate-in">How Flafka <span class="text-gradient">compares</span></h1>
-    <p class="animate-in" data-delay="1">Transparent, honest feature comparisons against every major Kafka GUI. We show what we do better and what others offer that we don't.</p>
+    <p class="animate-in" data-delay="1">Transparent, honest feature comparisons against every major Kafka GUI &mdash; including audit &amp; compliance tooling, MSK compatibility, and FinOps. We show what we do better and what others offer that we don't.</p>
   </div>
 </section>
 
@@ -364,6 +453,74 @@
             <td class="cross">No</td>
             <td class="cross">No</td>
           </tr>
+          <!-- Audit & Compliance (W94-1) -->
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">Audit Trail</th>
+            <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; Immutable</a></td>
+            <td class="cross">No</td>
+            <td class="partial">Basic</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="partial">Enterprise</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">Evidence Bundling</th>
+            <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; Automated</a></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">Compliance Automation</th>
+            <td class="col-flafka check"><a href="security.html" style="color: inherit; text-decoration: underline;">&#10003; Scheduled</a></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="partial">Partial</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">SOC 2 Controls Mapping</th>
+            <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; 9 controls</a></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">RBAC Audit Logging</th>
+            <td class="col-flafka check"><a href="security.html" style="color: inherit; text-decoration: underline;">&#10003; Yes</a></td>
+            <td class="cross">No</td>
+            <td class="partial">Basic</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="partial">Enterprise</td>
+            <td class="cross">No</td>
+          </tr>
+          <!-- MSK Support (W94-2) -->
+          <tr>
+            <th scope="row" style="font-weight:700; color: var(--color-primary-light);">MSK Support</th>
+            <td class="col-flafka"><a href="integrations.html" style="color: var(--color-primary-light); text-decoration: underline;">Coming Soon</a></td>
+            <td class="cross">No (CC only)</td>
+            <td class="check">&#10003; Yes (SASL/IAM)</td>
+            <td class="check">&#10003; Yes (OSS)</td>
+            <td class="cross">No</td>
+            <td class="partial">Partial</td>
+            <td class="check">&#10003; Yes</td>
+            <td class="check">&#10003; Yes (OSS)</td>
+          </tr>
           <tr>
             <td>Embedded CLI</td>
             <td class="col-flafka check">&#10003; Built-in terminal, 6 resource types, tab completion</td>
@@ -388,6 +545,34 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <p style="text-align: center; color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-lg);">Based on feature analysis of 6 Kafka admin tools, May 2027.</p>
+
+    <!-- FAQ Section (W94-2b) -->
+    <div style="max-width: 720px; margin: var(--space-3xl) auto 0;">
+      <h3 style="text-align: center; margin-bottom: var(--space-xl); font-size: var(--text-xl);">Frequently Asked Questions</h3>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">Does Flafka support SOC 2 compliance?</summary>
+        <div class="faq-item__answer">
+          <p>Yes. Flafka provides 9 compliance building blocks that map directly to SOC 2 Trust Services Criteria, including immutable audit trails, automated evidence bundling, compliance posture dashboards, and RBAC audit logging. See the Audit &amp; Compliance section in the comparison table above, or read our <a href="blog/soc2-kafka.html" style="color: var(--color-primary-light); text-decoration: underline;">SOC 2-Ready Kafka Management</a> guide for the full mapping.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">Does Flafka work with Amazon MSK?</summary>
+        <div class="faq-item__answer">
+          <p>MSK support is coming soon. You can <a href="integrations.html" style="color: var(--color-primary-light); text-decoration: underline;">join the MSK waitlist</a> to get early access. Flafka currently supports Confluent Cloud, with self-managed Apache Kafka and Amazon MSK as the next integration targets. See our <a href="index.html#faq" style="color: var(--color-primary-light); text-decoration: underline;">Self-Managed Kafka FAQ</a> for more details.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">How much does Flafka cost vs Conduktor?</summary>
+        <div class="faq-item__answer">
+          <p>Flafka's Team tier is <strong>$19/seat/mo</strong> vs Conduktor's ~$25/seat/mo &mdash; a <strong>24% savings</strong>. Flafka also offers 18+ unique features that Conduktor does not have (FinOps, compliance automation, SLO tracking, and more). See the <a href="pricing.html" style="color: var(--color-primary-light); text-decoration: underline;">pricing page</a> for full details.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -687,7 +872,7 @@
     <h2>Ready to <span class="text-gradient">switch</span>?</h2>
     <p>Setup takes 5 minutes. Connect your Confluent Cloud credentials and go.</p>
     <div class="flex flex--center" style="gap: var(--space-md);">
-      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
       <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demos First</a>
     </div>
   </div>
@@ -699,7 +884,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__brand-name">
-          <span class="nav__logo-icon" style="width:28px;height:28px;font-size:15px;">F</span>
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>

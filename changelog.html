@@ -23,6 +23,31 @@
   <link rel="canonical" href="https://flafka.dev/changelog.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: ItemList of changelog releases -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Flafka Changelog",
+    "description": "Release history for Flafka — Kafka management platform. Security, compliance, and enterprise updates shipped every sprint.",
+    "url": "https://flafka.dev/changelog.html",
+    "numberOfItems": 11,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Sprint 81: Compliance Evidence Bundle, DQ Rule Templates, and Connector Error Alerting", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 2, "name": "Sprint 80: Flink Error Explainer, Audit Tamper Detection, and Chaos Testing", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 3, "name": "Sprint 79: SLO Compliance Reports, RBAC Audit Export, and Data Quality Dashboard", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 4, "name": "Sprint 78: Cost Alerts, Display Masking, and Password Policy", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 5, "name": "Sprint 77: Message Bulk Export, Data Quality Rules, and Connector Audit Trail", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 6, "name": "Sprint 76: Executive Summary Dashboard, Schema Guides, and Connector DAG", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 7, "name": "Sprint 75: SLO Prometheus Export, Container Persistence, and Dashboard Drill-Down", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 8, "name": "Sprint 74: Spend Dashboard Drill-Down and Connector Validation", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 9, "name": "Sprint 72: Resource-Level RBAC and Spend Dashboard Foundation", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 10, "name": "Sprint 71: Connector Monitoring, ACL Management, and Schema Impact", "url": "https://flafka.dev/changelog.html" },
+      { "@type": "ListItem", "position": 11, "name": "Sprint 70: Multi-Cluster Profiles, Connector CRUD, and Shareable Reports", "url": "https://flafka.dev/changelog.html" }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -47,7 +72,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -67,7 +92,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -86,7 +111,7 @@
       <button class="changelog-filter changelog-filter--security" role="button" aria-pressed="false" data-filter="security">Security</button>
       <button class="changelog-filter changelog-filter--compliance" role="button" aria-pressed="false" data-filter="compliance">Compliance</button>
       <button class="changelog-filter changelog-filter--enterprise" role="button" aria-pressed="false" data-filter="enterprise">Enterprise</button>
-      <a href="#" class="changelog-filters__clear" id="changelog-clear-filters" style="display: none;">Clear filters</a>
+      <button type="button" class="changelog-filters__clear" id="changelog-clear-filters" style="display: none;">Clear filters</button>
     </div>
     <div class="changelog-filters__count" aria-live="polite" id="changelog-filter-count"></div>
   </div>
@@ -279,7 +304,7 @@
     <h2>Ship with <span class="text-gradient">confidence</span></h2>
     <p>Join a platform that ships real features every sprint. Start free today.</p>
     <div class="flex flex--center" style="gap: var(--space-md);">
-      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
       <a href="features.html" class="btn btn--secondary btn--lg">Explore Features</a>
     </div>
   </div>
@@ -294,7 +319,7 @@
           <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="footer__mascot">
         </div>
         <div class="footer__brand-name">
-          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">

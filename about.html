@@ -23,6 +23,51 @@
   <link rel="canonical" href="https://flafka.dev/about.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Flafka",
+    "url": "https://flafka.dev",
+    "logo": "https://flafka.dev/assets/flafka-mascot.png",
+    "description": "Flafka is a unified management and streaming platform for Confluent Cloud, built with Rust and React. Our mission: give Kafka teams better visibility into schema dependencies, better cost controls, and better access management.",
+    "foundingDate": "2025",
+    "knowsAbout": [
+      "Apache Kafka",
+      "Confluent Cloud",
+      "Flink SQL",
+      "Schema Registry",
+      "Stream Processing",
+      "FinOps for Kafka",
+      "Data Quality",
+      "Compliance Reporting"
+    ],
+    "sameAs": [
+      "https://github.com/flafka"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "url": "https://flafka.dev/about.html#contact",
+      "availableLanguage": "English"
+    },
+    "makesOffer": {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "SoftwareApplication",
+        "name": "Flafka",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux, Docker"
+      },
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free Starter tier. Team tier at $19/seat/month.",
+      "url": "https://flafka.dev/pricing.html"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -47,7 +92,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -67,7 +112,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -235,7 +280,7 @@
   <div class="container animate-in">
     <h2>Ready to try <span class="text-gradient">Flafka</span>?</h2>
     <p>Free tier available. No credit card. Deploy in under 5 minutes.</p>
-    <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+    <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
   </div>
 </section>
 
@@ -245,7 +290,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__brand-name">
-          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>

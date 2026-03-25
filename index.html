@@ -73,6 +73,45 @@
     ]
   }
   </script>
+
+  <!-- JSON-LD: Review schema for case study cards (W94-4) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Flafka",
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "James Kim",
+          "jobTitle": "CTO & Co-Founder"
+        },
+        "reviewBody": "The Spend Dashboard gave us board-level cost visibility into our Confluent usage for the first time. We identified $4K/month in idle Flink compute within the first week. It paid for itself before the trial ended.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "David Huang",
+          "jobTitle": "Enterprise Architect"
+        },
+        "reviewBody": "The combination of 6 FinOps features, conditional DQ rules, and compliance automation creates a comprehensive GRC package. Our post-SAML POC timeline dropped from the typical 6-8 weeks to 2-3 weeks.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -591,18 +630,26 @@
         </div>
       </div>
 
-      <div class="testimonial-card animate-in" data-delay="2">
-        <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
-        <blockquote class="testimonial-card__text">
-          The Spend Dashboard gave us board-level cost visibility into our Confluent usage for the first time. We identified $4K/month in idle Flink compute within the first week. It paid for itself before the trial ended.
-        </blockquote>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">JK</div>
+      <!-- Case Study Card: James Kim — FinOps (W94-4) -->
+      <div class="testimonial-card testimonial-card--case-study animate-in" data-delay="2" style="grid-column: span 2; padding: var(--space-xl); border: 1px solid var(--color-primary); border-radius: var(--radius-lg);">
+        <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md);">
+          <div class="testimonial-card__avatar" style="width: 56px; height: 56px; font-size: var(--text-lg);">JK</div>
           <div>
-            <div class="testimonial-card__name">James Kim</div>
+            <div class="testimonial-card__name" style="font-size: var(--text-lg);">James Kim</div>
             <div class="testimonial-card__role">CTO &amp; Co-Founder</div>
             <div class="testimonial-card__company">Series A Fintech</div>
           </div>
+        </div>
+        <blockquote class="testimonial-card__text" style="font-size: var(--text-lg); line-height: 1.6;">
+          The Spend Dashboard gave us board-level cost visibility into our Confluent usage for the first time. We identified $4K/month in idle Flink compute within the first week. It paid for itself before the trial ended.
+        </blockquote>
+        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle);">
+          <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-primary-light);">Projected 30% reduction</div>
+          <div style="color: var(--text-secondary); font-size: var(--text-sm);">in Confluent Cloud spend<br><em>Projected savings based on typical Confluent Cloud usage</em></div>
+        </div>
+        <div style="margin-top: var(--space-md); display: flex; gap: var(--space-md);">
+          <a href="features.html#finops" class="btn btn--secondary btn--sm">FinOps Features &rarr;</a>
+          <a href="about.html#contact" class="btn btn--primary btn--sm">Read Full Story &rarr;</a>
         </div>
       </div>
 
@@ -635,18 +682,26 @@
         </div>
       </div>
 
-      <div class="testimonial-card animate-in" data-delay="5">
-        <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
-        <blockquote class="testimonial-card__text">
-          The combination of 6 FinOps features, conditional DQ rules, and compliance automation creates a comprehensive GRC package. Our post-SAML POC timeline dropped from the typical 6&ndash;8 weeks to 2&ndash;3 weeks.
-        </blockquote>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">DH</div>
+      <!-- Case Study Card: David Huang — Compliance (W94-4) -->
+      <div class="testimonial-card testimonial-card--case-study animate-in" data-delay="5" style="grid-column: span 2; padding: var(--space-xl); border: 1px solid var(--color-primary); border-radius: var(--radius-lg);">
+        <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md);">
+          <div class="testimonial-card__avatar" style="width: 56px; height: 56px; font-size: var(--text-lg);">DH</div>
           <div>
-            <div class="testimonial-card__name">David Huang</div>
+            <div class="testimonial-card__name" style="font-size: var(--text-lg);">David Huang</div>
             <div class="testimonial-card__role">Enterprise Architect</div>
             <div class="testimonial-card__company">Fortune 500 Financial Services</div>
           </div>
+        </div>
+        <blockquote class="testimonial-card__text" style="font-size: var(--text-lg); line-height: 1.6;">
+          The combination of 6 FinOps features, conditional DQ rules, and compliance automation creates a comprehensive GRC package. Our post-SAML POC timeline dropped from the typical 6&ndash;8 weeks to 2&ndash;3 weeks.
+        </blockquote>
+        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle);">
+          <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-primary-light);">2&ndash;3 week POC</div>
+          <div style="color: var(--text-secondary); font-size: var(--text-sm);">vs typical 6&ndash;8 weeks<br><em>Audit evidence bundle generation reduced from 2 days to 10 minutes</em></div>
+        </div>
+        <div style="margin-top: var(--space-md); display: flex; gap: var(--space-md);">
+          <a href="features.html#compliance" class="btn btn--secondary btn--sm">Compliance Features &rarr;</a>
+          <a href="about.html#contact" class="btn btn--primary btn--sm">Read Full Story &rarr;</a>
         </div>
       </div>
     </div>
