@@ -4,19 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance</title>
-  <meta name="description" content="Enterprise Kafka management with built-in cost tracking, SLO monitoring, SOC 2 compliance, and FinOps. The only Kafka platform with compliance automation and spend governance. Free tier available.">
-  <meta name="keywords" content="Kafka cost tracking, Kafka FinOps, Confluent Cloud cost management, Kafka monitoring, Kafka SLO, schema impact analysis, Kafka ACL management, Conduktor alternative, Kafka platform, enterprise Kafka management, SOC 2 Kafka, enterprise Kafka admin tool">
+  <meta name="description" content="Enterprise Kafka management with built-in cost tracking, SLO monitoring, SOC 2 compliance, and FinOps. MSK management tool and self-managed Kafka GUI support planned. Free tier available.">
+  <meta name="keywords" content="Kafka cost tracking, Kafka FinOps, Confluent Cloud cost management, Kafka monitoring, Kafka SLO, schema impact analysis, Kafka ACL management, Conduktor alternative, Kafka platform, enterprise Kafka management, SOC 2 Kafka, enterprise Kafka admin tool, MSK management tool, self-managed Kafka GUI, Apache Kafka admin tool">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance">
   <meta property="og:description" content="Enterprise Kafka management with built-in cost tracking, SLO monitoring, SOC 2 compliance, and FinOps. The only Kafka platform with compliance automation.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flafka.dev">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Flafka — Kafka Cost Tracking, SLO Monitoring & Compliance">
   <meta name="twitter:description" content="Enterprise Kafka management with built-in cost tracking, SLO monitoring, SOC 2 compliance, and FinOps. The only Kafka platform with compliance automation.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
@@ -95,7 +97,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -116,7 +118,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- ===== Hero ===== -->
@@ -140,7 +142,7 @@
         </p>
 
         <div class="hero__actions animate-in" data-delay="3">
-          <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+          <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
           <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demo</a>
         </div>
       </div>
@@ -181,10 +183,11 @@
         <span class="platform-badge__dot platform-badge__dot--confluent"></span>
         Confluent Cloud
       </span>
-      <span class="platform-badge" aria-label="Compatible with AWS MSK">
+      <a href="about.html#contact" class="platform-badge platform-badge--coming-soon" aria-label="AWS MSK support coming soon — join waitlist" data-signup-trigger data-signup-platform="aws-msk" style="text-decoration:none;cursor:pointer;">
         <span class="platform-badge__dot platform-badge__dot--msk"></span>
         AWS MSK
-      </span>
+        <span class="platform-badge__tag" style="background:var(--color-warning);color:#000;font-size:0.65rem;padding:1px 6px;border-radius:9999px;margin-left:4px;font-weight:600;">Coming Soon</span>
+      </a>
       <span class="platform-badge" aria-label="Compatible with Apache Kafka">
         <span class="platform-badge__dot platform-badge__dot--kafka"></span>
         Apache Kafka
@@ -221,7 +224,7 @@
         <div class="platform-card__cta">Get Started &rarr;</div>
       </a>
 
-      <a class="platform-card animate-in" data-delay="2" href="#" data-signup-trigger data-signup-platform="aws-msk">
+      <a class="platform-card animate-in" data-delay="2" href="about.html#contact" data-signup-trigger data-signup-platform="aws-msk">
         <div class="platform-card__logo platform-card__logo--msk">&#9881;</div>
         <div class="platform-card__name">AWS MSK</div>
         <div class="platform-card__status platform-card__status--planned">Planned</div>
@@ -229,7 +232,7 @@
         <div class="platform-card__cta">Join Waitlist &rarr;</div>
       </a>
 
-      <a class="platform-card animate-in" data-delay="3" href="#" data-signup-trigger data-signup-platform="apache-kafka">
+      <a class="platform-card animate-in" data-delay="3" href="about.html#contact" data-signup-trigger data-signup-platform="apache-kafka">
         <div class="platform-card__logo platform-card__logo--kafka">&#9733;</div>
         <div class="platform-card__name">Apache Kafka</div>
         <div class="platform-card__status platform-card__status--planned">Planned</div>
@@ -237,7 +240,7 @@
         <div class="platform-card__cta">Join Waitlist &rarr;</div>
       </a>
 
-      <a class="platform-card animate-in" data-delay="4" href="#" data-signup-trigger data-signup-platform="redpanda">
+      <a class="platform-card animate-in" data-delay="4" href="about.html#contact" data-signup-trigger data-signup-platform="redpanda">
         <div class="platform-card__logo platform-card__logo--redpanda">&#9830;</div>
         <div class="platform-card__name">Redpanda</div>
         <div class="platform-card__status platform-card__status--planned">Planned</div>
@@ -247,6 +250,123 @@
     </div>
   </div>
 </section>
+
+<!-- ===== W93-1: Self-Managed Kafka FAQ ===== -->
+<section class="section faq-section" id="self-managed-kafka-faq">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Platform Compatibility</div>
+      <h2 class="section-header__title">Self-Managed Kafka &mdash; <span class="text-gradient">Frequently Asked Questions</span></h2>
+    </div>
+
+    <div class="faq-intro animate-in" style="max-width:720px;margin:0 auto var(--space-xl);text-align:center;">
+      <p style="color:var(--text-secondary);">
+        Flafka is a unified management platform for Confluent Cloud supporting Kafka topics, Flink SQL, Schema Registry, and 18+ unique features not found in competing tools. Platform support is expanding to self-managed Kafka environments:
+      </p>
+    </div>
+
+    <div class="faq-accordion" style="max-width:720px;margin:0 auto;">
+      <details class="faq-item animate-in" data-delay="1">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-msk">
+          Does Flafka work with Amazon MSK?
+        </summary>
+        <div class="faq-item__answer" id="faq-msk">
+          <p>MSK support is in active development. <a href="about.html#contact" data-signup-trigger data-signup-platform="aws-msk">Join the MSK waitlist</a> for early access and be first to know when it ships.</p>
+          <p style="margin-top:var(--space-sm);"><a href="pricing.html" class="text-link">Try Flafka free with Confluent Cloud &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="2">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-apache">
+          Does Flafka work with Apache Kafka?
+        </summary>
+        <div class="faq-item__answer" id="faq-apache">
+          <p>Apache Kafka support is planned. Flafka currently supports Confluent Cloud with full feature coverage. <a href="about.html#contact" data-signup-trigger data-signup-platform="apache-kafka">Join the waitlist</a> for self-managed Kafka support.</p>
+          <p style="margin-top:var(--space-sm);"><a href="pricing.html" class="text-link">Try Flafka free with Confluent Cloud &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="3">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-redpanda">
+          What about Redpanda?
+        </summary>
+        <div class="faq-item__answer" id="faq-redpanda">
+          <p>Redpanda support is planned for a future release. Redpanda's Kafka-compatible API makes integration straightforward. <a href="about.html#contact" data-signup-trigger data-signup-platform="redpanda">Join the waitlist</a> to get notified.</p>
+          <p style="margin-top:var(--space-sm);"><a href="pricing.html" class="text-link">Try Flafka free with Confluent Cloud &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="4">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-onprem">
+          Can I use Flafka for on-premise Kafka?
+        </summary>
+        <div class="faq-item__answer" id="faq-onprem">
+          <p>Self-managed Kafka support (including on-premise clusters) is on our roadmap. <a href="about.html#contact" data-signup-trigger data-signup-platform="self-managed">Join the waitlist</a> and we will notify you when it is available.</p>
+          <p style="margin-top:var(--space-sm);"><a href="pricing.html" class="text-link">Try Flafka free with Confluent Cloud &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="5">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-platforms">
+          What platforms are currently supported?
+        </summary>
+        <div class="faq-item__answer" id="faq-platforms">
+          <p>Flafka currently supports <strong>Confluent Cloud</strong> with full feature coverage: topics, schemas, Flink SQL, connectors, RBAC, spend tracking, SLO monitoring, and compliance reporting. See the <a href="integrations.html" class="text-link">Integrations page</a> for the complete platform compatibility matrix.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- W93-1: FAQPage JSON-LD for Self-Managed Kafka FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Flafka work with Amazon MSK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MSK support is in active development. Join the MSK waitlist for early access. In the meantime, try Flafka free with Confluent Cloud."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Flafka work with Apache Kafka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apache Kafka support is planned. Flafka currently supports Confluent Cloud with full feature coverage including topics, schemas, Flink SQL, connectors, RBAC, and spend tracking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about Redpanda?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Redpanda support is planned for a future release. Redpanda's Kafka-compatible API makes integration straightforward."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use Flafka for on-premise Kafka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Self-managed Kafka support including on-premise clusters is on our roadmap. Join the waitlist to be notified when it ships."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What platforms are currently supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flafka currently supports Confluent Cloud with full feature coverage: topics, schemas, Flink SQL, connectors, RBAC, spend tracking, SLO monitoring, and compliance reporting."
+      }
+    }
+  ]
+}
+</script>
 
 <!-- ===== W86-2: Quantified Metrics Trust Strip ===== -->
 <section class="metrics-strip section--sm" aria-label="Flafka by the numbers">
@@ -542,7 +662,7 @@
     <p class="testimonial-disclaimer">Representative use cases from validated persona research.</p>
 
     <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in">
-      <a href="#" class="btn btn--primary" data-signup-trigger>Join teams already using Flafka &rarr;</a>
+      <a href="about.html#contact" class="btn btn--primary" data-signup-trigger>Join teams already using Flafka &rarr;</a>
     </div>
   </div>
 </section>
@@ -738,7 +858,7 @@
           <li>Desktop app (Tauri)</li>
         </ul>
         <div class="pricing-card__cta">
-          <a href="#" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
+          <a href="about.html#contact" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
         </div>
       </div>
 
@@ -759,7 +879,7 @@
           <li>Email support</li>
         </ul>
         <div class="pricing-card__cta">
-          <a href="#" class="btn btn--primary" data-signup-trigger>Start 14-Day Trial</a>
+          <a href="about.html#contact" class="btn btn--primary" data-signup-trigger>Start 14-Day Trial</a>
         </div>
       </div>
 
@@ -778,7 +898,7 @@
           <li>Custom integrations</li>
         </ul>
         <div class="pricing-card__cta">
-          <a href="#" class="btn btn--secondary">Contact Sales</a>
+          <a href="about.html#contact" class="btn btn--secondary">Contact Sales</a>
         </div>
       </div>
     </div>
@@ -824,7 +944,7 @@
     <h2>Ready to upgrade your<br><span class="text-gradient">Confluent Cloud experience?</span></h2>
     <p>Start with the free tier. No credit card required. Deploy in under 5 minutes.</p>
     <div class="flex flex--center" style="gap: var(--space-md);">
-      <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
       <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demos</a>
     </div>
   </div>
@@ -839,7 +959,7 @@
           <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="footer__mascot">
         </div>
         <div class="footer__brand-name">
-          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">
@@ -871,6 +991,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="about.html#contact">Contact</a></li>
           <li><a href="compare.html">Compare</a></li>
+          <li><a href="security.html">Security</a></li>
         </ul>
       </div>
     </div>

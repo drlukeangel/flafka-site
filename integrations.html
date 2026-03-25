@@ -18,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Integrations &amp; Platform Compatibility | Flafka">
   <meta name="twitter:description" content="Flafka integrates with Confluent Cloud, Prometheus, Grafana, PagerDuty, Slack, Docker, and Helm. AWS MSK and Apache Kafka OSS support planned.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/integrations.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
@@ -74,7 +75,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -94,7 +95,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -126,7 +127,7 @@
             <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
           </div>
           <p class="integration-card__description">Full feature set: Kafka topics, Flink SQL IDE, Schema Registry, consumer groups, connectors, RBAC, spend tracking, SLO monitoring, and compliance evidence bundles.</p>
-          <a href="index.html#signup" class="btn btn--primary btn--sm">Start Free &#x2192;</a>
+          <a href="about.html#contact" data-signup-trigger class="btn btn--primary btn--sm">Start Free &#x2192;</a>
         </div>
       </div>
 
@@ -147,10 +148,11 @@
         <div class="integration-card__body">
           <div class="integration-card__header">
             <h3 class="integration-card__name">AWS MSK</h3>
-            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Planned">Planned</span>
+            <span class="integration-card__status-badge integration-card__status-badge--coming-soon" aria-label="Status: Coming Soon" style="background:var(--color-warning);color:#000;">Coming Soon</span>
           </div>
           <p class="integration-card__description">IAM auth adapter, topic CRUD, consumer group monitoring, and CloudWatch metrics integration. Replaces manual MSK management workflows.</p>
-          <a href="#waitlist" class="btn btn--secondary btn--sm">Join Waitlist &#x2192;</a>
+          <a href="about.html#contact" class="btn btn--secondary btn--sm" data-signup-trigger data-signup-platform="aws-msk">Join MSK Waitlist &#x2192;</a>
+          <p style="font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-sm);">While you wait, <a href="pricing.html" class="text-link">try Flafka free with Confluent Cloud</a>.</p>
         </div>
       </div>
 
@@ -286,7 +288,7 @@
             <span class="integration-card__status-badge integration-card__status-badge--supported" aria-label="Status: Available">Available</span>
           </div>
           <p class="integration-card__description">Native desktop application for macOS, Windows, and Linux. Built with Tauri &mdash; no Electron, no resource bloat. Launches in under 2 seconds.</p>
-          <a href="index.html#signup" class="btn btn--primary btn--sm">Download &#x2192;</a>
+          <a href="about.html#contact" data-signup-trigger class="btn btn--primary btn--sm">Download &#x2192;</a>
         </div>
       </div>
 
@@ -328,7 +330,7 @@
     <h2>Ready to try <span class="text-gradient">Flafka</span>?</h2>
     <p>Free tier available. No credit card. Deploy in under 5 minutes.</p>
     <div class="flex flex--center" style="gap: var(--space-md);">
-      <a href="index.html#signup" class="btn btn--primary btn--lg">Start Free Trial</a>
+      <a href="about.html#contact" data-signup-trigger class="btn btn--primary btn--lg">Start Free Trial</a>
       <a href="docs.html" class="btn btn--secondary btn--lg">Read the Docs</a>
     </div>
   </div>
@@ -340,7 +342,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__brand-name">
-          <img src="assets/flafka-mascot.png" alt="" class="footer__brand-icon">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>

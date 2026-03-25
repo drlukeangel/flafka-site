@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://flafka.dev/blog/embedded-cli.html</loc>
-    <lastmod>2027-04-21</lastmod>
+    <lastmod>2027-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -125,5 +125,17 @@
     <lastmod>2027-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://flafka.dev/guides/conduktor-migration.html</loc>
+    <lastmod>2027-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://flafka.dev/security-checklist.html</loc>
+    <lastmod>2027-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

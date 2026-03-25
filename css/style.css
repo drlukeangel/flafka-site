@@ -1101,6 +1101,37 @@ code, .mono {
   padding-top: var(--space-md);
 }
 
+/* --- FAQ Accordion (native <details>) --- */
+.faq-item summary.faq-item__question {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-primary);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+.faq-item summary.faq-item__question::-webkit-details-marker { display: none; }
+.faq-item summary.faq-item__question::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: var(--space-md);
+}
+.faq-item[open] summary.faq-item__question::after {
+  transform: rotate(45deg);
+}
+.faq-item__answer {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  padding-top: var(--space-md);
+}
+
 /* --- Trust Bar --- */
 .trust-bar {
   display: flex;
@@ -4419,7 +4450,7 @@ code, .mono {
 [data-theme="light"] .footer a { color: #a89ec4; }
 [data-theme="light"] .footer h4 { color: #f5f3ff; }
 [data-theme="light"] .footer__brand-desc { color: #a89ec4; }
-[data-theme="light"] .footer__copy { color: #6b5f8a; }
+[data-theme="light"] .footer__copy { color: #9484b8; /* WCAG AA fix: 5.35:1 on #1a1035 (was #6b5f8a at 3.10:1) */ }
 
 [data-theme="light"] .changelog-entry__badge {
   color: var(--color-primary);
@@ -4462,6 +4493,106 @@ code, .mono {
 [data-theme="light"] .platform-badge {
   background: #ffffff;
   border-color: var(--border-default);
+}
+
+/* ============================================
+   Light Theme Auto-Switch — OS Preference (SITE-UX-1)
+   ============================================ */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .text-link { color: var(--color-primary); }
+  :root:not([data-theme="dark"]) .text-link:hover { color: #6d28d9; }
+
+  :root:not([data-theme="dark"]) .nav {
+    background: rgba(248, 246, 255, 0.9);
+  }
+  :root:not([data-theme="dark"]) .nav__mobile {
+    background: #f8f6ff;
+  }
+  :root:not([data-theme="dark"]) .hero__glow {
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  }
+  :root:not([data-theme="dark"]) .hero__badge {
+    background: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 0.15);
+    color: var(--color-primary);
+  }
+  :root:not([data-theme="dark"]) .hero__badge__dot {
+    background: var(--color-primary);
+  }
+  :root:not([data-theme="dark"]) .hero__stat {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .feature-card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .pricing-card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .pricing-card--featured {
+    border-color: var(--color-primary);
+  }
+  :root:not([data-theme="dark"]) .testimonial-card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .cta-section__glow {
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+  }
+  :root:not([data-theme="dark"]) .page-hero__glow {
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  }
+  :root:not([data-theme="dark"]) .page-hero {
+    background: var(--bg-surface);
+  }
+  :root:not([data-theme="dark"]) .footer {
+    background: #1a1035;
+    color: #f5f3ff;
+  }
+  :root:not([data-theme="dark"]) .footer a { color: #a89ec4; }
+  :root:not([data-theme="dark"]) .footer h4 { color: #f5f3ff; }
+  :root:not([data-theme="dark"]) .footer__brand-desc { color: #a89ec4; }
+  :root:not([data-theme="dark"]) .footer__copy { color: #9484b8; }
+  :root:not([data-theme="dark"]) .changelog-entry__badge {
+    color: var(--color-primary);
+    background: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 0.15);
+  }
+  :root:not([data-theme="dark"]) .platform-card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .steward-card {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .screenshot-frame {
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .screenshot-frame__bar {
+    background: #f0ecfa;
+    border-bottom-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .hero__mascot-glow {
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  }
+  :root:not([data-theme="dark"]) .btn--secondary {
+    border-color: var(--border-default);
+    color: var(--text-primary);
+  }
+  :root:not([data-theme="dark"]) .platform-strip {
+    border-color: var(--border-default);
+  }
+  :root:not([data-theme="dark"]) .platform-badge {
+    background: #ffffff;
+    border-color: var(--border-default);
+  }
 }
 
 /* ============================================
@@ -5582,4 +5713,76 @@ code, .mono {
   .integrations-grid { grid-template-columns: 1fr; }
   .integration-card { flex-direction: column; }
   .integrations-waitlist__form { flex-direction: column; align-items: stretch; }
+}
+
+/* ============================================
+   SITE-QC8: 375px Small Phone Breakpoint
+   iPhone SE / mini / narrow Android
+   ============================================ */
+@media (max-width: 375px) {
+  /* Tighter container side padding */
+  .container { padding: 0 var(--space-md); }
+
+  /* Reduced section spacing */
+  .section { padding: var(--space-2xl) 0; }
+  .section--sm { padding: var(--space-xl) 0; }
+  .section--hero { padding: var(--space-3xl) 0 var(--space-2xl); }
+  .cta-section { padding: var(--space-3xl) 0; }
+
+  /* Hero adjustments */
+  .hero { padding-top: calc(var(--nav-height) + var(--space-2xl)); padding-bottom: var(--space-2xl); }
+  .hero__title { font-size: var(--text-2xl); }
+  .hero__subtitle { font-size: var(--text-sm); }
+  .hero__actions { gap: var(--space-sm); }
+  .hero__actions .btn { font-size: var(--text-sm); padding: 0.6rem 1.25rem; }
+  .hero__stats { grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+  .hero__stat-value { font-size: var(--text-lg); }
+  .hero__stat-label { font-size: var(--text-xs); }
+  .hero__mascot { width: 180px; }
+  .hero__badge { font-size: var(--text-xs); padding: 4px 10px; }
+
+  /* Page hero (subpages) */
+  .page-hero { padding-top: calc(var(--nav-height) + var(--space-2xl)); padding-bottom: var(--space-2xl); }
+  .page-hero__title { font-size: var(--text-2xl); }
+  .page-hero__desc { font-size: var(--text-sm); }
+
+  /* Section headers */
+  .section-header__title { font-size: var(--text-2xl); }
+  .section-header__desc { font-size: var(--text-sm); }
+  .section-header__overline { font-size: var(--text-xs); }
+
+  /* Cards — tighter padding */
+  .card { padding: var(--space-lg); }
+  .feature-card { padding: var(--space-lg); }
+  .pricing-card { padding: var(--space-xl); }
+  .testimonial-card { padding: var(--space-lg); }
+
+  /* Buttons — compact */
+  .btn { padding: 0.6rem 1.25rem; font-size: var(--text-sm); }
+  .btn--lg { padding: 0.7rem 1.5rem; font-size: var(--text-base); }
+  .btn--sm { padding: 0.4rem 0.9rem; font-size: var(--text-xs); }
+
+  /* Trust bar / platform strip */
+  .trust-bar { gap: var(--space-md); font-size: var(--text-xs); }
+  .platform-strip { gap: var(--space-sm); }
+  .platform-badge { padding: var(--space-xs) var(--space-sm); font-size: var(--text-xs); }
+
+  /* Nav mobile */
+  .nav__logo-mascot { width: 28px; height: 28px; }
+  .nav__logo-text { font-size: var(--text-base); }
+
+  /* Footer */
+  .footer { padding: var(--space-2xl) 0 var(--space-lg); }
+  .footer__brand-icon { width: 24px; height: 24px; }
+
+  /* Pricing features list */
+  .pricing-card__features li { font-size: var(--text-xs); }
+
+  /* Compare table */
+  .compare-table { font-size: var(--text-xs); }
+
+  /* Headings global override */
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
 }

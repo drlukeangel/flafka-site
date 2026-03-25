@@ -22,6 +22,91 @@
   <link rel="canonical" href="https://flafka.dev/pricing.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: SoftwareApplication with pricing tiers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Unified management and streaming platform for Confluent Cloud — Kafka, Flink SQL, Schema Registry, connectors, and cost management in one GUI.",
+    "url": "https://flafka.dev",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Starter",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Up to 3 users, 1 cluster — forever free. Topic management, Schema Registry, Flink SQL IDE, message browser, consumer group monitoring.",
+        "url": "https://flafka.dev/pricing.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Team",
+        "price": "19",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "19",
+          "priceCurrency": "USD",
+          "unitText": "seat/month",
+          "billingIncrement": 1
+        },
+        "description": "Unlimited users and clusters. Spend Dashboard, CFU Monitor, Cost Alerts, RBAC, SLO tracking, connector monitoring, data quality rules. 14-day free trial.",
+        "url": "https://flafka.dev/pricing.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise",
+        "price": "0",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "USD",
+          "unitText": "custom"
+        },
+        "description": "Volume pricing for 50+ seats. SSO/OIDC, SOC 2, PCI-DSS, audit compliance reporting, SLA guarantee, dedicated support engineer.",
+        "url": "https://flafka.dev/pricing.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage for pricing questions -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Flafka free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Starter tier is free forever for up to 3 users and 1 cluster. It includes topic management, Schema Registry, Flink SQL IDE, and consumer group monitoring."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Flafka Team cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Team tier costs $19 per seat per month (billed monthly) or $15.20/seat/mo billed annually (save 20%). It includes unlimited users and clusters, cost management, RBAC, SLO tracking, and a 14-day free trial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka require a credit card to start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Starter tier and the 14-day Team trial both require no credit card."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -29,7 +114,7 @@
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a href="index.html" class="nav__logo">
-      <span class="nav__logo-icon">F</span>
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
       Flafka
     </a>
     <ul class="nav__links">
@@ -46,7 +131,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -66,7 +151,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -115,7 +200,7 @@
           <li>Community support</li>
         </ul>
         <div class="pricing-card__cta">
-          <a href="#" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
+          <a href="about.html#contact" class="btn btn--secondary" data-signup-trigger>Get Started Free</a>
         </div>
       </div>
 
@@ -374,7 +459,7 @@ Visit flafka.dev/download</div>
   <div class="container animate-in">
     <h2>Start building with <span class="text-gradient">Flafka</span> today</h2>
     <p>Free tier available. No credit card. Deploy in under 5 minutes.</p>
-    <a href="#" class="btn btn--primary btn--lg" data-signup-trigger>Get Started Free</a>
+    <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Get Started Free</a>
   </div>
 </section>
 
@@ -384,7 +469,7 @@ Visit flafka.dev/download</div>
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__brand-name">
-          <span class="nav__logo-icon" style="width:28px;height:28px;font-size:15px;">F</span>
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>

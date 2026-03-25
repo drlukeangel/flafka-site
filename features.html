@@ -18,10 +18,52 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Features | Flafka — Kafka Management Platform">
   <meta name="twitter:description" content="18+ features no other Kafka GUI has. FinOps, Data Quality, Compliance, Alerting, schema impact analysis, Flink SQL cost estimation, and more.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/features.html">
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: SoftwareApplication with featureList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Unified management and streaming platform for Confluent Cloud — Kafka, Flink SQL, Schema Registry, connectors, and cost management in one GUI.",
+    "url": "https://flafka.dev",
+    "featureList": [
+      "Schema Impact Analysis with blast radius visualization",
+      "Flink SQL IDE with real-time CFU cost estimation",
+      "Spend Dashboard with drill-down FinOps for Kafka",
+      "Connector Monitoring with throughput and error tracking",
+      "Resource-Level RBAC with glob patterns and audit trail",
+      "SLO Tracking with error budgets and Prometheus export",
+      "Data Protection with role-based masking and ML-assisted PII detection",
+      "Compliance Reporting with audit trail and SOC 2 readiness",
+      "Topic Management with CRUD, config editing, and message browser",
+      "Connection Profiles for multi-cluster management",
+      "Shareable Analytics and dashboard snapshots",
+      "Dark Mode with system preference detection",
+      "Desktop App via Tauri (Windows, macOS, Linux)",
+      "Embedded CLI with kubectl-style terminal in browser",
+      "Learning Center with guided tracks and interactive examples",
+      "Real-Time Updates via WebSocket streaming",
+      "Data Quality Rules engine with auto-suggest",
+      "Cost Anomaly Detection and threshold alerts"
+    ],
+    "screenshot": "https://flafka.dev/assets/screenshots/ws3-schema-panel-dark.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free Starter tier with up to 3 users. Team tier at $19/seat/month.",
+      "url": "https://flafka.dev/pricing.html"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -29,7 +71,7 @@
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a href="index.html" class="nav__logo">
-      <span class="nav__logo-icon">F</span>
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
       Flafka
     </a>
     <ul class="nav__links">
@@ -46,7 +88,7 @@
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
     <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
   </div>
@@ -66,7 +108,7 @@
   <a href="blog.html">Blog</a>
   <a href="integrations.html">Integrations</a>
 
-  <a href="#" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
 </div>
 
 <!-- Page Hero -->
@@ -106,7 +148,7 @@
               <img src="assets/screenshots/ws3-schema-panel-dark.png" alt="Schema Impact Analysis blast radius visualization showing dependent topics, consumer groups, and Flink statements" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try Schema Impact Analysis &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try Schema Impact Analysis &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -146,7 +188,7 @@
             <p>Before submitting any Flink SQL statement, Flafka estimates the CFU/hour cost based on the query complexity, input topic throughput, and windowing operations. If the estimate exceeds your configured budget threshold, a warning appears with the projected monthly cost.</p>
             <p><strong>Example:</strong> A <code>SELECT ... FROM orders GROUP BY TUMBLE(event_time, INTERVAL '5' MINUTE)</code> query estimates at 2.4 CFU/hour ($57.60/month). Your budget limit is $50/month &mdash; Flafka warns you before submission.</p>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try Flink SQL IDE &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try Flink SQL IDE &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -189,7 +231,7 @@
               <img src="assets/screenshots/ws3-spend-dashboard-dark.png" alt="Spend Dashboard showing month-to-date costs, trend chart, and product-level breakdown" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try Spend Dashboard &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try Spend Dashboard &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -231,7 +273,7 @@
               <img src="assets/screenshots/ws1-throughput-charts-dark.png" alt="Connector throughput time-series charts showing messages per second over time" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try Connector Monitoring &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try Connector Monitoring &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -280,7 +322,7 @@
               <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Resource-level RBAC glob pattern configuration with ACL template presets" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try RBAC &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try RBAC &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -323,7 +365,7 @@
               <img src="assets/screenshots/ws3-slo-dashboard-dark.png" alt="SLO Dashboard with error budget burn-down visualization and 7-day sparkline trends" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="#" class="btn btn--primary btn--sm" data-signup-trigger>Try SLO Tracking &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try SLO Tracking &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -598,6 +640,66 @@
   </div>
 </section>
 
+<!-- ===== W93-3: Embedded CLI Section (10th feature) ===== -->
+<section class="section" id="embedded-cli">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Power User</div>
+      <h2 class="section-header__title">Embedded CLI &mdash; <span class="text-gradient">kubectl-style terminal in your browser</span></h2>
+      <p class="section-header__desc">
+        No other Kafka admin tool has an embedded CLI. Flafka puts a full terminal alongside the GUI &mdash; switch between visual and command-line workflows without leaving the app.
+      </p>
+    </div>
+
+    <div class="grid grid--2" style="gap: var(--space-2xl); align-items: center;">
+      <div class="animate-in" data-delay="1">
+        <h3 style="color: var(--text-primary); margin-bottom: var(--space-md);">20+ commands, 6 resource types</h3>
+        <ul style="color: var(--text-secondary); line-height: 2; list-style: none; padding: 0;">
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>topics</strong> &mdash; list, describe, create, delete, produce, consume</li>
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>schemas</strong> &mdash; list, describe, diff, compatibility check</li>
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>groups</strong> &mdash; list, describe, reset offsets, delete</li>
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>consumers</strong> &mdash; lag monitoring, member listing</li>
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>health</strong> &mdash; cluster status, broker info, metrics</li>
+          <li><span style="color: var(--color-primary-light);">&#10003;</span> <strong>help</strong> &mdash; contextual docs, command reference</li>
+        </ul>
+        <p style="color: var(--text-secondary); margin-top: var(--space-md);">
+          Tab completion works across all 6 resource types. Hybrid syntax supports both CLI flags and natural-language commands. Persistent command history across sessions.
+        </p>
+        <div style="margin-top: var(--space-lg);">
+          <a href="about.html#contact" class="btn btn--primary" data-signup-trigger>Try the Embedded CLI &mdash; Start Free Trial</a>
+        </div>
+      </div>
+      <div class="animate-in" data-delay="2">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+            <span style="color: var(--text-muted); font-size: var(--text-xs); margin-left: var(--space-sm); font-family: monospace;">&gt;_ CLI</span>
+          </div>
+          <div style="background: var(--bg-elevated); padding: var(--space-lg); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: var(--text-sm); line-height: 1.8; color: var(--text-secondary); border-radius: 0 0 8px 8px;">
+            <div><span style="color: var(--color-primary-light);">flafka&gt;</span> topics list</div>
+            <div style="color: var(--text-muted);">  orders-v2          12 partitions    3 replicas</div>
+            <div style="color: var(--text-muted);">  payments-events    6 partitions     3 replicas</div>
+            <div style="color: var(--text-muted);">  user-signups       3 partitions     3 replicas</div>
+            <div style="margin-top: var(--space-sm);"><span style="color: var(--color-primary-light);">flafka&gt;</span> schemas describe orders-v2-value</div>
+            <div style="color: var(--text-muted);">  Subject: orders-v2-value</div>
+            <div style="color: var(--text-muted);">  Type: AVRO    Version: 3    Compatibility: BACKWARD</div>
+            <div style="margin-top: var(--space-sm);"><span style="color: var(--color-primary-light);">flafka&gt;</span> <span style="border-right: 2px solid var(--color-primary-light); animation: blink 1s step-end infinite;">&nbsp;</span></div>
+          </div>
+        </div>
+        <p style="color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-md); text-align: center;">
+          0 of 6 competing Kafka admin tools offer an embedded CLI
+        </p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-2xl);" class="animate-in">
+      <a href="blog/embedded-cli.html" class="btn btn--secondary">Read: Why Your Kafka Tool Needs an Embedded CLI &rarr;</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-section__glow"></div>
@@ -617,7 +719,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__brand-name">
-          <span class="nav__logo-icon" style="width:28px;height:28px;font-size:15px;">F</span>
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
           Flafka
         </div>
         <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
