@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Features | Flafka — Kafka Management Platform</title>
-  <meta name="description" content="Explore Flafka's enterprise Kafka admin tool features: Schema Impact Analysis, Flink SQL cost estimation, Spend Dashboard, Resource RBAC, Connector Monitoring, SLO Tracking, SOC 2 compliance, and more.">
+  <meta name="description" content="Explore Flafka's enterprise Kafka admin tool features: Schema Impact Analysis, Flink SQL cost estimation, Spend Dashboard, Permission Tree RBAC, Connector Monitoring, SLO Tracking, SOC 2 compliance, and more.">
   <meta name="keywords" content="enterprise Kafka admin tool, Kafka management features, schema impact analysis, Flink SQL cost estimation, Kafka spend dashboard, Kafka RBAC, Kafka connector monitoring, Kafka SLO tracking, SOC 2 Kafka, enterprise Kafka GUI">
 
   <!-- Open Graph -->
@@ -39,7 +39,7 @@
       "Flink SQL IDE with real-time CFU cost estimation",
       "Spend Dashboard with drill-down FinOps for Kafka",
       "Connector Monitoring with throughput and error tracking",
-      "Resource-Level RBAC with glob patterns and audit trail",
+      "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), and full audit trail",
       "SLO Tracking with error budgets and Prometheus export",
       "AI PII Detection — hybrid regex + ML detection of 13 PII types with sub-microsecond latency and producer blocking",
       "Schema-Aware Masking Rules — 6 masking operations with schema evolution impact analysis",
@@ -301,34 +301,36 @@
     <div class="feature-section animate-in">
       <div class="feature-section__content">
         <span class="badge-unique" style="margin-bottom: var(--space-md);">No competitor has this</span>
-        <h3>Resource-Level RBAC</h3>
+        <h3>Permission Tree RBAC</h3>
         <p>
-          Fine-grained access control using glob patterns. Assign permissions like <code>analytics-*</code> or <code>prod.orders.*</code> to control exactly who can access which resources. PCI-DSS Requirement 7 aligned.
+          Hierarchical, node-based access control where permissions inherit from parent nodes down the tree. Cluster and environment scoped &mdash; each permission tag carries a <code>cluster_id</code> and <code>environment_id</code> so the same role behaves correctly across staging and production clusters. OIDC provider built in: Flafka issues RS256 JWTs with a JWKS endpoint, enabling SSO onboarding and Gateway OAUTHBEARER integration. PCI-DSS Requirement 7 aligned.
         </p>
         <ul>
-          <li>Glob pattern matching for resource-level access</li>
+          <li>Hierarchical node tree &mdash; permissions inherit from parent nodes</li>
+          <li>Cluster and environment scoping (<code>cluster_id</code> + <code>environment_id</code> on tags)</li>
+          <li>OIDC provider integration &mdash; RS256 JWTs, JWKS endpoint, SSO onboarding</li>
           <li>ACL template presets (Consumer, Producer, Admin)</li>
           <li>Bootstrap admin with lockout prevention</li>
-          <li>Permission-denied guidance for users</li>
-          <li>PCI-DSS Requirement 7 alignment</li>
-          <li>Full audit trail for compliance</li>
+          <li>Full audit trail for compliance &mdash; PCI-DSS Requirement 7</li>
         </ul>
         <details class="feature-expand">
           <summary>Learn more</summary>
           <div class="feature-expand__content">
-            <h4>Glob pattern examples</h4>
-            <p>Resource patterns use glob syntax familiar to any developer. Examples:</p>
+            <h4>How the Permission Tree works</h4>
+            <p>Permissions are modelled as a tree of nodes. A grant on a parent node automatically propagates to all children &mdash; so granting <code>prod</code> access covers every topic, consumer group, and connector under that environment without enumerating each resource. Nodes are tagged with <code>cluster_id</code> and <code>environment_id</code>, making the same permission set work correctly across multiple clusters and environments.</p>
+            <p>Glob pattern resource matching is still supported for backward compatibility. Examples:</p>
             <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md);">
               <li style="padding: var(--space-xs) 0;"><code>analytics-*</code> &mdash; All analytics topics</li>
               <li style="padding: var(--space-xs) 0;"><code>prod.*</code> &mdash; All production resources</li>
-              <li style="padding: var(--space-xs) 0;"><code>team-payments-*</code> &mdash; Payment team's resources</li>
+              <li style="padding: var(--space-xs) 0;"><code>team-payments-*</code> &mdash; Payment team&rsquo;s resources</li>
             </ul>
-            <p>PCI-DSS Requirement 7 mandates that access to cardholder data is restricted to need-to-know. Flafka's resource-level RBAC with audit trails provides the access control and evidence trail that auditors require.</p>
+            <p>The built-in OIDC provider lets Flafka issue RS256 JWTs directly. Connect your Identity Provider once, and every team member onboards via SSO &mdash; no manual credential distribution. The JWKS endpoint enables Gateway OAUTHBEARER mode for end-to-end token-based auth from client to broker.</p>
+            <p>PCI-DSS Requirement 7 mandates that access to cardholder data is restricted to need-to-know. Flafka&rsquo;s Permission Tree with audit trails provides the access control evidence auditors require.</p>
             <div class="feature-expand__thumb">
-              <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Resource-level RBAC glob pattern configuration with ACL template presets" loading="lazy">
+              <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Permission Tree RBAC — hierarchical node configuration with cluster and environment scoping" loading="lazy">
             </div>
             <div class="feature-expand__cta">
-              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try RBAC &mdash; Start Free Trial</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Try Permission Tree RBAC &mdash; Start Free Trial</a>
             </div>
           </div>
         </details>
@@ -340,7 +342,7 @@
             <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
             <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
           </div>
-          <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Resource-level RBAC" loading="lazy">
+          <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Permission Tree RBAC — hierarchical node configuration with cluster and environment scoping" loading="lazy">
         </div>
       </div>
     </div>
