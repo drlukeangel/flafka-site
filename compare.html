@@ -39,7 +39,8 @@
       "Flink SQL IDE with real-time CFU cost estimation",
       "Spend Dashboard with drill-down FinOps",
       "Cost Management: Spend Dashboard, CFU Budget Tracking, Cost Anomaly Detection, End-of-Month Forecast, Cost Threshold Alerts, Cost Allocation by Team, Budget Limit Enforcement",
-      "Resource-Level RBAC with glob patterns",
+      "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider (RS256 JWTs, JWKS endpoint)",
+      "Flafka Gateway — Rust Kafka TCP proxy, <1ms p99 latency, no JVM/GC pauses, SASL/OIDC auth, dual-write DR, included in platform",
       "SLO Tracking with error budgets",
       "Connector Monitoring with throughput and error tracking",
       "Data Quality Rules engine",
@@ -250,15 +251,15 @@
             <td class="cross" title="Kafka UI: No cost management or spend dashboard — OSS tool with no billing integration. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
-            <td>Resource RBAC (glob)</td>
-            <td class="col-flafka check">&#10003; Yes</td>
+            <td>Permission Tree RBAC</td>
+            <td class="col-flafka check" title="Flafka: Hierarchical node-based RBAC with parent inheritance, cluster + environment scoping, OIDC provider (RS256 JWTs, JWKS endpoint). Glob patterns supported for backward compat.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(tree model)</span></td>
             <td class="cross">No</td>
-            <td class="partial">Basic roles</td>
-            <td class="cross" title="AKHQ: LDAP-based auth only, no resource-level RBAC with glob patterns">No</td>
+            <td class="partial" title="Conduktor: Role-based access at application level, not hierarchical node tree with cluster/env scoping">Basic roles</td>
+            <td class="cross" title="AKHQ: LDAP-based auth only, no hierarchical Permission Tree RBAC">No</td>
             <td class="cross">No</td>
             <td class="partial">Enterprise</td>
             <td class="partial">Enterprise</td>
-            <td class="partial" title="Kafka UI: Basic role-based access via OAuth 2.0, no resource-level glob patterns">Basic</td>
+            <td class="partial" title="Kafka UI: Basic role-based access via OAuth 2.0, no Permission Tree with node inheritance">Basic</td>
           </tr>
           <tr>
             <td>PCI-DSS Alignment</td>
@@ -488,7 +489,7 @@
             <td>Data Quality Rules (No-Code)</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
-            <td class="partial">Gateway only</td>
+            <td class="partial" title="Conduktor: DQ rules available via Conduktor Gateway (JVM, separate SKU, $1,750+/mo). Flafka includes a native Rust gateway with zero GC pauses at no extra cost.">Gateway only <span style="font-size: var(--text-xs); color: var(--text-muted);">(JVM, +$1,750/mo)</span></td>
             <td class="cross" title="AKHQ: No data quality rules engine">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
@@ -611,6 +612,17 @@
               <strong style="color: var(--color-primary-light);">The only Kafka admin tool with AI-powered PII detection.</strong>
               <a href="features.html#data-protection" class="text-link" style="margin-left: var(--space-sm);">See Data Protection features &rarr;</a>
             </td>
+          </tr>
+          <tr>
+            <td>Kafka Proxy / Gateway</td>
+            <td class="col-flafka check" title="Flafka Gateway: Rust wire-protocol Kafka TCP proxy. &lt;1ms p99 passthrough latency, zero GC pauses, SASL/OIDC OAUTHBEARER auth, metadata rewriting, dual-write DR at 40k msg/s. Ships as single binary + Helm/K8s. Included in Flafka platform — no separate SKU.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(Rust, &lt;1ms, included)</span></td>
+            <td class="cross" title="Confluent Console: No standalone Kafka proxy/gateway product in the console tier">No</td>
+            <td class="partial" title="Conduktor Gateway: JVM-based Kafka proxy. GC pauses under load. Separate SKU — $1,750+/mo for Console + Gateway. Feature-rich but heavy.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(JVM, separate SKU, $1,750+/mo)</span></td>
+            <td class="cross" title="AKHQ: No Kafka proxy or gateway capability — management UI only">No</td>
+            <td class="cross" title="Kafdrop: No Kafka proxy or gateway capability">No</td>
+            <td class="cross" title="Redpanda Console: No Kafka proxy/gateway — Redpanda has its own broker-level features but no proxy tier">No</td>
+            <td class="partial" title="Lenses.io: Lenses SQL Processor provides some data-plane routing but is not a wire-protocol Kafka TCP proxy">Partial</td>
+            <td class="cross" title="Kafka UI: No Kafka proxy or gateway capability — management UI only. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td style="font-weight:700; color: var(--color-primary-light);">Price</td>
