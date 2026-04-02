@@ -42,6 +42,7 @@
       "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), and full audit trail",
       "Service Accounts (M2M auth) — OAuth 2.0 client_credentials grant, RBAC-scoped, API key + secret with rotation, Gateway SASL OAUTHBEARER integration",
       "Flafka Gateway — Rust-native Kafka TCP proxy, <1ms p99 latency, no JVM/GC pauses, SASL/OIDC auth, metadata rewriting, dual-write DR at 40k msg/s, Helm/K8s deploy, Prometheus metrics included",
+      "flafka-client — custom Rust Kafka client (not rskafka), plain Apache Kafka connectivity without Confluent auth, produce/consume/transactions/SCRAM/admin ops/share groups, powers gateway dual-write DR",
       "SLO Tracking with error budgets and Prometheus export",
       "AI PII Detection — hybrid regex + ML detection of 13 PII types with sub-microsecond latency and producer blocking",
       "Schema-Aware Masking Rules — 6 masking operations with schema evolution impact analysis",
@@ -324,6 +325,7 @@
           <li>Cluster and environment scoping (<code>cluster_id</code> + <code>environment_id</code> on tags)</li>
           <li>OIDC provider integration &mdash; RS256 JWTs, JWKS endpoint, SSO onboarding</li>
           <li>ACL template presets (Consumer, Producer, Admin)</li>
+          <li><strong>Team Cluster Access Panel</strong> &mdash; grant or revoke cluster access per team directly in the Permission Tree UI, without touching individual user permissions; <code>cluster_id</code> and <code>environment_id</code> scoping inherited automatically</li>
           <li>Bootstrap admin with lockout prevention</li>
           <li>Full audit trail for compliance &mdash; PCI-DSS Requirement 7</li>
         </ul>
@@ -477,6 +479,7 @@
           <li>Ships as single binary + Helm chart + K8s manifests &mdash; deploy in minutes</li>
           <li>Prometheus metrics built in &mdash; drop into existing observability stack</li>
           <li>Included in Flafka platform &mdash; not a separate SKU</li>
+          <li>Built on <strong>flafka-client</strong> &mdash; a custom Rust Kafka client (not rskafka). Connects to plain Apache Kafka without Confluent auth. Produce, consume, transactions, SCRAM auth, admin ops, share groups support.</li>
         </ul>
         <details class="feature-expand">
           <summary>Learn more</summary>
@@ -486,6 +489,7 @@
             <p>Flafka Gateway passes the Kafka wire protocol through with metadata rewriting &mdash; your clients connect to the gateway address and see a normal Kafka cluster. Topic routing, partition leadership, and consumer group coordination all work unchanged. No client-side SDK changes required.</p>
             <h4>Dual-write DR architecture</h4>
             <p>Flafka Gateway's dual-write mode writes every produced message to two clusters simultaneously &mdash; primary and standby &mdash; at the proxy layer. No application changes required. The POC achieved 40k msg/s sustained dual-write with zero additional latency overhead. Combined with Flafka's DR Monitoring Dashboard (lag delta, ISR health, failover thresholds), this is an end-to-end active-active DR solution for Kafka without Confluent Cluster Linking costs.</p>
+            <p>The dual-write architecture is powered by <strong>flafka-client</strong> &mdash; a custom Rust Kafka client library (distinct from rskafka) that connects directly to plain Apache Kafka clusters without requiring Confluent-specific authentication. This is what enables the gateway to write to any Kafka-compatible cluster as a standby target, including self-hosted Apache Kafka, MSK, and Redpanda &mdash; not just Confluent Cloud.</p>
             <h4>Auth integration</h4>
             <p>Service accounts created in Flafka authenticate directly at the Gateway via SASL OAUTHBEARER Mode 2 &mdash; the RS256 JWT issued by Flafka's built-in OIDC provider is validated at the proxy, enforcing Permission Tree RBAC without modifying broker ACLs. One auth system governs both the management UI and the data plane.</p>
             <div class="feature-expand__cta">
