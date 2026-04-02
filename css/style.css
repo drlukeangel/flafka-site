@@ -5924,6 +5924,259 @@ code, .mono {
   .nav__logo-mascot { width: 28px; height: 28px; }
   .nav__logo-text { font-size: var(--text-base); }
 
+/* ============================================
+   Data Governance Page (W99-1)
+   ============================================ */
+
+/* DQ 3-column card grid */
+.gov-dq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+/* Compliance 3-column grid */
+.gov-compliance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+/* Governance card */
+.gov-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
+}
+
+.gov-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.gov-card__icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+}
+
+.gov-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.gov-card__desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Two-column layout for Data Protection section */
+.gov-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+  margin-top: var(--space-xl);
+}
+
+.gov-two-col__content h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.gov-pii-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xs) var(--space-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.gov-pii-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Data Protection stat panel */
+.gov-two-col__stat-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.gov-stat-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.gov-stat-card__value {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--color-primary-light);
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+}
+
+.gov-stat-card__label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Audit list */
+.gov-audit-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.gov-audit-item {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+
+.gov-audit-item__icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.gov-audit-item__content h3 {
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.gov-audit-item__content p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* Competitor comparison table */
+.gov-comparison-wrap {
+  overflow-x: auto;
+  margin-top: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.gov-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.gov-comparison-table th,
+.gov-comparison-table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.gov-comparison-table th:first-child,
+.gov-comparison-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--bg-surface);
+}
+
+.gov-comparison-table thead th {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gov-comparison-table__flafka {
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.gov-comparison-table thead .gov-comparison-table__flafka {
+  color: var(--color-primary-light) !important;
+}
+
+.gov-comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.gov-comparison-table .check {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.gov-comparison-table .partial {
+  color: var(--color-warning);
+}
+
+.gov-comparison-table .cross {
+  color: var(--text-muted);
+}
+
+/* Responsive breakpoints for governance page */
+@media (max-width: 1023px) {
+  .gov-dq-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+  .gov-compliance-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+  .gov-two-col { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .gov-two-col__stat-panel { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .gov-dq-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+  .gov-compliance-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+  .gov-pii-list { grid-template-columns: 1fr; }
+  .gov-two-col__stat-panel { grid-template-columns: repeat(2, 1fr); }
+  .gov-audit-item { flex-direction: column; gap: var(--space-md); }
+  .gov-comparison-wrap { border-radius: 0; border-left: none; border-right: none; }
+}
+
+/* Light mode overrides for governance page */
+[data-theme="light"] .gov-card {
+  background: var(--bg-surface);
+}
+
+[data-theme="light"] .gov-stat-card {
+  background: var(--bg-surface);
+}
+
+[data-theme="light"] .gov-audit-item {
+  background: var(--bg-surface);
+}
+
+[data-theme="light"] .gov-comparison-table th:first-child,
+[data-theme="light"] .gov-comparison-table td:first-child {
+  background: var(--bg-surface);
+}
+
+[data-theme="light"] .gov-comparison-table thead th {
+  background: var(--bg-elevated);
+}
+
   /* Footer */
   .footer { padding: var(--space-2xl) 0 var(--space-lg); }
   .footer__brand-icon { width: 24px; height: 24px; }

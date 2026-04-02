@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Flafka — Kafka Management Platform</title>
+  <meta name="description" content="Create your free Flafka account. Manage Kafka topics, schemas, Flink SQL, and more. No credit card required.">
+
+  <meta property="og:title" content="Sign Up | Flafka">
+  <meta property="og:description" content="Create your free Flafka account. Start managing Kafka in minutes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flafka.dev/signup.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <link rel="canonical" href="https://flafka.dev/signup.html">
+  <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .signup-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3xl) var(--space-lg);
+      background: var(--gradient-hero);
+      position: relative;
+    }
+    .signup-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-glow);
+      pointer-events: none;
+    }
+
+    .signup-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .signup-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: var(--border-radius);
+      padding: var(--space-2xl);
+    }
+
+    .signup-card__logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .signup-card__logo img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .signup-card h1 {
+      text-align: center;
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-xs);
+    }
+    .signup-card__subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Plan selector */
+    .signup-plans {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .signup-plan-opt {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-default);
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-md);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-align: center;
+    }
+    .signup-plan-opt:hover {
+      border-color: var(--color-primary-light);
+    }
+    .signup-plan-opt.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary-subtle);
+    }
+    .signup-plan-opt__name {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: var(--text-base);
+    }
+    .signup-plan-opt__price {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Form fields */
+    .signup-field {
+      margin-bottom: var(--space-md);
+    }
+    .signup-field label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+    .signup-field input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--border-radius-sm);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: var(--text-base);
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .signup-field input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    .signup-field input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .signup-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .signup-terms input {
+      margin-top: 3px;
+      accent-color: var(--color-primary);
+    }
+    .signup-terms a {
+      color: var(--color-primary-light);
+      text-decoration: underline;
+    }
+
+    .signup-submit {
+      width: 100%;
+      padding: 12px;
+      background: var(--gradient-purple);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      font-size: var(--text-base);
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+    .signup-submit:hover:not(:disabled) { opacity: 0.9; }
+    .signup-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .signup-submit__spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .signup-error {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: var(--color-error);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--border-radius-sm);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-md);
+      display: none;
+    }
+
+    .signup-success {
+      text-align: center;
+      display: none;
+    }
+    .signup-success__icon {
+      color: var(--color-success);
+      margin-bottom: var(--space-md);
+    }
+    .signup-success h2 {
+      margin-bottom: var(--space-sm);
+    }
+    .signup-success p {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .signup-footer-text {
+      text-align: center;
+      margin-top: var(--space-lg);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+    .signup-footer-text a {
+      color: var(--color-primary-light);
+      text-decoration: none;
+    }
+    .signup-footer-text a:hover { text-decoration: underline; }
+
+    /* Honeypot */
+    .signup-hp { position: absolute; left: -9999px; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="docs.html">Docs</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+    <div class="nav__cta">
+      <a href="pricing.html" class="btn btn--primary btn--sm">View Plans</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+
+<section class="signup-hero">
+  <div class="signup-wrapper">
+    <div class="signup-card" id="signup-card">
+      <div class="signup-card__logo">
+        <img src="assets/flafka-mascot.png" alt="Flafka">
+        Flafka
+      </div>
+
+      <!-- Form View -->
+      <div id="signup-form-view">
+        <h1>Create your account</h1>
+        <p class="signup-card__subtitle">Start managing Kafka for free. No credit card required.</p>
+
+        <div class="signup-error" id="signup-error" role="alert"></div>
+
+        <!-- Plan Selection -->
+        <div class="signup-plans" id="plan-selector">
+          <div class="signup-plan-opt active" data-plan="free">
+            <div class="signup-plan-opt__name">Free</div>
+            <div class="signup-plan-opt__price">$0/mo</div>
+          </div>
+          <div class="signup-plan-opt" data-plan="pro">
+            <div class="signup-plan-opt__name">Pro</div>
+            <div class="signup-plan-opt__price">$29/mo</div>
+          </div>
+          <div class="signup-plan-opt" data-plan="team">
+            <div class="signup-plan-opt__name">Team</div>
+            <div class="signup-plan-opt__price">$129/mo</div>
+          </div>
+          <div class="signup-plan-opt" data-plan="enterprise">
+            <div class="signup-plan-opt__name">Enterprise</div>
+            <div class="signup-plan-opt__price">Contact Sales</div>
+          </div>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="signup-field">
+            <label for="signup-name">Display Name</label>
+            <input type="text" id="signup-name" name="display_name" placeholder="Your name" required>
+          </div>
+
+          <div class="signup-field">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" placeholder="you@company.com" required>
+          </div>
+
+          <div class="signup-field">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Minimum 8 characters" required minlength="8">
+          </div>
+
+          <div class="signup-field">
+            <label for="signup-org">Organization Name</label>
+            <input type="text" id="signup-org" name="org_name" placeholder="Acme Inc.">
+          </div>
+
+          <!-- Honeypot -->
+          <div class="signup-hp" aria-hidden="true" tabindex="-1">
+            <label for="signup-website">Website</label>
+            <input type="text" id="signup-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="signup-terms">
+            <input type="checkbox" id="signup-agree" required>
+            <label for="signup-agree">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button type="submit" class="signup-submit" id="signup-btn">
+            <span class="signup-submit__spinner" id="signup-spinner"></span>
+            <span id="signup-btn-text">Create Account</span>
+          </button>
+        </form>
+
+        <div class="signup-footer-text">
+          Already have an account? <a href="http://localhost:5173/login">Sign in</a>
+        </div>
+      </div>
+
+      <!-- Success View -->
+      <div class="signup-success" id="signup-success">
+        <div class="signup-success__icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h2>Welcome to Flafka!</h2>
+        <p id="success-message">Your account has been created. Check your email to verify.</p>
+        <a href="http://localhost:5173/" class="btn btn--primary" id="go-dashboard">Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+      <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="docs.html">Docs</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="compare.html">Compare</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function() {
+  // API base URL — change for production
+  const API_BASE = 'http://localhost:8080/api/v1';
+
+  const form = document.getElementById('signup-form');
+  const errorEl = document.getElementById('signup-error');
+  const formView = document.getElementById('signup-form-view');
+  const successView = document.getElementById('signup-success');
+  const spinner = document.getElementById('signup-spinner');
+  const btnText = document.getElementById('signup-btn-text');
+  const btn = document.getElementById('signup-btn');
+  const successMsg = document.getElementById('success-message');
+  const dashboardLink = document.getElementById('go-dashboard');
+
+  // Plan selection
+  let selectedPlan = 'free';
+  document.querySelectorAll('.signup-plan-opt').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.signup-plan-opt').forEach(o => o.classList.remove('active'));
+      el.classList.add('active');
+      selectedPlan = el.dataset.plan;
+    });
+  });
+
+  // Pre-select plan from URL param
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('plan')) {
+    selectedPlan = params.get('plan');
+    document.querySelectorAll('.signup-plan-opt').forEach(o => {
+      o.classList.toggle('active', o.dataset.plan === selectedPlan);
+    });
+  }
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.style.display = 'block';
+  }
+  function hideError() {
+    errorEl.style.display = 'none';
+  }
+  function setLoading(loading) {
+    btn.disabled = loading;
+    spinner.style.display = loading ? 'inline-block' : 'none';
+    btnText.textContent = loading ? 'Creating...' : 'Create Account';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+
+    // Honeypot check
+    if (document.getElementById('signup-website').value) return;
+
+    const name = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const orgName = document.getElementById('signup-org').value.trim();
+    const agreed = document.getElementById('signup-agree').checked;
+
+    // Validation
+    if (!name) { showError('Display name is required.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('Please enter a valid email address.'); return;
+    }
+    if (password.length < 8) {
+      showError('Password must be at least 8 characters.'); return;
+    }
+    if (!agreed) {
+      showError('You must agree to the Terms of Service.'); return;
+    }
+
+    setLoading(true);
+    try {
+      const payload = {
+        email: email,
+        password: password,
+        display_name: name,
+        plan: selectedPlan,
+      };
+      if (orgName) {
+        payload.org_name = orgName;
+        payload.org_slug = orgName.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+      }
+
+      const resp = await fetch(API_BASE + '/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Unique-Id': 'marketing-site-' + Date.now(),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        const msg = data.error || data.message || 'Signup failed. Please try again.';
+        showError(typeof msg === 'string' ? msg : JSON.stringify(msg));
+        return;
+      }
+
+      // Success
+      formView.style.display = 'none';
+      successView.style.display = 'block';
+
+      if (data.token && data.token !== 'placeholder_jwt') {
+        // Store token and redirect to app
+        successMsg.textContent = 'Your account is ready. Click below to open the dashboard.';
+        dashboardLink.href = 'http://localhost:5173/';
+        dashboardLink.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          // Store token in the app's localStorage via redirect
+          window.location.href = 'http://localhost:5173/?auth_token=' + encodeURIComponent(data.token);
+        });
+      } else {
+        successMsg.textContent = 'Your account has been created. Check ' + email + ' to verify your account.';
+      }
+    } catch (err) {
+      showError('Network error. Is the Flafka server running?');
+    } finally {
+      setLoading(false);
+    }
+  });
+})();
+</script>
+</body>
+</html>

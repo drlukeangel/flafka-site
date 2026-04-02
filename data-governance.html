@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Governance for Kafka | Flafka — Built In, Not Bolted On</title>
+  <meta name="description" content="Flafka delivers Kafka data governance built in: 10 DQ rules, AI PII detection for 13 types, 13 compliance building blocks, tamper-evident audit trails. GDPR, HIPAA, PCI-DSS ready.">
+  <meta name="keywords" content="Kafka data governance, Kafka data quality tool, Kafka DLP, Kafka compliance management, Kafka audit trail, data governance for Confluent Cloud, Kafka PII detection, Kafka GDPR compliance">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Data Governance for Kafka | Flafka — Built In, Not Bolted On">
+  <meta property="og:description" content="10 data quality features, AI PII detection, 13 compliance building blocks, tamper-evident audit trails — all managed from one Kafka platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flafka.dev/data-governance.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Governance for Kafka | Flafka — Built In, Not Bolted On">
+  <meta name="twitter:description" content="10 data quality features, AI PII detection, 13 compliance building blocks, tamper-evident audit trails. GDPR, HIPAA, PCI-DSS ready.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <link rel="canonical" href="https://flafka.dev/data-governance.html">
+  <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: SoftwareApplication — Data Governance -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka",
+    "applicationCategory": "Data Governance",
+    "operatingSystem": "Windows, macOS, Linux, Docker",
+    "description": "Kafka data governance platform with 10 data quality rules, AI-assisted PII detection for 13 PII types, 13 compliance building blocks, and tamper-evident audit trails. Covers GDPR, HIPAA, PCI-DSS, and SOC 2.",
+    "url": "https://flafka.dev",
+    "featureList": [
+      "Data Quality Rules CRUD (no-code)",
+      "14 DQ Rule Templates",
+      "Auto-Suggest DQ Rules from Schema",
+      "CSV Batch Import (200 rules)",
+      "Conditional DQ Rules",
+      "Violation Persistence (7-day trends)",
+      "DQ Coverage Reports",
+      "DQ Dashboard Widget",
+      "Per-Rule Alerting",
+      "Schema Evolution DQ Impact Analysis",
+      "Hybrid regex + ML PII detection (13 PII types)",
+      "Sub-microsecond PII detection latency",
+      "Producer blocking mode for real-time PII prevention",
+      "GDPR/HIPAA/PCI-DSS compliance reports",
+      "Self-training PII feedback loop",
+      "Display masking for viewer role",
+      "Compliance Posture Dashboard",
+      "Evidence Bundle Export",
+      "Evidence Bundle Scheduling",
+      "Compliance Score Trend (90-day chart)",
+      "SHA-256 tamper-evident audit chain",
+      "RBAC Audit Export (CSV/JSON)",
+      "Session Audit Trail (OIDC lifecycle)",
+      "Connector Config Audit Trail"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "19",
+      "priceCurrency": "USD",
+      "description": "Data quality and compliance features included in Team plan at $19/seat/month.",
+      "url": "https://flafka.dev/pricing.html"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Flafka support SOC 2 compliance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka's compliance automation includes a Compliance Posture Dashboard covering SOC 2, PCI-DSS, GDPR, and HIPAA framework mappings. One-click evidence bundle export produces a zip with audit logs, access reviews, and compliance reports. Evidence bundle scheduling automates regular evidence collection. See our SOC 2 blog post for the full framework mapping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Kafka DLP work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka uses a hybrid regex + ML detection pipeline to identify 13 PII types (SSN, credit card, email, phone, passport, national ID, IP address, date of birth, bank account, driver's license, health record, biometric data, and tax ID) in message payloads. Detection runs in sub-microsecond latency. Producer blocking mode prevents PII from entering Kafka topics in real time. A self-training feedback loop improves detection accuracy over time. All processing runs on your infrastructure — no cloud dependency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I import data quality rules in bulk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka supports CSV batch import for up to 200 DQ rules in a single upload. Each row defines the rule name, topic, field path, condition type, threshold, severity, and alert setting. This is faster than creating rules one-by-one and supports bulk migrations from existing DQ systems."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="data-governance.html" class="active">Data Governance</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="security.html">Security</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="integrations.html">Integrations</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+    <div class="nav__cta">
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="data-governance.html">Data Governance</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="compare.html">Compare</a>
+  <a href="security.html">Security</a>
+  <a href="docs.html">Docs</a>
+  <a href="community.html">Community</a>
+  <a href="demo.html">Sprint Demos</a>
+  <a href="video-library.html">Feature Videos</a>
+  <a href="roi-calculator.html">ROI Calculator</a>
+  <a href="about.html">About</a>
+  <a href="blog.html">Blog</a>
+  <a href="integrations.html">Integrations</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <h1 class="animate-in">Data Governance for Kafka &mdash; <span class="text-gradient">Built In, Not Bolted On</span></h1>
+    <p class="animate-in" data-delay="1">10 data quality features, AI PII detection, 13 compliance building blocks, tamper-evident audit trails &mdash; all managed from one platform.</p>
+    <div class="animate-in" data-delay="2" style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-lg);justify-content:center;">
+      <a href="about.html#contact" class="btn btn--primary" data-signup-trigger>Start Free Trial</a>
+      <a href="pricing.html" class="btn btn--secondary">See Pricing</a>
+      <a href="compare.html" class="btn btn--ghost">See Comparison</a>
+    </div>
+    <p class="animate-in" data-delay="3" style="color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-md);">Data quality and compliance features included in <a href="pricing.html" style="color:var(--color-primary-light);">Team ($19/seat/mo)</a> and Enterprise plans. <a href="pricing.html" style="color:var(--color-primary-light);">See pricing for full tier breakdown.</a></p>
+  </div>
+</section>
+
+<!-- Section 1: Data Quality -->
+<section class="section" id="data-quality">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Data Quality</div>
+      <h2 class="section-header__title">10 DQ Features. <span class="text-gradient">Zero Guesswork.</span></h2>
+      <p class="section-header__desc">A complete data quality stack for Kafka — no-code rules, AI-assisted suggestions, 7-day violation trends, and schema-aware impact analysis.</p>
+      <p class="section-header__desc" style="margin-top:var(--space-sm);"><span class="badge-available">Included in Team plan ($19/seat/mo)</span></p>
+    </div>
+
+    <div class="gov-dq-grid animate-in" data-delay="1">
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128203;</div>
+        <h3 class="gov-card__title">Rules CRUD</h3>
+        <p class="gov-card__desc">Create, edit, and delete DQ rules with a no-code UI. Define field paths, conditions, thresholds, and severity levels.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128196;</div>
+        <h3 class="gov-card__title">Rule Templates</h3>
+        <p class="gov-card__desc">14 ready-made rule templates covering nullability, type validation, range checks, regex patterns, and referential integrity.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#129302;</div>
+        <h3 class="gov-card__title">Auto-Suggest from Schema</h3>
+        <p class="gov-card__desc">Flafka reads your schema and suggests DQ rules for every field — save hours of manual rule creation on new topics.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128202;</div>
+        <h3 class="gov-card__title">CSV Batch Import</h3>
+        <p class="gov-card__desc">Upload up to 200 rules at once via CSV. Migrate from existing DQ systems or bulk-create rules for new pipelines.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128260;</div>
+        <h3 class="gov-card__title">Conditional Rules</h3>
+        <p class="gov-card__desc">Rules that trigger only when preconditions are met. Example: require <code>tax_id</code> when <code>country == "US"</code>.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128200;</div>
+        <h3 class="gov-card__title">Violation Persistence</h3>
+        <p class="gov-card__desc">7-day violation trend charts per rule. See if data quality is improving or degrading over time with daily granularity.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128301;</div>
+        <h3 class="gov-card__title">Coverage Reports</h3>
+        <p class="gov-card__desc">Which topics have DQ rules? Which fields are uncovered? Coverage reports surface gaps before auditors do.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128187;</div>
+        <h3 class="gov-card__title">Dashboard Widget</h3>
+        <p class="gov-card__desc">DQ summary widget on the main dashboard: total rules, violation rate today, worst-performing topic at a glance.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128276;</div>
+        <h3 class="gov-card__title">Per-Rule Alerting</h3>
+        <p class="gov-card__desc">Configure alert thresholds per rule. Slack, webhook, or email notifications when violations exceed your threshold.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128268;</div>
+        <h3 class="gov-card__title">Schema Evolution Impact Analysis</h3>
+        <p class="gov-card__desc">Cross-references schema field diffs against DQ rules by field path. See which rules break before you deploy a schema change.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:var(--space-xl);" class="animate-in" data-delay="2">
+      <a href="features.html#data-quality" class="btn btn--secondary">See Data Quality in Features &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Data Protection (AI PII Detection) -->
+<section class="section" id="data-protection" style="background:var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Data Protection</div>
+      <h2 class="section-header__title">AI PII Detection. <span class="text-gradient">Sub-Microsecond Latency.</span></h2>
+      <p class="section-header__desc">Hybrid regex + ML detection identifies 13 PII types in Kafka message payloads. Producer blocking stops sensitive data at the source.</p>
+      <p class="section-header__desc" style="margin-top:var(--space-sm);"><span class="badge-available">Included in Team plan ($19/seat/mo)</span></p>
+    </div>
+
+    <div class="gov-two-col animate-in" data-delay="1">
+      <div class="gov-two-col__content">
+        <h3>13 PII Types Detected</h3>
+        <ul class="gov-pii-list">
+          <li>&#128274; SSN (Social Security Number)</li>
+          <li>&#128179; Credit card numbers (Luhn-validated)</li>
+          <li>&#9993; Email addresses</li>
+          <li>&#128222; Phone numbers (international formats)</li>
+          <li>&#128100; Passport numbers</li>
+          <li>&#128203; National ID numbers</li>
+          <li>&#127760; IP addresses (v4 and v6)</li>
+          <li>&#128197; Date of birth patterns</li>
+          <li>&#127981; Bank account numbers</li>
+          <li>&#128663; Driver&rsquo;s license numbers</li>
+          <li>&#9877; Health record identifiers</li>
+          <li>&#128100; Biometric data markers</li>
+          <li>&#128196; Tax ID numbers</li>
+        </ul>
+
+        <div style="margin-top:var(--space-xl);">
+          <h3>Key Capabilities</h3>
+          <ul style="color:var(--text-secondary);line-height:2.2;list-style:none;padding:0;margin-top:var(--space-sm);">
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>Sub-microsecond latency</strong> — no perceptible throughput impact</li>
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>Producer blocking mode</strong> — reject PII messages before they enter Kafka</li>
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>Self-training feedback loop</strong> — accuracy improves with usage</li>
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>Display masking</strong> — viewer role sees <code>****</code> for detected PII</li>
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>Zero cloud dependency</strong> — runs entirely on your infrastructure</li>
+            <li><span style="color:var(--color-primary-light);">&#10003;</span> <strong>GDPR, HIPAA, PCI-DSS</strong> compliance reports built in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gov-two-col__stat-panel">
+        <div class="gov-stat-card">
+          <div class="gov-stat-card__value">&lt;1&micro;s</div>
+          <div class="gov-stat-card__label">Detection latency per message</div>
+        </div>
+        <div class="gov-stat-card">
+          <div class="gov-stat-card__value">13</div>
+          <div class="gov-stat-card__label">PII types detected</div>
+        </div>
+        <div class="gov-stat-card">
+          <div class="gov-stat-card__value">3</div>
+          <div class="gov-stat-card__label">Compliance frameworks (GDPR, HIPAA, PCI-DSS)</div>
+        </div>
+        <div class="gov-stat-card">
+          <div class="gov-stat-card__value">100%</div>
+          <div class="gov-stat-card__label">On-premise — no data leaves your infrastructure</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:var(--space-xl);" class="animate-in" data-delay="2">
+      <a href="blog/kafka-dlp.html" class="btn btn--secondary">Full DLP Details &rarr;</a>
+      <a href="features.html" class="btn btn--ghost" style="margin-left:var(--space-sm);">See Features Page &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Compliance Automation -->
+<section class="section" id="compliance">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Compliance Automation</div>
+      <h2 class="section-header__title">From Posture to <span class="text-gradient">Evidence in One Click</span></h2>
+      <p class="section-header__desc">Compliance Posture Dashboard, Evidence Bundle Export, automated scheduling, and 90-day score trends. Audit-ready without the scramble.</p>
+      <p class="section-header__desc" style="margin-top:var(--space-sm);"><span class="badge-available">Included in Team plan &mdash; Evidence Bundle Scheduling in Enterprise</span></p>
+    </div>
+
+    <div class="gov-compliance-grid animate-in" data-delay="1">
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128202;</div>
+        <h3 class="gov-card__title">Compliance Posture Dashboard</h3>
+        <p class="gov-card__desc">5 KPI cards and a 10-item compliance checklist. See your current posture at a glance: SOC 2, PCI-DSS, GDPR, HIPAA.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128230;</div>
+        <h3 class="gov-card__title">Evidence Bundle Export</h3>
+        <p class="gov-card__desc">One-click ZIP download containing audit logs, access reviews, DQ reports, and compliance posture snapshot for a custom date range.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128197;</div>
+        <h3 class="gov-card__title">Bundle Scheduling</h3>
+        <p class="gov-card__desc">Automate evidence collection on a schedule. Daily, weekly, or monthly bundle generation delivered to your S3 or SFTP endpoint.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128200;</div>
+        <h3 class="gov-card__title">Compliance Score Trend</h3>
+        <p class="gov-card__desc">90-day daily compliance score chart. Track whether your posture is improving before your next audit window.</p>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card__icon">&#128219;</div>
+        <h3 class="gov-card__title">Framework Mapping</h3>
+        <p class="gov-card__desc">SOC 2 Type II, PCI-DSS Req 3/7/10, GDPR Art. 25/32, and HIPAA 164.312. Controls mapped to Flafka capabilities.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:var(--space-xl);" class="animate-in" data-delay="2">
+      <a href="security.html" class="btn btn--secondary">Full Compliance Mapping &rarr;</a>
+      <a href="blog/soc2-kafka.html" class="btn btn--ghost" style="margin-left:var(--space-sm);">SOC 2 Blog Post &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Audit & Accountability -->
+<section class="section" id="audit" style="background:var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Audit &amp; Accountability</div>
+      <h2 class="section-header__title">Tamper-Evident Audit Chain. <span class="text-gradient">Every Action, Every Actor.</span></h2>
+      <p class="section-header__desc">SHA-256 chained audit logs, RBAC export, session audit trails, and connector config history. Nothing gets lost.</p>
+      <p class="section-header__desc" style="margin-top:var(--space-sm);"><span class="badge-available">Included in Team plan ($19/seat/mo)</span></p>
+    </div>
+
+    <div class="gov-audit-list animate-in" data-delay="1" style="max-width:900px;margin:0 auto;">
+
+      <div class="gov-audit-item">
+        <div class="gov-audit-item__icon">&#128274;</div>
+        <div class="gov-audit-item__content">
+          <h3>SHA-256 Tamper-Evident Audit Chain</h3>
+          <p>Every audit event is hashed and chained to the previous event. Any tampering breaks the chain — detectable immediately. 30-day retention with daily rotation.</p>
+        </div>
+      </div>
+
+      <div class="gov-audit-item">
+        <div class="gov-audit-item__icon">&#128100;</div>
+        <div class="gov-audit-item__content">
+          <h3>RBAC Audit Export</h3>
+          <p>Export full role assignment history in CSV or JSON. Who had access to what, and when. Required evidence for SOC 2 access reviews.</p>
+        </div>
+      </div>
+
+      <div class="gov-audit-item">
+        <div class="gov-audit-item__icon">&#128203;</div>
+        <div class="gov-audit-item__content">
+          <h3>Session Audit Trail</h3>
+          <p>Full OIDC session lifecycle logging: login, token refresh, permission escalation, logout. IP addresses included with optional anonymization for GDPR.</p>
+        </div>
+      </div>
+
+      <div class="gov-audit-item">
+        <div class="gov-audit-item__icon">&#128279;</div>
+        <div class="gov-audit-item__content">
+          <h3>Connector Config Audit Trail</h3>
+          <p>Every connector configuration change is logged: what changed, who changed it, when. Diff view shows before/after values for each modified field.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Competitor Comparison Strip -->
+<section class="section" id="comparison">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Competitor Comparison</div>
+      <h2 class="section-header__title">More Governance Than <span class="text-gradient">Any Competitor</span></h2>
+      <p class="section-header__desc">Conduktor, Lenses, and Redpanda have governance features. Flafka has more of them, deeper, and built in.</p>
+    </div>
+
+    <div class="gov-comparison-wrap animate-in" data-delay="1">
+      <table class="gov-comparison-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="gov-comparison-table__flafka">Flafka</th>
+            <th>Conduktor</th>
+            <th>Lenses</th>
+            <th>OSS Tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data Quality Rules</td>
+            <td class="check gov-comparison-table__flafka">&#10003; 10 features</td>
+            <td class="partial">Basic</td>
+            <td class="partial">Basic</td>
+            <td class="cross">&mdash;</td>
+          </tr>
+          <tr>
+            <td>AI PII Detection</td>
+            <td class="check gov-comparison-table__flafka">&#10003; 13 types, &lt;1&micro;s</td>
+            <td class="partial">Gateway only</td>
+            <td class="cross">&mdash;</td>
+            <td class="cross">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Compliance Evidence Bundle</td>
+            <td class="check gov-comparison-table__flafka">&#10003; One-click ZIP</td>
+            <td class="cross">&mdash;</td>
+            <td class="cross">&mdash;</td>
+            <td class="cross">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Audit Trail</td>
+            <td class="check gov-comparison-table__flafka">&#10003; SHA-256 chain</td>
+            <td class="partial">Basic logs</td>
+            <td class="partial">Basic logs</td>
+            <td class="cross">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Cost Management</td>
+            <td class="check gov-comparison-table__flafka">&#10003; 7 FinOps tools</td>
+            <td class="cross">&mdash;</td>
+            <td class="cross">&mdash;</td>
+            <td class="cross">&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="text-align:center;margin-top:var(--space-xl);" class="animate-in" data-delay="2">
+      <a href="compare.html" class="btn btn--secondary">See Full Comparison &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section" id="faq" style="background:var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">FAQ</div>
+      <h2 class="section-header__title">Common <span class="text-gradient">Governance Questions</span></h2>
+    </div>
+
+    <div class="faq animate-in" data-delay="1" style="max-width:720px;margin:0 auto;">
+
+      <details class="faq-item animate-in" data-delay="1">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-gov-soc2">
+          Does Flafka support SOC 2 compliance?
+        </summary>
+        <div class="faq-item__answer" id="faq-gov-soc2">
+          <p>Yes. Flafka's compliance automation covers SOC 2, PCI-DSS, GDPR, and HIPAA. The Compliance Posture Dashboard maps your configuration against each framework's control requirements. The Evidence Bundle Export produces a one-click ZIP with audit logs, access reviews, DQ reports, and posture snapshots ready for auditor submission.</p>
+          <p style="margin-top:var(--space-sm);"><a href="blog/soc2-kafka.html">Read our SOC 2 for Kafka blog post &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="2">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-gov-dlp">
+          How does Kafka DLP work?
+        </summary>
+        <div class="faq-item__answer" id="faq-gov-dlp">
+          <p>Flafka uses a hybrid regex + ML pipeline to detect 13 PII types in Kafka message payloads. Detection runs at sub-microsecond latency with no perceptible throughput impact. In producer blocking mode, Flafka rejects messages containing PII before they enter Kafka topics. A self-training feedback loop improves accuracy over time. All detection runs on your own infrastructure — no data leaves your environment.</p>
+          <p style="margin-top:var(--space-sm);"><a href="blog/kafka-dlp.html">See the full DLP explainer &rarr;</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item animate-in" data-delay="3">
+        <summary class="faq-item__question" aria-expanded="false" aria-controls="faq-gov-csv">
+          Can I import data quality rules in bulk?
+        </summary>
+        <div class="faq-item__answer" id="faq-gov-csv">
+          <p>Yes. Flafka supports CSV batch import for up to 200 DQ rules in a single upload. Each row in the CSV defines the rule name, topic, field path, condition type, threshold value, severity level, and alert setting. This is useful for migrating rules from existing DQ systems or setting up governance for new pipelines at scale.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="cta-section__glow"></div>
+  <div class="container animate-in">
+    <h2>Governance that actually <span class="text-gradient">ships with the product</span></h2>
+    <p>No separate governance tool. No bolt-on integration. Data quality, PII detection, compliance, and audit — all in one platform. Free to start.</p>
+    <div class="flex flex--center" style="gap: var(--space-md);">
+      <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
+      <a href="pricing.html" class="btn btn--secondary btn--lg">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="demo.html">Demos</a></li>
+          <li><a href="video-library.html">Feature Videos</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="compare.html">Compare</a></li>
+          <li><a href="security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
+        <a href="security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/signup.js"></script>
+<script>
+  // FAQ accordion: sync aria-expanded with <details> open state
+  document.querySelectorAll('.faq-item').forEach(function(details) {
+    var summary = details.querySelector('summary');
+    if (!summary) return;
+    details.addEventListener('toggle', function() {
+      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    });
+  });
+</script>
+</body>
+</html>
