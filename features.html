@@ -59,13 +59,16 @@
       "Data Quality Rules engine with auto-suggest and custom heuristic patterns",
       "DQ Violation Trend — 7-day rolling violation trend chart per rule with trend direction alerting",
       "Alert Routing Rules — per-rule Slack/email/Kafka topic routing with distinct webhook URLs per destination",
+      "Schema Evolution DQ Impact Analysis — impact report showing which DQ rules break when a schema changes, before the change is applied",
+      "Batch DQ Rule Creation from CSV — import up to 200 DQ rules at once via CSV upload",
       "Cost Anomaly Detection and threshold alerts",
       "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination",
       "Cluster Overview Dashboard — health cards and consumer lag table across all registered clusters",
       "Cross-Cluster Comparison — topic config diff, partition delta, and consumer lag comparison across clusters",
       "Environments and Context Bar — group clusters with shared Schema Registry and Flink context, one-click context switching",
       "DR Monitoring Dashboard — real-time lag delta between primary and standby clusters, ISR status per partition, configurable health thresholds, alerting on replication drift (Flafka Ops)",
-      "Failover Clustering — standby cluster designation, tag cascade (cluster_id + environment_id propagate to standby), one-click failover promotion wizard (Flafka Ops)"
+      "Failover Clustering — standby cluster designation, tag cascade (cluster_id + environment_id propagate to standby), one-click failover promotion wizard (Flafka Ops)",
+      "Bulk Topic Operations — create topics across multiple clusters simultaneously, bulk delete with cluster-scoped confirmation, cross-cluster topic config sync"
     ],
     "screenshot": "https://flafka.dev/assets/screenshots/ws3-schema-panel-dark.png",
     "offers": {
@@ -804,6 +807,16 @@
         <h3 class="feature-card__title">Alert Routing Rules</h3>
         <p class="feature-card__desc">Route each DQ or SLO alert to a distinct Slack channel, email address, or Kafka topic. Per-rule routing with distinct webhook URLs — critical alerts to ops-alerts, DQ violations to data-team, spend anomalies to finops.</p>
       </div>
+      <div class="feature-card animate-in" data-delay="4">
+        <div class="feature-card__icon">&#128268;</div>
+        <h3 class="feature-card__title">Schema Evolution DQ Impact</h3>
+        <p class="feature-card__desc">When a schema changes, Flafka evaluates which DQ rules are affected and surfaces an impact report before the change is applied. Prevent silent rule breakage on schema migrations — see exactly which field-path rules break and which survive.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="1">
+        <div class="feature-card__icon">&#128196;</div>
+        <h3 class="feature-card__title">Batch DQ Rule Import (CSV)</h3>
+        <p class="feature-card__desc">Upload up to 200 DQ rules at once via CSV. Migrate from existing DQ systems or bulk-create rules for new pipelines without clicking through the UI one rule at a time.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -832,6 +845,11 @@
         <div class="card__icon">&#127758;</div>
         <h3 class="card__title">Environments &amp; Context Bar</h3>
         <p class="card__desc">Group clusters with a shared Schema Registry and Flink context into named environments (e.g. "Production EU", "Staging US"). One-click context switching via the Context Bar &mdash; the entire UI re-scopes instantly.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">&#128228;</div>
+        <h3 class="card__title">Bulk Topic Operations</h3>
+        <p class="card__desc">Create topics across multiple clusters simultaneously with a single form submission. Bulk delete with per-cluster confirmation gates. Cross-cluster topic config sync propagates partition count, retention, and replication factor from a source cluster to selected targets &mdash; no manual copy-paste per cluster.</p>
       </div>
     </div>
   </div>
