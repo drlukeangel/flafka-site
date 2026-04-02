@@ -57,7 +57,10 @@
       "Real-Time Updates via WebSocket streaming",
       "Data Quality Rules engine with auto-suggest",
       "Cost Anomaly Detection and threshold alerts",
-      "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination"
+      "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination",
+      "Cluster Overview Dashboard — health cards and consumer lag table across all registered clusters",
+      "Cross-Cluster Comparison — topic config diff, partition delta, and consumer lag comparison across clusters",
+      "Environments and Context Bar — group clusters with shared Schema Registry and Flink context, one-click context switching"
     ],
     "screenshot": "https://flafka.dev/assets/screenshots/ws3-schema-panel-dark.png",
     "offers": {
@@ -770,6 +773,35 @@
         <div class="feature-card__icon">&#128276;</div>
         <h3 class="feature-card__title">Slack Delivery History</h3>
         <p class="feature-card__desc">Per-channel delivery log for every alert dispatched — timestamp, status (delivered / failed / retried), and alert type. Filter by destination and rule type to diagnose missed notifications instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Multi-Cluster Operations Section (Sprint 95/96) ===== -->
+<section class="section" id="multi-cluster-ops">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Enterprise Multi-Cluster</div>
+      <h2 class="section-header__title">Operate Across Clusters <span class="text-gradient">Like a Single Platform</span></h2>
+      <p class="section-header__desc">Environment grouping, cross-cluster visibility, and one-click context switching. The only Kafka GUI built for teams running multiple Confluent Cloud clusters.</p>
+    </div>
+
+    <div class="grid grid--3 animate-in" data-delay="1">
+      <div class="card">
+        <div class="card__icon">&#127968;</div>
+        <h3 class="card__title">Cluster Overview Dashboard</h3>
+        <p class="card__desc">Health cards and consumer lag table across all registered clusters — see cross-cluster health at a glance without switching contexts. Spot lagging consumer groups and unhealthy clusters instantly.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">&#9878;</div>
+        <h3 class="card__title">Cross-Cluster Comparison</h3>
+        <p class="card__desc">Topic config diff, partition delta, and consumer lag comparison across clusters side by side. Validate that staging and production are in sync. No other Kafka GUI offers cross-cluster compare.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">&#127758;</div>
+        <h3 class="card__title">Environments &amp; Context Bar</h3>
+        <p class="card__desc">Group clusters with a shared Schema Registry and Flink context into named environments (e.g. "Production EU", "Staging US"). One-click context switching via the Context Bar &mdash; the entire UI re-scopes instantly.</p>
       </div>
     </div>
   </div>
