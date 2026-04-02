@@ -46,6 +46,7 @@
       "AI PII Detection — hybrid regex + ML detection of 13 PII types with sub-microsecond latency and producer blocking",
       "Schema-Aware Masking Rules — 6 masking operations with schema evolution impact analysis",
       "Role-Based Data Masking — RBAC-integrated field masking for viewer and operator roles",
+      "Compliance Score Trend — 90-day daily compliance score chart with trend direction and threshold alerting",
       "Compliance Reporting with audit trail and SOC 2 readiness",
       "Topic Management with CRUD, config editing, and message browser",
       "Multi-Cluster Registry — persistent cluster profiles with AES-256-GCM encrypted credentials, environment grouping, cluster-scoped RBAC, and cross-cluster overview dashboard",
@@ -55,12 +56,16 @@
       "Embedded CLI with kubectl-style terminal in browser",
       "Learning Center with guided tracks and interactive examples",
       "Real-Time Updates via WebSocket streaming",
-      "Data Quality Rules engine with auto-suggest",
+      "Data Quality Rules engine with auto-suggest and custom heuristic patterns",
+      "DQ Violation Trend — 7-day rolling violation trend chart per rule with trend direction alerting",
+      "Alert Routing Rules — per-rule Slack/email/Kafka topic routing with distinct webhook URLs per destination",
       "Cost Anomaly Detection and threshold alerts",
       "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination",
       "Cluster Overview Dashboard — health cards and consumer lag table across all registered clusters",
       "Cross-Cluster Comparison — topic config diff, partition delta, and consumer lag comparison across clusters",
-      "Environments and Context Bar — group clusters with shared Schema Registry and Flink context, one-click context switching"
+      "Environments and Context Bar — group clusters with shared Schema Registry and Flink context, one-click context switching",
+      "DR Monitoring Dashboard — real-time lag delta between primary and standby clusters, ISR status per partition, configurable health thresholds, alerting on replication drift (Flafka Ops)",
+      "Failover Clustering — standby cluster designation, tag cascade (cluster_id + environment_id propagate to standby), one-click failover promotion wizard (Flafka Ops)"
     ],
     "screenshot": "https://flafka.dev/assets/screenshots/ws3-schema-panel-dark.png",
     "offers": {
@@ -583,7 +588,7 @@
       <p class="section-header__desc">Session audit trails, resource RBAC with glob patterns, compliance reporting, and admin lockout prevention. Everything your data stewards need to approve Flafka.</p>
     </div>
 
-    <div class="grid grid--3 animate-in" data-delay="1">
+    <div class="grid grid--4 animate-in" data-delay="1">
       <div class="card">
         <div class="card__icon">&#128065;</div>
         <h3 class="card__title">Audit Trail</h3>
@@ -598,6 +603,11 @@
         <div class="card__icon">&#128220;</div>
         <h3 class="card__title">Compliance Reporting</h3>
         <p class="card__desc">SLO compliance reports, permission-denied logging, and IP anonymization for regulatory evidence.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">&#128200;</div>
+        <h3 class="card__title">Compliance Score Trend</h3>
+        <p class="card__desc">90-day daily compliance score chart with trend direction indicator and threshold alerting. Track posture improvement before your next audit window.</p>
       </div>
     </div>
 
@@ -744,6 +754,11 @@
         <h3 class="feature-card__title">Authentication</h3>
         <p class="feature-card__desc">Local auth, OIDC, password reset flows. User management with admin panel. Full audit trail.</p>
       </div>
+      <div class="feature-card animate-in" data-delay="4">
+        <div class="feature-card__icon">&#128273;</div>
+        <h3 class="feature-card__title">OIDC Provider</h3>
+        <p class="feature-card__desc">Flafka acts as an OIDC provider — issues RS256 JWTs, exposes a JWKS endpoint, and enables SSO for the Permission Tree and Gateway OAUTHBEARER flows. No external identity service required for token issuance.</p>
+      </div>
       <div class="feature-card animate-in" data-delay="5">
         <div class="feature-card__icon">&#127912;</div>
         <h3 class="feature-card__title">Dark Mode</h3>
@@ -774,6 +789,21 @@
         <h3 class="feature-card__title">Slack Delivery History</h3>
         <p class="feature-card__desc">Per-channel delivery log for every alert dispatched — timestamp, status (delivered / failed / retried), and alert type. Filter by destination and rule type to diagnose missed notifications instantly.</p>
       </div>
+      <div class="feature-card animate-in" data-delay="1">
+        <div class="feature-card__icon">&#128200;</div>
+        <h3 class="feature-card__title">DQ Violation Trends</h3>
+        <p class="feature-card__desc">Violations persist across restarts with a 7-day rolling trend chart per rule. See whether data quality is improving or degrading over time — trend direction alerting fires when violation rate spikes.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="2">
+        <div class="feature-card__icon">&#128161;</div>
+        <h3 class="feature-card__title">Custom Heuristic Rules</h3>
+        <p class="feature-card__desc">Define custom field-name patterns (e.g. <code>*_ssn</code>, <code>*_email</code>) to seed the DQ auto-suggest engine with organisation-specific conventions. Auto-suggest recommendations reflect your actual schema naming standards.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="3">
+        <div class="feature-card__icon">&#128228;</div>
+        <h3 class="feature-card__title">Alert Routing Rules</h3>
+        <p class="feature-card__desc">Route each DQ or SLO alert to a distinct Slack channel, email address, or Kafka topic. Per-rule routing with distinct webhook URLs — critical alerts to ops-alerts, DQ violations to data-team, spend anomalies to finops.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -803,6 +833,60 @@
         <h3 class="card__title">Environments &amp; Context Bar</h3>
         <p class="card__desc">Group clusters with a shared Schema Registry and Flink context into named environments (e.g. "Production EU", "Staging US"). One-click context switching via the Context Bar &mdash; the entire UI re-scopes instantly.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DR Monitoring & Failover Clustering (Sprint 94/95, Flafka Ops) ===== -->
+<section class="section" id="dr-monitoring" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Disaster Recovery</div>
+      <h2 class="section-header__title">Real-Time DR Monitoring <span class="text-gradient">&amp; One-Click Failover</span></h2>
+      <p class="section-header__desc">
+        Know the health of your standby cluster at all times. Promote to primary in a single action when the primary fails.
+        Combined with <a href="#gateway">Flafka Gateway dual-write</a>, this is a complete active-active DR stack for Kafka &mdash; no Confluent Cluster Linking required.
+      </p>
+    </div>
+
+    <div class="grid grid--3 animate-in" data-delay="1">
+
+      <div class="card">
+        <div class="card__icon">&#128202;</div>
+        <h3 class="card__title">DR Monitoring Dashboard</h3>
+        <span class="badge-unique" style="display: inline-block; margin-bottom: var(--space-sm); font-size: var(--text-xs);">Flafka Ops &mdash; Enterprise</span>
+        <p class="card__desc">
+          Real-time lag delta between primary and standby clusters. ISR (in-sync replica) status per partition. Configurable health thresholds for replication drift. Alerting fires when lag delta exceeds your SLO threshold &mdash; giving your on-call team time to react before a failover becomes forced.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__icon">&#9889;</div>
+        <h3 class="card__title">Failover Clustering</h3>
+        <span class="badge-unique" style="display: inline-block; margin-bottom: var(--space-sm); font-size: var(--text-xs);">Flafka Ops &mdash; Enterprise</span>
+        <p class="card__desc">
+          Designate any registered cluster as the standby for another. Tags cascade automatically &mdash; <code>cluster_id</code> and <code>environment_id</code> propagate from primary to standby so your RBAC, SLO rules, and alert routing follow the cluster relationship. One-click failover promotion wizard promotes the standby to primary and updates all downstream references.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__icon">&#128279;</div>
+        <h3 class="card__title">End-to-End DR Stack</h3>
+        <span class="badge-unique" style="display: inline-block; margin-bottom: var(--space-sm); font-size: var(--text-xs);">Flafka Ops &mdash; Enterprise</span>
+        <p class="card__desc">
+          Combine Flafka Gateway dual-write (POC: 40k msg/s, zero latency overhead) with DR Monitoring and Failover Clustering for a complete active-active DR solution. No Confluent Cluster Linking license required. No application changes. Estimated 28% cost reduction vs Cluster Linking at scale.
+        </p>
+        <a href="#gateway" style="font-size: var(--text-sm); color: var(--color-primary-light);">See Gateway DR architecture &rarr;</a>
+      </div>
+
+    </div>
+
+    <div class="data-protection__compliance animate-in" data-delay="2" style="margin-top: var(--space-xl);">
+      <strong>How it works:</strong> Flafka monitors the replication offset delta between your primary and standby cluster every 10 seconds. If the lag delta exceeds your configured threshold (default: 5,000 messages), an alert fires. The failover wizard walks you through standby validation, consumer group migration, and DNS/config promotion in a single guided flow.
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in" data-delay="3">
+      <a href="pricing.html#ops" class="btn btn--secondary">See Flafka Ops Pricing &rarr;</a>
     </div>
   </div>
 </section>
