@@ -37,7 +37,7 @@
     "featureList": [
       "Schema Impact Analysis with blast radius visualization",
       "Flink SQL IDE with real-time CFU cost estimation",
-      "Spend Dashboard with drill-down FinOps for Kafka",
+      "Spend Dashboard with drill-down FinOps for Kafka — Cost Anomaly Detection (ML-based per-topic spike detection with alert routing), Cost Forecast Card (30-day projected spend), Cost Allocation by Team (topic ownership tag mapping with CSV chargeback export)",
       "Connector Monitoring with throughput and error tracking",
       "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), Team Cluster Access Panel (grant/revoke cluster access per team), and full audit trail",
       "Service Accounts (M2M auth) — OAuth 2.0 client_credentials grant, RBAC-scoped, API key + secret with rotation, Gateway SASL OAUTHBEARER integration",
@@ -63,7 +63,9 @@
       "Schema Evolution DQ Impact Analysis — impact report showing which DQ rules break when a schema changes, before the change is applied",
       "Batch DQ Rule Creation from CSV — import up to 200 DQ rules at once via CSV upload",
       "DQ Coverage Report — dashboard showing rules-configured vs uncovered topics, filterable by topic pattern, team, and environment",
-      "Cost Anomaly Detection and threshold alerts",
+      "Cost Anomaly Detection — ML-based spend spike detection per topic and consumer group, configurable thresholds, Slack/email/Kafka alert routing",
+      "Cost Forecast Card — 30-day projected spend from rolling usage trend",
+      "Cost Allocation by Team — map Confluent Cloud costs to internal teams via topic ownership tags, CSV export for chargeback",
       "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination",
       "Cluster Overview Dashboard — health cards and consumer lag table across all registered clusters",
       "Cross-Cluster Comparison — topic config diff, partition delta, and consumer lag comparison across clusters",
@@ -242,6 +244,9 @@
           <li>Budget alerts and notifications</li>
           <li>CFU cost forecasting</li>
           <li>Analytics data export (JSON/CSV)</li>
+          <li>Cost Anomaly Detection &mdash; ML-based spike detection per topic and consumer group, configurable thresholds, alert routing</li>
+          <li>Cost Forecast Card &mdash; 30-day projected spend from rolling usage trend</li>
+          <li>Cost Allocation by Team &mdash; allocate Confluent Cloud costs to internal teams via topic ownership tags, exportable as CSV for chargeback</li>
         </ul>
         <details class="feature-expand">
           <summary>Learn more</summary>
@@ -249,6 +254,9 @@
             <h4>KPI cards, trends, and projections</h4>
             <p>The Spend Dashboard displays KPI cards for month-to-date spend, daily average, projected end-of-month total, and budget utilization. A daily trend chart shows spending patterns over the current billing period. Product-level breakdown (Kafka, Flink, Connect, Schema Registry) reveals which services are driving costs.</p>
             <p>7-day cost projections use historical spending patterns to forecast where you'll land at month end, with confidence intervals so you know the best and worst case scenarios.</p>
+            <h4>FinOps sub-features</h4>
+            <p><strong>Cost Anomaly Detection</strong> uses ML to flag unusual spend spikes at the topic and consumer group level. Configurable thresholds trigger alerts via your existing routing rules (Slack, email, Kafka topic) &mdash; so your FinOps team learns about runaway topics before the bill arrives.</p>
+            <p><strong>Cost Forecast Card</strong> projects 30-day spend from a rolling usage trend, giving finance a single number to budget against. <strong>Cost Allocation by Team</strong> maps Confluent Cloud costs to internal teams using topic ownership tags, with one-click CSV export for chargeback workflows &mdash; no manual spreadsheet reconciliation.</p>
             <div class="feature-expand__thumb">
               <img src="assets/screenshots/ws3-spend-dashboard-dark.png" alt="Spend Dashboard showing month-to-date costs, trend chart, and product-level breakdown" loading="lazy">
             </div>
@@ -826,6 +834,16 @@
         <div class="feature-card__icon">&#128202;</div>
         <h3 class="feature-card__title">DQ Coverage Report</h3>
         <p class="feature-card__desc">Coverage dashboard showing which topics have DQ rules configured vs uncovered. Surface blind spots before they become incidents. Filterable by topic pattern, team, and environment.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="3">
+        <div class="feature-card__icon">&#128256;</div>
+        <h3 class="feature-card__title">Conditional DQ Rules</h3>
+        <p class="feature-card__desc">Rules that only fire when a condition is met — e.g. apply a range check only when <code>event_type == "purchase"</code>. Reduce false positives on polymorphic schemas where fields have different valid ranges per event type.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="4">
+        <div class="feature-card__icon">&#128295;</div>
+        <h3 class="feature-card__title">ksqlDB Dashboard</h3>
+        <p class="feature-card__desc">Full ksqlDB IDE: browse streams and tables, run queries, manage persistent queries, and monitor consumer lag for ksqlDB streams. No separate ksqlDB tooling required — everything from one platform.</p>
       </div>
     </div>
   </div>
