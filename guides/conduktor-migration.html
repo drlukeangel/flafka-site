@@ -287,7 +287,7 @@
         </ul>
 
         <h3>Gateway Policies</h3>
-        <p>If you use Conduktor Gateway for proxy-level policies (virtual clusters, data masking at the wire level), note that <strong>Flafka complements Gateway</strong> &mdash; use Gateway for proxy-level policies and Flafka for management, monitoring, and compliance. The two tools can coexist in your stack.</p>
+        <p>Flafka includes a native Rust Kafka gateway with SASL auth, connection pooling, OIDC integration, metadata rewriting, and dual-write DR capability. If you currently use Conduktor Gateway, Flafka Gateway is a direct replacement &mdash; included in the platform at no extra cost, not a separate SKU. For teams who want to keep an existing proxy, Flafka management and monitoring layers sit alongside any gateway.</p>
 
         <!-- Section 3: User Onboarding Checklist -->
         <h2 id="onboarding" class="animate-in">User Onboarding Checklist</h2>
@@ -341,7 +341,7 @@
           <div class="faq-item">
             <button class="faq-question">What about Conduktor Gateway?</button>
             <div class="faq-answer">
-              <p>Flafka does not replace Conduktor Gateway. Gateway operates at the wire level as a Kafka proxy, handling virtual clusters, data masking at the protocol level, and traffic policies. Flafka complements Gateway &mdash; use Gateway for proxy-level policies and Flafka for management, monitoring, cost visibility, and compliance. Many teams use a proxy alongside a management tool.</p>
+              <p>Flafka includes a native Rust Kafka gateway &mdash; a wire-protocol proxy with SASL auth, connection pooling, OIDC integration, metadata rewriting, and a POC-proven dual-write architecture at 40k msg/s with zero latency overhead. Unlike Conduktor Gateway (JVM), Flafka Gateway is built in Rust: no GC pauses, &lt;1ms p99 passthrough latency, and a fraction of the resource footprint. It ships as a single binary with Helm/K8s manifests and Prometheus metrics built in. If you are evaluating Conduktor Gateway, Flafka Gateway is a direct replacement &mdash; included in the platform, not a separate SKU.</p>
             </div>
           </div>
           <div class="faq-item">
