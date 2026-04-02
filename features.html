@@ -72,7 +72,10 @@
       "Environments and Context Bar — group clusters with shared Schema Registry and Flink context, one-click context switching",
       "DR Monitoring Dashboard — real-time lag delta between primary and standby clusters, ISR status per partition, configurable health thresholds, alerting on replication drift (Flafka Ops)",
       "Failover Clustering — standby cluster designation, tag cascade (cluster_id + environment_id propagate to standby), one-click failover promotion wizard (Flafka Ops)",
-      "Bulk Topic Operations — create topics across multiple clusters simultaneously, bulk delete with cluster-scoped confirmation, cross-cluster topic config sync"
+      "Bulk Topic Operations — create topics across multiple clusters simultaneously, bulk delete with cluster-scoped confirmation, cross-cluster topic config sync",
+      "Advanced Alerting — webhook delivery (custom HTTP endpoints, configurable headers, retry logic), Kafka topic delivery for pipeline integration, multi-condition AND/OR rules across metrics, per-alert mute/snooze controls, alert history log (delivery status, last fired, ack state)",
+      "Conditional DQ Rules — rules that fire only when a condition is met (e.g. apply range check only when event_type == 'purchase'), reducing false positives on polymorphic schemas",
+      "ksqlDB Dashboard — full ksqlDB IDE: browse streams and tables, run queries, manage persistent queries, monitor consumer lag for ksqlDB streams"
     ],
     "screenshot": "https://flafka.dev/assets/screenshots/ws3-schema-panel-dark.png",
     "offers": {
@@ -427,6 +430,11 @@
           <li>Executive KPI dashboard</li>
           <li>Health monitoring integration</li>
           <li>Telemetry-driven metrics</li>
+          <li>Webhook delivery &mdash; custom HTTP endpoints, configurable headers, retry logic</li>
+          <li>Kafka topic delivery &mdash; route alerts directly to a Kafka topic for pipeline integration</li>
+          <li>Multi-condition rules &mdash; AND/OR logic across metrics</li>
+          <li>Per-alert mute / snooze controls</li>
+          <li>Alert history log &mdash; delivery status, last fired, and ack state per alert</li>
         </ul>
         <details class="feature-expand">
           <summary>Learn more</summary>
