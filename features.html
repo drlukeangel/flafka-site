@@ -41,7 +41,9 @@
       "Connector Monitoring with throughput and error tracking",
       "Resource-Level RBAC with glob patterns and audit trail",
       "SLO Tracking with error budgets and Prometheus export",
-      "Data Protection with role-based masking and ML-assisted PII detection",
+      "AI PII Detection — hybrid regex + ML detection of 13 PII types with sub-microsecond latency and producer blocking",
+      "Schema-Aware Masking Rules — 6 masking operations with schema evolution impact analysis",
+      "Role-Based Data Masking — RBAC-integrated field masking for viewer and operator roles",
       "Compliance Reporting with audit trail and SOC 2 readiness",
       "Topic Management with CRUD, config editing, and message browser",
       "Connection Profiles for multi-cluster management",
@@ -87,6 +89,7 @@
       <li><a href="blog.html">Blog</a></li>
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
     <div class="nav__cta">
       <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
@@ -94,6 +97,7 @@
   </div>
 </nav>
 <div class="nav__mobile">
+  <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="pricing.html">Pricing</a>
@@ -391,7 +395,7 @@
     <div class="section-header section-header--center animate-in">
       <div class="section-header__overline">Data Protection</div>
       <h2 class="section-header__title">Protect Sensitive Data <span class="text-gradient">Without Slowing Down Your Team</span></h2>
-      <p class="section-header__desc">RBAC-integrated field masking. Schema-aware PII detection. Coming soon: ML-assisted PII blocking.</p>
+      <p class="section-header__desc">RBAC-integrated field masking, schema-aware rules, and AI PII detection &mdash; available now. <a href="data-governance.html">See full data governance capabilities &rarr;</a></p>
     </div>
 
     <div class="data-protection__grid">
@@ -406,24 +410,26 @@
         </p>
       </div>
 
-      <!-- Card 2: Schema-Aware Rules (Coming Soon) -->
+      <!-- Card 2: Schema-Aware Rules (Available) -->
       <div class="data-protection__card animate-in" data-delay="2">
-        <span class="badge-coming-soon">Coming Soon</span>
+        <span class="badge-available">Available</span>
         <div class="data-protection__card-icon">&#128220;</div>
         <h3 class="data-protection__card-title">Schema-Aware Rules</h3>
         <p class="data-protection__card-desc">
-          Admin UI for custom masking rules per schema subject. 6 masking operations: redact, hash, partial mask, tokenize, truncate, and noise. Fine-grained control over what each role sees.
+          Admin UI for custom masking rules per schema subject. 6 masking operations: redact, hash, partial mask, tokenize, truncate, and noise. Schema evolution impact analysis cross-references field diffs against rules by field path.
         </p>
+        <a href="data-governance.html#data-quality" class="data-protection__card-link">Learn More &rarr;</a>
       </div>
 
-      <!-- Card 3: AI PII Detection (Coming Soon) -->
+      <!-- Card 3: AI PII Detection (Available) -->
       <div class="data-protection__card animate-in" data-delay="3">
-        <span class="badge-coming-soon">Coming Soon</span>
+        <span class="badge-available">Available</span>
         <div class="data-protection__card-icon">&#129302;</div>
         <h3 class="data-protection__card-title">ML-Assisted PII Detection</h3>
         <p class="data-protection__card-desc">
-          Regex and ML-based detection finds PII you did not tag. Identifies emails, phone numbers, SSNs, and credit card numbers in message payloads. Zero cloud dependency &mdash; runs entirely on your infrastructure.
+          Hybrid regex + ML detection of 13 PII types (SSN, credit card, email, phone, passport, and more). Sub-microsecond latency. Producer blocking mode for real-time prevention. Compliance reports for GDPR, HIPAA, and PCI-DSS. Self-training feedback loop improves accuracy over time.
         </p>
+        <a href="blog/kafka-dlp.html" class="data-protection__card-link">Learn More &rarr;</a>
       </div>
 
     </div>
