@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison</title>
-  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, Audit & Compliance, and MSK Support. Kafka compliance comparison and SOC 2 Kafka tool comparison.">
+  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 25+ unique features including Embedded CLI, AI PII Detection (Kafka DLP), 7 FinOps tools, Data Quality, and Audit &amp; Compliance. Updated April 2026.">
   <meta name="keywords" content="enterprise Kafka comparison, Conduktor alternative, Kafka GUI comparison, Confluent Cloud management tool, Kafka admin tool comparison, enterprise Kafka management, Kafka compliance comparison">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison">
-  <meta property="og:description" content="Transparent feature comparison against 7 Kafka GUI tools including Audit & Compliance, MSK Support, and FinOps. See what Flafka does better.">
+  <meta property="og:description" content="Transparent feature comparison against 7 Kafka GUI tools including Embedded CLI, AI PII Detection (Kafka DLP), cost management &amp; FinOps (7 tools), and Audit &amp; Compliance. The only Kafka admin tool with built-in FinOps and AI-powered PII detection.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flafka.dev/compare.html">
   <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
@@ -17,7 +17,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Compare | Flafka vs Conduktor vs AKHQ vs Kafka UI">
-  <meta name="twitter:description" content="Honest feature comparison against every major Kafka GUI — including Audit & Compliance, MSK Support, and pricing. See what sets Flafka apart.">
+  <meta name="twitter:description" content="Honest feature comparison against every major Kafka GUI — including Embedded CLI, AI PII Detection (Kafka DLP), FinOps (7 tools), Audit &amp; Compliance, and pricing. See what sets Flafka apart.">
   <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
 
   <link rel="canonical" href="https://flafka.dev/compare.html">
@@ -32,12 +32,13 @@
     "name": "Flafka",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Windows, macOS, Linux, Docker",
-    "description": "Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 18+ unique features including FinOps, Data Quality, and Compliance.",
+    "description": "Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 25+ unique features including Embedded CLI, AI PII Detection (Kafka DLP), 7 FinOps cost management tools, Data Quality, and Compliance. Updated April 2026.",
     "url": "https://flafka.dev",
     "featureList": [
       "Schema Impact Analysis (unique — no competitor offers this)",
       "Flink SQL IDE with real-time CFU cost estimation",
       "Spend Dashboard with drill-down FinOps",
+      "Cost Management: Spend Dashboard, CFU Budget Tracking, Cost Anomaly Detection, End-of-Month Forecast, Cost Threshold Alerts, Cost Allocation by Team, Budget Limit Enforcement",
       "Resource-Level RBAC with glob patterns",
       "SLO Tracking with error budgets",
       "Connector Monitoring with throughput and error tracking",
@@ -45,6 +46,8 @@
       "Compliance Reporting and audit trail",
       "Cost Anomaly Detection and threshold alerts",
       "ML-Assisted PII Detection and masking",
+      "AI PII Detection (Kafka DLP): hybrid regex + ML detection of 13 PII types, sub-microsecond latency, producer blocking mode, compliance reports (GDPR/HIPAA/PCI-DSS), fully air-gapped",
+      "Data Loss Prevention: automatic PII detection in Kafka messages with self-training feedback loop",
       "Audit & Compliance: Audit Trail, Evidence Bundling, SOC 2 Controls Mapping, RBAC Audit Logging",
       "MSK Support (Coming Soon — waitlist open)"
     ],
@@ -108,6 +111,14 @@
           "@type": "Answer",
           "text": "Flafka's Team tier is $19/seat/mo vs Conduktor's ~$25/seat/mo — a 24% savings. Flafka also offers 18+ unique features that Conduktor does not have, including FinOps, compliance automation, and SLO tracking."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Kafka tool has PII detection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka is the only Kafka admin tool with AI-powered PII detection. It uses a hybrid regex + ML engine to detect 13 PII types (SSN, credit card, email, phone, passport, and more) with sub-microsecond latency. Features include producer blocking mode, GDPR/HIPAA/PCI-DSS compliance reports, and fully air-gapped operation."
+        }
       }
     ]
   }
@@ -135,6 +146,7 @@
       <li><a href="blog.html">Blog</a></li>
       <li><a href="integrations.html">Integrations</a></li>
     </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
     <div class="nav__cta">
       <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
     </div>
@@ -142,6 +154,7 @@
   </div>
 </nav>
 <div class="nav__mobile">
+  <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="pricing.html">Pricing</a>
@@ -164,7 +177,7 @@
   <div class="page-hero__glow"></div>
   <div class="container">
     <h1 class="animate-in">How Flafka <span class="text-gradient">compares</span></h1>
-    <p class="animate-in" data-delay="1">Transparent, honest feature comparisons against every major Kafka GUI &mdash; including audit &amp; compliance tooling, MSK compatibility, and FinOps. We show what we do better and what others offer that we don't.</p>
+    <p class="animate-in" data-delay="1">Transparent, honest feature comparisons against every major Kafka GUI &mdash; including cost management and FinOps capabilities, embedded CLI, AI-powered PII detection and data loss prevention, audit &amp; compliance tooling, and MSK compatibility. We show what we do better and what others offer that we don't.</p>
   </div>
 </section>
 
@@ -186,17 +199,18 @@
     <!-- Full Feature Matrix -->
     <div class="compare-table-wrapper animate-in" data-delay="1">
       <table class="compare-table">
+        <caption style="text-align: left; padding: var(--space-sm) 0; font-size: var(--text-sm); color: var(--text-muted); caption-side: top;">Kafka GUI Feature Comparison &mdash; April 2026. Comparing Flafka, Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI across 25+ feature categories.</caption>
         <thead>
           <tr>
             <th>Feature</th>
             <th class="col-flafka">Flafka</th>
             <th>Confluent Console</th>
             <th>Conduktor</th>
-            <th>AKHQ</th>
+            <th><a href="https://github.com/tchiotludo/akhq" target="_blank" rel="noopener" title="AKHQ on GitHub — open-source Kafka GUI">AKHQ</a></th>
             <th>Kafdrop</th>
             <th>Redpanda</th>
             <th>Lenses.io</th>
-            <th>Kafka UI</th>
+            <th><a href="https://github.com/provectus/kafka-ui" target="_blank" rel="noopener" title="Kafka UI (Provectus) on GitHub — open-source Kafka GUI">Kafka UI</a></th>
           </tr>
         </thead>
         <tbody>
@@ -205,154 +219,154 @@
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: Has Schema Registry viewer (view, create, delete) but no impact analysis">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: Has Schema Registry support (Avro, JSON Schema, Protobuf) but no impact analysis">No</td>
           </tr>
           <tr>
             <td>Flink SQL IDE + Cost Est.</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="partial">Basic</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No SQL on streams — AKHQ is a Kafka admin UI only, no stream processing IDE. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No Flink SQL or stream processing IDE — Kafka UI is a topic/schema management tool only. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Spend Dashboard</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="partial">Invoice only</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No cost management or spend dashboard — OSS tool with no billing integration. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No cost management or spend dashboard — OSS tool with no billing integration. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Resource RBAC (glob)</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="partial">Basic roles</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: LDAP-based auth only, no resource-level RBAC with glob patterns">No</td>
             <td class="cross">No</td>
             <td class="partial">Enterprise</td>
             <td class="partial">Enterprise</td>
-            <td class="partial">Basic</td>
+            <td class="partial" title="Kafka UI: Basic role-based access via OAuth 2.0, no resource-level glob patterns">Basic</td>
           </tr>
           <tr>
             <td>PCI-DSS Alignment</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No PCI-DSS alignment features — LDAP auth only, no resource-level access controls for compliance. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="partial">Partial</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No PCI-DSS alignment — OAuth 2.0 auth available but no resource-level RBAC or compliance controls. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Connector Throughput</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ has basic connector CRUD but no throughput monitoring">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI has connector CRUD + task management but no throughput charts">No</td>
           </tr>
           <tr>
             <td>Connector Logs</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: Connector CRUD only, no structured log viewer">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: Connector task management, no structured log viewer">No</td>
           </tr>
           <tr>
             <td>SLO Tracking</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No SLO tracking or error budget management — monitoring not in scope for this OSS tool. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No SLO tracking — consumer lag monitoring available but no SLO objectives or error budgets. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>ACL Templates</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No ACL templates — AKHQ has ACL viewing but no template-based provisioning. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No ACL templates — basic ACL management via UI but no reusable templates. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Desktop App</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: Web UI only — must be self-hosted as a Java service; no native desktop app. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: Web UI only — must be self-hosted as a Docker/Java service; no native desktop app. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Dark Mode</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="check">&#10003;</td>
-            <td class="check">&#10003;</td>
+            <td class="check" title="AKHQ: Built-in dark mode theme">&#10003;</td>
             <td class="cross">No</td>
             <td class="check">&#10003;</td>
             <td class="check">&#10003;</td>
-            <td class="check">&#10003;</td>
+            <td class="check" title="Kafka UI: Built-in dark mode theme">&#10003;</td>
           </tr>
           <tr>
             <td>Shareable Dashboards</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No shareable dashboards — read-only views exist but no link-sharing or permission-scoped sharing. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No shareable dashboards — metrics visible to all authenticated users but no scoped dashboard sharing. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Multi-Cluster</td>
             <td class="col-flafka">Profiles</td>
             <td>N/A</td>
             <td class="check">&#10003; Yes</td>
-            <td class="check">&#10003; Yes</td>
+            <td class="check" title="AKHQ: Multi-cluster support via configuration">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="check">&#10003; Yes</td>
             <td class="check">&#10003; Yes</td>
-            <td class="check">&#10003; Yes</td>
+            <td class="check" title="Kafka UI: Multi-cluster support with cluster switching">&#10003; Yes</td>
           </tr>
           <tr>
             <td>Multi-Vendor Kafka</td>
             <td class="col-flafka check">&#10003; All</td>
             <td>Confluent</td>
             <td class="check">&#10003; All</td>
-            <td class="check">&#10003; All</td>
+            <td class="check" title="AKHQ: Supports any Kafka-compatible broker — Confluent, MSK, self-managed Apache Kafka, Redpanda. See github.com/tchiotludo/akhq">&#10003; All</td>
             <td class="check">&#10003; All</td>
             <td>Redpanda+</td>
             <td class="check">&#10003; All</td>
-            <td class="check">&#10003; All</td>
+            <td class="check" title="Kafka UI: Supports any Kafka-compatible broker — Confluent Cloud, MSK, self-managed Apache Kafka, Redpanda. See github.com/provectus/kafka-ui">&#10003; All</td>
           </tr>
           <tr>
             <td>Platform Support</td>
@@ -370,88 +384,114 @@
             <td class="col-flafka cross">No</td>
             <td class="cross">No</td>
             <td class="check">&#10003; Yes</td>
+            <td class="cross" title="AKHQ: No data masking capabilities">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="check">&#10003; Yes</td>
+            <td class="check" title="Kafka UI: Display-level data masking via regex patterns">&#10003; Yes</td>
           </tr>
           <tr>
             <td>Free Tier</td>
             <td class="col-flafka check">&#10003; 3 users</td>
             <td>With CC</td>
             <td class="check">50 users</td>
-            <td class="check">OSS</td>
+            <td class="check" title="AKHQ: Fully open source (Apache 2.0), free to self-host">OSS (free)</td>
             <td class="check">OSS</td>
             <td class="check">Free</td>
             <td class="cross">No</td>
-            <td class="check">OSS</td>
+            <td class="check" title="Kafka UI: Fully open source (Apache 2.0), free to self-host">OSS (free)</td>
           </tr>
           <tr>
             <td>SSO/SAML</td>
             <td class="col-flafka">OIDC</td>
             <td>N/A</td>
             <td class="check">OIDC+LDAP</td>
-            <td>LDAP</td>
+            <td class="partial" title="AKHQ supports LDAP-based authentication only">LDAP only</td>
             <td class="cross">No</td>
             <td class="partial">Enterprise</td>
             <td class="check">&#10003; Yes</td>
-            <td>OAuth 2.0</td>
+            <td class="partial" title="Kafka UI supports OAuth 2.0 via Spring Security">OAuth 2.0</td>
           </tr>
           <tr>
             <td>Message Browser</td>
             <td class="col-flafka">Good</td>
             <td>Basic</td>
             <td class="check">Superior</td>
-            <td>Good</td>
+            <td class="partial" title="AKHQ: Basic message viewer — no search, no export. See github.com/tchiotludo/akhq">Basic</td>
             <td>Basic</td>
             <td>Good</td>
             <td>Good</td>
-            <td>Good</td>
+            <td class="check" title="Kafka UI: Search, filters, multi-format deserialization. See github.com/provectus/kafka-ui">Good</td>
           </tr>
           <tr>
             <td>SQL on Streams</td>
             <td class="col-flafka check">Flink SQL</td>
             <td>Flink+ksql</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No SQL on streams — AKHQ provides Kafka administration only, no stream processing layer. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td>Lenses SQL</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No SQL on streams — Kafka UI is a management UI only; use Kafka Streams or ksqlDB separately. See github.com/provectus/kafka-ui">No</td>
+          </tr>
+          <!-- Cost Management & FinOps (W96-3) -->
+          <tr class="compare-section-header">
+            <th scope="col" colspan="9" style="font-weight:700; color: var(--color-primary-light); font-size: var(--text-lg); padding-top: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary); text-align: left;">Cost Management &amp; FinOps</th>
           </tr>
           <tr>
-            <td>Cost Management / FinOps</td>
-            <td class="col-flafka check">&#10003; Yes</td>
+            <td>
+              <button class="compare-expand-btn" aria-expanded="false" aria-controls="finops-detail" title="Click to see all 7 FinOps capabilities">
+                Cost Management &amp; FinOps
+                <span class="compare-expand-icon" aria-hidden="true">&#9660;</span>
+              </button>
+              <div id="finops-detail" class="compare-expand-detail" hidden>
+                <ol style="margin: var(--space-sm) 0 0; padding-left: 1.2em; font-size: var(--text-xs); color: var(--text-secondary);">
+                  <li>Spend Dashboard (real-time)</li>
+                  <li>CFU Budget Tracking</li>
+                  <li>Cost Anomaly Detection</li>
+                  <li>End-of-Month Forecast</li>
+                  <li>Cost Threshold Alerts</li>
+                  <li>Cost Allocation by Team</li>
+                  <li>Budget Limit Enforcement</li>
+                </ol>
+              </div>
+            </td>
+            <td class="col-flafka check"><a href="features.html#finops" style="color: inherit; text-decoration: underline;" title="7 built-in FinOps tools">&#10003; 7 Tools</a></td>
+            <td class="partial">Invoice only</td>
+            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No cost management — OSS self-hosted tool with no billing or FinOps integration. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No cost management — OSS self-hosted tool with no billing or FinOps integration. See github.com/provectus/kafka-ui">No</td>
+          </tr>
+          <tr>
+            <td colspan="9" style="text-align: center; padding: var(--space-sm) 0; font-size: var(--text-sm);">
+              <strong style="color: var(--color-primary-light);">Flafka is the only Kafka admin tool with built-in FinOps.</strong>
+              <a href="pricing.html" class="text-link" style="margin-left: var(--space-sm);">See pricing &rarr;</a>
+            </td>
           </tr>
           <tr>
             <td>SLO Compliance Reports</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No SLO compliance reports — no SLO tracking at all; consumer lag is visible but not tied to objectives. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No SLO compliance reports — consumer group lag visible but no SLO tracking or exportable reports. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <td>Data Quality Rules (No-Code)</td>
             <td class="col-flafka check">&#10003; Yes</td>
             <td class="cross">No</td>
             <td class="partial">Gateway only</td>
+            <td class="cross" title="AKHQ: No data quality rules engine">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No data quality rules engine">No</td>
           </tr>
           <!-- Audit & Compliance (W94-1) -->
           <tr>
@@ -459,55 +499,55 @@
             <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; Immutable</a></td>
             <td class="cross">No</td>
             <td class="partial">Basic</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No audit trail — no logging of user actions or admin operations. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="partial">Enterprise</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No audit trail — no immutable log of user or admin actions. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <th scope="row" style="font-weight:700; color: var(--color-primary-light);">Evidence Bundling</th>
             <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; Automated</a></td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No evidence bundling — no compliance export or automated audit evidence collection. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No evidence bundling — no automated compliance evidence collection or export. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <th scope="row" style="font-weight:700; color: var(--color-primary-light);">Compliance Automation</th>
             <td class="col-flafka check"><a href="security.html" style="color: inherit; text-decoration: underline;">&#10003; Scheduled</a></td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No compliance automation — no scheduled compliance checks or automated reporting. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="partial">Partial</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No compliance automation — no scheduled compliance jobs or automated evidence generation. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <th scope="row" style="font-weight:700; color: var(--color-primary-light);">SOC 2 Controls Mapping</th>
             <td class="col-flafka check"><a href="blog/soc2-kafka.html" style="color: inherit; text-decoration: underline;">&#10003; 9 controls</a></td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No SOC 2 controls mapping — no built-in compliance framework alignment. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No SOC 2 controls mapping — no compliance framework alignment or audit support. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
             <th scope="row" style="font-weight:700; color: var(--color-primary-light);">RBAC Audit Logging</th>
             <td class="col-flafka check"><a href="security.html" style="color: inherit; text-decoration: underline;">&#10003; Yes</a></td>
             <td class="cross">No</td>
             <td class="partial">Basic</td>
-            <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No RBAC audit logging — LDAP auth only; no resource-level access logging. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="partial">Enterprise</td>
-            <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No RBAC audit logging — OAuth 2.0 role mapping available but no audit log of access decisions. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <!-- MSK Support (W94-2) -->
           <tr>
@@ -515,22 +555,60 @@
             <td class="col-flafka"><a href="integrations.html" style="color: var(--color-primary-light); text-decoration: underline;">Coming Soon</a></td>
             <td class="cross">No (CC only)</td>
             <td class="check">&#10003; Yes (SASL/IAM)</td>
-            <td class="check">&#10003; Yes (OSS)</td>
+            <td class="check" title="AKHQ: Connects to any Kafka-compatible broker including MSK">&#10003; Yes (OSS)</td>
             <td class="cross">No</td>
             <td class="partial">Partial</td>
             <td class="check">&#10003; Yes</td>
-            <td class="check">&#10003; Yes (OSS)</td>
+            <td class="check" title="Kafka UI: Connects to any Kafka-compatible broker including MSK">&#10003; Yes (OSS)</td>
           </tr>
           <tr>
             <td>Embedded CLI</td>
             <td class="col-flafka check">&#10003; Built-in terminal, 6 resource types, tab completion</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="AKHQ: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="Kafka UI: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/provectus/kafka-ui">No</td>
+          </tr>
+          <!-- AI PII Detection / Data Loss Prevention (W98-3) -->
+          <tr class="compare-section-header">
+            <th scope="col" colspan="9" style="font-weight:700; color: var(--color-primary-light); font-size: var(--text-lg); padding-top: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary); text-align: left;">Data Protection &amp; DLP</th>
+          </tr>
+          <tr>
+            <td>
+              <button class="compare-expand-btn" aria-expanded="false" aria-controls="pii-dlp-detail" title="Click to see AI PII Detection capabilities">
+                AI PII Detection (Kafka DLP)
+                <span class="compare-expand-icon" aria-hidden="true">&#9660;</span>
+              </button>
+              <div id="pii-dlp-detail" class="compare-expand-detail" role="region" aria-labelledby="pii-dlp-label" hidden>
+                <span id="pii-dlp-label" class="sr-only">AI PII Detection details</span>
+                <ul style="margin: var(--space-sm) 0 0; padding-left: 1.2em; font-size: var(--text-xs); color: var(--text-secondary);">
+                  <li>Hybrid regex + ML detection engine</li>
+                  <li>13 PII types: SSN, credit card, email, phone, passport, IBAN, driver license, date of birth, IP address, MAC address, medical record number, tax ID, national ID</li>
+                  <li>Sub-microsecond latency per message</li>
+                  <li>Producer blocking mode (prevent PII from reaching Kafka)</li>
+                  <li>Compliance reports: GDPR, HIPAA, PCI-DSS</li>
+                  <li>Self-training feedback loop</li>
+                  <li>Fully air-gapped &mdash; no data leaves your network</li>
+                </ul>
+              </div>
+            </td>
+            <td class="col-flafka check"><a href="blog/kafka-dlp.html" style="color: inherit; text-decoration: underline;" title="Flafka AI PII Detection — the only Kafka admin tool with AI-powered PII detection">&#10003; 13 PII types, ML + regex</a></td>
+            <td class="cross" title="Confluent has Stream Governance but no AI PII detection in the console">No</td>
+            <td class="cross" title="Conduktor Gateway has CSFLE data masking but no automatic PII detection">No <span style="font-size: var(--text-xs); color: var(--text-muted);">(CSFLE masking only)</span></td>
+            <td class="cross" title="AKHQ: No AI PII detection — no data loss prevention or automatic PII scanning in messages. See github.com/tchiotludo/akhq">No</td>
             <td class="cross">No</td>
             <td class="cross">No</td>
+            <td class="cross" title="Lenses.io has data policies but no AI-powered PII detection">No</td>
+            <td class="cross" title="Kafka UI: Has display-level field masking via regex patterns but no AI-powered PII detection or DLP. See github.com/provectus/kafka-ui">No <span style="font-size: var(--text-xs); color: var(--text-muted);">(display masking only)</span></td>
+          </tr>
+          <tr>
+            <td colspan="9" style="text-align: center; padding: var(--space-sm) 0; font-size: var(--text-sm);">
+              <strong style="color: var(--color-primary-light);">The only Kafka admin tool with AI-powered PII detection.</strong>
+              <a href="features.html#data-protection" class="text-link" style="margin-left: var(--space-sm);">See Data Protection features &rarr;</a>
+            </td>
           </tr>
           <tr>
             <td style="font-weight:700; color: var(--color-primary-light);">Price</td>
@@ -547,7 +625,7 @@
       </table>
     </div>
 
-    <p style="text-align: center; color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-lg);">Based on feature analysis of 6 Kafka admin tools, May 2027.</p>
+    <p style="text-align: center; color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-lg);">Based on feature analysis of 7 Kafka admin tools, April 2026. <span style="opacity: 0.7;">Last updated: April 2026</span></p>
 
     <!-- FAQ Section (W94-2b) -->
     <div style="max-width: 720px; margin: var(--space-3xl) auto 0;">
@@ -571,6 +649,13 @@
         <summary class="faq-item__question">How much does Flafka cost vs Conduktor?</summary>
         <div class="faq-item__answer">
           <p>Flafka's Team tier is <strong>$19/seat/mo</strong> vs Conduktor's ~$25/seat/mo &mdash; a <strong>24% savings</strong>. Flafka also offers 18+ unique features that Conduktor does not have (FinOps, compliance automation, SLO tracking, and more). See the <a href="pricing.html" style="color: var(--color-primary-light); text-decoration: underline;">pricing page</a> for full details.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">Which Kafka tool has PII detection?</summary>
+        <div class="faq-item__answer">
+          <p>Flafka is the <strong>only</strong> Kafka admin tool with AI-powered PII detection. It uses a hybrid regex + ML engine to detect <strong>13 PII types</strong> (SSN, credit card, email, phone, passport, and more) with sub-microsecond latency. Features include producer blocking mode, <a href="blog/kafka-dlp.html" style="color: var(--color-primary-light); text-decoration: underline;">GDPR/HIPAA/PCI-DSS compliance reports</a>, and fully air-gapped operation. See the <a href="features.html#data-protection" style="color: var(--color-primary-light); text-decoration: underline;">Data Protection features</a> for details.</p>
         </div>
       </details>
     </div>
@@ -931,5 +1016,19 @@
 
 <script src="js/main.js"></script>
 <script src="js/signup.js"></script>
+<script>
+/* W96-3: Toggle expand button for FinOps detail in comparison table */
+document.querySelectorAll('.compare-expand-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    var targetId = btn.getAttribute('aria-controls');
+    var detail = document.getElementById(targetId);
+    if (detail) {
+      btn.setAttribute('aria-expanded', String(!expanded));
+      detail.hidden = expanded;
+    }
+  });
+});
+</script>
 </body>
 </html>
