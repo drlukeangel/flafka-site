@@ -46,7 +46,7 @@
       "Role-Based Data Masking — RBAC-integrated field masking for viewer and operator roles",
       "Compliance Reporting with audit trail and SOC 2 readiness",
       "Topic Management with CRUD, config editing, and message browser",
-      "Connection Profiles for multi-cluster management",
+      "Multi-Cluster Registry — persistent cluster profiles with AES-256-GCM encrypted credentials, environment grouping, cluster-scoped RBAC, and cross-cluster overview dashboard",
       "Shareable Analytics and dashboard snapshots",
       "Dark Mode with system preference detection",
       "Desktop App via Tauri (Windows, macOS, Linux)",
@@ -347,6 +347,46 @@
       </div>
     </div>
 
+    <!-- Feature 5b: Service Accounts -->
+    <div class="feature-section animate-in">
+      <div class="feature-section__content">
+        <span class="badge-unique" style="margin-bottom: var(--space-md);">No competitor has this</span>
+        <h3>Service Accounts (M2M Auth)</h3>
+        <p>
+          Machine-to-machine authentication for CI/CD pipelines, scripts, and Gateway integrations. Service accounts use the OAuth 2.0 <code>client_credentials</code> grant &mdash; no human login required. Each account is RBAC-scoped through the Permission Tree, so automated pipelines get the minimum permissions they need and nothing more.
+        </p>
+        <ul>
+          <li>OAuth 2.0 <code>client_credentials</code> grant for M2M auth</li>
+          <li>RBAC-scoped via Permission Tree (inherits cluster + environment scoping)</li>
+          <li>API key + secret issuance with one-click secret rotation</li>
+          <li>Gateway SASL integration &mdash; service accounts authenticate directly at the broker proxy</li>
+          <li>Audit trail: every service account action logged for compliance</li>
+        </ul>
+        <details class="feature-expand">
+          <summary>Learn more</summary>
+          <div class="feature-expand__content">
+            <h4>CI/CD and automation use cases</h4>
+            <p>Service accounts let your automation infrastructure authenticate to Flafka without storing human credentials in CI/CD secrets. A deploy pipeline needs to create a topic and validate schema compatibility? Create a service account with exactly those permissions, issue a key+secret, and rotate it on a schedule &mdash; zero human credential exposure.</p>
+            <p>Because service accounts are scoped through the Permission Tree, they inherit the same cluster and environment boundaries as human users. A service account granted access to <code>staging</code> cannot accidentally affect <code>production</code> even if its credentials are reused across pipelines.</p>
+            <p>For Gateway integrations, service accounts support SASL OAUTHBEARER mode &mdash; the service account JWT is validated at the Kafka proxy layer, providing end-to-end token-based auth from client to broker without modifying broker configuration.</p>
+            <div class="feature-expand__cta">
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Set Up Service Accounts &mdash; Start Free Trial</a>
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="feature-section__media">
+        <div class="screenshot-frame">
+          <div class="screenshot-frame__bar">
+            <span class="screenshot-frame__dot screenshot-frame__dot--red"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--yellow"></span>
+            <span class="screenshot-frame__dot screenshot-frame__dot--green"></span>
+          </div>
+          <img src="assets/screenshots/ws1-resource-patterns-dark.png" alt="Service accounts M2M auth — API key management with RBAC scoping and secret rotation" loading="lazy">
+        </div>
+      </div>
+    </div>
+
     <!-- Feature 6: SLO Tracking -->
     <div class="feature-section animate-in">
       <div class="feature-section__content">
@@ -608,8 +648,8 @@
       </div>
       <div class="feature-card animate-in" data-delay="2">
         <div class="feature-card__icon">&#127760;</div>
-        <h3 class="feature-card__title">Connection Profiles</h3>
-        <p class="feature-card__desc">Switch between multiple Confluent Cloud clusters instantly. Save and manage connection configurations.</p>
+        <h3 class="feature-card__title">Multi-Cluster Registry</h3>
+        <p class="feature-card__desc">Manage multiple Kafka clusters simultaneously. Persistent cluster registry with AES-256-GCM encrypted credentials. Environment grouping for staging/prod cluster sets with shared Schema Registry and Flink context. Cluster-scoped RBAC and cross-cluster overview dashboard.</p>
       </div>
       <div class="feature-card animate-in" data-delay="3">
         <div class="feature-card__icon">&#128279;</div>
