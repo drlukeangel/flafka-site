@@ -39,7 +39,7 @@
       "Flink SQL IDE with real-time CFU cost estimation",
       "Spend Dashboard with drill-down FinOps for Kafka",
       "Connector Monitoring with throughput and error tracking",
-      "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), and full audit trail",
+      "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), Team Cluster Access Panel (grant/revoke cluster access per team), and full audit trail",
       "Service Accounts (M2M auth) — OAuth 2.0 client_credentials grant, RBAC-scoped, API key + secret with rotation, Gateway SASL OAUTHBEARER integration",
       "Flafka Gateway — Rust-native Kafka TCP proxy, <1ms p99 latency, no JVM/GC pauses, SASL/OIDC auth, metadata rewriting, dual-write DR at 40k msg/s, Helm/K8s deploy, Prometheus metrics included",
       "flafka-client — custom Rust Kafka client (not rskafka), plain Apache Kafka connectivity without Confluent auth, produce/consume/transactions/SCRAM/admin ops/share groups, powers gateway dual-write DR",
@@ -62,6 +62,7 @@
       "Alert Routing Rules — per-rule Slack/email/Kafka topic routing with distinct webhook URLs per destination",
       "Schema Evolution DQ Impact Analysis — impact report showing which DQ rules break when a schema changes, before the change is applied",
       "Batch DQ Rule Creation from CSV — import up to 200 DQ rules at once via CSV upload",
+      "DQ Coverage Report — dashboard showing rules-configured vs uncovered topics, filterable by topic pattern, team, and environment",
       "Cost Anomaly Detection and threshold alerts",
       "Slack Delivery History — per-channel alert delivery log with timestamp, status (delivered/failed/retried), and filter by alert type and destination",
       "Cluster Overview Dashboard — health cards and consumer lag table across all registered clusters",
@@ -820,6 +821,11 @@
         <div class="feature-card__icon">&#128196;</div>
         <h3 class="feature-card__title">Batch DQ Rule Import (CSV)</h3>
         <p class="feature-card__desc">Upload up to 200 DQ rules at once via CSV. Migrate from existing DQ systems or bulk-create rules for new pipelines without clicking through the UI one rule at a time.</p>
+      </div>
+      <div class="feature-card animate-in" data-delay="2">
+        <div class="feature-card__icon">&#128202;</div>
+        <h3 class="feature-card__title">DQ Coverage Report</h3>
+        <p class="feature-card__desc">Coverage dashboard showing which topics have DQ rules configured vs uncovered. Surface blind spots before they become incidents. Filterable by topic pattern, team, and environment.</p>
       </div>
     </div>
   </div>
