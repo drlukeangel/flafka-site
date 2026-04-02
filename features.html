@@ -41,6 +41,7 @@
       "Connector Monitoring with throughput and error tracking",
       "Permission Tree RBAC — hierarchical node-based permissions with parent inheritance, cluster and environment scoping, OIDC provider integration (RS256 JWTs, JWKS endpoint), and full audit trail",
       "Service Accounts (M2M auth) — OAuth 2.0 client_credentials grant, RBAC-scoped, API key + secret with rotation, Gateway SASL OAUTHBEARER integration",
+      "Flafka Gateway — Rust-native Kafka TCP proxy, <1ms p99 latency, no JVM/GC pauses, SASL/OIDC auth, metadata rewriting, dual-write DR at 40k msg/s, Helm/K8s deploy, Prometheus metrics included",
       "SLO Tracking with error budgets and Prometheus export",
       "AI PII Detection — hybrid regex + ML detection of 13 PII types with sub-microsecond latency and producer blocking",
       "Schema-Aware Masking Rules — 6 masking operations with schema evolution impact analysis",
@@ -432,6 +433,83 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- Flafka Gateway Section -->
+<section class="section" id="gateway" style="background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Flafka Gateway</div>
+      <h2 class="section-header__title">A Rust-Native Kafka Proxy. <span class="text-gradient">No JVM. No GC Pauses.</span></h2>
+      <p class="section-header__desc">
+        Drop-in replacement for Conduktor Gateway &mdash; at a fraction of the cost. Flafka Gateway is a wire-protocol Kafka TCP proxy built entirely in Rust: <strong>&lt;1ms p99</strong> passthrough latency, zero garbage collection pauses, and POC-proven dual-write DR at 40k msg/s with zero latency overhead.
+        <br><br>
+        <strong>Conduktor Console + Gateway: $1,750+/mo. Flafka + Gateway: $99/mo.</strong>
+      </p>
+    </div>
+
+    <div class="feature-section animate-in">
+      <div class="feature-section__content">
+        <span class="badge-unique" style="margin-bottom: var(--space-md);">The only Rust Kafka gateway</span>
+        <h3>Flafka Gateway</h3>
+        <p>
+          Every competing Kafka gateway &mdash; Conduktor, Confluent CP Gateway, Kroxylicious &mdash; runs on the JVM. JVM means GC pauses, heap tuning, and latency spikes under load. Flafka Gateway is written entirely in Rust: deterministic latency at any throughput, a single static binary, and native integration with the Flafka management UI.
+        </p>
+        <ul>
+          <li>Wire-protocol Kafka TCP proxy &mdash; transparent to producers and consumers</li>
+          <li>&lt;1ms p99 passthrough latency &mdash; zero GC pauses, no heap tuning required</li>
+          <li>SASL/SCRAM auth, OIDC OAUTHBEARER (Mode 2) &mdash; service account JWT validation at proxy layer</li>
+          <li>Metadata rewriting &mdash; expose broker topology without leaking internal addresses</li>
+          <li>Connection pooling for multi-tenant cluster isolation</li>
+          <li>Dual-write DR mode &mdash; POC-proven at 40k msg/s with zero latency overhead</li>
+          <li>Ships as single binary + Helm chart + K8s manifests &mdash; deploy in minutes</li>
+          <li>Prometheus metrics built in &mdash; drop into existing observability stack</li>
+          <li>Included in Flafka platform &mdash; not a separate SKU</li>
+        </ul>
+        <details class="feature-expand">
+          <summary>Learn more</summary>
+          <div class="feature-expand__content">
+            <h4>Why Rust matters for a Kafka proxy</h4>
+            <p>A Kafka gateway sits in the hot path of every produce and consume request. JVM-based gateways introduce latency jitter from garbage collection &mdash; a 50ms GC pause on a gateway serving 40k msg/s is a 2,000-message stall. Rust's ownership model eliminates the heap entirely: no GC, no pauses, and memory safety guaranteed at compile time.</p>
+            <p>Flafka Gateway passes the Kafka wire protocol through with metadata rewriting &mdash; your clients connect to the gateway address and see a normal Kafka cluster. Topic routing, partition leadership, and consumer group coordination all work unchanged. No client-side SDK changes required.</p>
+            <h4>Dual-write DR architecture</h4>
+            <p>Flafka Gateway's dual-write mode writes every produced message to two clusters simultaneously &mdash; primary and standby &mdash; at the proxy layer. No application changes required. The POC achieved 40k msg/s sustained dual-write with zero additional latency overhead. Combined with Flafka's DR Monitoring Dashboard (lag delta, ISR health, failover thresholds), this is an end-to-end active-active DR solution for Kafka without Confluent Cluster Linking costs.</p>
+            <h4>Auth integration</h4>
+            <p>Service accounts created in Flafka authenticate directly at the Gateway via SASL OAUTHBEARER Mode 2 &mdash; the RS256 JWT issued by Flafka's built-in OIDC provider is validated at the proxy, enforcing Permission Tree RBAC without modifying broker ACLs. One auth system governs both the management UI and the data plane.</p>
+            <div class="feature-expand__cta">
+              <a href="pricing.html" class="btn btn--secondary btn--sm">See Gateway Pricing &rarr;</a>
+              <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger style="margin-left: var(--space-sm);">Start Free Trial</a>
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="feature-section__media">
+        <div style="padding: var(--space-xl); background: var(--bg-secondary); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-lg);">
+            <div style="text-align: center;">
+              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-primary-light); font-family: var(--font-mono);">&lt;1ms</div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">p99 passthrough latency</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-primary-light); font-family: var(--font-mono);">40k</div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">msg/s dual-write DR (POC)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-success); font-family: var(--font-mono);">0</div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">GC pauses (Rust, no JVM)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-success); font-family: var(--font-mono);">17&times;</div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">cheaper than Conduktor Gateway</div>
+            </div>
+          </div>
+          <div style="text-align: center; padding-top: var(--space-md); border-top: 1px solid var(--border-subtle);">
+            <span style="font-size: var(--text-sm); color: var(--text-secondary);">vs Conduktor Console + Gateway ($1,750+/mo)</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
