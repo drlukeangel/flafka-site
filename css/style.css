@@ -1566,6 +1566,37 @@ code, .mono {
   width: 100%;
 }
 
+.demo-coming-soon {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+}
+
+.demo-coming-soon__icon {
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+.demo-coming-soon__label {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.demo-coming-soon__sub {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
 .demo-video-placeholder {
   position: relative;
   width: 100%;
