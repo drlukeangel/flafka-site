@@ -152,9 +152,13 @@ code, .mono {
 .btn--ghost {
   background: transparent;
   color: var(--text-secondary);
+  border: 1px solid var(--border-default);
   padding: 0.5rem 1rem;
 }
-.btn--ghost:hover { color: var(--text-primary); }
+.btn--ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
 
 .btn--lg {
   padding: 1rem 2.25rem;
@@ -4659,6 +4663,18 @@ code, .mono {
   background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
 }
 
+[data-theme="light"] .hero__mascot {
+  filter: drop-shadow(0 6px 24px rgba(30, 20, 60, 0.38)) drop-shadow(0 2px 6px rgba(30, 20, 60, 0.22));
+}
+
+[data-theme="light"] .footer__mascot {
+  filter: drop-shadow(0 4px 12px rgba(30, 20, 60, 0.32));
+}
+
+[data-theme="light"] .nav__logo-mascot {
+  filter: drop-shadow(0 1px 5px rgba(30, 20, 60, 0.30));
+}
+
 [data-theme="light"] .btn--secondary {
   border-color: var(--border-default);
   color: var(--text-primary);
@@ -4759,6 +4775,15 @@ code, .mono {
   }
   :root:not([data-theme="dark"]) .hero__mascot-glow {
     background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  }
+  :root:not([data-theme="dark"]) .hero__mascot {
+    filter: drop-shadow(0 6px 24px rgba(30, 20, 60, 0.38)) drop-shadow(0 2px 6px rgba(30, 20, 60, 0.22));
+  }
+  :root:not([data-theme="dark"]) .footer__mascot {
+    filter: drop-shadow(0 4px 12px rgba(30, 20, 60, 0.32));
+  }
+  :root:not([data-theme="dark"]) .nav__logo-mascot {
+    filter: drop-shadow(0 1px 5px rgba(30, 20, 60, 0.30));
   }
   :root:not([data-theme="dark"]) .btn--secondary {
     border-color: var(--border-default);

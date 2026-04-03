@@ -10,16 +10,39 @@
     var els = document.querySelectorAll('.animate-in');
     if (!els.length) return;
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    // prefers-reduced-motion: make everything visible immediately.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
 
-    els.forEach(function (el) { observer.observe(el); });
+    // Defer until after first paint — ensures getBoundingClientRect values are stable and the IO root
+    // geometry is correct before any observations are registered.
+    requestAnimationFrame(function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+        // rootMargin '0px 0px 300px 0px' pre-triggers elements 300px before they
+        // reach the viewport bottom edge — ensures scroll animations fire early enough
+        // to prevent visible blank flashes on normal scroll speed.
+      }, { threshold: 0, rootMargin: '0px 0px 300px 0px' });
+
+      els.forEach(function (el) { observer.observe(el); });
+
+      // Safety fallback: if IO hasn't made all elements visible within 3 seconds
+      // mark remaining elements visible so sections never stay blank indefinitely.
+      setTimeout(function () {
+        els.forEach(function (el) {
+          if (!el.classList.contains('visible')) {
+            el.classList.add('visible');
+          }
+        });
+      }, 3000);
+    });
   }
 
   // --- Mobile nav toggle ---
