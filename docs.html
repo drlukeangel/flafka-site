@@ -50,44 +50,38 @@
   }
   </script>
 
-  <!-- JSON-LD: HowTo (AI-SEO reviewer advisory #2) -->
+  <!-- JSON-LD: HowTo — 4-step Confluent Cloud quick-start (mandated by PRD v4/AI-SEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Set Up Flafka for Kafka Management",
-    "description": "A 5-step guide to go from zero to managing Kafka clusters with Flafka in under 5 minutes.",
+    "name": "How to Connect Flafka to Confluent Cloud in 5 Minutes",
+    "description": "A 4-step guide to install Flafka, connect to Confluent Cloud, browse topics, and create your first Data Quality rule.",
     "totalTime": "PT5M",
     "step": [
       {
         "@type": "HowToStep",
-        "name": "Launch Flafka",
-        "text": "Run the Docker one-liner or download the desktop app to start Flafka in about 30 seconds.",
+        "name": "Install Flafka Desktop or open the web app",
+        "text": "Install Flafka Desktop or open the web app at app.flafka.dev in your browser.",
         "position": 1
       },
       {
         "@type": "HowToStep",
-        "name": "Add Confluent Cloud Credentials",
-        "text": "Enter your Confluent Cloud API key, secret, and bootstrap server to connect Flafka to your clusters.",
+        "name": "Connect to Confluent Cloud",
+        "text": "Connect to Confluent Cloud — click 'Add Cluster', paste your bootstrap server (pkc-xxxx.region.confluent.cloud:9092), add API key + secret, click 'Test Connection'.",
         "position": 2
       },
       {
         "@type": "HowToStep",
         "name": "Browse Topics",
-        "text": "View all your Kafka topics with real-time message counts, partition details, and schema information.",
+        "text": "Browse topics — click any topic in the sidebar to open the Message Browser with offset navigation, key prefix, value contains, and time range filters.",
         "position": 3
       },
       {
         "@type": "HowToStep",
-        "name": "Write Flink SQL",
-        "text": "Use the built-in SQL editor with autocomplete to write and execute Flink SQL statements against your streams.",
+        "name": "Create your first Data Quality rule",
+        "text": "Create your first Data Quality rule — navigate to Data Quality → Rules, click 'Add Rule', choose topic, field, and condition (e.g. email format), save.",
         "position": 4
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Set Up SLO Monitoring",
-        "text": "Configure service level objectives for consumer lag, throughput, and error rates with alerting.",
-        "position": 5
       }
     ]
   }
@@ -177,6 +171,8 @@
     <ul class="nav__links">
       <li><a href="features.html">Features</a></li>
       <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="tour.html">Interactive Tour</a></li>
+      <li><a href="multi-vendor.html">Platforms</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html">Security</a></li>
@@ -201,6 +197,8 @@
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="data-governance.html">Data Governance</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
   <a href="security.html">Security</a>
@@ -230,6 +228,168 @@
         Everything you need to install, configure, and start managing your Kafka clusters.
         Unlike Conduktor (requires Docker Compose + Kafka Connect), Flafka runs with a single Docker command and zero configuration files.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Get Started in 5 Minutes (Confluent Cloud Quick-Start) ===== -->
+<section class="section" id="quickstart" style="background: var(--bg-surface, var(--bg-elevated));">
+  <div class="container">
+    <h2 class="section__title animate-in">Get Started in 5 Minutes</h2>
+    <p class="section__subtitle animate-in">Connect Flafka to Confluent Cloud, browse your topics, and create your first Data Quality rule — without reading a 200-page manual.</p>
+
+    <div class="docs-steps animate-in" style="margin-top: var(--space-xl);">
+
+      <div class="docs-step animate-in">
+        <div class="docs-step__number">1</div>
+        <div class="docs-step__content">
+          <h3>Install Flafka Desktop (or use the web app)</h3>
+          <p>Download the Flafka desktop app for your platform, or open <a href="https://app.flafka.dev" target="_blank" rel="noopener">app.flafka.dev</a> in your browser. The web app requires no installation.</p>
+          <div class="code-block" aria-label="Flafka download options">
+            <pre><code># Download from:
+https://flafka.dev/signup
+
+# Or open in browser:
+https://app.flafka.dev</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-step animate-in">
+        <div class="docs-step__number">2</div>
+        <div class="docs-step__content">
+          <h3>Connect to Confluent Cloud</h3>
+          <p>Click <strong>"Add Cluster"</strong> in the Connection Registry. Paste your Confluent Cloud bootstrap server, add your API key and secret (from the Confluent Cloud console), then click <strong>"Test Connection"</strong> — should show green in under 2 seconds.</p>
+          <div class="code-block" aria-label="Confluent Cloud bootstrap server format">
+            <pre><code># Bootstrap server format:
+pkc-xxxx.region.confluent.cloud:9092
+
+# API key + secret: from
+# Confluent Cloud → API Keys → Create Key</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-step animate-in">
+        <div class="docs-step__number">3</div>
+        <div class="docs-step__content">
+          <h3>Browse Topics</h3>
+          <p>Your topics appear in the sidebar under your cluster name. Click any topic to open the <strong>Message Browser</strong> with offset navigation. Use filters: key prefix, value contains, time range.</p>
+        </div>
+      </div>
+
+      <div class="docs-step animate-in">
+        <div class="docs-step__number">4</div>
+        <div class="docs-step__content">
+          <h3>Create Your First Data Quality Rule</h3>
+          <p>Navigate to <strong>Data Quality &rarr; Rules</strong>. Click <strong>"Add Rule"</strong>, choose your topic, field, and condition (e.g. email format). Save — the rule evaluates on the next message batch.</p>
+          <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-secondary);">
+            This guide uses the <strong>Free Starter tier</strong>. No credit card required.
+            <a href="signup.html" class="cta-link" style="margin-left: var(--space-xs);">Start free &rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- "What this means" callout -->
+    <div class="animate-in" style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, var(--color-primary-subtle, rgba(99,102,241,0.1))); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: var(--space-xl); max-width: 720px;">
+      Conduktor and Lenses have full docs sites. Flafka's quick-start gets you from zero to a working Confluent Cloud connection in 5 minutes — without reading a 200-page manual.
+    </div>
+
+    <!-- Dual CTA -->
+    <div class="docs-cta-block animate-in" style="margin-top: var(--space-xl);">
+      <h3>Ready to connect your cluster?</h3>
+      <div class="docs-cta-actions">
+        <a href="signup.html" data-signup-trigger class="btn btn--primary btn--lg">Start Free Trial &rarr;</a>
+        <a href="contact.html" class="btn btn--secondary btn--lg">Request Enterprise Demo &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Feature Documentation Links ===== -->
+<section class="section" id="feature-docs">
+  <div class="container">
+    <h2 class="section__title animate-in">Feature Documentation</h2>
+    <p class="section__subtitle animate-in">Jump to the feature you need.</p>
+    <div class="grid grid--3 animate-in" style="margin-top: var(--space-lg);">
+      <a href="features.html#topics" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x1F4C1;</div>
+        <div class="card__title">Topic Management</div>
+        <div class="card__desc">CRUD, config editing, message browser, offset navigation.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+      <a href="features.html#schema" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x1F9E9;</div>
+        <div class="card__title">Schema Registry</div>
+        <div class="card__desc">Schema evolution, impact analysis, blast radius visualization.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+      <a href="features.html#flink" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x26A1;</div>
+        <div class="card__title">Flink SQL IDE</div>
+        <div class="card__desc">Real-time SQL editor with autocomplete and CFU cost estimation.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+      <a href="features.html#data-quality" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x1F4CA;</div>
+        <div class="card__title">Data Quality</div>
+        <div class="card__desc">Rules engine, DQ violations trend, batch import, coverage report.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+      <a href="features.html#slo" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x1F6A6;</div>
+        <div class="card__title">SLO Monitoring</div>
+        <div class="card__desc">Error budgets, Prometheus export, consumer lag SLOs.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+      <a href="features.html#finops" class="card" style="text-decoration: none;">
+        <div class="card__icon">&#x1F4B0;</div>
+        <div class="card__title">Spend Dashboard</div>
+        <div class="card__desc">FinOps for Kafka — anomaly detection, forecasting, team allocation.</div>
+        <span class="cta-link">View guide &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== API Reference Stub ===== -->
+<section class="section" id="api-reference" style="background: var(--bg-surface, var(--bg-elevated));">
+  <div class="container">
+    <h2 class="section__title animate-in">API Reference</h2>
+    <p class="section__subtitle animate-in">The Flafka REST API covers topic management, schema registry operations, data quality rules, connectors, and Flink SQL statement management.</p>
+    <div class="animate-in" style="max-width: 720px; margin: 0 auto;">
+      <div class="code-block" aria-label="Flafka API reference endpoints">
+        <div class="code-block__header">
+          <span class="code-block__lang">text</span>
+        </div>
+        <pre><code># REST API (at your Flafka instance):
+http://localhost:8080/api/v1
+
+# OpenAPI spec:
+http://localhost:8080/api/v1/openapi.json
+
+# Full API reference documentation: coming soon.</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Need Help ===== -->
+<section class="section" id="need-help">
+  <div class="container">
+    <h2 class="section__title animate-in">Need Help?</h2>
+    <div class="grid grid--2 animate-in" style="margin-top: var(--space-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
+      <a href="community.html" class="card" style="text-decoration: none; text-align: center;">
+        <div class="card__icon">&#x1F465;</div>
+        <div class="card__title">Join the community</div>
+        <div class="card__desc">GitHub Discussions and Discord — answers from the team and other users.</div>
+      </a>
+      <a href="about.html#contact" class="card" style="text-decoration: none; text-align: center;">
+        <div class="card__icon">&#x1F4E7;</div>
+        <div class="card__title">Contact support</div>
+        <div class="card__desc">Direct support for Pro/Team and Enterprise accounts.</div>
+      </a>
     </div>
   </div>
 </section>
@@ -644,7 +804,9 @@ GROUP BY TUMBLE(ts, INTERVAL '1' MINUTE);</code></pre>
         <h4>Product</h4>
         <ul>
           <li><a href="features.html">Features</a></li>
-      <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="demo.html">Demos</a></li>
           <li><a href="video-library.html">Feature Videos</a></li>

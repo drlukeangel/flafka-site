@@ -24,13 +24,13 @@
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- JSON-LD WebPage -->
+  <!-- JSON-LD WebPage + SoftwareApplication featureList -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Security & Compliance",
-    "description": "Flafka enterprise security and compliance page covering PCI-DSS, SOX, SOC 2, HIPAA, and GDPR alignment.",
+    "description": "Flafka enterprise security and compliance page covering PCI-DSS, SOX, SOC 2, HIPAA, and GDPR alignment. Includes OIDC identity provider with RS256 JWTs, JWKS endpoint, and Gateway OAUTHBEARER Mode 2.",
     "url": "https://flafka.dev/security.html",
     "publisher": {
       "@type": "Organization",
@@ -39,7 +39,47 @@
         "@type": "ImageObject",
         "url": "https://flafka.dev/assets/flafka-mascot.png"
       }
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Flafka",
+      "featureList": [
+        "OIDC Provider — RS256-signed JWTs for users and service accounts, JWKS endpoint at /api/v1/auth/.well-known/jwks.json",
+        "JWKS Endpoint — /api/v1/auth/.well-known/jwks.json enables Kafka clients to use Flafka-issued tokens for SASL/OAUTHBEARER",
+        "OAUTHBEARER Authentication — Gateway OAUTHBEARER Mode 2 with Flafka-issued JWTs, no third-party IdP required for dev/staging",
+        "Resource-Level RBAC",
+        "Session Audit Trail",
+        "IP Anonymization (GDPR)",
+        "AES-256-GCM Credential Encryption",
+        "SAML SSO (Enterprise, roadmap)"
+      ]
     }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage — OIDC Provider Q&As -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Flafka support OIDC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka acts as an OIDC identity provider, issuing RS256-signed JWTs for users and service accounts. The JWKS endpoint at /api/v1/auth/.well-known/jwks.json enables Kafka clients to use Flafka-issued tokens for Gateway OAUTHBEARER Mode 2 authentication."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Flafka as the OIDC provider for Kafka SASL/OAUTHBEARER?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka Gateway OAUTHBEARER Mode 2 lets producers and consumers authenticate using Flafka-issued JWTs — no third-party IdP required for dev and staging environments. For production, integrate with Okta, Azure AD, Auth0, or Keycloak via Flafka's OIDC upstream configuration."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -55,6 +95,8 @@
     <ul class="nav__links">
       <li><a href="features.html">Features</a></li>
       <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="tour.html">Interactive Tour</a></li>
+      <li><a href="multi-vendor.html">Platforms</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html" class="active">Security</a></li>
@@ -79,6 +121,8 @@
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="data-governance.html">Data Governance</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
   <a href="security.html">Security</a>
@@ -256,6 +300,45 @@
         </ul>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ===== OIDC Identity Provider Section ===== -->
+<section class="section" id="oidc-provider">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Identity &amp; Authentication</div>
+      <h2 class="section-header__title">Flafka as an <span class="text-gradient">OIDC Identity Provider</span></h2>
+      <p class="section-header__desc">
+        Flafka issues RS256-signed JWTs for authenticated users and service accounts — eliminating the need for a third-party IdP in dev and staging environments.
+      </p>
+    </div>
+
+    <div class="feature-section animate-in">
+      <div class="feature-section__content">
+        <ul>
+          <li><strong>RS256-signed JWTs</strong> — Flafka issues RS256 JWTs for all authenticated users and service accounts</li>
+          <li><strong>JWKS endpoint</strong> — available at <code>/api/v1/auth/.well-known/jwks.json</code> — configure your Kafka clients to use Flafka as the token authority</li>
+          <li><strong>Gateway OAUTHBEARER Mode 2</strong> — producers and consumers authenticate to Flafka Gateway using Flafka-issued tokens. No third-party IdP required for dev/staging environments</li>
+          <li><strong>Production OIDC integration</strong> — integrate with your existing OIDC provider (Okta, Azure AD, Auth0, Keycloak) via Flafka's OIDC upstream configuration</li>
+          <li><strong>SAML 2.0</strong> — on roadmap. <a href="contact.html">Contact enterprise sales &rarr;</a></li>
+        </ul>
+
+        <p style="margin-top: var(--space-md); color: var(--text-secondary); font-size: var(--text-sm);">
+          <strong>OIDC Provider:</strong> Pro/Team and Enterprise. <a href="pricing.html">See pricing &rarr;</a>
+        </p>
+
+        <!-- "What this means" callout -->
+        <div style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, var(--color-primary-subtle, rgba(99,102,241,0.1))); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: var(--space-lg);">
+          Conduktor and Redpanda Console both require an external identity provider. Flafka includes its own OIDC issuer — dev and staging environments have zero external IdP dependency. For production, integrate with Okta, Azure AD, Auth0, or Keycloak via Flafka's OIDC upstream configuration.
+        </div>
+
+        <div style="margin-top: var(--space-lg); display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center;">
+          <a href="gateway.html" class="btn btn--secondary">See Gateway OAUTHBEARER &rarr;</a>
+          <a href="contact.html" class="btn btn--primary" data-signup-trigger>Request Enterprise Demo &rarr;</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -729,6 +812,67 @@
 }
 </script>
 
+<!-- SOC 2 Controls Mapping Download (Sprint 103) -->
+<section class="section" id="soc2-controls-mapping" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="whitepaper-download animate-in">
+      <div class="whitepaper-download__content">
+        <div class="whitepaper-download__badge">NEW</div>
+        <h2 class="whitepaper-download__title">Download SOC 2 Controls Mapping</h2>
+        <p class="whitepaper-download__desc">
+          A complete mapping of Flafka's 13 compliance building blocks to SOC 2 Trust Services Criteria — formatted for GRC teams and ARB vendor assessments. Covers CC6, CC7, C1, A1, CC4, CC2, and P8 criteria with implementation notes.
+        </p>
+        <ul class="whitepaper-download__highlights">
+          <li>All 13 compliance building blocks mapped to specific TSC codes</li>
+          <li>Implementation notes for GRC review — not marketing copy</li>
+          <li>Data architecture disclaimer: no Kafka data passes through Flafka servers</li>
+          <li>Deployment options including air-gapped and on-premise</li>
+        </ul>
+        <p style="font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-lg);">
+          Opens as a printable HTML page. Use browser Print &rarr; Save as PDF for your ARB package.
+        </p>
+        <div class="whitepaper-download__actions">
+          <a href="assets/flafka-soc2-controls-mapping.html" class="btn btn--primary btn--lg" target="_blank" rel="noopener" aria-label="View SOC 2 Controls Mapping — opens printable page" download="Flafka-SOC2-Controls-Mapping.html">Download SOC 2 Controls Mapping</a>
+          <a href="mailto:enterprise@flafka.dev?subject=SOC%202%20Controls%20Mapping%20Discussion" class="btn btn--ghost btn--lg">Talk to Sales</a>
+        </div>
+      </div>
+      <div class="whitepaper-download__preview">
+        <div class="whitepaper-download__mock">
+          <div class="whitepaper-download__mock-header">
+            <div class="whitepaper-download__mock-logo">F</div>
+            <span>Flafka SOC 2 Controls Mapping</span>
+          </div>
+          <div class="whitepaper-download__mock-body">
+            <div class="whitepaper-download__mock-line" style="width:85%"></div>
+            <div class="whitepaper-download__mock-line" style="width:60%"></div>
+            <div class="whitepaper-download__mock-table">
+              <div class="whitepaper-download__mock-row"><span>CC6.1</span><span>RBAC + Glob Patterns</span></div>
+              <div class="whitepaper-download__mock-row"><span>CC7.1</span><span>Evidence Bundle</span></div>
+              <div class="whitepaper-download__mock-row"><span>C1.1</span><span>AI PII Detection</span></div>
+              <div class="whitepaper-download__mock-row"><span>A1.1</span><span>SLO Monitoring</span></div>
+              <div class="whitepaper-download__mock-row"><span>CC4.1</span><span>Compliance Score</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI PII Detection Cross-Link -->
+<section class="section" style="padding-top: 0; padding-bottom: var(--space-xl);">
+  <div class="container">
+    <div class="callout callout--info animate-in" style="max-width: 800px; margin: 0 auto;">
+      <strong>AI-Powered Kafka PII Detection &amp; DLP</strong>
+      <p style="margin: var(--space-sm) 0 0;">Flafka detects 13 PII types in your Kafka data path in real time — credit cards, SSNs, IBAN, medical record numbers, and more. Block producers before sensitive data reaches your topics. GDPR (Articles 5, 25, 32), HIPAA (§164.312), and PCI-DSS (Requirement 3) ready.</p>
+      <div style="margin-top: var(--space-md); display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+        <a href="dlp.html" class="btn btn--primary btn--sm">Kafka PII detection &amp; DLP capabilities &rarr;</a>
+        <a href="data-governance.html" class="btn btn--ghost btn--sm">Data governance overview</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Competitor Comparison Callout -->
 <section class="section" style="background: var(--bg-surface);">
   <div class="container">
@@ -737,8 +881,9 @@
       <p class="competitor-callout__desc">
         No other Kafka management tool &mdash; Conduktor, AKHQ, Kafka UI, Lenses, Redpanda Console, Kafdrop, or the Confluent Console &mdash; offers a dedicated security and compliance page. Flafka is the only tool that takes enterprise security seriously enough to document it.
       </p>
-      <div style="margin-top: var(--space-lg);">
+      <div style="margin-top: var(--space-lg); display: flex; gap: var(--space-md); flex-wrap: wrap; justify-content: center;">
         <a href="compare.html" class="btn btn--secondary">See full competitor comparison &rarr;</a>
+        <a href="blog/chaos-testing-kafka.html" class="btn btn--ghost">How we test our security posture &rarr;</a>
       </div>
     </div>
   </div>
@@ -777,7 +922,11 @@
         <h4>Product</h4>
         <ul>
           <li><a href="features.html">Features</a></li>
-      <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="enterprise.html">Enterprise</a></li>
+          <li><a href="gateway.html">Gateway Replication</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="demo.html">Demos</a></li>
           <li><a href="video-library.html">Feature Videos</a></li>

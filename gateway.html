@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafka Disaster Recovery Without Cluster Linking | Flafka Gateway</title>
+  <meta name="description" content="Gateway-level Kafka dual-write replication. 58-83% cheaper than Confluent Cluster Linking. No additional infrastructure. Works with Confluent Cloud, AWS MSK, Redpanda. Request beta access.">
+  <meta name="keywords" content="Kafka active-active replication, Confluent Cluster Linking alternative, Kafka disaster recovery, Kafka dual-write replication, kafka gateway replication, kafka DR setup, Kafka active-active DR">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kafka Disaster Recovery Without Cluster Linking | Flafka Gateway">
+  <meta property="og:description" content="Gateway-level dual-write replication. Real-time. 58-83% cheaper than Confluent Cluster Linking. No additional infrastructure. Works with any Kafka cluster.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flafka.dev/gateway.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kafka Disaster Recovery Without Cluster Linking | Flafka Gateway">
+  <meta name="twitter:description" content="Gateway-level dual-write replication. 58-83% cheaper than Confluent Cluster Linking. No JVM, no GC pauses. Works with Confluent Cloud, MSK, Redpanda.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <link rel="canonical" href="https://flafka.dev/gateway.html">
+  <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://flafka.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Gateway Replication", "item": "https://flafka.dev/gateway.html" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flafka Gateway Replication",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux, Docker, Kubernetes",
+    "description": "Gateway-level Kafka dual-write replication for active-active DR. 58-83% cheaper than Confluent Cluster Linking. Works with Confluent Cloud, AWS MSK, Redpanda, and self-managed Apache Kafka.",
+    "url": "https://flafka.dev/gateway.html",
+    "featureList": [
+      "Dual-Write DR Replication — <1ms primary path overhead, automatic secondary failover",
+      "Replication Monitoring — real-time lag delta dashboard with sparklines per topic",
+      "ISR Monitoring — per-partition ISR health indicators (green/yellow/red) with threshold alerts",
+      "Prometheus Replication Metrics — replication_lag_ms, circuit_breaker_state, buffer_bytes, buffer_overflow_total",
+      "Circuit Breaker — automatic secondary cluster isolation on repeated failures, HalfOpen recovery",
+      "Pre-built Grafana dashboard — 10 panels, dual-write-grafana-dashboard.json, Prometheus-compatible",
+      "Alert Routing — ISR shrinkage and circuit breaker trip alerts to Slack, PagerDuty, or any webhook"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "name": "Flafka Ops — Gateway Replication Add-On",
+      "description": "Available as add-on to any Enterprise plan. ~$65-115/mo for 50 GB/day workload vs $272.50+ for Confluent Cluster Linking.",
+      "url": "https://flafka.dev/pricing.html#ops-gateway"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this require changes to our producer application code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Producers connect to the Flafka gateway endpoint as if it were a Kafka broker. The gateway handles replication transparently — no client code changes, no library updates, no configuration changes on the producer side."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the RPO in Phase 1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non-zero. Data in the async send pipeline at crash time is at risk of loss. Phase 2 reconciliation consumer reduces RPO to near-zero by replaying any gap from the primary cluster's log after recovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Kafka clusters are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Confluent Cloud, AWS MSK, Redpanda, and self-managed Apache Kafka. Any Kafka-compatible cluster that speaks the Apache Kafka wire protocol is supported."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a replacement for Cluster Linking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, for most use cases. Cluster Linking has some advantages — offset preservation from day one, native Confluent Cloud integration. Flafka Gateway closes the offset preservation gap in Phase 2. For multi-cloud or mixed-cluster DR (e.g., Confluent Cloud to MSK), Flafka Gateway is the only option since Cluster Linking is Confluent Cloud-only."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka monitor Kafka replication lag in real time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka's replication monitoring dashboard shows per-topic lag in milliseconds with sparklines, per-partition ISR status (green/yellow/red), circuit breaker state (Closed/Open/HalfOpen), and buffer utilization — updated in real time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What Prometheus metrics does Flafka expose for DR monitoring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka exposes replication_lag_ms (histogram per topic-partition), circuit_breaker_state (gauge: 0=Closed, 1=Open, 2=HalfOpen), buffer_bytes, and buffer_overflow_total. Compatible with Grafana Cloud, Datadog, and VictoriaMetrics."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: HowTo — How to Monitor Kafka Replication with Flafka (WS4 Sprint 107) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Monitor Kafka Replication with Flafka",
+    "description": "Set up real-time replication monitoring, health thresholds, and Prometheus alerting for Kafka DR using Flafka Gateway.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Configure health thresholds",
+        "text": "Set your replication lag alert threshold (ms) and minimum ISR count in the Flafka gateway settings."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Connect Prometheus",
+        "text": "Point your scrape config at the Flafka metrics endpoint. Import the pre-built Grafana dashboard (dual-write-grafana-dashboard.json) for 10 pre-configured panels."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Enable alert routing",
+        "text": "Connect replication alerts to your Slack channel or PagerDuty via Flafka's per-rule alert routing. ISR shrinkage and circuit breaker trips fire automatically."
+      }
+    ]
+  }
+  </script>
+
+
+  <style>
+    /* Gateway-specific styles */
+    .gateway-hero {
+      padding: var(--space-4xl) 0 var(--space-3xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+    .gateway-hero__glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .gateway-hero__badge {
+      display: inline-block;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-lg);
+    }
+    .gateway-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: var(--space-md);
+      color: var(--text-primary);
+    }
+    .gateway-hero__sub {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+      line-height: 1.6;
+    }
+    .gateway-hero__actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Architecture diagram */
+    .arch-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: var(--space-2xl) 0;
+    }
+    .arch-node {
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-default);
+      border-radius: var(--border-radius);
+      padding: 14px 20px;
+      text-align: center;
+      min-width: 120px;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .arch-node--gateway {
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(79,70,229,0.1) 100%);
+      border-color: var(--color-primary);
+      border-width: 2px;
+    }
+    .arch-node__label {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    .arch-arrow {
+      font-size: 20px;
+      color: var(--color-primary-light);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+    }
+    .arch-split {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .arch-split-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .arch-badge-primary {
+      display: inline-block;
+      background: rgba(52,211,153,0.12);
+      color: var(--color-success);
+      border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      margin-top: 4px;
+    }
+    .arch-badge-secondary {
+      display: inline-block;
+      background: rgba(124,58,237,0.1);
+      color: var(--color-primary-light);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      margin-top: 4px;
+    }
+
+    /* Steps */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+    @media (max-width: 768px) {
+      .how-steps { grid-template-columns: 1fr; }
+    }
+    .how-step {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-xl);
+      position: relative;
+    }
+    .how-step__number {
+      width: 36px;
+      height: 36px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: var(--space-md);
+    }
+    .how-step h3 {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .how-step p {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .how-step__stat {
+      margin-top: var(--space-md);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-primary-light);
+      background: rgba(124,58,237,0.08);
+      border-radius: 4px;
+      padding: 4px 8px;
+      display: inline-block;
+    }
+
+    /* Cost comparison table */
+    .cost-table-wrap {
+      overflow-x: auto;
+      margin-top: var(--space-2xl);
+    }
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+    .cost-table thead tr {
+      background: var(--bg-elevated);
+    }
+    .cost-table thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-default);
+    }
+    .cost-table thead th:first-child {
+      width: 34%;
+    }
+    .cost-table thead th.col-flafka {
+      color: var(--color-primary-light);
+      background: rgba(124,58,237,0.06);
+    }
+    .cost-table tbody td {
+      padding: 11px 16px;
+      font-size: var(--text-sm);
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .cost-table tbody td:first-child {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .cost-table tbody td.col-flafka {
+      background: rgba(124,58,237,0.04);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .cost-table tbody tr:last-child td { border-bottom: none; }
+    .cost-win { color: var(--color-success); font-weight: 700; }
+    .cost-lose { color: var(--text-muted); }
+    .cost-disclaimer {
+      margin-top: var(--space-md);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Phases timeline */
+    .phases-timeline {
+      position: relative;
+      margin-top: var(--space-2xl);
+    }
+    .phases-timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-primary) 0%, var(--border-subtle) 100%);
+    }
+    .phase-item {
+      display: flex;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      position: relative;
+    }
+    .phase-item__dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: var(--text-xs);
+      font-weight: 800;
+      z-index: 1;
+    }
+    .phase-item__dot--active {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
+    }
+    .phase-item__dot--planned {
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-default);
+      color: var(--text-muted);
+    }
+    .phase-item__body {
+      padding-top: 8px;
+      flex: 1;
+    }
+    .phase-item__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: 6px;
+    }
+    .phase-item__title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .phase-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+    .phase-badge--beta {
+      background: rgba(52,211,153,0.12);
+      color: var(--color-success);
+      border: 1px solid rgba(52,211,153,0.25);
+    }
+    .phase-badge--q3 {
+      background: rgba(124,58,237,0.1);
+      color: var(--color-primary-light);
+      border: 1px solid rgba(124,58,237,0.2);
+    }
+    .phase-badge--q4 {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+    .phase-badge--future {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+    .phase-item p {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .phase-item ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .phase-item ul li {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      padding: 3px 0 3px 18px;
+      position: relative;
+    }
+    .phase-item ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--color-primary-light);
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: var(--space-2xl);
+    }
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius);
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+    }
+    .faq-item__q {
+      padding: var(--space-lg) var(--space-xl);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-elevated);
+    }
+    .faq-item__q:hover {
+      background: var(--bg-card);
+    }
+    .faq-item__q .faq-icon {
+      font-size: var(--text-lg);
+      color: var(--color-primary-light);
+      flex-shrink: 0;
+      margin-left: var(--space-md);
+    }
+    .faq-item__a {
+      padding: var(--space-md) var(--space-xl) var(--space-lg);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+    }
+
+    @media (max-width: 375px) {
+      .arch-diagram { flex-direction: column; gap: var(--space-md); }
+      .arch-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li class="nav__dropdown">
+        <a href="features.html" class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">Product</a>
+        <div class="nav__dropdown-menu">
+          <a href="features.html">Features</a>
+          <a href="tour.html">Interactive Tour</a>
+          <a href="multi-vendor.html">Platforms</a>
+          <a href="data-governance.html">Data Governance</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="gateway.html" aria-current="page">Gateway Replication</a>
+        </div>
+      </li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="security.html">Security</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li class="nav__dropdown"><a href="demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="demo.html">Sprint Demos</a><a href="video-library.html">Feature Videos</a></div></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+    <div class="nav__cta">
+      <a href="about.html#contact" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+
+<div class="nav__mobile">
+  <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="gateway.html">Gateway Replication</a>
+  <a href="enterprise.html">Enterprise</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
+  <a href="data-governance.html">Data Governance</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="compare.html">Compare</a>
+  <a href="security.html">Security</a>
+  <a href="docs.html">Docs</a>
+  <a href="community.html">Community</a>
+  <a href="demo.html">Sprint Demos</a>
+  <a href="video-library.html">Feature Videos</a>
+  <a href="roi-calculator.html">ROI Calculator</a>
+  <a href="about.html">About</a>
+  <a href="blog.html">Blog</a>
+  <a href="about.html#contact" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Section 1: Hero -->
+<section class="gateway-hero" aria-label="Gateway hero">
+  <div class="gateway-hero__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="gateway-hero__badge">Flafka Ops &mdash; Beta</div>
+    <h1>Kafka Disaster Recovery<br><span class="text-gradient">Without Cluster Linking</span></h1>
+    <p class="gateway-hero__sub">Gateway-level dual-write replication. Real-time. 58&ndash;83% cheaper than Confluent Cluster Linking. No additional infrastructure.</p>
+    <div class="gateway-hero__actions">
+      <a href="about.html#contact?subject=Gateway%20Beta%20Access" class="btn btn--primary btn--lg" data-signup-trigger>Request Beta Access</a>
+      <a href="#cost-comparison" class="btn btn--secondary btn--lg">See Cost Comparison &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: How It Works -->
+<section class="section" aria-labelledby="how-it-works-title">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">How It Works</div>
+      <h2 class="section-header__title" id="how-it-works-title">Replication in the <span class="text-gradient">data path</span></h2>
+      <p class="section-header__desc">No separate replication service. No per-GB Confluent fees. The gateway already sits between your producers and Kafka &mdash; dual-write adds replication in that same hop.</p>
+    </div>
+
+    <!-- Architecture diagram -->
+    <div class="arch-diagram animate-in" data-delay="1" role="img" aria-label="Architecture diagram: Producer connects to Flafka Gateway, which routes to Primary Cluster and asynchronously to Secondary Cluster">
+      <div class="arch-node">
+        <div>Producer</div>
+        <div class="arch-node__label">Your app<br>(no changes)</div>
+      </div>
+      <div class="arch-arrow" aria-hidden="true">&rarr;</div>
+      <div class="arch-node arch-node--gateway">
+        <div>Flafka Gateway</div>
+        <div class="arch-node__label">Rust TCP proxy<br>&lt;1ms overhead</div>
+      </div>
+      <div class="arch-arrow" aria-hidden="true">&rarr;</div>
+      <div class="arch-split">
+        <div class="arch-split-row">
+          <div class="arch-node">
+            <div>Primary Cluster</div>
+            <div class="arch-node__label">Confluent / MSK<br>/ Redpanda</div>
+            <div><span class="arch-badge-primary">Sync</span></div>
+          </div>
+        </div>
+        <div class="arch-split-row">
+          <div class="arch-node">
+            <div>Secondary Cluster</div>
+            <div class="arch-node__label">Any Kafka-compatible</div>
+            <div><span class="arch-badge-secondary">Async clone</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-steps animate-in" data-delay="2">
+      <div class="how-step">
+        <div class="how-step__number" aria-hidden="true">1</div>
+        <h3>Producers write to the gateway</h3>
+        <p>Your producers connect to the Flafka gateway endpoint as if it were a Kafka broker. Zero changes to your application code &mdash; same bootstrap address pattern, same client libraries.</p>
+        <span class="how-step__stat">0 application code changes</span>
+      </div>
+      <div class="how-step">
+        <div class="how-step__number" aria-hidden="true">2</div>
+        <h3>Gateway clones every ProduceRequest</h3>
+        <p>The gateway forwards ProduceRequests to the primary cluster synchronously, then asynchronously clones the same frame to the secondary cluster. Per-partition bounded queues prevent secondary slowness from affecting the primary path.</p>
+        <span class="how-step__stat">&lt;1ms overhead on primary path</span>
+      </div>
+      <div class="how-step">
+        <div class="how-step__number" aria-hidden="true">3</div>
+        <h3>Consumers failover to secondary</h3>
+        <p>If the primary cluster fails, consumers failover to the secondary. Phase 1: timestamp-based consumer reset (&lt;1 min RTO). Phase 2: offset translation for near-zero RPO and &lt;10 second RTO.</p>
+        <span class="how-step__stat">RTO &lt;10s (Phase 2)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Cost Comparison -->
+<section class="section" id="cost-comparison" style="background: var(--bg-surface);" aria-labelledby="cost-comparison-title">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Cost Comparison</div>
+      <h2 class="section-header__title" id="cost-comparison-title">58&ndash;83% cheaper than <span class="text-gradient">Cluster Linking</span></h2>
+      <p class="section-header__desc">At 50 GB/day workload. No per-GB replication fees. Runs on infrastructure you already have.</p>
+    </div>
+
+    <div class="cost-table-wrap animate-in" data-delay="1">
+      <table class="cost-table" aria-label="Cost comparison: Flafka Gateway vs Confluent Cluster Linking vs MirrorMaker 2">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th class="col-flafka">Flafka Gateway</th>
+            <th>Confluent Cluster Linking</th>
+            <th>MirrorMaker 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monthly cost (50 GB/day workload)</td>
+            <td class="col-flafka cost-win">~$65&ndash;115/mo</td>
+            <td class="cost-lose">$272.50+/mo</td>
+            <td class="cost-lose">~$200+/mo (Connect workers)</td>
+          </tr>
+          <tr>
+            <td>Infrastructure required</td>
+            <td class="col-flafka">None (gateway already deployed)</td>
+            <td>Confluent Cloud license</td>
+            <td>Dedicated Connect cluster</td>
+          </tr>
+          <tr>
+            <td>RTO Phase 1</td>
+            <td class="col-flafka">Timestamp-based (&lt;1 min)</td>
+            <td>Seconds (offset preserved)</td>
+            <td>Minutes (manual offset translation)</td>
+          </tr>
+          <tr>
+            <td>RTO Phase 2</td>
+            <td class="col-flafka cost-win">&lt;10 seconds (offset translation)</td>
+            <td>Seconds</td>
+            <td>Minutes</td>
+          </tr>
+          <tr>
+            <td>Works with AWS MSK</td>
+            <td class="col-flafka cost-win">Yes</td>
+            <td class="cost-lose">No (Confluent Cloud only)</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Works with Redpanda</td>
+            <td class="col-flafka cost-win">Yes</td>
+            <td class="cost-lose">No</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>App code changes required</td>
+            <td class="col-flafka cost-win">None</td>
+            <td>None</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Configuration</td>
+            <td class="col-flafka">TOML config + hot reload</td>
+            <td>Confluent Cloud UI</td>
+            <td>Connect JSON config</td>
+          </tr>
+          <tr>
+            <td>Replication status UI</td>
+            <td class="col-flafka cost-win">Per-topic lag dashboard included</td>
+            <td>Confluent Cloud UI</td>
+            <td>Connect REST API only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cost-disclaimer animate-in" data-delay="2">
+      Cost estimates based on Confluent Cloud public pricing as of April 2026. Cluster Linking at $5.45/GB. MirrorMaker 2 estimate includes 2x Connect worker nodes (m5.large). Flafka Gateway estimate includes Ops add-on pricing at representative workload. <a href="roi-calculator.html#dr-savings">Use our calculator &rarr;</a> &middot; <a href="blog/cluster-linking-cost.html">See the cost analysis.</a>
+    </p>
+  </div>
+</section>
+
+<!-- Section 4: Replication Phases -->
+<section class="section" aria-labelledby="phases-title">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Replication Roadmap</div>
+      <h2 class="section-header__title" id="phases-title">Four phases to <span class="text-gradient">full active-active</span></h2>
+      <p class="section-header__desc">Phase 1 is available in beta today. Each phase builds on the last without breaking changes.</p>
+    </div>
+
+    <div class="phases-timeline animate-in" data-delay="1">
+
+      <div class="phase-item">
+        <div class="phase-item__dot phase-item__dot--active" aria-label="Phase 1 — Active">1</div>
+        <div class="phase-item__body">
+          <div class="phase-item__header">
+            <div class="phase-item__title">Phase 1: Fire-and-Forget Cloning</div>
+            <span class="phase-badge phase-badge--beta">Beta Available</span>
+          </div>
+          <ul>
+            <li>Real-time ProduceRequest cloning to secondary cluster</li>
+            <li>&lt;1ms overhead on the primary path (circuit breaker on secondary)</li>
+            <li>Topic auto-creation mirroring primary topic configuration and partition count</li>
+            <li>Per-topic replication lag dashboard in Flafka Ops UI</li>
+            <li>RPO: non-zero (fire-and-forget; data in async queue at crash time is at risk)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-item__dot phase-item__dot--planned" aria-label="Phase 2 — Q3 2026">2</div>
+        <div class="phase-item__body">
+          <div class="phase-item__header">
+            <div class="phase-item__title">Phase 2: Reconciliation Consumer</div>
+            <span class="phase-badge phase-badge--q3">Q3 2026</span>
+          </div>
+          <ul>
+            <li>Reconciliation consumer replays any gap from primary log after recovery</li>
+            <li>Offset mapping and translation for consumer failover</li>
+            <li>RTO &lt;10 seconds with offset translation</li>
+            <li>RPO: near-zero (reconciliation closes the async gap)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-item__dot phase-item__dot--planned" aria-label="Phase 3 — Q4 2026">3</div>
+        <div class="phase-item__body">
+          <div class="phase-item__header">
+            <div class="phase-item__title">Phase 3: EOS / Idempotent Deduplication</div>
+            <span class="phase-badge phase-badge--q4">Q4 2026</span>
+          </div>
+          <ul>
+            <li>Exactly-once semantics on the replication path</li>
+            <li>Idempotent deduplication prevents duplicate writes on failover</li>
+            <li>Full transactional producer support in dual-write mode</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-item__dot phase-item__dot--planned" aria-label="Phase 4 — 2027">4</div>
+        <div class="phase-item__body">
+          <div class="phase-item__header">
+            <div class="phase-item__title">Phase 4: Active-Active Bidirectional Replication</div>
+            <span class="phase-badge phase-badge--future">2027</span>
+          </div>
+          <ul>
+            <li>Both clusters accept writes simultaneously</li>
+            <li>Conflict resolution policies (last-write-wins, custom)</li>
+            <li>Circular replication prevention via message provenance headers</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Replication Monitoring & Alerting (WS4 Sprint 107) -->
+<section class="feature-section section" id="replication-monitoring" aria-labelledby="monitoring-title" style="background: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Operational Visibility</div>
+      <h2 class="section-header__title" id="monitoring-title">Replication Monitoring <span class="text-gradient">&amp; Alerting</span></h2>
+      <p class="section-header__desc">Real-time lag delta, per-partition ISR status, circuit breaker state, and auto-alerts for replication events — all in the same UI where you manage your topics.</p>
+    </div>
+
+    <!-- Sub-section A: Real-Time Lag Dashboard -->
+    <div class="feature-section__content animate-in" style="margin-bottom: var(--space-3xl);">
+      <h3 style="font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary);">Real-Time Lag Dashboard</h3>
+      <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md);">
+        <li style="padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+          <strong style="color: var(--text-primary);">Per-topic replication lag (ms)</strong>
+          <p style="color: var(--text-secondary); margin-top: var(--space-xs); font-size: var(--text-sm);">Sparklines show which topics are keeping up and which are falling behind in real time.</p>
+        </li>
+        <li style="padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+          <strong style="color: var(--text-primary);">Per-partition ISR status</strong>
+          <p style="color: var(--text-secondary); margin-top: var(--space-xs); font-size: var(--text-sm);"><span style="color: #22c55e;">&#9679;</span> green: ISR healthy &nbsp;|&nbsp; <span style="color: #f59e0b;">&#9679;</span> yellow: ISR shrinking &nbsp;|&nbsp; <span style="color: #ef4444;">&#9679;</span> red: ISR &lt; min.insync.replicas</p>
+        </li>
+        <li style="padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+          <strong style="color: var(--text-primary);">Secondary cluster health</strong>
+          <p style="color: var(--text-secondary); margin-top: var(--space-xs); font-size: var(--text-sm);">Circuit breaker state: <code>Closed</code> (healthy), <code>Open</code> (tripped), <code>HalfOpen</code> (recovering).</p>
+        </li>
+        <li style="padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+          <strong style="color: var(--text-primary);">Buffer utilization gauge</strong>
+          <p style="color: var(--text-secondary); margin-top: var(--space-xs); font-size: var(--text-sm);">Shows how much overflow buffer is consumed — early warning before backpressure impacts producers.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sub-section B: Health Thresholds & Auto-Alerts -->
+    <div class="animate-in" style="margin-bottom: var(--space-3xl);" data-delay="1">
+      <h3 style="font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary);">Health Thresholds &amp; Auto-Alerts</h3>
+      <ul style="color: var(--text-secondary); line-height: 1.8; padding-left: 1.5em;">
+        <li><strong style="color: var(--text-primary);">Configurable lag threshold</strong> — alert when replication lag exceeds N ms per topic</li>
+        <li><strong style="color: var(--text-primary);">ISR shrinkage alert</strong> — fires when a partition ISR count drops below your configured minimum</li>
+        <li><strong style="color: var(--text-primary);">Circuit breaker trip alert</strong> — fires when the secondary cluster experiences repeated failures</li>
+        <li><strong style="color: var(--text-primary);">Flexible routing</strong> — alerts route to Slack, PagerDuty, or any webhook target in your <a href="features.html" class="cta-link">Alert Routing settings</a></li>
+        <li><strong style="color: var(--text-primary);">Pre-built Grafana dashboard</strong> — <code>dual-write-grafana-dashboard.json</code>, 10 panels, Prometheus-compatible, download and import in minutes</li>
+      </ul>
+    </div>
+
+    <!-- Sub-section C: Prometheus Integration -->
+    <div class="animate-in" style="margin-bottom: var(--space-2xl);" data-delay="2">
+      <h3 style="font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary);">Prometheus Integration</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Point your Prometheus scrape config at the Flafka metrics endpoint. All metrics are labelled by topic and partition for fine-grained alerting.</p>
+      <ul style="color: var(--text-secondary); line-height: 1.8; padding-left: 1.5em;">
+        <li><code>replication_lag_ms</code> — histogram per topic-partition</li>
+        <li><code>circuit_breaker_state</code> — gauge: 0=Closed, 1=Open, 2=HalfOpen</li>
+        <li><code>buffer_bytes</code> — current overflow buffer fill level</li>
+        <li><code>buffer_overflow_total</code> — cumulative overflow events counter</li>
+      </ul>
+      <p style="color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-md);">Compatible with any Prometheus-compatible scrape target: Grafana Cloud, Datadog, VictoriaMetrics.</p>
+    </div>
+
+    <!-- What this means callout -->
+    <div class="animate-in" style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, rgba(124,58,237,0.06)); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: var(--space-2xl);" data-delay="3">
+      <strong style="color: var(--text-primary); display: block; margin-bottom: var(--space-xs);">What this means for your DR strategy</strong>
+      <p style="color: var(--text-secondary); margin: 0; font-size: var(--text-sm);">Conduktor Gateway has no built-in replication monitoring — you need a separate Grafana setup. Flafka shows lag delta, ISR status, and circuit breaker state in the same interface where you manage your topics.</p>
+    </div>
+
+    <!-- Pricing tier signal -->
+    <p class="animate-in" style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-xl);" data-delay="3">
+      Replication monitoring included with Flafka Ops. <a href="pricing.html" class="cta-link">See pricing &rarr;</a>
+    </p>
+
+    <!-- Dual CTA -->
+    <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;" class="animate-in" data-delay="4">
+      <a href="signup.html" class="btn btn--primary btn--lg">Start Free Trial &rarr;</a>
+      <a href="contact.html" class="btn btn--secondary btn--lg">Request Enterprise Demo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: FAQ + CTA -->
+<section class="section" style="background: var(--bg-surface);" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">FAQ</div>
+      <h2 class="section-header__title" id="faq-title">Common <span class="text-gradient">questions</span></h2>
+    </div>
+
+    <div class="faq-list animate-in" data-delay="1">
+
+      <div class="faq-item">
+        <div class="faq-item__q">
+          Does this require changes to our producer application code?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          No. Producers connect to the Flafka gateway endpoint as if it were a Kafka broker. The gateway handles replication transparently &mdash; no client code changes, no library updates, no configuration changes on the producer side. If you can change a bootstrap address in your config, you can enable dual-write replication.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q">
+          What is the RPO in Phase 1?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Non-zero. Data in the async send pipeline at crash time is at risk of loss. This is the honest trade-off of the fire-and-forget approach. If your workload requires sub-second RPO today, Confluent Cluster Linking currently has an advantage. Phase 2 (reconciliation consumer) reduces RPO to near-zero by replaying any gap from the primary cluster log after recovery. Phase 2 ships Q3 2026.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q">
+          Which Kafka clusters are supported?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Confluent Cloud, AWS MSK, Redpanda, and self-managed Apache Kafka. Any Kafka-compatible cluster that speaks the Apache Kafka wire protocol is supported &mdash; as both primary and secondary. This means you can replicate from Confluent Cloud to MSK, MSK to MSK, or any other combination Cluster Linking cannot support.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q">
+          Is this a replacement for Cluster Linking?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Yes, for most use cases. Cluster Linking has some advantages &mdash; offset preservation from day one, deep Confluent Cloud integration. Flafka Gateway closes the offset preservation gap in Phase 2. For multi-cloud or mixed-cluster DR (e.g., Confluent Cloud to MSK), Flafka Gateway is the only option: Cluster Linking only replicates between Confluent Cloud clusters.
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-3xl);" class="animate-in" data-delay="2">
+      <h3 style="font-size: var(--text-xl); font-weight: 800; margin-bottom: var(--space-md); color: var(--text-primary);">Ready to evaluate gateway replication?</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-xl); max-width: 480px; margin-left: auto; margin-right: auto;">Beta access is open for Enterprise customers. Our team will walk you through a proof-of-concept using your actual clusters.</p>
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+        <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Request Ops Add-On Access</a>
+        <a href="compare.html#replication-tools" class="btn btn--secondary btn--lg">See Full Comparison &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="enterprise.html">Enterprise</a></li>
+          <li><a href="gateway.html">Gateway Replication</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="demo.html">Demos</a></li>
+          <li><a href="video-library.html">Feature Videos</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="blog/active-active-kafka.html">DR Replication Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="compare.html">Compare</a></li>
+          <li><a href="security.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2027 Flafka. All rights reserved.</span>
+      <div class="footer__legal">
+        <span class="footer__legal-placeholder">Privacy</span>
+        <span class="footer__legal-placeholder">Terms</span>
+        <a href="security.html">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+/* FAQ toggle */
+document.querySelectorAll('.faq-item__q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = q.closest('.faq-item');
+    var answer = item.querySelector('.faq-item__a');
+    var icon = q.querySelector('.faq-icon');
+    var isOpen = answer.style.display === 'block';
+    answer.style.display = isOpen ? 'none' : 'block';
+    icon.textContent = isOpen ? '+' : '−';
+  });
+  // Hide answers initially
+  var item = q.closest('.faq-item');
+  item.querySelector('.faq-item__a').style.display = 'none';
+});
+</script>
+</body>
+</html>

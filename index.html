@@ -32,7 +32,7 @@
     "name": "Flafka",
     "applicationCategory": "Enterprise Kafka Management",
     "operatingSystem": "Windows, macOS, Linux, Docker",
-    "description": "The only Kafka platform with 7 built-in FinOps tools and a native Rust Kafka gateway — 17x cheaper than Conduktor Gateway ($99/mo vs $1,750+/mo). Track Kafka cluster costs with spend dashboards, budget tracking, anomaly detection, forecasting, threshold alerts, team cost allocation, and budget limit enforcement. Plus SLO monitoring, SOC 2 compliance, data governance, AI PII detection, and 38+ unique features across 98 shipped sprints. Backed by 10,935+ automated tests.",
+    "description": "The only Kafka platform with 7 built-in FinOps tools and a native Rust Kafka gateway — 17x cheaper than Conduktor Gateway ($99/mo vs $1,750+/mo). Track Kafka cluster costs with spend dashboards, budget tracking, anomaly detection, forecasting, threshold alerts, team cost allocation, and budget limit enforcement. Plus SLO monitoring, SOC 2 compliance, data governance, AI PII detection, and 45+ unique features across 100 shipped sprints. Backed by 10,935+ automated tests.",
     "featureList": [
       "Spend Dashboard (real-time cost visibility)",
       "CFU Budget Tracking",
@@ -141,9 +141,10 @@
       Flafka
     </a>
     <ul class="nav__links">
-      <li><a href="features.html">Features</a>
-  <a href="data-governance.html">Data Governance</a></li>
+      <li><a href="features.html">Features</a></li>
       <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="tour.html">Interactive Tour</a></li>
+      <li><a href="multi-vendor.html">Platforms</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html">Security</a></li>
@@ -168,6 +169,8 @@
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="data-governance.html">Data Governance</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
   <a href="security.html">Security</a>
@@ -192,12 +195,16 @@
       <div class="hero__content">
         <div class="hero__badge animate-in">
           <span class="hero__badge__dot"></span>
-          38+ features no other Kafka GUI has
+          50+ features no other Kafka GUI has &middot; Now with Active-Active Kafka DR
         </div>
 
         <h1 class="hero__title animate-in" data-delay="1">
           7 Built-in Cost Tools. <span class="text-gradient">Zero Kafka Spend Surprises.</span>
         </h1>
+
+        <p class="hero__finops-sub animate-in" data-delay="2" style="font-size: var(--text-lg); font-weight: 600; color: var(--color-primary-light); margin-bottom: var(--space-sm);">
+          Built-in cost visibility, data quality, and DR &mdash; at a third of the price. <span style="font-size: var(--text-sm); font-weight: 400; color: var(--text-secondary);">(vs. Conduktor &mdash; <a href="compare.html" style="color: var(--text-secondary);">see comparison</a>)</span>
+        </p>
 
         <p class="hero__subtitle animate-in" data-delay="2">
           Spend dashboard, budget tracking, anomaly detection, forecasting, alerts, team allocation, and budget limits &mdash; all built in. The only Kafka platform with complete FinOps. Free to start.
@@ -205,7 +212,12 @@
 
         <div class="hero__actions animate-in" data-delay="3">
           <a href="about.html#contact" class="btn btn--primary btn--lg" data-signup-trigger>Start Free Trial</a>
-          <a href="demo.html" class="btn btn--secondary btn--lg">Watch Demo</a>
+          <a href="tour.html" class="btn btn--secondary btn--lg">Interactive Tour</a>
+          <a href="demo.html" class="btn btn--ghost btn--lg">Watch Demo</a>
+        </div>
+        <div class="animate-in" data-delay="4" style="margin-top: var(--space-md);">
+          <span style="display: inline-block; background: var(--color-success-subtle, rgba(34,197,94,0.12)); color: var(--color-success, #22c55e); border: 1px solid var(--color-success, #22c55e); border-radius: 999px; padding: 5px 16px; font-size: var(--text-sm); font-weight: 600;">&#x2713; Free Starter tier — no credit card required</span>
+          <a href="pricing.html#starter" style="display: inline-block; margin-left: var(--space-sm); font-size: var(--text-sm); color: var(--text-secondary); text-decoration: underline;">See what's included &rarr;</a>
         </div>
       </div>
 
@@ -217,7 +229,7 @@
 
     <div class="hero__stats animate-in" data-delay="4">
       <div class="hero__stat">
-        <span class="hero__stat-value" data-count="10935" data-suffix="+">0</span>
+        <span class="hero__stat-value" data-count="11237" data-suffix="+">0</span>
         <span class="hero__stat-label">Automated tests</span>
       </div>
       <div class="hero__stat">
@@ -236,16 +248,16 @@
         <span class="hero__stat-value">Real-time</span>
         <span class="hero__stat-label">Cost Tracking</span>
       </a>
-      <a href="changelog.html" class="hero__stat hero__stat--link" title="98 sprints shipped — view changelog">
-        <span class="hero__stat-value" data-count="98" data-suffix="+">0</span>
+      <a href="changelog.html" class="hero__stat hero__stat--link" title="108 sprints shipped — view changelog">
+        <span class="hero__stat-value" data-count="108" data-suffix="+">0</span>
         <span class="hero__stat-label">Sprints shipped</span>
       </a>
       <a href="features.html#gateway" class="hero__stat hero__stat--link" title="Flafka + Gateway: $99/mo. Conduktor Console + Gateway: $1,750+/mo. Rust-native, no JVM, no GC pauses.">
         <span class="hero__stat-value">17&times;</span>
         <span class="hero__stat-label">cheaper than Conduktor Gateway</span>
       </a>
-      <a href="compare.html" class="hero__stat hero__stat--link" title="38 unique features — view full comparison">
-        <span class="hero__stat-value" data-count="38" data-suffix="+">0</span>
+      <a href="compare.html" class="hero__stat hero__stat--link" title="50 unique features — view full comparison">
+        <span class="hero__stat-value" data-count="50" data-suffix="+">0</span>
         <span class="hero__stat-label">Unique features</span>
       </a>
     </div>
@@ -361,6 +373,7 @@
         </summary>
         <div class="faq-item__answer" id="faq-msk">
           <p>MSK support is in active development. <a href="about.html#contact" data-signup-trigger data-signup-platform="aws-msk">Join the MSK waitlist</a> for early access and be first to know when it ships.</p>
+          <p style="margin-top:var(--space-sm);"><a href="blog/msk-kafka.html" class="text-link">Read more: Kafka Monitoring for AWS MSK Teams &rarr;</a></p>
           <p style="margin-top:var(--space-sm);"><a href="pricing.html" class="text-link">Try Flafka free with Confluent Cloud &rarr;</a></p>
         </div>
       </details>
@@ -462,19 +475,19 @@
   <div class="container">
     <h2 class="metrics-strip__headline text-center animate-in">Built to ship, built to last.</h2>
     <div class="metrics-strip__grid animate-in" data-delay="1">
-      <a href="community.html" class="metrics-strip__card metrics-strip__card--link" aria-label="10,935+ automated tests — view development transparency">
+      <a href="community.html" class="metrics-strip__card metrics-strip__card--link" aria-label="11,237+ automated tests — view development transparency">
         <span class="metrics-strip__icon" style="color: var(--color-success);">&#129514;</span>
-        <span class="metrics-strip__value" data-count="10935" data-suffix="+">0</span>
+        <span class="metrics-strip__value" data-count="11237" data-suffix="+">0</span>
         <span class="metrics-strip__label">Automated tests passing</span>
       </a>
-      <a href="changelog.html" class="metrics-strip__card metrics-strip__card--link" aria-label="98 sprints delivered — view changelog">
+      <a href="changelog.html" class="metrics-strip__card metrics-strip__card--link" aria-label="108 sprints delivered — view changelog">
         <span class="metrics-strip__icon" style="color: var(--color-primary-light);">&#9889;</span>
-        <span class="metrics-strip__value" data-count="98" data-suffix="+">0</span>
+        <span class="metrics-strip__value" data-count="108" data-suffix="+">0</span>
         <span class="metrics-strip__label">Sprints delivered</span>
       </a>
-      <a href="compare.html" class="metrics-strip__card metrics-strip__card--link" aria-label="38 unique features — view comparison">
+      <a href="compare.html" class="metrics-strip__card metrics-strip__card--link" aria-label="50 unique features — view comparison">
         <span class="metrics-strip__icon" style="color: var(--color-warning);">&#127942;</span>
-        <span class="metrics-strip__value" data-count="38" data-suffix="+">0</span>
+        <span class="metrics-strip__value" data-count="50" data-suffix="+">0</span>
         <span class="metrics-strip__label">Unique features</span>
       </a>
       <a href="security.html" class="metrics-strip__card metrics-strip__card--link" aria-label="99.9% uptime SLO target — view security page">
@@ -930,7 +943,7 @@
         Used by teams managing 10+ Confluent Cloud clusters
       </p>
       <div class="flex flex--center" style="gap: var(--space-md); flex-wrap: wrap;">
-        <a href="about.html#contact" class="btn btn--primary btn--lg">Start a 30-Day Enterprise POC &rarr;</a>
+        <a href="enterprise.html" class="btn btn--primary btn--lg">Start a 30-Day Enterprise POC &rarr;</a>
         <a href="security.html" class="btn btn--secondary">View Compliance Details</a>
       </div>
     </div>
@@ -953,6 +966,7 @@
         <div class="pricing-card__name">Starter</div>
         <div class="pricing-card__price">Free</div>
         <div class="pricing-card__period">Up to 3 users, 1 cluster</div>
+        <div class="pricing-card__free-note" style="font-size:var(--text-sm);color:var(--color-success);font-weight:600;margin-top:var(--space-xs);">Free forever &mdash; no credit card required</div>
         <ul class="pricing-card__features">
           <li>Topic management</li>
           <li>Schema Registry CRUD</li>
@@ -1077,6 +1091,8 @@
         <ul>
           <li><a href="features.html">Features</a></li>
           <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="demo.html">Demos</a></li>
           <li><a href="video-library.html">Feature Videos</a></li>

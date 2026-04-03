@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Chaos Testing Makes Flafka More Reliable | Flafka Engineering</title>
+  <meta name="description" content="Flafka runs automated chaos testing every 5 sprints: broker disconnects, concurrent request storms, and resource exhaustion. Here is what we found — and what we fixed.">
+  <meta name="keywords" content="Kafka chaos testing, Kafka reliability testing, Kafka management tool reliability, Kafka fault injection, Kafka resilience engineering">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="How Chaos Testing Makes Flafka More Reliable — And What We Found">
+  <meta property="og:description" content="Flafka runs automated chaos tests every 5 sprints. Broker disconnects, concurrent storms, resource exhaustion. Honest disclosures of what we found and fixed.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://flafka.dev/blog/chaos-testing-kafka.html">
+  <meta property="og:image" content="https://flafka.dev/assets/flafka-mascot.png" width="1200" height="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Chaos Testing Makes Flafka More Reliable | Flafka Engineering">
+  <meta name="twitter:description" content="Automated chaos testing every 5 sprints. What broke, what survived, and why it matters for production Kafka management.">
+  <meta name="twitter:image" content="https://flafka.dev/assets/flafka-mascot.png">
+
+  <link rel="canonical" href="https://flafka.dev/blog/chaos-testing-kafka.html">
+  <link rel="icon" type="image/png" href="../assets/flafka-mascot.png">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://flafka.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://flafka.dev/blog.html" },
+      { "@type": "ListItem", "position": 3, "name": "Chaos Testing", "item": "https://flafka.dev/blog/chaos-testing-kafka.html" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Chaos Testing Makes Flafka More Reliable — And What We Found",
+    "description": "Flafka runs automated chaos testing every 5 sprints. Broker disconnects, concurrent request storms, and resource exhaustion reveal failure modes that normal test suites miss. Here is what we found and fixed.",
+    "datePublished": "2026-08-05",
+    "dateModified": "2026-08-05",
+    "author": {
+      "@type": "Organization",
+      "name": "Flafka Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flafka",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://flafka.dev/assets/flafka-mascot.png"
+      }
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://flafka.dev/assets/flafka-mascot.png",
+      "width": "1200",
+      "height": "630"
+    },
+    "mainEntityOfPage": "https://flafka.dev/blog/chaos-testing-kafka.html",
+    "keywords": "Kafka chaos testing, Kafka reliability testing, Kafka management tool reliability",
+    "wordCount": "850",
+    "timeRequired": "PT6M"
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How often does Flafka run chaos tests?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every 5 sprints. The automated chaos suite runs after the QA gate and covers broker disconnects, concurrent request storms, and resource exhaustion scenarios."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see the chaos test results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Test scenarios and results summaries are published in Flafka's sprint feedback folder (linked from the Engineering blog). Enterprise customers can request the full chaos report via the Enterprise Demo page at https://flafka.dev/contact.html."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo">
+      <img src="../assets/flafka-mascot.png" alt="Flafka mascot" class="nav__logo-mascot">
+      Flafka
+    </a>
+    <ul class="nav__links">
+      <li class="nav__dropdown">
+        <a href="../features.html" class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">Product</a>
+        <div class="nav__dropdown-menu">
+          <a href="../features.html">Features</a>
+          <a href="../tour.html">Interactive Tour</a>
+          <a href="../multi-vendor.html">Platforms</a>
+          <a href="../data-governance.html">Data Governance</a>
+          <a href="../dlp.html">DLP / PII Detection</a>
+          <a href="../gateway.html">Gateway</a>
+        </div>
+      </li>
+      <li><a href="../pricing.html">Pricing</a></li>
+      <li><a href="../compare.html">Compare</a></li>
+      <li><a href="../security.html">Security</a></li>
+      <li><a href="../docs.html">Docs</a></li>
+      <li><a href="../community.html">Community</a></li>
+      <li class="nav__dropdown"><a href="../demo.html" class="nav__dropdown-toggle">Demos</a><div class="nav__dropdown-menu"><a href="../demo.html">Sprint Demos</a><a href="../video-library.html">Feature Videos</a></div></li>
+      <li><a href="../roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../blog.html" class="active">Blog</a></li>
+      <li><a href="../integrations.html">Integrations</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+    <div class="nav__cta">
+      <a href="../signup.html" class="btn btn--primary btn--sm" data-signup-trigger>Start Free</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
+  <a href="../index.html">Home</a>
+  <a href="../features.html">Features</a>
+  <a href="../data-governance.html">Data Governance</a>
+  <a href="../tour.html">Interactive Tour</a>
+  <a href="../multi-vendor.html">Platforms</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../compare.html">Compare</a>
+  <a href="../security.html">Security</a>
+  <a href="../docs.html">Docs</a>
+  <a href="../community.html">Community</a>
+  <a href="../demo.html">Sprint Demos</a>
+  <a href="../video-library.html">Feature Videos</a>
+  <a href="../roi-calculator.html">ROI Calculator</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="../integrations.html">Integrations</a>
+  <a href="../signup.html" class="btn btn--primary" style="text-align:center;margin-top:var(--space-md);" data-signup-trigger>Start Free</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero__glow"></div>
+  <div class="container">
+    <div class="blog-card__category" style="margin: 0 auto var(--space-md);">Engineering &amp; Reliability</div>
+    <h1 class="animate-in" style="max-width: 760px; margin: 0 auto;">How Chaos Testing Makes Flafka More Reliable &mdash; <span class="text-gradient">And What We Found</span></h1>
+  </div>
+</section>
+
+<!-- Article -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="article__layout">
+      <article class="article__main" style="max-width: 720px; margin: 0 auto;">
+        <div class="article__meta">
+          <span class="article__author">Flafka Engineering Team</span>
+          <time datetime="2026-08-05">August 2026</time>
+          <span>6 min read</span>
+        </div>
+
+        <div class="article__body">
+
+          <!-- Section 1: Why Chaos Testing Matters -->
+          <h2 id="why-chaos-testing-matters">Why Chaos Testing Matters for Kafka Tools</h2>
+          <p>
+            Kafka management tools interact with production infrastructure. They read from broker connections that can fail, write to admin APIs that can time out, and render live consumer lag data that can race with incoming events. A tool that behaves poorly under load or network partition conditions can make a cluster outage worse &mdash; slow queries become blocking operations, UI threads stall waiting for timed-out connections, and the dashboard you need to diagnose the problem becomes unavailable at the worst moment.
+          </p>
+          <p>
+            Most Kafka management tools do not publish reliability test results. Flafka does. We run an automated chaos testing suite after every fifth sprint. The suite is disruptive by design &mdash; its job is to find failure modes before production does.
+          </p>
+
+          <!-- Section 2: What We Inject -->
+          <h2 id="what-we-inject">What We Inject</h2>
+          <p>
+            Our chaos suite covers three categories of failure, each targeting a different layer of the stack:
+          </p>
+
+          <h3>Connection chaos</h3>
+          <p>
+            Simulates unstable broker connectivity: random broker disconnects mid-operation, partial TCP responses, and cascading timeout storms across multiple connections simultaneously. We test the Flafka backend's ability to degrade gracefully &mdash; showing stale data with a clear indicator, not a white screen.
+          </p>
+          <pre><code>// Example: broker disconnect mid-schema-fetch
+chaos.inject(ChaosType::BrokerDisconnect {
+    target: "schema-registry",
+    timing: InjectionTiming::MidResponse,
+    duration_ms: 2000,
+});</code></pre>
+
+          <h3>Concurrent request storms</h3>
+          <p>
+            Launches 50+ simultaneous operations of the same type: topic creates, schema updates, consumer group inspections, and connector status checks. The goal is to surface race conditions, deadlocks, and resource contention that appear only at concurrency levels beyond normal usage.
+          </p>
+
+          <h3>Resource exhaustion</h3>
+          <p>
+            Connection pool saturation, heap memory pressure (simulated via allocation injection), and disk-fill simulation for JSONL audit log rotation. We observe whether the backend returns 5xx errors, whether data corruption occurs, and whether the UI remains responsive enough to display a degraded-state indicator.
+          </p>
+
+          <!-- Section 3: What We Found (and Fixed) -->
+          <h2 id="what-we-found">What We Found (and Fixed)</h2>
+          <p>
+            Honest disclosure is the point of this article. Here are failure modes the chaos suite surfaced &mdash; and the fixes shipped in the same sprint cycle:
+          </p>
+
+          <p>
+            <strong>Topic list pagination under high-concurrency simulation.</strong> Under a 500-concurrent-user simulation, the topic list pagination component submitted duplicate API requests for the same page offset. The duplicate responses arrived out of order and rendered the list in an inconsistent state. Fixed with request deduplication using a DashMap-based claim gate &mdash; only the first request for a given offset proceeds; subsequent concurrent requests for the same page share the result.
+          </p>
+          <p>
+            <strong>Schema registry timeout propagating as HTTP 500.</strong> A 5-second timeout on the schema registry admin API was propagating as an unhandled 500 to the frontend, causing the schema browser to show a generic error page rather than a graceful degraded state ("Schema registry temporarily unavailable — showing cached data"). Fixed with a circuit breaker around the schema registry client and a fallback to cached schema data with a visible staleness indicator.
+          </p>
+          <p>
+            <strong>Consumer group sync racing with WebSocket push.</strong> The consumer group lag table was written by two concurrent paths: a polling task that fetched lag from the broker and a WebSocket push handler that received real-time offset updates. Under concurrent load, both paths wrote to the same state map without coordination, producing intermittent stale or duplicated rows. Fixed with an atomic state update using a single-writer pattern &mdash; the polling task owns the state map; the WebSocket handler sends events to a channel that the polling task drains.
+          </p>
+
+          <!-- Mid-article CTA — the transparency disclosure is the conversion moment -->
+          <div style="background: var(--bg-card); border: 1px solid var(--color-primary); border-radius: var(--radius-md); padding: var(--space-xl); margin: var(--space-2xl) 0; text-align: center;">
+            <p style="color: var(--text-primary); font-weight: 600; margin-bottom: var(--space-md);">See how Flafka handles your production load.</p>
+            <a href="../signup.html" class="btn btn--primary">Start Free &rarr;</a>
+          </div>
+
+          <!-- Section 4: The Architecture That Survived -->
+          <h2 id="architecture-that-survived">The Architecture That Survived</h2>
+          <p>
+            The failure modes above were found and fixed. What did not fail? The core message-passing architecture &mdash; and it is worth explaining why.
+          </p>
+          <p>
+            Flafka's backend uses bounded channels throughout: <code>mpsc</code> channels at 2,000-message capacity, <code>broadcast</code> channels at 1,024-receiver capacity. Every channel is bounded. There is no global mutable state in the hot path. All state transitions are atomic &mdash; either the full transition succeeds, or the previous state is preserved intact.
+          </p>
+          <p>
+            Under resource exhaustion conditions, bounded channels apply natural backpressure. Producers slow down rather than unboundedly queuing. The backend sheds load gracefully rather than running out of memory. The circuit breaker pattern at the schema registry and broker connection layers prevents cascading failures from propagating to unrelated subsystems.
+          </p>
+          <p>
+            The chaos suite also validated the <a href="../gateway.html#replication-monitoring" style="color: var(--color-primary-light); text-decoration: underline;">gateway dual-write replication path</a>: under broker disconnect conditions, the circuit breaker isolated the secondary cluster without impacting the primary produce path. The replication buffer held pending messages until the secondary recovered, and the reconciliation consumer replayed the gap without duplication.
+          </p>
+          <p>
+            Chaos testing did not break our architecture because the architecture was designed to fail safely. Bounded channels, atomic state, circuit breakers, and a single-writer state ownership model give the system a predictable degraded-state envelope rather than an undefined one.
+          </p>
+
+          <!-- Section 5: What This Means for You -->
+          <h2 id="what-this-means">What This Means for You</h2>
+          <p>
+            If you are migrating from Conduktor, AKHQ, or another Kafka management tool and need confidence that Flafka can handle your production load, the chaos suite results are the most direct evidence we can offer. No Kafka management tool competitor publishes this kind of engineering transparency.
+          </p>
+          <p>
+            We run the chaos suite every 5 sprints. When we find issues, we fix them before the sprint ships. When we don't find issues, we document that too. The goal is a tool you can trust during an outage &mdash; which is exactly when you need it most.
+          </p>
+
+          <!-- FAQ accordion -->
+          <div style="margin-top: var(--space-2xl);">
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-lg);">Frequently Asked Questions</h3>
+
+            <details class="faq-item">
+              <summary class="faq-item__question">How often does Flafka run chaos tests?</summary>
+              <div class="faq-item__answer">
+                <p>Every 5 sprints. The automated chaos suite runs after the QA gate and covers broker disconnects, concurrent request storms, and resource exhaustion scenarios.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__question">Can I see the chaos test results?</summary>
+              <div class="faq-item__answer">
+                <p>Test scenarios and results summaries are published in Flafka's sprint feedback folder (linked from the Engineering blog). Enterprise customers can request the full chaos report via the <a href="../contact.html" style="color: var(--color-primary-light); text-decoration: underline;">Enterprise Demo page</a>.</p>
+              </div>
+            </details>
+          </div>
+
+        </div>
+
+        <!-- Final CTA -->
+        <div style="border-top: 1px solid var(--border-subtle); margin-top: var(--space-3xl); padding-top: var(--space-2xl); text-align: center;">
+          <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-md);">Ready to see Flafka in action?</h3>
+          <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">Start free and explore everything Flafka has to offer — no credit card required.</p>
+          <a href="../signup.html" class="btn btn--primary btn--lg">Start Free Trial &rarr;</a>
+        </div>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="article__sidebar">
+        <div class="article__toc">
+          <h4>In this article</h4>
+          <ul>
+            <li><a href="#why-chaos-testing-matters">Why chaos testing matters</a></li>
+            <li><a href="#what-we-inject">What we inject</a></li>
+            <li><a href="#what-we-found">What we found (and fixed)</a></li>
+            <li><a href="#architecture-that-survived">The architecture that survived</a></li>
+            <li><a href="#what-this-means">What this means for you</a></li>
+          </ul>
+        </div>
+
+        <div class="article__related" style="margin-top: var(--space-2xl);">
+          <h4>Related</h4>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-md);">
+            <li><a href="../gateway.html#replication-monitoring" style="color: var(--color-primary-light); text-decoration: underline;">DR Replication Monitoring &rarr;</a></li>
+            <li><a href="../security.html" style="color: var(--color-primary-light); text-decoration: underline;">Security &amp; Compliance &rarr;</a></li>
+            <li><a href="../features.html" style="color: var(--color-primary-light); text-decoration: underline;">Full Feature List &rarr;</a></li>
+            <li><a href="active-active-kafka.html" style="color: var(--color-primary-light); text-decoration: underline;">Active-Active Kafka DR &rarr;</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <img src="../assets/flafka-mascot.png" alt="Flafka" class="footer__brand-icon">
+          Flafka
+        </div>
+        <p class="footer__brand-desc">The Kafka management platform that sees everything.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../features.html">Features</a></li>
+          <li><a href="../pricing.html">Pricing</a></li>
+          <li><a href="../compare.html">Compare</a></li>
+          <li><a href="../gateway.html">Gateway Replication</a></li>
+          <li><a href="../security.html">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../docs.html">Docs</a></li>
+          <li><a href="../community.html">Community</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../signup.html">Start Free</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2026 Flafka. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/signup.js"></script>
+</body>
+</html>

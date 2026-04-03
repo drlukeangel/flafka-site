@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flafka Community — Kafka Management Tool</title>
-  <meta name="description" content="Join the Flafka community. Get help on GitHub Discussions, chat on Discord, contribute to the project, and stay updated with the newsletter.">
+  <title>Flafka Community — GitHub, Discord &amp; Contributor Guide</title>
+  <meta name="description" content="Join the Flafka community on GitHub and Discord. Report bugs, request features, and connect with 500+ Kafka engineers using Flafka for Confluent Cloud management.">
   <meta name="keywords" content="Kafka community, Confluent Cloud tool community, Flafka community, Kafka management help, Kafka support">
 
   <!-- Open Graph -->
@@ -24,7 +24,7 @@
   <link rel="icon" type="image/png" href="assets/flafka-mascot.png">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- JSON-LD: Organization with SameAs (AI-SEO advisory #3) -->
+  <!-- JSON-LD: Organization with SameAs -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -32,19 +32,62 @@
     "name": "Flafka",
     "url": "https://flafka.dev",
     "logo": "https://flafka.dev/assets/flafka-mascot.png",
-    "description": "Open-source Kafka management platform with cost tracking, SLO monitoring, and compliance reporting.",
+    "description": "Commercial Kafka management platform with a generous free Starter tier — cost tracking, SLO monitoring, data quality, and compliance reporting.",
     "sameAs": [
-      "https://github.com/flafka",
+      "https://github.com/flafka-ai/flafka",
+      "https://github.com/flafka-ai",
       "https://discord.gg/flafka",
       "https://twitter.com/flafkadev"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "technical support",
-      "url": "https://github.com/flafka/flafka/discussions"
+      "url": "https://github.com/flafka-ai/flafka/discussions"
     },
-    "datePublished": "2027-01-13",
-    "dateModified": "2027-01-13"
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19"
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Flafka open source?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The core management platform is available under a commercial license with a generous free tier. Gateway replication (Flafka Ops) is an enterprise add-on."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I report a bug?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open a GitHub issue. We triage all issues within 5 business days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I request a feature?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — open a GitHub issue labeled 'enhancement'. We use interview feedback to prioritize."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Slack workspace?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We're building a Discord community. Join the waitlist at flafka.dev/signup."
+        }
+      }
+    ]
   }
   </script>
 
@@ -82,6 +125,8 @@
     <ul class="nav__links">
       <li><a href="features.html">Features</a></li>
       <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="tour.html">Interactive Tour</a></li>
+      <li><a href="multi-vendor.html">Platforms</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html">Security</a></li>
@@ -106,6 +151,8 @@
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
   <a href="data-governance.html">Data Governance</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
   <a href="security.html">Security</a>
@@ -127,10 +174,20 @@
   <div class="hero__glow"></div>
   <div class="container">
     <div class="community-hero__content animate-in">
-      <h1 class="community-hero__title">Built by the Community, <span class="text-gradient">for the Community</span></h1>
+      <h1 class="community-hero__title">Questions? Ideas? <span class="text-gradient">Join the Flafka Community.</span></h1>
       <p class="community-hero__subtitle">
-        Get help, share feedback, and connect with other Flafka users and contributors.
+        Get help, share feedback, and connect with Kafka engineers using Flafka. GitHub, Discord, and a growing contributor base.
       </p>
+      <div style="margin: var(--space-md) 0 var(--space-sm);">
+        <span style="display: inline-block; background: var(--color-success-subtle, rgba(34,197,94,0.12)); color: var(--color-success, #22c55e); border: 1px solid var(--color-success, #22c55e); border-radius: 999px; padding: 4px 14px; font-size: var(--text-sm); font-weight: 600; margin-right: var(--space-sm);">Free Starter tier — no credit card required</span>
+        <a href="signup.html" class="cta-link" style="font-size: var(--text-sm);">Start free &rarr;</a>
+      </div>
+      <a href="signup.html" class="btn btn--primary btn--lg" data-signup-trigger style="margin-top: var(--space-sm);">Start Free Trial &rarr;</a>
+    </div>
+
+    <!-- What This Means callout -->
+    <div class="animate-in" style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, var(--color-primary-subtle, rgba(99,102,241,0.1))); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: var(--space-lg) 0 var(--space-md); max-width: 780px;">
+      Most early-stage Kafka tools have no community. Flafka has GitHub, Discord, and a growing contributor base — signal that this is a product the team stands behind.
     </div>
 
     <!-- Stat Cards -->
@@ -149,6 +206,40 @@
         <div class="community-stat-card__number">250+</div>
         <div class="community-stat-card__label">Features Delivered</div>
         <div class="community-stat-card__desc">From cost tracking to compliance bundles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Community Channels ===== -->
+<section class="section" id="community-channels" style="padding-bottom: 0;">
+  <div class="container">
+    <h2 class="section__title animate-in">Join the Community</h2>
+    <div class="grid grid--3 animate-in" style="margin-top: var(--space-lg);">
+
+      <!-- GitHub Card -->
+      <div class="card" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+        <div class="card__icon">&#x1F4E6;</div>
+        <h3 class="card__title">GitHub</h3>
+        <p class="card__desc">Star the repo, open issues, submit PRs. Community votes drive our roadmap.</p>
+        <a href="https://github.com/flafka-ai/flafka" class="cta-link" target="_blank" rel="noopener" aria-label="Open Flafka GitHub repository">GitHub &rarr;</a>
+      </div>
+
+      <!-- Discord Card -->
+      <div class="card" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+        <div class="card__icon">&#x1F4AC;</div>
+        <h3 class="card__title">Discord</h3>
+        <p class="card__desc">Real-time chat for questions, demos, and release discussions. Get answers from the team directly.</p>
+        <!-- TODO: replace with actual Discord invite URL before publishing -->
+        <a href="#" class="cta-link" aria-label="Join Flafka Discord community">Join Discord &rarr;</a>
+      </div>
+
+      <!-- Newsletter Card -->
+      <div class="card" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+        <div class="card__icon">&#x1F4EC;</div>
+        <h3 class="card__title">Newsletter</h3>
+        <p class="card__desc">Monthly Flafka updates — features, blog posts, and roadmap. No spam. One email per month.</p>
+        <a href="signup.html" class="cta-link" aria-label="Subscribe to Flafka newsletter">Subscribe &rarr;</a>
       </div>
     </div>
   </div>
@@ -254,6 +345,105 @@
   </div>
 </section>
 
+<!-- ===== Contributor Guide ===== -->
+<section class="section" id="contribute">
+  <div class="container">
+    <h2 class="section__title animate-in">Contributor Guide</h2>
+    <p class="section__subtitle animate-in">Flafka is built in Rust and React. Contributions welcome — bugs, features, and documentation.</p>
+
+    <div class="feature-section animate-in" style="align-items: flex-start; gap: var(--space-xl);">
+      <div style="flex: 1; min-width: 0;">
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+          <li>&#x2705; We follow <strong>conventional commits</strong> and run GitHub Actions CI on all PRs.</li>
+          <li>&#x2705; All PRs require passing <strong>cargo test</strong> (Rust) and <strong>npm test</strong> (React).</li>
+          <li>&#x2705; Bug fixes, documentation improvements, and feature contributions are all welcome.</li>
+          <li>&#x2705; <a href="about.html#contact">Contact the team &rarr;</a> for contribution inquiries until a public CONTRIBUTING.md is available.</li>
+        </ul>
+        <div style="margin-top: var(--space-lg); display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+          <a href="https://github.com/flafka-ai/flafka" class="btn btn--secondary" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+          <a href="changelog.html" class="cta-link" style="display: flex; align-items: center;">See what the community has shipped &rarr;</a>
+        </div>
+        <p style="margin-top: var(--space-md); color: var(--text-secondary); font-size: var(--text-sm);">
+          <a href="about.html">Learn about the team &rarr;</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Community FAQ ===== -->
+<section class="section" id="faq" style="background: var(--bg-surface, var(--bg-elevated));">
+  <div class="container">
+    <h2 class="section__title animate-in">Community FAQ</h2>
+
+    <!-- Definition paragraph for "Is Flafka open source?" featured snippet -->
+    <p class="animate-in" style="max-width: 720px; margin: 0 auto var(--space-lg); color: var(--text-secondary); text-align: center;">
+      Flafka is a commercial Kafka management platform with a generous free Starter tier — no credit card required. The core features (topic management, schema registry, message browser, Flink SQL IDE) are available free. Gateway replication (Flafka Ops) and enterprise features (SAML, custom RBAC) are paid add-ons.
+    </p>
+
+    <div class="community-faq animate-in" style="max-width: 720px; margin: 0 auto;">
+
+      <details class="community-faq__item" style="border-bottom: 1px solid var(--border-subtle);">
+        <summary class="community-faq__question" style="cursor: pointer; padding: var(--space-md) 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;" aria-expanded="false">
+          Is Flafka open source?
+          <span class="community-faq__icon" aria-hidden="true" style="transition: transform 200ms ease-in-out;">&#x25BE;</span>
+        </summary>
+        <div class="community-faq__answer" style="padding-bottom: var(--space-md); color: var(--text-secondary);">
+          The core management platform is available under a commercial license with a generous free tier. Gateway replication (Flafka Ops) is an enterprise add-on.
+        </div>
+      </details>
+
+      <details class="community-faq__item" style="border-bottom: 1px solid var(--border-subtle);">
+        <summary class="community-faq__question" style="cursor: pointer; padding: var(--space-md) 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;" aria-expanded="false">
+          How do I report a bug?
+          <span class="community-faq__icon" aria-hidden="true" style="transition: transform 200ms ease-in-out;">&#x25BE;</span>
+        </summary>
+        <div class="community-faq__answer" style="padding-bottom: var(--space-md); color: var(--text-secondary);">
+          Open a GitHub issue. We triage all issues within 5 business days.
+        </div>
+      </details>
+
+      <details class="community-faq__item" style="border-bottom: 1px solid var(--border-subtle);">
+        <summary class="community-faq__question" style="cursor: pointer; padding: var(--space-md) 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;" aria-expanded="false">
+          Can I request a feature?
+          <span class="community-faq__icon" aria-hidden="true" style="transition: transform 200ms ease-in-out;">&#x25BE;</span>
+        </summary>
+        <div class="community-faq__answer" style="padding-bottom: var(--space-md); color: var(--text-secondary);">
+          Yes — open a GitHub issue labeled 'enhancement'. We use interview feedback to prioritize.
+        </div>
+      </details>
+
+      <details class="community-faq__item">
+        <summary class="community-faq__question" style="cursor: pointer; padding: var(--space-md) 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;" aria-expanded="false">
+          Is there a Slack workspace?
+          <span class="community-faq__icon" aria-hidden="true" style="transition: transform 200ms ease-in-out;">&#x25BE;</span>
+        </summary>
+        <div class="community-faq__answer" style="padding-bottom: var(--space-md); color: var(--text-secondary);">
+          We're building a Discord community. Join the waitlist at <a href="signup.html">flafka.dev/signup</a>.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+/* FAQ accordion: 200ms animation + prefers-reduced-motion */
+.community-faq__item[open] .community-faq__icon {
+  transform: rotate(180deg);
+}
+.community-faq__answer {
+  animation: faq-expand 200ms ease-in-out;
+}
+@keyframes faq-expand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .community-faq__answer { animation: none; }
+  .community-faq__icon   { transition: none; }
+}
+</style>
+
 <!-- ===== Newsletter ===== -->
 <section class="section" id="newsletter">
   <div class="container">
@@ -295,7 +485,9 @@
         <h4>Product</h4>
         <ul>
           <li><a href="features.html">Features</a></li>
-      <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="demo.html">Demos</a></li>
           <li><a href="video-library.html">Feature Videos</a></li>

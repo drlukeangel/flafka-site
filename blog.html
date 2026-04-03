@@ -43,6 +43,34 @@
     "blogPost": [
       {
         "@type": "BlogPosting",
+        "headline": "76% Cost Reduction: How Flafka Gateway Compares to Confluent Cluster Linking",
+        "datePublished": "2026-06-24",
+        "description": "How Flafka Gateway compares to Confluent Cluster Linking on cost — with real workload examples showing 58-83% savings. Phase 1 trade-offs documented honestly. Updated April 2026.",
+        "url": "https://flafka.dev/blog/cluster-linking-cost.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Active-Active Kafka Without Cluster Linking: How Gateway-Level Replication Works",
+        "datePublished": "2026-06-01",
+        "description": "How gateway-level Kafka replication works — cost, RPO, and operational simplicity compared to Confluent Cluster Linking and MirrorMaker 2. Phase 1 trade-offs documented honestly.",
+        "url": "https://flafka.dev/blog/active-active-kafka.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Multi-Cluster Kafka Management: Connection Profiles, Cross-Cluster Comparison, and DR Monitoring",
+        "datePublished": "2026-05-14",
+        "description": "How to manage multiple Kafka clusters with Flafka — connection profiles, cross-cluster config comparison, DR lag monitoring, and bulk operations.",
+        "url": "https://flafka.dev/blog/multi-cluster-kafka.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Kafka Monitoring for AWS MSK Teams: SLOs, Consumer Lag, and What's Coming",
+        "datePublished": "2026-04-03",
+        "description": "Kafka monitoring for AWS MSK teams — SLO tracking, consumer lag visibility, and schema management without CloudWatch complexity. What Flafka gives you today and what's coming for native MSK support.",
+        "url": "https://flafka.dev/blog/msk-kafka.html"
+      },
+      {
+        "@type": "BlogPosting",
         "headline": "SOC 2-Ready Kafka Management: How Flafka Maps to Trust Services Criteria",
         "datePublished": "2027-05-05",
         "description": "Learn how Flafka's 9 compliance building blocks map to SOC 2 Trust Services Criteria for Security, Availability, and Confidentiality. Automated evidence bundling, RBAC, audit trails, and posture dashboards."
@@ -98,8 +126,15 @@
       Flafka
     </a>
     <ul class="nav__links">
-      <li><a href="features.html">Features</a></li>
-      <li><a href="data-governance.html">Data Governance</a></li>
+      <li class="nav__dropdown">
+        <a href="features.html" class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">Product</a>
+        <div class="nav__dropdown-menu">
+          <a href="features.html">Features</a>
+          <a href="tour.html">Interactive Tour</a>
+          <a href="multi-vendor.html">Platforms</a>
+          <a href="data-governance.html">Data Governance</a>
+        </div>
+      </li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html">Compare</a></li>
       <li><a href="security.html">Security</a></li>
@@ -121,6 +156,8 @@
   <button class="theme-toggle theme-toggle--mobile" aria-label="Switch theme"><span class="theme-toggle__icon">&#9789;</span><span class="theme-toggle__label">Light</span></button>
   <a href="index.html">Home</a>
   <a href="features.html">Features</a>
+  <a href="tour.html">Interactive Tour</a>
+  <a href="multi-vendor.html">Platforms</a>
   <a href="data-governance.html">Data Governance</a>
   <a href="pricing.html">Pricing</a>
   <a href="compare.html">Compare</a>
@@ -176,6 +213,97 @@
   <div class="container">
     <div class="blog-grid">
 
+      <!-- Article: Chaos Testing (Sprint 107) — NEW -->
+      <article class="blog-card animate-in" data-delay="1" style="border: 1px solid rgba(124,58,237,0.3); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(124,58,237,0.04) 100%);">
+        <div class="blog-card__icon"><span aria-hidden="true">&#9889;</span></div>
+        <div class="blog-card__category">Engineering &amp; Reliability</div>
+        <div style="display: inline-block; background: var(--color-primary); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px; margin-bottom: var(--space-sm); text-transform: uppercase; letter-spacing: 0.05em;">New</div>
+        <h2 class="blog-card__title">How Chaos Testing Makes Flafka More Reliable &mdash; And What We Found</h2>
+        <time class="blog-card__date" datetime="2026-08-05">August 2026</time>
+        <p class="blog-card__excerpt">
+          We inject broker disconnects, 50+ concurrent request storms, and resource exhaustion into a live Flafka instance every 5 sprints. Here is what broke, what we fixed, and why bounded channels mean the architecture survives when individual components don't.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/chaos-testing-kafka.html" class="btn btn--secondary btn--sm" aria-label="Read the Kafka chaos testing article">Read article &rarr;</a>
+          <a href="security.html" class="btn btn--ghost btn--sm">Flafka Security</a>
+        </div>
+      </article>
+
+      <!-- Article: 76% Cost Reduction vs Cluster Linking (Sprint 104) — HIGH INTENT, FIRST POSITION -->
+      <article class="blog-card animate-in" data-delay="1" style="border: 1px solid rgba(124,58,237,0.3); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(124,58,237,0.04) 100%);">
+        <div class="blog-card__icon"><span aria-hidden="true">&#128200;</span></div>
+        <div class="blog-card__category">Kafka DR &amp; Cost Analysis</div>
+        <h2 class="blog-card__title">76% Cost Reduction: How Flafka Gateway Compares to Confluent Cluster Linking</h2>
+        <time class="blog-card__date" datetime="2026-06-24">June 2026</time>
+        <p class="blog-card__excerpt">
+          If you have seen a Cluster Linking invoice, this article is the analysis you need. Three reference workloads, exact pricing methodology, and honest trade-offs. The savings range is 58&ndash;83% — 76% for a 50&nbsp;GB/day workload is the specific calculation, not an average.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/cluster-linking-cost.html" class="btn btn--secondary btn--sm" aria-label="Read the Cluster Linking cost analysis">Read cost analysis &rarr;</a>
+          <a href="roi-calculator.html#dr-savings" class="btn btn--ghost btn--sm">Calculate your savings</a>
+        </div>
+      </article>
+
+      <!-- Article: Active-Active Kafka Without Cluster Linking (Sprint 103) -->
+      <article class="blog-card animate-in" data-delay="1">
+        <div class="blog-card__icon"><span aria-hidden="true">&#9889;</span></div>
+        <div class="blog-card__category">Kafka DR &amp; Replication</div>
+        <h2 class="blog-card__title">Active-Active Kafka Without Cluster Linking: How Gateway-Level Replication Works</h2>
+        <time class="blog-card__date" datetime="2026-06-01">June 2026</time>
+        <p class="blog-card__excerpt">
+          Confluent Cluster Linking costs $5.45/GB. For 50&nbsp;GB/day, that's $272/month just for replication &mdash; and it only works Confluent to Confluent. Gateway-level dual-write puts replication in the data path with &lt;1ms overhead, no extra infrastructure, and 58&ndash;83% lower cost. Honest trade-offs included.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/active-active-kafka.html" class="btn btn--secondary btn--sm" aria-label="Read active-active Kafka replication guide">Read guide &rarr;</a>
+          <a href="gateway.html" class="btn btn--ghost btn--sm">Flafka Gateway</a>
+        </div>
+      </article>
+
+      <!-- Article: Multi-Cluster Kafka Management Guide (Sprint 102) -->
+      <article class="blog-card animate-in" data-delay="1">
+        <div class="blog-card__icon"><span aria-hidden="true">&#9861;</span></div>
+        <div class="blog-card__category">Multi-Cluster Management</div>
+        <h2 class="blog-card__title">Multi-Cluster Kafka Management: Connection Profiles, Cross-Cluster Comparison, and DR Monitoring</h2>
+        <time class="blog-card__date" datetime="2026-05-14">May 2026</time>
+        <p class="blog-card__excerpt">
+          Stop context-switching between 3 console tabs. Flafka's connection profiles give you one dashboard for all clusters. Cross-cluster config diff catches topic drift before it becomes a DR gap. Consumer lag sparklines answer "Is my standby current?" in one view.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/multi-cluster-kafka.html" class="btn btn--secondary btn--sm" aria-label="Read multi-cluster Kafka management guide">Read guide &rarr;</a>
+          <a href="pricing.html#ops-gateway" class="btn btn--ghost btn--sm">Flafka Ops replication</a>
+        </div>
+      </article>
+
+      <!-- Article: MSK Kafka Monitoring (Sprint 101) -->
+      <article class="blog-card animate-in" data-delay="1">
+        <div class="blog-card__icon"><span aria-hidden="true">&#9729;</span></div>
+        <div class="blog-card__category">MSK &amp; AWS Kafka</div>
+        <h2 class="blog-card__title">Kafka Monitoring for AWS MSK Teams: SLOs, Consumer Lag, and What's Coming</h2>
+        <time class="blog-card__date" datetime="2026-04-03">April 2026</time>
+        <p class="blog-card__excerpt">
+          You're running Kafka on AWS MSK. CloudWatch gives you cluster metrics but no consumer group lag trends, no SLO tracking, no schema visibility, no cost-per-topic breakdown. Here's what Flafka gives you today &mdash; and what's coming with native MSK IAM auth support.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/msk-kafka.html" class="btn btn--secondary btn--sm" aria-label="Read Kafka monitoring guide for AWS MSK teams">Read article &rarr;</a>
+          <a href="about.html#contact" class="btn btn--ghost btn--sm" data-signup-trigger data-signup-platform="aws-msk">Join MSK waitlist</a>
+        </div>
+      </article>
+
+      <!-- Article: DQ Proxy vs Management-Plane (Sprint 100) -->
+      <article class="blog-card animate-in" data-delay="1">
+        <div class="blog-card__icon"><span aria-hidden="true">&#9989;</span></div>
+        <div class="blog-card__category">Data Quality</div>
+        <h2 class="blog-card__title">Data Quality for Kafka: Why Proxy-Based Approaches Fall Short</h2>
+        <time class="blog-card__date" datetime="2026-05-08">May 2026</time>
+        <p class="blog-card__excerpt">
+          Two architectural approaches to Kafka data quality: proxy-based (intercept in transit) and management-plane (validate from a control layer). Learn the structural limitations of proxy-based DQ and why management-plane enables rule history, trend analysis, coverage reports, and schema impact analysis that proxies cannot.
+        </p>
+        <div class="blog-card__actions">
+          <a href="blog/kafka-dq-management-plane.html" class="btn btn--secondary btn--sm" aria-label="Read about proxy-based vs management-plane Kafka data quality">Read article &rarr;</a>
+          <a href="features.html#data-quality" class="btn btn--ghost btn--sm">DQ features</a>
+        </div>
+      </article>
+
       <!-- Article: SOC 2 Compliance -->
       <article class="blog-card animate-in" data-delay="1">
         <div class="blog-card__icon"><span aria-hidden="true">&#128737;</span></div>
@@ -218,6 +346,22 @@
         <div class="blog-card__actions">
           <a href="blog/embedded-cli.html" class="btn btn--secondary btn--sm" aria-label="Read why your Kafka admin tool needs an embedded CLI">Read article &rarr;</a>
           <a href="pricing.html" class="btn btn--ghost btn--sm">Try it free</a>
+        </div>
+      </article>
+
+      <!-- DLP Product Page Launch Teaser (Sprint 105) -->
+      <article class="blog-card animate-in" data-delay="1" style="border: 1px solid rgba(239,68,68,0.3); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(239,68,68,0.04) 100%);">
+        <div class="blog-card__icon"><span aria-hidden="true">&#128274;</span></div>
+        <div class="blog-card__category">Product Launch</div>
+        <div style="display: inline-block; background: #ef4444; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px; margin-bottom: var(--space-sm); text-transform: uppercase; letter-spacing: 0.05em;">New Page</div>
+        <h2 class="blog-card__title">Kafka PII Detection &amp; DLP — Dedicated Product Page</h2>
+        <time class="blog-card__date" datetime="2026-07-08">July 2026</time>
+        <p class="blog-card__excerpt">
+          Flafka's AI-powered DLP now has a dedicated product page. 13 PII types, hybrid regex+ML detection, producer blocking mode, GDPR/HIPAA/PCI-DSS compliance badges, and a full competitor comparison. No competitor offers all six capabilities.
+        </p>
+        <div class="blog-card__actions">
+          <a href="dlp.html" class="btn btn--secondary btn--sm" aria-label="See the Kafka DLP product page">See Kafka DLP capabilities &rarr;</a>
+          <a href="blog/kafka-dlp.html" class="btn btn--ghost btn--sm">Read DLP article</a>
         </div>
       </article>
 

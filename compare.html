@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison</title>
-  <meta name="description" content="Compare Flafka against Conduktor, Confluent Console, AKHQ, Kafdrop, Redpanda Console, Lenses.io, and Kafka UI. 25+ unique features including Embedded CLI, AI PII Detection (Kafka DLP), 7 FinOps tools, Data Quality, and Audit &amp; Compliance. Updated April 2026.">
-  <meta name="keywords" content="enterprise Kafka comparison, Conduktor alternative, Kafka GUI comparison, Confluent Cloud management tool, Kafka admin tool comparison, enterprise Kafka management, Kafka compliance comparison">
+  <meta name="description" content="Compare Flafka against AKHQ, Kafka UI, Conduktor, Confluent Console, Kafdrop, Redpanda Console, and Lenses.io. See exactly what AKHQ and Kafka UI cover vs. what Flafka adds: FinOps, SLOs, AI PII Detection, and enterprise RBAC. Updated August 2026.">
+  <meta name="keywords" content="AKHQ vs Flafka, AKHQ alternative, Kafka UI comparison, Kafka UI vs Flafka, enterprise Kafka comparison, Conduktor alternative, Kafka GUI comparison, Confluent Cloud management tool, Kafka admin tool comparison">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Compare | Flafka — Conduktor Alternatives &amp; Kafka GUI Comparison">
@@ -50,7 +50,12 @@
       "AI PII Detection (Kafka DLP): hybrid regex + ML detection of 13 PII types, sub-microsecond latency, producer blocking mode, compliance reports (GDPR/HIPAA/PCI-DSS), fully air-gapped",
       "Data Loss Prevention: automatic PII detection in Kafka messages with self-training feedback loop",
       "Audit & Compliance: Audit Trail, Evidence Bundling, SOC 2 Controls Mapping, RBAC Audit Logging",
-      "MSK Support (Coming Soon — waitlist open)"
+      "MSK Support (Coming Soon — waitlist open)",
+      "Cost Management: Spend Dashboard (CFU/topic/connector drill-down), CFU Monitor per-statement, Cost Anomaly Detection (automated spike detection), Cost Forecast EOM Projection, Cost Alerts (threshold-based per-topic), Cost Allocation by Team, CFU Cost Trend Forecasting",
+      "Kafka Replication (Gateway): dual-write DR replication via gateway, 58-83% cheaper than Confluent Cluster Linking, works with Confluent Cloud + MSK + Redpanda, no application code changes, <1ms primary path overhead, per-topic lag dashboard",
+      "Hierarchical Permission Tree — cluster-scoped nodes, environment scoping, OIDC onboarding, inheritance-based access propagation (no competitor has this)",
+      "Per-Rule Alert Routing — each SLO, DQ, or lag alert routes to its own Slack channel, email group, or Kafka topic; HMAC-SHA256 signed, delivery history panel (no competitor has this)",
+      "ksqlDB Management — full GUI: query editor, streams dashboard, tables view, persistent queries panel"
     ],
     "offers": {
       "@type": "Offer",
@@ -120,6 +125,38 @@
           "@type": "Answer",
           "text": "Flafka is the only Kafka admin tool with AI-powered PII detection. It uses a hybrid regex + ML engine to detect 13 PII types (SSN, credit card, email, phone, passport, and more) with sub-microsecond latency. Features include producer blocking mode, GDPR/HIPAA/PCI-DSS compliance reports, and fully air-gapped operation."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka have hierarchical Kafka RBAC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka's Permission Tree model uses cluster-scoped nodes with inheritance-based access propagation. Access changes at a parent node automatically propagate to child nodes — no manual ACL updates required. All competitors use flat glob patterns or basic role assignments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka support per-rule alert routing for Kafka?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each alert rule has its own configurable destination — a Slack channel, email group, or Kafka topic. No other Kafka management tool supports this — most require all alerts to share a single webhook URL. Flafka also provides HMAC-SHA256 signed payloads and a delivery history panel showing the last 100 deliveries per rule."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Flafka have a built-in command-line interface?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Flafka includes an embedded terminal with support for 6 resource types (topics, consumer groups, connectors, schemas, ksqlDB, Flink), tab completion, and persistent command history — no separate CLI installation required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I do with Flafka's embedded CLI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flafka's embedded CLI supports topic management, consumer group inspection, health checks, and connector operations. Power users can script batch operations and inspect cluster state without leaving the browser."
+        }
       }
     ]
   }
@@ -137,6 +174,8 @@
     <ul class="nav__links">
       <li><a href="features.html">Features</a></li>
       <li><a href="data-governance.html">Data Governance</a></li>
+      <li><a href="tour.html">Interactive Tour</a></li>
+      <li><a href="multi-vendor.html">Platforms</a></li>
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="compare.html" class="active">Compare</a></li>
       <li><a href="security.html">Security</a></li>
@@ -251,15 +290,40 @@
             <td class="cross" title="Kafka UI: No cost management or spend dashboard — OSS tool with no billing integration. See github.com/provectus/kafka-ui">No</td>
           </tr>
           <tr>
-            <td>Permission Tree RBAC</td>
-            <td class="col-flafka check" title="Flafka: Hierarchical node-based RBAC with parent inheritance, cluster + environment scoping, OIDC provider (RS256 JWTs, JWKS endpoint). Glob patterns supported for backward compat.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(tree model)</span></td>
-            <td class="cross">No</td>
-            <td class="partial" title="Conduktor: Role-based access at application level, not hierarchical node tree with cluster/env scoping">Basic roles</td>
-            <td class="cross" title="AKHQ: LDAP-based auth only, no hierarchical Permission Tree RBAC">No</td>
-            <td class="cross">No</td>
+            <th scope="row">Permission Tree RBAC</th>
+            <td class="col-flafka check supported" aria-label="Supported" title="Flafka: Hierarchical Permission Tree — cluster-scoped nodes, environment scoping, OIDC onboarding, inheritance-based access propagation. Glob patterns supported for backward compat.">&#10003; Yes &mdash; Hierarchical Permission Tree <span style="font-size: var(--text-xs); color: var(--text-muted);">(cluster + env scope, OIDC onboarding, inheritance-based)</span></td>
+            <td class="cross not-supported" aria-label="Not supported">No</td>
+            <td class="partial" title="Conduktor: Role-based access at application level, not hierarchical node tree with cluster/env scoping">Flat roles</td>
+            <td class="cross not-supported" aria-label="Not supported" title="AKHQ: LDAP-based auth only, no hierarchical Permission Tree RBAC">No</td>
+            <td class="cross not-supported" aria-label="Not supported">No</td>
             <td class="partial">Enterprise</td>
             <td class="partial">Enterprise</td>
             <td class="partial" title="Kafka UI: Basic role-based access via OAuth 2.0, no Permission Tree with node inheritance">Basic</td>
+          </tr>
+          <!-- Permission Tree row — Sprint 106 WS6 -->
+          <tr>
+            <th scope="row"><strong>Permission Tree (hierarchical RBAC)</strong></th>
+            <td class="col-flafka check supported" aria-label="Supported">&#10003; Hierarchical tree, cluster + env scope, OIDC onboarding, inheritance-based</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Flat roles</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Flat roles</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Partial</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Partial</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+          </tr>
+          <!-- What this means callout for Permission Tree -->
+          <tr>
+            <td colspan="9">
+              <div style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, rgba(99,102,241,0.08)); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: var(--space-sm) 0;">
+                <strong>What this means:</strong> Flat glob patterns require administrators to manually update every pattern when team structure changes. Flafka's Permission Tree propagates access changes automatically through the hierarchy &mdash; eliminating the need to manually update ACL rules when teams reorganize.
+              </div>
+              <div style="margin-top: var(--space-sm);">
+                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Hierarchical Permission Tree: <strong>Enterprise plan</strong>.</span>
+                <a href="contact.html" class="btn btn--primary btn--sm" style="margin-left: var(--space-md);">Request Enterprise Demo &rarr;</a>
+                <span style="font-size: var(--text-sm); color: var(--text-secondary); margin-left: var(--space-md);"><a href="pricing.html" style="color: var(--color-primary-light);">Contact Sales &rarr;</a></span>
+              </div>
+            </td>
           </tr>
           <tr>
             <td>PCI-DSS Alignment</td>
@@ -271,6 +335,17 @@
             <td class="cross">No</td>
             <td class="partial">Partial</td>
             <td class="cross" title="Kafka UI: No PCI-DSS alignment — OAuth 2.0 auth available but no resource-level RBAC or compliance controls. See github.com/provectus/kafka-ui">No</td>
+          </tr>
+          <tr id="connector-intelligence">
+            <td>Connector Config Intelligence + Audit Trail <a href="demo.html#connector-comparison" style="font-size: var(--text-xs); color: var(--color-primary-light); white-space: nowrap;">See it in action &rarr;</a></td>
+            <td class="col-flafka check">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(unique)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
           </tr>
           <tr>
             <td>Connector Throughput</td>
@@ -384,7 +459,7 @@
           </tr>
           <tr>
             <td>Data Masking</td>
-            <td class="col-flafka check" title="Flafka: Schema-aware field masking with 6 rule types (nullify, redact, hash, truncate, replace, encrypt). Viewer/operator role-based enforcement. Shipped Sprint 87/88.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(6 rule types, role-based)</span></td>
+            <td class="col-flafka check" title="Flafka: Schema-aware field masking with 6 operations (nullify, redact, hash, truncate, replace, encrypt). Display masking for viewer role. Shipped Sprint 77/87/88.">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(schema-aware, 6 operations, display masking for viewer role)</span></td>
             <td class="cross">No</td>
             <td class="check">&#10003; Yes</td>
             <td class="cross" title="AKHQ: No data masking capabilities">No</td>
@@ -472,7 +547,86 @@
             <td colspan="9" style="text-align: center; padding: var(--space-sm) 0; font-size: var(--text-sm);">
               <strong style="color: var(--color-primary-light);">Flafka is the only Kafka admin tool with built-in FinOps.</strong>
               <a href="pricing.html" class="text-link" style="margin-left: var(--space-sm);">See pricing &rarr;</a>
+              <a href="roi-calculator.html" class="text-link" style="margin-left: var(--space-sm);">Calculate your ROI &rarr;</a>
             </td>
+          </tr>
+          <!-- Cost Management individual rows (WS4 Sprint 101) -->
+          <tr>
+            <th scope="row">Spend Dashboard</th>
+            <td class="col-flafka check" title="Flafka: Real-time spend dashboard with CFU, topic, and connector drill-down">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(CFU/topic/connector drill-down)</span></td>
+            <td class="partial" title="Confluent Console: Invoice-level view only, no per-topic breakdown">Invoice only</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">CFU Monitor (per-statement)</th>
+            <td class="col-flafka check" title="Flafka: Real-time per-Flink-statement CFU cost estimation">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(real-time per-statement)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">Cost Anomaly Detection</th>
+            <td class="col-flafka check" title="Flafka: ML-based automated spike detection with alert routing">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(automated spike detection)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">Cost Forecast / EOM Projection</th>
+            <td class="col-flafka check" title="Flafka: End-of-month cost projection from rolling 7-day trend">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(end-of-month projection)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">Cost Alerts</th>
+            <td class="col-flafka check" title="Flafka: Threshold-based cost alerts per topic with Slack/email routing">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(threshold-based, per-topic)</span></td>
+            <td class="partial" title="Confluent Console: Basic budget alerts at account level only">Basic budget alerts</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">Cost Allocation by Team</th>
+            <td class="col-flafka check" title="Flafka: Tag topics by cost center, CSV export for chargeback">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(tag topics by cost center)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+          </tr>
+          <tr>
+            <th scope="row">CFU Cost Trend Forecasting</th>
+            <td class="col-flafka check" title="Flafka: 7-day trend analysis plus monthly projection">&#10003; Yes <span style="font-size: var(--text-xs); color: var(--text-muted);">(7-day trend + monthly projection)</span></td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
+            <td class="cross">No</td>
           </tr>
           <tr>
             <td>SLO Compliance Reports</td>
@@ -484,6 +638,36 @@
             <td class="cross">No</td>
             <td class="cross">No</td>
             <td class="cross" title="Kafka UI: No SLO compliance reports — consumer group lag visible but no SLO tracking or exportable reports. See github.com/provectus/kafka-ui">No</td>
+          </tr>
+          <!-- Per-Rule Alert Routing row — Sprint 106 WS6 -->
+          <tr>
+            <th scope="row"><strong>Per-Rule Alert Routing</strong></th>
+            <td class="col-flafka check supported" aria-label="Supported">&#10003; Per-rule: Slack/email/Kafka topic per alert type, HMAC-signed, delivery history</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Single webhook</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007; Single webhook</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="partial" title="Lenses.io: Basic alert routing available, not per-rule">Basic</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+          </tr>
+          <!-- What this means + cross-link for Alert Routing -->
+          <tr>
+            <td colspan="9" style="font-size: var(--text-sm); color: var(--text-secondary); padding: var(--space-xs) var(--space-sm);">
+              No other Kafka tool routes alerts per-rule. <a href="features.html#alert-routing" style="color: var(--color-primary-light);">See full Alert Routing spec &rarr;</a>
+            </td>
+          </tr>
+          <!-- ksqlDB Management row — Sprint 106 WS6 -->
+          <tr>
+            <th scope="row"><strong>ksqlDB Management</strong></th>
+            <td class="col-flafka check supported" aria-label="Supported">&#10003; Full GUI: query editor, streams, tables, persistent queries</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="partial" title="Conduktor: Limited ksqlDB support via Conduktor Console">Partial</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
+            <td class="partial" title="Lenses.io: ksqlDB browsing, limited query management">Basic</td>
+            <td class="cross not-supported" aria-label="Not supported">&#10007;</td>
           </tr>
           <tr>
             <td>Data Quality Rules (No-Code)</td>
@@ -565,15 +749,15 @@
             <td class="check" title="Kafka UI: Connects to any Kafka-compatible broker including MSK">&#10003; Yes (OSS)</td>
           </tr>
           <tr>
-            <td>Embedded CLI</td>
-            <td class="col-flafka check">&#10003; Built-in terminal, 6 resource types, tab completion</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross" title="AKHQ: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/tchiotludo/akhq">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross">No</td>
-            <td class="cross" title="Kafka UI: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/provectus/kafka-ui">No</td>
+            <th scope="row">Embedded CLI</th>
+            <td class="col-flafka check" aria-label="Supported">&#10003; Built-in terminal, 6 resource types, tab completion, persistent history</td>
+            <td class="cross" aria-label="Not supported">No</td>
+            <td class="cross" aria-label="Not supported">No</td>
+            <td class="cross" title="AKHQ: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/tchiotludo/akhq" aria-label="Not supported">No</td>
+            <td class="cross" aria-label="Not supported">No</td>
+            <td class="cross" aria-label="Not supported">No</td>
+            <td class="partial" title="Redpanda Console: Limited basic shell — not a full embedded CLI" aria-label="Limited support">Limited (basic shell)</td>
+            <td class="cross" title="Kafka UI: No embedded CLI — web UI only with no built-in terminal or command interface. See github.com/provectus/kafka-ui" aria-label="Not supported">No</td>
           </tr>
           <!-- AI PII Detection / Data Loss Prevention (W98-3) -->
           <tr class="compare-section-header">
@@ -639,7 +823,21 @@
       </table>
     </div>
 
-    <p style="text-align: center; color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-lg);">Based on feature analysis of 7 Kafka admin tools, April 2026. <span style="opacity: 0.7;">Last updated: April 2026</span></p>
+    <!-- AKHQ/Kafka UI: What this means callout (WS6 Sprint 107) -->
+    <div style="border-left: 3px solid var(--accent, var(--color-primary)); background: var(--info-bg, rgba(124,58,237,0.06)); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: var(--space-2xl) 0 var(--space-lg);">
+      <strong style="color: var(--text-primary); display: block; margin-bottom: var(--space-xs);">AKHQ and Kafka UI vs. Flafka — what the table shows</strong>
+      <p style="color: var(--text-secondary); margin: 0; font-size: var(--text-sm);">AKHQ and Kafka UI cover the basics &mdash; topic management, message browsing, schema registry. Flafka adds everything above that line: FinOps, DQ, SLOs, PII detection, alert routing, and a hierarchical permission tree. Same starting point. Different ceiling.</p>
+    </div>
+
+    <!-- Why Flafka over AKHQ? callout (CRO Fix 4) -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-xl); margin-bottom: var(--space-xl);">
+      <h3 style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary);">Why Flafka over AKHQ or Kafka UI?</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-md);">Both are excellent for basic Kafka ops. Neither supports Flink SQL, FinOps, SLO monitoring, AI PII detection, or enterprise RBAC &mdash; the capabilities that make Flafka the choice for production-grade platform teams.</p>
+      <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-md);">AKHQ and Kafka UI are both open-source and free. Flafka: from free. <a href="pricing.html" class="cta-link">See full pricing &rarr;</a></p>
+      <a href="features.html" class="btn btn--secondary btn--sm">See everything Flafka adds above the OSS baseline &rarr;</a>
+    </div>
+
+    <p style="text-align: center; color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-lg);">Based on feature analysis of 8 Kafka admin tools, August 2026. <span style="opacity: 0.7;">Last updated: August 2026</span></p>
 
     <!-- FAQ Section (W94-2b) -->
     <div style="max-width: 720px; margin: var(--space-3xl) auto 0;">
@@ -655,7 +853,7 @@
       <details class="faq-item">
         <summary class="faq-item__question">Does Flafka work with Amazon MSK?</summary>
         <div class="faq-item__answer">
-          <p>MSK support is coming soon. You can <a href="integrations.html" style="color: var(--color-primary-light); text-decoration: underline;">join the MSK waitlist</a> to get early access. Flafka currently supports Confluent Cloud, with self-managed Apache Kafka and Amazon MSK as the next integration targets. See our <a href="index.html#faq" style="color: var(--color-primary-light); text-decoration: underline;">Self-Managed Kafka FAQ</a> for more details.</p>
+          <p>MSK support is coming soon. You can <a href="integrations.html" style="color: var(--color-primary-light); text-decoration: underline;">join the MSK waitlist</a> to get early access. Flafka currently supports Confluent Cloud, with self-managed Apache Kafka and Amazon MSK as the next integration targets. See our <a href="index.html#faq" style="color: var(--color-primary-light); text-decoration: underline;">Self-Managed Kafka FAQ</a> for more details. <a href="blog/msk-kafka.html" style="color: var(--color-primary-light); text-decoration: underline;">Read our MSK guide &rarr;</a></p>
         </div>
       </details>
 
@@ -964,6 +1162,110 @@
   </div>
 </section>
 
+<!-- Kafka Replication Tools Comparison (Sprint 103 WS6) -->
+<section class="section" id="replication-tools" style="background: var(--bg-surface);" aria-labelledby="replication-tools-title">
+  <div class="container">
+    <div class="section-header section-header--center animate-in">
+      <div class="section-header__overline">Kafka Replication</div>
+      <h2 class="section-header__title" id="replication-tools-title">Kafka Replication: Flafka Gateway vs <span class="text-gradient">Cluster Linking vs MirrorMaker 2</span></h2>
+    </div>
+
+    <p class="animate-in" data-delay="1" style="max-width: 720px; margin: 0 auto var(--space-2xl); text-align: center; font-size: var(--text-base); color: var(--text-secondary); line-height: 1.7;">
+      If you're evaluating Kafka replication options for active-active or DR, Flafka Gateway competes directly with Confluent Cluster Linking and MirrorMaker 2 &mdash; not with other Kafka admin tools. This is a category-level comparison for SRE teams evaluating DR architecture choices.
+    </p>
+
+    <div class="compare-table-wrap animate-in" data-delay="2">
+      <table class="compare-table" aria-label="Kafka Replication Tools: Flafka Gateway vs Confluent Cluster Linking vs MirrorMaker 2">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th style="color: var(--color-primary-light);">Flafka Gateway</th>
+            <th>Confluent Cluster Linking</th>
+            <th>MirrorMaker 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Deployment</td>
+            <td><strong style="color: var(--color-success);">No extra infra</strong> (gateway already deployed)</td>
+            <td>Confluent Cloud only</td>
+            <td>Dedicated Connect cluster</td>
+          </tr>
+          <tr>
+            <td>Monthly cost (50&nbsp;GB/day)</td>
+            <td><strong style="color: var(--color-success);">~$65&ndash;115/mo</strong></td>
+            <td>$272.50+/mo</td>
+            <td>~$200+/mo (workers)</td>
+          </tr>
+          <tr>
+            <td>RTO Phase 1</td>
+            <td>Timestamp-based (&lt;1 min)</td>
+            <td>Seconds</td>
+            <td>Minutes</td>
+          </tr>
+          <tr>
+            <td>RTO Phase 2</td>
+            <td><strong style="color: var(--color-success);">Offset translation (&lt;10 sec)</strong></td>
+            <td>Seconds</td>
+            <td>Minutes</td>
+          </tr>
+          <tr>
+            <td>Works with AWS MSK</td>
+            <td><strong style="color: var(--color-success);">Yes</strong></td>
+            <td><span style="color: var(--text-muted);">No (Confluent only)</span></td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Works with Redpanda</td>
+            <td><strong style="color: var(--color-success);">Yes</strong></td>
+            <td><span style="color: var(--text-muted);">No</span></td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>App code changes</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Topic auto-creation</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Bidirectional (active-active)</td>
+            <td>Phase 4 (2027)</td>
+            <td>Yes (today)</td>
+            <td>Manual setup</td>
+          </tr>
+          <tr>
+            <td>Replication status UI</td>
+            <td><strong style="color: var(--color-success);">Per-topic lag dashboard included</strong></td>
+            <td>Confluent Cloud UI</td>
+            <td>Connect REST API only</td>
+          </tr>
+          <tr>
+            <td>Open Source</td>
+            <td>Proprietary</td>
+            <td>No</td>
+            <td>Yes (Apache 2.0)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="animate-in" data-delay="3" style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-md); text-align: center;">
+      Pricing data: Confluent public pricing, April 2026. Cluster Linking at $5.45/GB. MirrorMaker 2 estimate includes 2&times; Connect worker nodes. Flafka Gateway estimate is representative workload at Ops add-on pricing. <a href="roi-calculator.html" style="color: var(--color-primary-light);">See full methodology.</a>
+    </p>
+
+    <div style="text-align: center; margin-top: var(--space-xl);" class="animate-in" data-delay="4">
+      <a href="gateway.html" class="btn btn--primary">Learn more about Flafka Gateway &rarr;</a>
+      <a href="roi-calculator.html" class="btn btn--secondary" style="margin-left: var(--space-md);">Estimate your savings &rarr;</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-section__glow"></div>
@@ -992,7 +1294,11 @@
         <h4>Product</h4>
         <ul>
           <li><a href="features.html">Features</a></li>
-      <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="data-governance.html">Data Governance</a></li>
+          <li><a href="enterprise.html">Enterprise</a></li>
+          <li><a href="gateway.html">Gateway Replication</a></li>
+          <li><a href="tour.html">Interactive Tour</a></li>
+          <li><a href="multi-vendor.html">Platforms</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="demo.html">Demos</a></li>
           <li><a href="video-library.html">Feature Videos</a></li>
